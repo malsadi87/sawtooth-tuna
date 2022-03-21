@@ -54,9 +54,25 @@ const saveKeys = keys => {
   localStorage.setItem(KEY_NAME, paired.join(';'))
 }
 
+//Fetch Fish by it's ID
+const getFishByID =  (fishAddress) => {
+  $.get(`${API_URL}/state?address=${fishAddress}`, ({ data }) => {
+    console.log(data)
+    //return data
+    data.reduce((processed, datum) => {
+      if (datum.data !== '') {
+        const parsed = JSON.parse(atob(datum.data))
+        console.log(parsed)
+      }
+      return processed
+    }, {transfers: []})
+  })
+}
+
 // Fetch current Sawtooth Tuna Chain state from validator
 const getState = cb => {
   $.get(`${API_URL}/state?address=${PREFIX}`, ({ data }) => {
+    console.log(data)
     cb(data.reduce((processed, datum) => {
       if (datum.data !== '') {
         const parsed = JSON.parse(atob(datum.data))
@@ -136,5 +152,6 @@ module.exports = {
   makeKeyPair,
   saveKeys,
   getState,
-  submitUpdate
+  submitUpdate,
+  getFishByID
 }

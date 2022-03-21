@@ -29,6 +29,8 @@ class TunachainPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
         action = data.get('action')
+        #add fish ID
+        fishID = data.get('fishID')
         asset = data.get('asset')
         owner = data.get('owner')
         #New fields
@@ -49,6 +51,8 @@ class TunachainPayload(object):
                     'Owner is required for "transfer" transaction')
 
         self._action = action
+         #new fields
+        self._fishID = fishID
         self._asset = asset
         self._owner = owner
         #new fields
@@ -58,6 +62,10 @@ class TunachainPayload(object):
     @property
     def action(self):
         return self._action
+    
+    @property
+    def fishID(self):
+        return self._fishID
 
     @property
     def asset(self):

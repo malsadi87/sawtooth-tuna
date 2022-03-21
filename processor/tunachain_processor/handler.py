@@ -61,7 +61,8 @@ class TunachainTransactionHandler(TransactionHandler):
                     signer[:8] + '... ')
 
         if payload.action == 'create':
-            _create_asset(asset=payload.asset,
+            _create_asset(fishID = payload.fishID,
+                          asset=payload.asset,
                           owner=signer,
                           weight=payload.weight,
                           location=payload.location,
@@ -88,12 +89,12 @@ class TunachainTransactionHandler(TransactionHandler):
                 payload.action))
 
 
-def _create_asset(asset, owner, weight, location, state):
-    if state.get_asset(asset) is not None:
+def _create_asset(fishID, asset, owner, weight, location, state):
+    if state.get_asset(fishID) is not None:
         raise InvalidTransaction(
-            'Invalid action: Asset already exists: {}'.format(asset))
+            'Invalid action: Fish already exists: {}'.format(asset))
 
-    state.set_asset(asset, owner, weight, location)
+    state.set_asset(fishID, asset, owner, weight, location)
 
 
 def _transfer_asset(asset, owner, signer, state):

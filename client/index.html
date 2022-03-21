@@ -1,8 +1,4 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-<!-- This code was written by Zac Delventhal @delventhalz.
-Original source code can be found here: https://github.com/delventhalz/transfer-chain-js/blob/master/client/index.html
--->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +86,9 @@ Original source code can be found here: https://github.com/delventhalz/transfer-
 
       <div class="form-group">
 
+        <label>Query Fish</label>
+        <input id="fishID" class="form-control" type="text" placeholder="Enter fish ID...">
+        <input id="searchFish" type="button" value="Search" class="btn btn-primary">
       </div>
 
       <div class="form-group">
@@ -101,7 +100,8 @@ Original source code can be found here: https://github.com/delventhalz/transfer-
       <label>Fish List</label>
       <table class="table table-hover">
         <tr>
-          <th>Fish</th>
+          <th>ID</th>
+          <th>Name</th>
           <th>Holder</th>
           <th>Weight</th>
         </tr>

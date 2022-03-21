@@ -29,8 +29,8 @@ def _get_address(key):
     return hashlib.sha512(key.encode('utf-8')).hexdigest()[:62]
 
 
-def _get_asset_address(asset_name):
-    return TUNACHAIN_NAMESPACE + '00' + _get_address(asset_name)
+def _get_asset_address(asset):
+    return TUNACHAIN_NAMESPACE + '00' + _get_address(asset)
 
 
 def _get_transfer_address(asset_name):
@@ -58,10 +58,10 @@ class TunachainState(object):
     def get_transfer(self, name):
         return self._get_state(_get_transfer_address(name))
 
-    def set_asset(self, name, owner, weight, location):
-        address = _get_asset_address(name)
+    def set_asset(self, fishID, name, owner, weight, location):
+        address = _get_asset_address(fishID)
         state_data = _serialize(
-            {
+            {   "fishID": fishID,
                 "name": name,
                 "owner": owner,
                 "weight": weight,

@@ -8,12 +8,15 @@ Original source code can be found here: https://github.com/delventhalz/transfer-
 'use strict'
 
 const $ = require('jquery')
+//const hashlib = require("hashlib")
+const crypto = require('crypto')
 const {
   getKeys,
   makeKeyPair,
   saveKeys,
   getState,
-  submitUpdate
+  submitUpdate,
+  getFishByID
 } = require('./state')
 const {
   addOption,
@@ -30,6 +33,20 @@ const map = L.map('map', {
       })
   ]
 });
+
+
+const _hash = (x) =>
+  crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
+
+
+const TUNACHAIN_NAMESPACE = _hash("transfer-chain").substring(0, 6)
+
+const get_asset_address = (asset)=> {
+  return TUNACHAIN_NAMESPACE + "00" + _hash(asset).slice(0, 62);
+}
+
+
+
 
 const concatNewOwners = (existing, ownerContainers) => {
   return existing.concat(ownerContainers
@@ -60,7 +77,7 @@ app.refresh = function () {
       const lon = parseFloat(asset.location.longitude)
       console.log(lon)
       //console.log('location : ' + location)
-      addRow('#assetList', asset.name, asset.owner, asset.weight)
+      addRow('#assetList',asset.fishID, asset.name, asset.owner, asset.weight)
       const marker = L.marker([lat, lon]).addTo(map);
       marker.bindPopup(asset.name).openPopup();
       if (this.user && asset.owner === this.user.public) {
@@ -83,9 +100,10 @@ app.refresh = function () {
 app.update = function (action, asset, owner, weight, location) {
   if (this.user) {
     if(action == 'create'){
-      console.log({action, asset, owner, weight, location})
+      const fishID = Date.now().toString()
+      console.log({action,fishID, asset, owner, weight, location})
       submitUpdate(
-        { action, asset, owner, weight, location },
+        { action, fishID, asset, owner, weight, location },
         this.user.private,
         success => success ? this.refresh() : null
       )
@@ -99,6 +117,14 @@ app.update = function (action, asset, owner, weight, location) {
     }
 
   }
+}
+app.queryLedger = function(fishID){
+
+const fishAddress = get_asset_address(fishID)
+console.log(fishAddress)
+getFishByID(fishAddress)
+
+
 }
 
 // Select User
@@ -127,6 +153,13 @@ $('#createSubmit').on('click', function () {
   }
   console.log('creating new fish assest: ' + asset)
   if (asset) app.update('create', asset, '', weight, location)
+})
+
+// search ledger for a specific fish
+$('#searchFish').on('click', function () {
+  const fishID = $('#fishID').val()
+  console.log('searching ledger for the following fish: ' + fishID)
+  if (fishID) app.queryLedger(fishID)
 })
 
 // Transfer Asset
