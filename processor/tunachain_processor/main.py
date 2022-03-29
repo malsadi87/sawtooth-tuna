@@ -20,6 +20,7 @@ from sawtooth_sdk.processor.core import TransactionProcessor
 from sawtooth_sdk.processor.log import init_console_logging
 
 from tunachain_processor.handler import TunachainTransactionHandler
+from tunachain_processor.meta_handler import MetadataTransactionHandler
 
 
 def parse_args(args):
@@ -52,7 +53,12 @@ def main(args=None):
 
         handler = TunachainTransactionHandler()
 
+        #Metadata handler
+        handler2 = MetadataTransactionHandler()
+
         processor.add_handler(handler)
+
+        processor.add_handler(handler2)
 
         processor.start()
     except KeyboardInterrupt:

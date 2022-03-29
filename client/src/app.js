@@ -16,7 +16,9 @@ const {
   saveKeys,
   getState,
   submitUpdate,
-  getFishByID
+  getFishByID,
+  updateRegistry,
+  getValueByKey
 } = require('./state')
 const {
   addOption,
@@ -43,6 +45,10 @@ const TUNACHAIN_NAMESPACE = _hash("transfer-chain").substring(0, 6)
 
 const get_asset_address = (asset)=> {
   return TUNACHAIN_NAMESPACE + "00" + _hash(asset).slice(0, 62);
+}
+
+const get_meta_key_address = (key) => {
+  return _hash("cross-chain").substring(0,6) + "00" + _hash(key).slice(0, 62);
 }
 
 
@@ -119,13 +125,25 @@ app.update = function (action, asset, owner, weight, location) {
   }
 }
 app.queryLedger = function(fishID){
-
 const fishAddress = get_asset_address(fishID)
 console.log(fishAddress)
 getFishByID(fishAddress)
-
-
 }
+
+app.addMetaData = function(key, value){
+  console.log('add meta data  function')
+  updateRegistry(
+    {key, value},
+    this.user.private,
+    success => success ? this.refresh() : null
+  )
+  }
+
+  app.getMetaValue = function(key){
+    const address = get_meta_key_address(key)
+    console.log('getMetaValue : ' , address)
+    getValueByKey(address)
+    }
 
 // Select User
 $('[name="keySelect"]').on('change', function () {
@@ -160,6 +178,21 @@ $('#searchFish').on('click', function () {
   const fishID = $('#fishID').val()
   console.log('searching ledger for the following fish: ' + fishID)
   if (fishID) app.queryLedger(fishID)
+})
+
+// add metadata entry
+$('#addMeta').on('click', function () {
+  const key = $('#meta_key').val()
+  const value = $('#meta_val').val()
+  console.log('adding : ', key, 'and ', value)
+  if (key) app.addMetaData(key, value)
+})
+
+// search ledger for a specific fish
+$('#getValue').on('click', function () {
+  const key = $('#meta_key').val()
+  console.log('searching ledger for the following key: ' + key)
+  if (key) app.getMetaValue(key)
 })
 
 // Transfer Asset

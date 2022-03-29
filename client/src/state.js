@@ -24,6 +24,10 @@ const FAMILY = 'transfer-chain'
 const VERSION = '0.0'
 const PREFIX = '19d832'
 
+const FAMILY2 = 'cross-chain'
+const VERSION2 = '0.1'
+const PREFIX2 = '5978b3'
+
 // Fetch key-pairs from localStorage
 const getKeys = () => {
   const storedKeys = localStorage.getItem(KEY_NAME)
@@ -57,6 +61,21 @@ const saveKeys = keys => {
 //Fetch Fish by it's ID
 const getFishByID =  (fishAddress) => {
   $.get(`${API_URL}/state?address=${fishAddress}`, ({ data }) => {
+    console.log(data)
+    //return data
+    data.reduce((processed, datum) => {
+      if (datum.data !== '') {
+        const parsed = JSON.parse(atob(datum.data))
+        console.log(parsed)
+      }
+      return processed
+    }, {transfers: []})
+  })
+}
+
+//Fetch MetaValue by it's Key
+const getValueByKey =  (keyAddress) => {
+  $.get(`${API_URL}/state?address=${keyAddress}`, ({ data }) => {
     console.log(data)
     //return data
     data.reduce((processed, datum) => {
@@ -147,11 +166,78 @@ const submitUpdate = (payload, privateKeyHex, cb) => {
   })
 }
 
+const updateRegistry = (payload, privateKeyHex, cb) => {
+  // Create signer
+  const context = createContext('secp256k1')
+  const privateKey = secp256k1.Secp256k1PrivateKey.fromHex(privateKeyHex)
+  const signer = new Signer(context, privateKey)
+  //const PREF = createHash('sha512').update("cross-chain'").digest('hex').toLowerCase().substring(0, 6)
+  // Create the TransactionHeader
+  console.log('updateRegistry method: ')
+  console.log('PREF ', PREFIX2)
+  console.log(JSON.stringify(payload))
+  const payloadBytes = Buffer.from(JSON.stringify(payload))
+  const transactionHeaderBytes = protobuf.TransactionHeader.encode({
+    familyName: FAMILY2,
+    familyVersion: VERSION2,
+    inputs: [PREFIX2],
+    outputs: [PREFIX2],
+    signerPublicKey: signer.getPublicKey().asHex(),
+    batcherPublicKey: signer.getPublicKey().asHex(),
+    dependencies: [],
+    payloadSha512: createHash('sha512').update(payloadBytes).digest('hex')
+  }).finish()
+
+  // Create the Transaction
+  const transactionHeaderSignature = signer.sign(transactionHeaderBytes)
+
+  const transaction = protobuf.Transaction.create({
+    header: transactionHeaderBytes,
+    headerSignature: transactionHeaderSignature,
+    payload: payloadBytes
+  })
+
+  // Create the BatchHeader
+  const batchHeaderBytes = protobuf.BatchHeader.encode({
+    signerPublicKey: signer.getPublicKey().asHex(),
+    transactionIds: [transaction.headerSignature]
+  }).finish()
+
+  // Create the Batch
+  const batchHeaderSignature = signer.sign(batchHeaderBytes)
+
+  const batch = protobuf.Batch.create({
+    header: batchHeaderBytes,
+    headerSignature: batchHeaderSignature,
+    transactions: [transaction]
+  })
+
+  // Encode the Batch in a BatchList
+  const batchListBytes = protobuf.BatchList.encode({
+    batches: [batch]
+  }).finish()
+
+  // Submit BatchList to Validator
+  $.post({
+    url: `${API_URL}/batches`,
+    data: batchListBytes,
+    headers: {'Content-Type': 'application/octet-stream'},
+    processData: false,
+    success: function( resp ) {
+      var id = resp.link.split('?')[1]
+      $.get(`${API_URL}/batch_statuses?${id}&wait`, ({ data }) => cb(true))
+    },
+    error: () => cb(false)
+  })
+}
+
 module.exports = {
   getKeys,
   makeKeyPair,
   saveKeys,
   getState,
   submitUpdate,
-  getFishByID
+  updateRegistry,
+  getFishByID,
+  getValueByKey
 }

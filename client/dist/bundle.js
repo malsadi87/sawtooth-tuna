@@ -39274,7 +39274,9 @@ const {
   saveKeys,
   getState,
   submitUpdate,
-  getFishByID
+  getFishByID,
+  updateRegistry,
+  getValueByKey
 } = __webpack_require__(212)
 const {
   addOption,
@@ -39301,6 +39303,10 @@ const TUNACHAIN_NAMESPACE = _hash("transfer-chain").substring(0, 6)
 
 const get_asset_address = (asset)=> {
   return TUNACHAIN_NAMESPACE + "00" + _hash(asset).slice(0, 62);
+}
+
+const get_meta_key_address = (key) => {
+  return _hash("cross-chain").substring(0,6) + "00" + _hash(key).slice(0, 62);
 }
 
 
@@ -39377,13 +39383,25 @@ app.update = function (action, asset, owner, weight, location) {
   }
 }
 app.queryLedger = function(fishID){
-
 const fishAddress = get_asset_address(fishID)
 console.log(fishAddress)
 getFishByID(fishAddress)
-
-
 }
+
+app.addMetaData = function(key, value){
+  console.log('add meta data  function')
+  updateRegistry(
+    {key, value},
+    this.user.private,
+    success => success ? this.refresh() : null
+  )
+  }
+
+  app.getMetaValue = function(key){
+    const address = get_meta_key_address(key)
+    console.log('getMetaValue : ' , address)
+    getValueByKey(address)
+    }
 
 // Select User
 $('[name="keySelect"]').on('change', function () {
@@ -39418,6 +39436,21 @@ $('#searchFish').on('click', function () {
   const fishID = $('#fishID').val()
   console.log('searching ledger for the following fish: ' + fishID)
   if (fishID) app.queryLedger(fishID)
+})
+
+// add metadata entry
+$('#addMeta').on('click', function () {
+  const key = $('#meta_key').val()
+  const value = $('#meta_val').val()
+  console.log('adding : ', key, 'and ', value)
+  if (key) app.addMetaData(key, value)
+})
+
+// search ledger for a specific fish
+$('#getValue').on('click', function () {
+  const key = $('#meta_key').val()
+  console.log('searching ledger for the following key: ' + key)
+  if (key) app.getMetaValue(key)
 })
 
 // Transfer Asset
@@ -51023,6 +51056,10 @@ const FAMILY = 'transfer-chain'
 const VERSION = '0.0'
 const PREFIX = '19d832'
 
+const FAMILY2 = 'cross-chain'
+const VERSION2 = '0.1'
+const PREFIX2 = '5978b3'
+
 // Fetch key-pairs from localStorage
 const getKeys = () => {
   const storedKeys = localStorage.getItem(KEY_NAME)
@@ -51056,6 +51093,21 @@ const saveKeys = keys => {
 //Fetch Fish by it's ID
 const getFishByID =  (fishAddress) => {
   $.get(`${API_URL}/state?address=${fishAddress}`, ({ data }) => {
+    console.log(data)
+    //return data
+    data.reduce((processed, datum) => {
+      if (datum.data !== '') {
+        const parsed = JSON.parse(atob(datum.data))
+        console.log(parsed)
+      }
+      return processed
+    }, {transfers: []})
+  })
+}
+
+//Fetch MetaValue by it's Key
+const getValueByKey =  (keyAddress) => {
+  $.get(`${API_URL}/state?address=${keyAddress}`, ({ data }) => {
     console.log(data)
     //return data
     data.reduce((processed, datum) => {
@@ -51146,13 +51198,80 @@ const submitUpdate = (payload, privateKeyHex, cb) => {
   })
 }
 
+const updateRegistry = (payload, privateKeyHex, cb) => {
+  // Create signer
+  const context = createContext('secp256k1')
+  const privateKey = secp256k1.Secp256k1PrivateKey.fromHex(privateKeyHex)
+  const signer = new Signer(context, privateKey)
+  //const PREF = createHash('sha512').update("cross-chain'").digest('hex').toLowerCase().substring(0, 6)
+  // Create the TransactionHeader
+  console.log('updateRegistry method: ')
+  console.log('PREF ', PREFIX2)
+  console.log(JSON.stringify(payload))
+  const payloadBytes = Buffer.from(JSON.stringify(payload))
+  const transactionHeaderBytes = protobuf.TransactionHeader.encode({
+    familyName: FAMILY2,
+    familyVersion: VERSION2,
+    inputs: [PREFIX2],
+    outputs: [PREFIX2],
+    signerPublicKey: signer.getPublicKey().asHex(),
+    batcherPublicKey: signer.getPublicKey().asHex(),
+    dependencies: [],
+    payloadSha512: createHash('sha512').update(payloadBytes).digest('hex')
+  }).finish()
+
+  // Create the Transaction
+  const transactionHeaderSignature = signer.sign(transactionHeaderBytes)
+
+  const transaction = protobuf.Transaction.create({
+    header: transactionHeaderBytes,
+    headerSignature: transactionHeaderSignature,
+    payload: payloadBytes
+  })
+
+  // Create the BatchHeader
+  const batchHeaderBytes = protobuf.BatchHeader.encode({
+    signerPublicKey: signer.getPublicKey().asHex(),
+    transactionIds: [transaction.headerSignature]
+  }).finish()
+
+  // Create the Batch
+  const batchHeaderSignature = signer.sign(batchHeaderBytes)
+
+  const batch = protobuf.Batch.create({
+    header: batchHeaderBytes,
+    headerSignature: batchHeaderSignature,
+    transactions: [transaction]
+  })
+
+  // Encode the Batch in a BatchList
+  const batchListBytes = protobuf.BatchList.encode({
+    batches: [batch]
+  }).finish()
+
+  // Submit BatchList to Validator
+  $.post({
+    url: `${API_URL}/batches`,
+    data: batchListBytes,
+    headers: {'Content-Type': 'application/octet-stream'},
+    processData: false,
+    success: function( resp ) {
+      var id = resp.link.split('?')[1]
+      $.get(`${API_URL}/batch_statuses?${id}&wait`, ({ data }) => cb(true))
+    },
+    error: () => cb(false)
+  })
+}
+
 module.exports = {
   getKeys,
   makeKeyPair,
   saveKeys,
   getState,
   submitUpdate,
-  getFishByID
+  updateRegistry,
+  getFishByID,
+  getValueByKey
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
