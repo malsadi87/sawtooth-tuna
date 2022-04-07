@@ -1,14 +1,12 @@
-## Hyperledger Sawtooth Sample Application - Hyperledger Sawtooth Tuna Chain
+## Hyperledger Sawtooth Sample Application
 
-We will be looking at a sample blockchain application that interfaces with Hyperledger Sawtooth. This example is meant to introduce you to writing an application that interfaces with Hyperledger Sawtooth as opposed to creating a complete production implementation.
+This example demonstrated a Hyperledger Sawtooth based application used for storing fish. The application provides a GUI through which users can interact with Sawtooth Blockchain to add/retrieve data to/from the ledger.
 
-This is an example of a simple Hyperledger Sawtooth blockchain application written in JavaScript. Hyperledger Sawtooth Tuna Chain allows a user to create named assets (tuna fish) and transfer them between different holders designated by a public key.
+The current applications has two transaction processors and two transaction handlers. One is responsbile handling transactions related to fish while the other is repsonible for interoperability transaction. This makes it possible for other Blockchains to interact with Sawtooth. Transaction Processors and Handlers are written in Pyhton. 
 
-This application was written by Zac Delventhal maintainer on Hyperledger Sawtooth. Original source code can be found here (https://github.com/delventhalz/transfer-chain-js).
+The main folders within the project are:
 
----
-**NOTE**
+1. processor: in this folder you can find all transaction processors and handlers. You will find also payload structure.
+2. client: this folder contains the codes repsonsible for handling user requests and it's execusion on Sawtooth.
 
-This example is based on v0.8 of Hyperledger Sawtooth. Please refer to the [v0.8 documentation](https://sawtooth.hyperledger.org/docs/core/releases/0.8/) when working with this example.
-
----
+To run the application, you should have docker running in your machine. You just need to run ( dicker-compose up ) from inside the main folder.
