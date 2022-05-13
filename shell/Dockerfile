@@ -29,7 +29,7 @@ RUN echo "deb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 
     curl \
     python3-pip
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
  && apt-get install -y nodejs
 
 RUN \
@@ -47,7 +47,16 @@ RUN pip3 install \
 WORKDIR /project/sawtooth-tuna
 
 COPY client/package.json /project/sawtooth-tuna/client/
+COPY client/package-lock.json /project/sawtooth-tuna/client/
 
-RUN cd client/ && npm install
+RUN mkdir -p /project/sawtooth-tuna/client/node_modules
+RUN chmod -R 777 /project/sawtooth-tuna/client/node_modules
+
+RUN cd client/ && npm install && npm install react-scripts@5.0.0 -g
+
+COPY client/ /project/sawtooth-tuna/client/
+
+RUN mkdir -p /project/sawtooth-tuna/client/node_modules/.cache
+RUN chmod -R 777 /project/sawtooth-tuna/client/node_modules/.cache
 
 ENV PATH $PATH:/project/sawtooth-tuna/bin

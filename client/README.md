@@ -1,0 +1,1 @@
+# NTNUPaaSAquaculture.Client

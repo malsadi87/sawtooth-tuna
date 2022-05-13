@@ -25,36 +25,25 @@ services:
         - http_proxy
         - https_proxy
         - no_proxy
-    image: sawtooth-tunachain-shell
     container_name: tunachain-shell
     volumes:
       - .:/project/sawtooth-tuna
       - /project/sawtooth-tuna/client/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     command: |
       bash -c "
         if [ ! -f /root/.sawtooth/keys/root.priv ]; then
           sawtooth keygen
         fi;
         cd client
-        npm run-script build
+        npm start
         cd ../
         tail -f /dev/null
       "
-
-  tunachain-client:
-    build: ./client/
-    image: sawtooth-tunachain-client
-    container_name: tunachain-client
-    volumes:
-      - ./client/:/usr/local/apache2/htdocs/
-    expose:
-      - 80
-    ports:
-      - '8000:80'
-    depends_on:
-    - rest-api
-    - tunachain-shell
-
+    
   tunachain-tp:
     build:
       context: .
