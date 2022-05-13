@@ -28,6 +28,12 @@
     header, .form-group{
       margin-bottom: 3%;
     }
+    .fixed-header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+    }
+
     #body{
       margin-left:30%;
     }
@@ -47,6 +53,7 @@
     }
     #right-column{
       display:inline-block;
+      margin-top: 100px;
     }
     #data{
       display: inline-block;
@@ -101,46 +108,45 @@
 </head>
 <body>
 
-  <header>
+  <header class="fixed-header">
     <div id="left_header">Sawtooth PassforChain</div>
     <i id="right_header">Sawtooth Blockchain example to demonstrate basic interactions</i>
   </header>
 
   <div id="body">
+    <div class="sidemenu">
+      <a href="fish-landing.html">Fish</a>
+      <a href="trip.html">Trip</a>
+      <a href="haul.html">Haul</a>
+      <a href="pallet.html">Pallet</a>
+    </div>
 
-  <div class="sidemenu">
-    <a href="fish-landing.html">Fish</a>
-    <a href="trip.html">Trip</a>
-    <a href="haul.html">Haul</a>
-    <a href="pallet.html">Pallet</a>
-
-	</div>
     <div id="right-column">
-
       <div class="form-group">
         <label>Create Fish Record</label>
         <input id="createName" class="form-control" type="text" placeholder="Enter fish name...">
         <input id="weight" class="form-control" type="text" placeholder="Enter fish weight...">
         <input id="latitude" class="form-control" type="text" placeholder="Enter GPS latitude...">
         <input id="longitude" class="form-control" type="text" placeholder="Enter GPS longitude...">
-        <input id="createSubmit" type="button" value="Create" class="btn btn-primary">
+        <input id="createSubmitFish" type="button" value="Create" class="btn btn-primary">
       </div>
-    </div>
 
-    <div id="data">
-      <label>Fish List</label>
-      <table class="table table-hover">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Holder</th>
-          <th>Weight</th>
-        </tr>
-        <tbody id="assetList"></tbody>
-      </table>
-    </div>
+      <div id="data">
+        <label>Fish List</label>
+        <table class="table table-hover">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Holder</th>
+            <th>Weight</th>
+          </tr>
+          <tbody id="assetList"></tbody>
+        </table>
+      </div>
     <div id="map"></div>
   </div>
+ </div>
+
 
 <script src="dist/bundle.js"></script>
 </body>

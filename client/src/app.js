@@ -161,8 +161,8 @@ $('[name="keySelect"]').on('change', function () {
   }
 })
 
-// Create Asset
-$('#createSubmit').on('click', function () {
+// Create Fish
+$('#createSubmitFish').on('click', function () {
   const asset = $('#createName').val()
   const weight = $('#weight').val()
   const location = {
@@ -171,6 +171,19 @@ $('#createSubmit').on('click', function () {
   }
   console.log('creating new fish assest: ' + asset)
   if (asset) app.update('create', asset, '', weight, location)
+})
+
+// Create Pallet
+$('#createSubmitPallet').on('click', function () {
+    const palletID = $('#createPalletID').val()
+    const palletVID = $('#createPalletVID').val()
+    const palletProductID = $('#createProductID').val()
+    const palletDate = $('#createDate').val()
+    const palletNumber = $('#createPalletNumber').val()
+    const palletProductNumber = $('#createProductNumber').val()
+    const palletWeight = $('#createWeight').val()
+    const palletTemperature = $('#createPalletTemperature').val()
+    console.log('creating new pallet with ID: ' + palletID)
 })
 
 // search ledger for a specific fish
