@@ -1,4 +1,4 @@
-const ROOT_KEY = 'MTFXQB';
+const ROOT_KEY = 'NTNUPAASAQUACULTURE';
 const ACCESS_TOKEN_KEY = 'access_token';
 const ACCESS_TOKEN_TYPE = 'token_type';
 const LOGGED_IN_USER_FULL_NAME_KEY = 'fullName';
@@ -44,6 +44,7 @@ const removeItem = (key) => {
         localStorage.setItem(ROOT_KEY, JSON.stringify(data));
     }
 }
+
 const reset = () => {
     localStorage.removeItem(ROOT_KEY);
 }

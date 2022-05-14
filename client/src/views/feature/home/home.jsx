@@ -50,7 +50,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </nav>
-                <div className="container h-custom" style={{ height: '82.7vh' }}>
+                <div className="container h-custom" style={{ height: '90.1%' }}>
                     <Outlet/>
                 </div>
                 <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">

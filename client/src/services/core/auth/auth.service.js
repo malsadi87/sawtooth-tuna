@@ -37,8 +37,15 @@ const signIn = async (email, password) => {
     }
 }
 
-const signUp = () => {
-
+const signUp = async (fullName, email, password) => {
+    try {
+        const response = await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
+        if (!response) return Promise.reject("Invalid form data!");
+        return response;
+    } catch(e) {
+        console.log(e);
+        return Promise.reject(e);
+    }
 }
 
 const signOut = async () => {
@@ -53,7 +60,6 @@ const signOutLocally = () => {
 
 const getAuthentication = () => {
     setAuthentication(!isTokenExpire());
-    console.log(getAuthentication);
     return isAuthenticate;
 }
 

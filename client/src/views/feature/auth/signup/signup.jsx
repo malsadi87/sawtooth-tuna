@@ -1,12 +1,49 @@
 import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import authService from "../../../../services/core/auth/auth.service";
+import { withParamsAndNavigation } from "../../../../utility/routerHelper";
+import { RouteUrl } from "../../../../constants/routeUrls";
 import './signup.css';
 
-export default class Signup extends Component {
+class Signup extends Component {
+    state = {
+        signUpForm: {
+            fullName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            agreeTerms: false
+        }
+    }
+
+    handleFormChange = ({ currentTarget: input }) => {
+        this.setState({
+            signUpForm: {
+                ...this.state.signUpForm,
+                [input.name]: input.value
+            }
+        });
+    }
+
+    signUp = async () => {
+        // Implement form validation if necessary
+        const { fullName, email, password, confirmPassword, agreeTerms } = this.state.signUpForm;
+
+        if (password != confirmPassword || !agreeTerms) {
+            alert('Invalid input');
+            return;
+        }
+        
+        await authService.signUp(fullName, email, password);
+        this.props.navigate(RouteUrl.login);
+    }
+
     render() {
+        const { signUpForm } = this.state;
+
         return (
             <section className="vh-100" style={{ backgroundColor: '#ffffff'}}>
-                <div style={{ height: '90.3vh' }} className="container">
+                <div style={{ height: '94.4%' }} className="container">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
                             <div className="row justify-content-center">
@@ -19,8 +56,15 @@ export default class Signup extends Component {
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <FontAwesomeIcon icon={["fas", "user"]} className="fa-lg me-3 fa-fw mb-8" />
                                             <div className="form-outline flex-fill mb-0">
-                                                <input type="text" id="form3Example1c"
-                                                       className="form-control"/>
+                                                <input
+                                                    autoFocus
+                                                    value={signUpForm.fullName}
+                                                    onChange={this.handleFormChange}
+                                                    type="text"
+                                                    id="fullName"
+                                                    name="fullName"
+                                                    className="form-control"
+                                                />
                                                 <label className="form-label" htmlFor="form3Example1c">Your
                                                     Name</label>
                                             </div>
@@ -29,8 +73,14 @@ export default class Signup extends Component {
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <FontAwesomeIcon icon={["fas", "envelope"]} className="fa-lg me-3 fa-fw mb-8" />
                                             <div className="form-outline flex-fill mb-0">
-                                                <input type="email" id="form3Example3c"
-                                                       className="form-control"/>
+                                                <input
+                                                    value={signUpForm.email}
+                                                    onChange={this.handleFormChange}
+                                                    type="email" 
+                                                    id="email"
+                                                    name="email"
+                                                    className="form-control"
+                                                />
                                                 <label className="form-label" htmlFor="form3Example3c">Your
                                                     Email</label>
                                             </div>
@@ -39,8 +89,14 @@ export default class Signup extends Component {
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <FontAwesomeIcon icon={["fas", "lock"]} className="fa-lg me-3 fa-fw mb-8" />
                                             <div className="form-outline flex-fill mb-0">
-                                                <input type="password" id="form3Example4c"
-                                                       className="form-control"/>
+                                                <input
+                                                    value={signUpForm.password}
+                                                    onChange={this.handleFormChange}
+                                                    type="password" 
+                                                    id="password"
+                                                    name="password"
+                                                    className="form-control"
+                                                />
                                                 <label className="form-label"
                                                        htmlFor="form3Example4c">Password</label>
                                             </div>
@@ -49,8 +105,14 @@ export default class Signup extends Component {
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <FontAwesomeIcon icon={["fas", "key"]} className="fa-lg me-3 fa-fw mb-8" />
                                             <div className="form-outline flex-fill mb-0">
-                                                <input type="password" id="form3Example4cd"
-                                                       className="form-control"/>
+                                                <input
+                                                    value={signUpForm.confirmPassword}
+                                                    onChange={this.handleFormChange}
+                                                    type="password" 
+                                                    id="confirmPassword"
+                                                    name="confirmPassword"
+                                                    className="form-control"
+                                                />
                                                 <label className="form-label" htmlFor="form3Example4cd">Repeat
                                                     your password</label>
                                             </div>
@@ -60,8 +122,10 @@ export default class Signup extends Component {
                                             <input
                                                 className="form-check-input me-2"
                                                 type="checkbox"
-                                                value=""
-                                                id="form2Example3c"
+                                                value={signUpForm.agreeTerms}
+                                                onChange={this.handleFormChange}
+                                                id="agreeTerms"
+                                                name="agreeTerms"
                                             />
                                             <label className="form-check-label" htmlFor="form2Example3">
                                                 I agree all statements in <a href="#!">Terms of service</a>
@@ -69,7 +133,7 @@ export default class Signup extends Component {
                                         </div>
 
                                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="button" className="btn btn-primary btn-lg">Register
+                                            <button onClick={this.signUp} type="button" className="btn btn-primary btn-lg">Register
                                             </button>
                                         </div>
                                     </form>
@@ -110,3 +174,5 @@ export default class Signup extends Component {
         )
     }
 }
+
+export default withParamsAndNavigation(Signup);
