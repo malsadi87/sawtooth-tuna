@@ -12,6 +12,14 @@ class NavBar extends Component {
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.collapsed !== state.collapsed) {
+            return { collapsed: props.collapsed };
+        }
+
+        return null;
+    }
+
     getItem = (label, key, icon, children, type) => {
         return { key, icon, children, label, type };
     }
