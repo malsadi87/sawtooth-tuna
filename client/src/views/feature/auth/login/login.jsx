@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import authService from '../../../../services/core/auth/auth.service';
+import './login.css';
 
 export default class Login extends Component {
     state = {
@@ -35,9 +36,9 @@ export default class Login extends Component {
         const { loginForm } = this.state;
 
         return (
-            <section className="vh-100">
-                <div className="container-fluid h-custom" style={{ height: '94.4%' }}>
-                    <div className="row d-flex justify-content-center align-items-center h-100">
+            <section>
+                <div className="container-fluid vh-100">
+                    <div className="ninenty row justify-content-center align-items-center">
                         <div className="col-md-9 col-lg-6 col-xl-5">
                             <img src="/draw2.webp"
                                  className="img-fluid" alt="Login here"/>
@@ -113,8 +114,7 @@ export default class Login extends Component {
                         </div>
                     </div>
                 </div>
-                <div
-                    className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
                     <div className="text-white mb-3 mb-md-0">
                         Copyright © 2022. All rights reserved.
                     </div>

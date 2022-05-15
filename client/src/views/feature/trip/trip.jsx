@@ -86,11 +86,9 @@ class Trip extends Component {
     render() {
         const { size, columns, data  } = this.state;
         return (
-            <div className="container-fluid">
-                <div className='mt-5'>
-                    <Button onClick={this.redirectToCreateNewTrip} className='mb-2 float-right' type="primary" size={size}>Create New</Button>
-                    <Table columns={columns} dataSource={data} />
-                </div>
+            <div className='mt-5'>
+                <Button onClick={this.redirectToCreateNewTrip} className='mb-2 float-right' type="primary" size={size}>Create New</Button>
+                <Table columns={columns} dataSource={data} />
             </div>
         )
     }

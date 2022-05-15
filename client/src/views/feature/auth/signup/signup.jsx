@@ -43,7 +43,7 @@ class Signup extends Component {
 
         return (
             <section className="vh-100" style={{ backgroundColor: '#ffffff'}}>
-                <div style={{ height: '94.4%' }} className="container">
+                <div className="container vh-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
                             <div className="row justify-content-center">
@@ -149,8 +149,7 @@ class Signup extends Component {
                         </div>
                     </div>
                 </div>
-                <div
-                    className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
                     <div className="text-white mb-3 mb-md-0">
                         Copyright © 2022. All rights reserved.
                     </div>
