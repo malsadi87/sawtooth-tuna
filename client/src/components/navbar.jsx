@@ -2,34 +2,34 @@ import React, { Component } from "react";
 import { withParamsAndNavigation } from "../utility/routerHelper";
 import { Menu } from 'antd';
 import { RouteUrl } from '../constants/routeUrls';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 class NavBar extends Component {
-    state = {
-        collapsed: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapsed: this.props.collapsed
+        }
     }
-
-    toggleCollapsed = () => {
-        this.setState({ collapsed: !this.state.collapsed })    
-    };
 
     getItem = (label, key, icon, children, type) => {
         return { key, icon, children, label, type };
     }
 
     items = [
-        this.getItem('Trip', 'sub1', <MailOutlined />),
-        this.getItem('Haul', 'sub2', <AppstoreOutlined />),
-        this.getItem('Pallet', 'sub3', <SettingOutlined />),
-        this.getItem('Product', 'sub4', <SettingOutlined />)
+        this.getItem('Trip', RouteUrl.trip, <MailOutlined />),
+        this.getItem('Haul', RouteUrl.haul, <AppstoreOutlined />),
+        this.getItem('Pallet', RouteUrl.pallet, <SettingOutlined />),
+        this.getItem('Product', RouteUrl.product, <SettingOutlined />)
     ];
     
     onClick = (e) => {
-        console.log('click ', e);
-        this.props.navigate(RouteUrl.trip);
+        this.props.navigate(e.key);
     };
 
     render() {
+        const { collapsed } = this.state;
+
         return (
             <Menu
                 onClick={this.onClick}

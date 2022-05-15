@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withParamsAndNavigation } from "../../../utility/routerHelper";
-import { Menu, Button } from 'antd';
+import NavBar from "../../../components/navbar";
+import { Button } from 'antd';
 import { Outlet } from "react-router-dom";
-import { AppstoreOutlined, MailOutlined, SettingOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { RouteUrl } from '../../../constants/routeUrls';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import './home.css';
-
-/*
-    // Nice to have things
-    * Move menu component to a new file as a seperate component
-*/
-
 
 class Home extends Component {
     state = {
@@ -20,28 +14,6 @@ class Home extends Component {
 
     toggleCollapsed = () => {
         this.setState({ collapsed: !this.state.collapsed })    
-    };
-
-    getItem = (label, key, icon, children, type) => {
-        return {
-          key,
-          icon,
-          children,
-          label,
-          type,
-        };
-    }
-
-    items = [
-        this.getItem('Trip', 'sub1', <MailOutlined />),
-        this.getItem('Haul', 'sub2', <AppstoreOutlined />),
-        this.getItem('Pallet', 'sub3', <SettingOutlined />),
-        this.getItem('Product', 'sub4', <SettingOutlined />)
-    ];
-    
-    onClick = (e) => {
-        console.log('click ', e);
-        this.props.navigate(RouteUrl.trip);
     };
 
     render() {
@@ -58,14 +30,7 @@ class Home extends Component {
                 <div className="container-fluid">
                 <div className="row body-div">
                     <div className="col-md-1">
-                        <Menu
-                            onClick={this.onClick}
-                            style={{ width: (collapsed ? 80 : 256) }}
-                            className="menu-max"
-                            mode="inline"
-                            inlineCollapsed={collapsed}
-                            items={this.items}
-                        />
+                        <NavBar collapsed={collapsed} />
                     </div>
                     <div className="col-md-11">
                         <Outlet/>
