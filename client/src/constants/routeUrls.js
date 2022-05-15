@@ -3,5 +3,8 @@ export const RouteUrl = {
     signup: '/auth/signup',
     login: '/auth/login',
     trip: '/trip',
-    newTrip: '/trip/new'
+    newTrip: '/trip/new',
+    haul: '/haul',
+    pallet: '/pallet',
+    product: '/product'
 };

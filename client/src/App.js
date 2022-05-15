@@ -11,6 +11,9 @@ import {RouteUrl} from './constants/routeUrls';
 import AuthShell from "./views/core/authShell";
 import Trip from "./views/feature/trip/trip";
 import NewTrip from "./views/feature/trip/newTrip/newTrip";
+import Haul from "./views/feature/haul/haul";
+import Pallet from "./views/feature/pallet/pallet";
+import Product from "./views/feature/product/product";
 import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
@@ -41,6 +44,9 @@ class App extends Component {
                     <Route exact path={RouteUrl.home} element={<Home />}>
                         <Route path={RouteUrl.trip} element={<Trip />} />
                         <Route path={RouteUrl.newTrip} element={<NewTrip />} />
+                        <Route path={RouteUrl.haul} element={<Haul />} />
+                        <Route path={RouteUrl.pallet} element={<Pallet />} />
+                        <Route path={RouteUrl.product} element={<Product />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>
