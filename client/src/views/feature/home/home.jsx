@@ -5,7 +5,13 @@ import { Menu, Button } from 'antd';
 import { Outlet } from "react-router-dom";
 import { AppstoreOutlined, MailOutlined, SettingOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { RouteUrl } from '../../../constants/routeUrls';
-import "./home.css";
+import './home.css';
+
+/*
+    // Nice to have things
+    * Move menu component to a new file as a seperate component
+*/
+
 
 class Home extends Component {
     state = {

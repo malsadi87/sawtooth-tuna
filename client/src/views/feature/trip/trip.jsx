@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Table, Tag, Space, Button } from 'antd';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
+import './trip.css';
 
 class Trip extends Component {
     state = {
@@ -85,6 +86,7 @@ class Trip extends Component {
 
     render() {
         const { size, columns, data  } = this.state;
+        
         return (
             <div className='mt-5'>
                 <Button onClick={this.redirectToCreateNewTrip} className='mb-2 float-right' type="primary" size={size}>Create New</Button>
