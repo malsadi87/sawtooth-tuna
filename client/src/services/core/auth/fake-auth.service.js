@@ -5,17 +5,19 @@ import JWT from 'expo-jwt';
 const privateKey = "NTNUPAASAQUACULTURE";
 const db = new Dexie("NTNUPAASAQUACULTURE");
 db.version(1).stores({
-    users: "++id,fullName,email,password"
+    users: "++id,fullName,email,password,sTPublicKey"
 });
 
 const token = async (email, password) => {
     const user = await db.users.filter(x => x.email == email && x.password == password).first();
-    console.log(user);
-    if (user == null) return null;
+    if (user == null) throw "No such suer exist! Try registering yourself.";
     return { token: generateToken(user) };
 }
 
 const signup = async (fullName, email, password) => {
+    // Try to create a key for the user
+    // Grab the key and save it
+    // If not possible throw exception
     await db.users.add({fullName, email, password});
     return true;
 }
@@ -31,7 +33,12 @@ const signOut = () => {
 const generateToken = (user) => {
     let now = new Date();
     now.setDate(now.getDate() + 365);
-    return JWT.encode({ token_type: 'Bearer', fullName: user.fullName, email: user.email }, privateKey, { algorithm: 'HS256', exp: now });
+    return JWT.encode({ 
+        token_type: 'Bearer', 
+        fullName: user.fullName,
+        email: user.email,
+        sTPublicKey: user.sTPublicKey
+    }, privateKey, { algorithm: 'HS256', exp: now });
 }
 
 const fakeAuthService = {

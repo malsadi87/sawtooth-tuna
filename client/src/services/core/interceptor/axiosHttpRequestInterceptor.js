@@ -16,7 +16,6 @@ const getFakeServiceMapping = (controllerName) => {
         default:
             return null;
     }
-
 }
 
 const RequestInterceptor = {
@@ -58,7 +57,8 @@ const RequestInterceptor = {
                     if (data == null)
                         return Promise.reject('Invalid Request!');
     
-                    console.info('Data from fake service - ', data)
+                    console.info('Fake service Info - ', urlDetails);
+                    console.info('Data from fake service - ', data);
                     config.adapter = (config) => {
                         return new Promise((resolve, _) => {
                             const res = {
@@ -73,7 +73,7 @@ const RequestInterceptor = {
                         });
                     };
                 } catch(e) {
-                    return Promise.reject('Invalid Request!');
+                    return Promise.reject(e.message);
                 }
             }
 

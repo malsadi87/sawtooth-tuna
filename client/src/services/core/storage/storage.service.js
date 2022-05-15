@@ -3,6 +3,7 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const ACCESS_TOKEN_TYPE = 'token_type';
 const LOGGED_IN_USER_FULL_NAME_KEY = 'fullName';
 const LOGGED_IN_USER_EMAIL = 'email';
+const LOGGED_IN_USER_SAWTOOTH_PUBLIC_KEY = "sTPublicKey";
 
 const getByRoot = () =>  {
     const data = localStorage.getItem(ROOT_KEY);
@@ -25,6 +26,10 @@ const getLoggedInUserFullName = () => {
 
 const getLoggedInUserEmail = () => {
     return getItem(LOGGED_IN_USER_EMAIL);
+}
+
+const getLoggedInUserSawtoothPublicKey = () => {
+    return getItem(LOGGED_IN_USER_SAWTOOTH_PUBLIC_KEY);
 }
 
 const getItem =  (key) => {
