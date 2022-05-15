@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withParamsAndNavigation } from "../../../utility/routerHelper";
 import NavBar from "../../../components/navbar";
 import { Button } from 'antd';
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import { RouteUrl } from "../../../constants/routeUrls";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import './home.css';
 
@@ -25,7 +26,9 @@ class Home extends Component {
                     <Button className="" type="primary" onClick={this.toggleCollapsed}>
                         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                     </Button>
-                    <h5 className="pt-2 font-weight-normal ms-1">Sawtooth PassforChain</h5>
+                    <h5 className="pt-2 font-weight-normal ms-2">
+                        <Link className="text-dark text-decoration-none" to={RouteUrl.home}>Sawtooth PassforChain</Link>
+                    </h5>
                 </div>
                 <div className="container-fluid">
                 <div className="row body-div">
