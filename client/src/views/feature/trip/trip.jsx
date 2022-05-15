@@ -1,99 +1,138 @@
 import React, {Component} from 'react';
-import { Table, Tag, Space, Button } from 'antd';
+import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './trip.css';
 
+
+
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 4,
+  },
+};
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
+
 class Trip extends Component {
     state = {
-        columns: [
-            {
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
-                render: text => <a>{text}</a>,
-            },
-            {
-                title: 'Age',
-                dataIndex: 'age',
-                key: 'age',
-            },
-            {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-            },
-            {
-                title: 'Tags',
-                key: 'tags',
-                dataIndex: 'tags',
-                render: tags => (
-                    <>
-                        {tags.map(tag => {
-                            let color = tag.length > 5 ? 'geekblue' : 'green';
-                            if (tag === 'loser') {
-                                color = 'volcano';
-                            }
-                            return (
-                                <Tag color={color} key={tag}>
-                                    {tag.toUpperCase()}
-                                </Tag>
-                            );
-                        })}
-                    </>
-                ),
-            },
-            {
-                title: 'Action',
-                key: 'action',
-                render: (text, record) => (
-                    <Space size="middle">
-                        <a>Invite {record.name}</a>
-                        <a>Delete</a>
-                    </Space>
-                ),
-            },
-        ],
-        data: [
-            {
-                key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-            },
-            {
-                key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
-            },
-            {
-                key: '3',
-                name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
-            },
-        ],
-        size: 'large',
-    }
+        tripForm: {
+            tripNo: '',
+            tripWithinYearNo: '',
+            vesselName: '',
+            departureDate: '',
+            departurePort: '',
+            landingDate: '',
+            landingPort: '',
+            hauls: ''
+            }
+     }
 
-    redirectToCreateNewTrip = () => {
-        this.props.navigate(RouteUrl.newTrip);
-    }
+    onFinish = (values) => {
+        console.log(values);
+    };
+
 
     render() {
-        const { size, columns, data  } = this.state;
-        
         return (
-            <div className='mt-5'>
-                <Button onClick={this.redirectToCreateNewTrip} className='mb-2 float-right' type="primary" size={size}>Create New</Button>
-                <Table columns={columns} dataSource={data} />
-            </div>
+          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+            <Form.Item
+                name={'tripNo'}
+                label="Trip Number"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+              <Input />
+            </Form.Item>
+            <Form.Item
+                name={'tripWithinYearNo'}
+                label="Trip within year number"
+                rules={[
+                  {
+                    required: true
+                  },
+                ]}
+              >
+              <Input />
+            </Form.Item>
+            <Form.Item
+            name={'vesselName'}
+            label="Vessel Name"
+            rules={[
+              {
+                required: false,
+                type: 'name'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+         <Form.Item
+             name={'departureDate'}
+             label="Date"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <DatePicker />
+         </Form.Item>
+
+       <Form.Item
+        name={'departurePort'}
+        label="Departure Port"
+        rules={[
+          {
+            required: true
+          },
+        ]}
+      >
+        <InputNumber />
+      </Form.Item>
+
+        <Form.Item
+        name={'Hauls'}
+        label="Hauls"
+        rules={[
+          {
+            required: true
+          },
+        ]}
+      >
+        <InputNumber />
+      </Form.Item>
+
+
+
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
         )
-    }
+    };
 }
+
+
+
+
+
 
 export default withParamsAndNavigation(Trip);
