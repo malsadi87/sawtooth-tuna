@@ -29,7 +29,7 @@ RUN echo "deb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 
     curl \
     python3-pip
 
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_12.x | bash - \
  && apt-get install -y nodejs
 
 RUN \
