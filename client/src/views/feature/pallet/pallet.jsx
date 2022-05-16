@@ -5,6 +5,7 @@ import './pallet.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+
 const layout = {
   labelCol: {
     span: 8,
