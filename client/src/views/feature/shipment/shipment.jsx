@@ -172,4 +172,4 @@ class Shipment extends Component {
 }
 
 
-export default withParamsAndNavigation(Product);
+export default withParamsAndNavigation(Shipment);
