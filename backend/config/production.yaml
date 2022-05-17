@@ -3,3 +3,13 @@ server:
 
 database:
   name: "NTNUPAASAQUACULTURE"
+
+sawtooth:
+  KEY_NAME: "transfer-chain.keys"
+  API_URL: "http://localhost:8008"
+  FAMILY: "transfer-chain"
+  VERSION: "0.0"
+  PREFIX: "19d832"
+  FAMILY2: "cross-chain"
+  VERSION2: "0.1"
+  PREFIX2: "5978b3"
