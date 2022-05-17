@@ -1,33 +1,33 @@
 version: '2.1'
 
 services:
-  # tunachain-shell:
-  #   build:
-  #     context: .
-  #     dockerfile: ./shell/Dockerfile
-  #     args:
-  #       - http_proxy
-  #       - https_proxy
-  #       - no_proxy
-  #   image: hyperledger/tunachain-shell
-  #   container_name: tunachain-shell
-  #   volumes:
-  #     - .:/project/sawtooth-tuna
-  #     - /project/sawtooth-tuna/client/node_modules
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   command: |
-  #     bash -c "
-  #       if [ ! -f /root/.sawtooth/keys/root.priv ]; then
-  #         sawtooth keygen
-  #       fi;
-  #       cd client
-  #       npm start
-  #       cd ../
-  #       tail -f /dev/null
-  #     "
+  tunachain-shell:
+    build:
+      context: .
+      dockerfile: ./shell/Dockerfile
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: hyperledger/tunachain-shell
+    container_name: tunachain-shell
+    volumes:
+      - ./client:/project/sawtooth-tuna/client
+      - /project/sawtooth-tuna/client/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: |
+      bash -c "
+        if [ ! -f /root/.sawtooth/keys/root.priv ]; then
+          sawtooth keygen
+        fi;
+        cd client
+        npm start
+        cd ../
+        tail -f /dev/null
+      "
     
   tunachain-backend:
     build:
@@ -37,92 +37,91 @@ services:
     image: hyperledger/tunachain-backend
     container_name: tunachain-backend
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./backend:/project/sawtooth-tuna/backend
+      - /project/sawtooth-tuna/backend/node_modules
     command: npm run start:dev
     ports:
       - 3001:3001
       - 9229:9229
-    # depends_on:
-    #   - rest-api
+    depends_on:
+      - rest-api
 
 
-#   tunachain-tp:
-#     build:
-#       context: .
-#       dockerfile: ./processor/Dockerfile
-#       args:
-#         - http_proxy
-#         - https_proxy
-#         - no_proxy
-#     image: sawtooth-tunachain-tp
-#     container_name: tunachain-tp
-#     volumes:
-#       - '.:/project/sawtooth-tuna'
-#     depends_on:
-#       - tunachain-shell
-#     command: |
-#       bash -c "
-#         sleep 1
-#         tunachain-tp -vv -C tcp://validator:4004
-#       "
+  tunachain-tp:
+    build:
+      context: .
+      dockerfile: ./processor/Dockerfile
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: sawtooth-tunachain-tp
+    container_name: tunachain-tp
+    volumes:
+      - ./processor:/project/sawtooth-tuna
+    depends_on:
+      - tunachain-shell
+    command: |
+      bash -c "
+        sleep 1
+        tunachain-tp -vv -C tcp://validator:4004
+      "
 
-#   settings-tp:
-#     image: hyperledger/sawtooth-settings-tp
-#     container_name: sawtooth-settings-tp
-#     depends_on:
-#       - validator
-#     entrypoint: settings-tp -vv -C tcp://validator:4004
+  settings-tp:
+    image: hyperledger/sawtooth-settings-tp
+    container_name: sawtooth-settings-tp
+    depends_on:
+      - validator
+    entrypoint: settings-tp -vv -C tcp://validator:4004
 
-#   rest-api:
-#     image: hyperledger/sawtooth-rest-api
-#     container_name: sawtooth-rest-api
-#     expose:
-#       - 8008
-#     ports:
-#       - '8008:8008'
-#     depends_on:
-#       - validator
-#     entrypoint: |
-#       sawtooth-rest-api -vv
-#         --connect tcp://validator:4004
-#         --bind rest-api:8008
+  rest-api:
+    image: hyperledger/sawtooth-rest-api
+    container_name: sawtooth-rest-api
+    expose:
+      - 8008
+    ports:
+      - '8008:8008'
+    depends_on:
+      - validator
+    entrypoint: |
+      sawtooth-rest-api -vv
+        --connect tcp://validator:4004
+        --bind rest-api:8008
 
-#   validator:
-#     image: hyperledger/sawtooth-validator
-#     container_name: sawtooth-validator
-#     expose:
-#       - 4004
-# #      - 8800
-#     ports:
-#       - '4004:4004'
-#     entrypoint: "bash -c \"\
-#       if [ ! -f /etc/sawtooth/keys/validator.priv ]; then
-#         sawadm keygen && \
-#         sawtooth keygen my_key && \
-#         sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
-#         sawset proposal create \
-#           -k /root/.sawtooth/keys/my_key.priv \
-#           sawtooth.consensus.algorithm.name=Devmode \
-#           sawtooth.consensus.algorithm.version=0.1 \
-#           -o config.batch && \
-#         sawadm genesis config-genesis.batch config.batch; \
-#       fi; \
-#         sawtooth-validator -vv \
-#           --endpoint tcp://validator:8800 \
-#           --bind component:tcp://eth0:4004 \
-#           --bind network:tcp://eth0:8800 \
-#           --bind consensus:tcp://eth0:5050 \
-#         \""
-#     volumes:
-#       - ./database/bcdata/data:/var/lib/sawtooth
-#       - ./database/bcdata/keys:/etc/sawtooth/keys
-#       - ./database/bcdata/userKeys:/root/.sawtooth/keys
-#       - ./database/bcdata/logs:/var/log/sawtooth
+  validator:
+    image: hyperledger/sawtooth-validator
+    container_name: sawtooth-validator
+    expose:
+      - 4004
+    ports:
+      - 4004:4004
+    entrypoint: "bash -c \"\
+      if [ ! -f /etc/sawtooth/keys/validator.priv ]; then
+        sawadm keygen && \
+        sawtooth keygen my_key && \
+        sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
+        sawset proposal create \
+          -k /root/.sawtooth/keys/my_key.priv \
+          sawtooth.consensus.algorithm.name=Devmode \
+          sawtooth.consensus.algorithm.version=0.1 \
+          -o config.batch && \
+        sawadm genesis config-genesis.batch config.batch; \
+      fi; \
+        sawtooth-validator -vv \
+          --endpoint tcp://validator:8800 \
+          --bind component:tcp://eth0:4004 \
+          --bind network:tcp://eth0:8800 \
+          --bind consensus:tcp://eth0:5050 \
+        \""
+    volumes:
+      - ./database/bcdata/data:/var/lib/sawtooth
+      - ./database/bcdata/keys:/etc/sawtooth/keys
+      - ./database/bcdata/userKeys:/root/.sawtooth/keys
+      - ./database/bcdata/logs:/var/log/sawtooth
 
-#   devmode-engine:
-#     image: hyperledger/sawtooth-devmode-engine-rust
-#     container_name: sawtooth-devmode-engine-rust-default
-#     depends_on:
-#       - validator
-#     entrypoint: devmode-engine-rust -C tcp://validator:5050
+  devmode-engine:
+    image: hyperledger/sawtooth-devmode-engine-rust
+    container_name: sawtooth-devmode-engine-rust-default
+    depends_on:
+      - validator
+    entrypoint: devmode-engine-rust -C tcp://validator:5050

@@ -1,24 +1,39 @@
-FROM node:12.22.4-alpine As development
+# Download base image
+FROM node:12-stretch AS development
 
-WORKDIR /usr/src/app
+# Define Base Directory
+WORKDIR /project/sawtooth-tuna/backend
 
-COPY ./package*.json ./
+# Copy and restore packages
+COPY backend/package*.json ./
+
+RUN npm install glob rimraf
 
 RUN npm install --only=development
 
-COPY . .
+# Copy all other directories
+COPY backend/ ./
 
+RUN yarn
+
+RUN yarn global add @nestjs/cli
+
+# Setup base command
 RUN npm run build
 
-FROM node:12.22.4-alpine As production
+# # # second phase
+FROM node:12-stretch AS production
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+# # Declaring working directory
+WORKDIR /project/sawtooth-tuna/backend
 
-WORKDIR /usr/src/app
+COPY backend/package*.json ./
 
-COPY --from=development /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/config ./config
-COPY --from=builder /usr/src/app/node_modules ./node_modules
+RUN npm install --only=production
 
-CMD ["node", "dist/main"]
+# #Copy build artifacts
+COPY --from=builder /project/sawtooth-tuna/backend/dist ./
+COPY --from=builder /project/sawtooth-tuna/backend/config ./config
+
+# # Start the server
+CMD [ "node", "main.js" ]

@@ -37,7 +37,7 @@ COPY client/package-lock.json /project/sawtooth-tuna/client/
 RUN mkdir -p /project/sawtooth-tuna/client/node_modules
 RUN chmod -R 777 /project/sawtooth-tuna/client/node_modules
 
-RUN cd client/ && npm install && npm install react-scripts@5.0.0 -g
+RUN cd client/ && npm install && npm install react-scripts@4.0.3 -g
 
 COPY client/ /project/sawtooth-tuna/client/
 
