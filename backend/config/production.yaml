@@ -1,0 +1,5 @@
+server:
+  port: 3001
+
+database:
+  name: "NTNUPAASAQUACULTURE"

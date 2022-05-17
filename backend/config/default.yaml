@@ -1,0 +1,12 @@
+server:
+  port: 3001
+
+database:
+  type: "mssql"
+  isLogEnable: true
+  synchronizeFlag: false
+  encrypt: true
+  trustServerCertificate: false
+
+jwt-config:
+  expiresIn: 604800
