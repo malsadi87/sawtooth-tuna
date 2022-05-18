@@ -7,5 +7,8 @@ export const RouteUrl = {
     haul: '/haul',
     pallet: '/pallet',
     shipment: '/shipment',
-    coldStorage: '/coldStorage'
+    coldStorage: '/coldStorage',
+    batchCreation: '/batchCreation',
+    batchLabelling: '/batchLabelling',
+    batchShipment: '/batchShipment'
 };
