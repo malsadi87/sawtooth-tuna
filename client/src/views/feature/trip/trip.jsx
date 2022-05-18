@@ -28,14 +28,16 @@ const validateMessages = {
 class Trip extends Component {
     state = {
         tripForm: {
-            tripNo: '',
-            tripWithinYearNo: '',
-            vesselName: '',
+            tripId: '',
             departureDate: '',
-            departurePort: '',
             landingDate: '',
+            supplierName: '',
+            supplierNumber: '',
+            tripNumber: '',
+            tripYearNo: '',
+            vesselName: '',
             landingPort: '',
-            hauls: ''
+            lontText: ''
             }
      }
 
@@ -48,8 +50,8 @@ class Trip extends Component {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
             <Form.Item
-                name={'tripNo'}
-                label="Trip Number"
+                name={'tripId'}
+                label="Trip ID"
                 rules={[
                   {
                     required: true,
@@ -58,31 +60,8 @@ class Trip extends Component {
               >
               <Input />
             </Form.Item>
-            <Form.Item
-                name={'tripWithinYearNo'}
-                label="Trip within year number"
-                rules={[
-                  {
-                    required: true
-                  },
-                ]}
-              >
-              <Input />
-            </Form.Item>
-            <Form.Item
-            name={'vesselName'}
-            label="Vessel Name"
-            rules={[
-              {
-                required: false,
-                type: 'name'
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
 
-         <Form.Item
+             <Form.Item
              name={'departureDate'}
              label="Date"
              rules={[
@@ -94,30 +73,109 @@ class Trip extends Component {
             <DatePicker />
          </Form.Item>
 
-       <Form.Item
-        name={'departurePort'}
-        label="Departure Port"
-        rules={[
-          {
-            required: true
-          },
-        ]}
-      >
-        <InputNumber />
-      </Form.Item>
+          <Form.Item
+             name={'landingDate'}
+             label="Landing Date"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <DatePicker />
+         </Form.Item>
 
-        <Form.Item
-        name={'Hauls'}
-        label="Hauls"
-        rules={[
-          {
-            required: true
-          },
-        ]}
-      >
-        <InputNumber />
-      </Form.Item>
+         <Form.Item
+            name={'supplierName'}
+            label="Supplier Name"
+            rules={[
+                {
+                    required: false,
+                    type: 'name'
+                },
+               ]}
+             >
+           <Input />
+          </Form.Item>
 
+
+         <Form.Item
+            name={'supplierNumber'}
+            label="Supplier Number"
+            rules={[
+                {
+                    required: true,
+                    type: 'number'
+                },
+               ]}
+             >
+           <InputNumber />
+          </Form.Item>
+
+           <Form.Item
+            name={'tripNumber'}
+            label="Trip Number"
+            rules={[
+                {
+                    required: true,
+                    type: 'number'
+                },
+               ]}
+             >
+           <InputNumber />
+          </Form.Item>
+
+
+         <Form.Item
+            name={'tripWithinYearNo'}
+            label="Trip within year number"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+            >
+          <InputNumber />
+          </Form.Item>
+
+            <Form.Item
+                name={'vesselName'}
+                label="Vessel Name"
+                rules={[
+                  {
+                    required: false,
+                    type: 'name'
+                  },
+                ]}
+               >
+               <Input />
+            </Form.Item>
+
+
+
+           <Form.Item
+            name={'landingPort'}
+            label="Landing Port"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+            >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+                name={'lontText'}
+                label="Long Text"
+                rules={[
+                  {
+                    required: false
+                  },
+                ]}
+               >
+               <Input />
+            </Form.Item>
 
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

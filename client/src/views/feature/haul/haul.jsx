@@ -27,17 +27,16 @@ const validateMessages = {
 class Haul extends Component {
    state = {
         haulForm: {
+            haulId: '',
             launchDate: '',
             launchTime: '',
             launchPosition: '',
             launchLatitude: '',
             launchLongitude: '',
-            haulDate: '',
-            haulTime: '',
-            haulPosition: '',
-            haulLatitude: '',
-            haulLongitude: '',
-            catch: '', //TODO: make list?
+            tripId: '',
+            catchProductNumber: '',
+            catchProductId: '',
+            catchWeight: ''
             }
      }
 
@@ -49,6 +48,19 @@ class Haul extends Component {
     render() {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+
+            {/*Haul ID*/}
+            <Form.Item
+             name={'haulId'}
+             label="Haul ID"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <InputNumber />
+         </Form.Item>
 
             {/*Launch Date*/}
             <Form.Item
@@ -115,71 +127,58 @@ class Haul extends Component {
           <Input />
         </Form.Item>
 
-        {/*Haul Date*/}
+         {/*Trip ID*/}
             <Form.Item
-             name={'haulDate'}
-             label="Haul Date"
+             name={'tripId'}
+             label="Trip ID"
              rules={[
                   {
                     required: true
                   },
                 ]}
                 >
-            <DatePicker />
+            <InputNumber />
          </Form.Item>
 
-          {/*Haul Time*/}
+          {/*Catch: Product Number*/}
             <Form.Item
-             name={'haulTime'}
-             label="Haul Time"
+             name={'catchProductNumber'}
+             label="Catch: Product Number"
              rules={[
                   {
                     required: true
                   },
                 ]}
                 >
-            <TimePicker />
+            <InputNumber />
          </Form.Item>
 
-
-       {/*Haul Position*/}
-       <Form.Item
-             name={'haulPosition'}
-             label="Haul Position (Name of place)"
+         {/*Catch: Product ID*/}
+            <Form.Item
+             name={'catchProductId'}
+             label="Catch: Product ID"
              rules={[
                   {
                     required: true
                   },
                 ]}
                 >
-            <Input />
+            <InputNumber />
          </Form.Item>
 
-          {/*Haul Latitude*/}
-        <Form.Item
-            name={'haulLatitude'}
-            label="Haul Latitude"
-            rules={[
-              {
-                required: true
-              },
-            ]}
-          >
-          <Input />
-        </Form.Item>
+            {/*Catch: Weight*/}
+            <Form.Item
+             name={'catchWeight'}
+             label="Catch: Weight"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <InputNumber />
+         </Form.Item>
 
-         {/*Haul Longitude*/}
-        <Form.Item
-            name={'haulLongitude'}
-            label="Haul Longitude"
-            rules={[
-              {
-                required: true
-              },
-            ]}
-          >
-          <Input />
-        </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button type="primary" htmlType="submit" >

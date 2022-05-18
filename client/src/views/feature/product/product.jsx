@@ -34,8 +34,12 @@ const data = [
 class Product extends Component {
     state = {
         productForm: {
+            productId: '',
             productName: '',
-            productWeight: ''
+            description: '',
+            attributeName: '',
+            attributeValue: '',
+            productNumber: ''
          }
     }
 
@@ -48,6 +52,19 @@ class Product extends Component {
     render() {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+
+            <Form.Item
+                name={'productId'}
+                label="Product ID"
+                rules={[
+                  {
+                    required: true
+                  },
+                ]}
+              >
+              <InputNumber />
+            </Form.Item>
+
             <Form.Item
                 name={'productName'}
                 label="Product Name"
@@ -59,18 +76,54 @@ class Product extends Component {
               >
               <Input />
             </Form.Item>
-            <Form.Item
-                name={'productWeight'}
-                label="Product Weight"
+
+             <Form.Item
+                name={'description'}
+                label="Description"
                 rules={[
                   {
-                    required: true
+                    required: false,
                   },
                 ]}
               >
               <Input />
             </Form.Item>
 
+            <Form.Item
+                name={'attributeName'}
+                label="Product Parameter: Attribute Name"
+                rules={[
+                  {
+                    required: false,
+                  },
+                ]}
+              >
+              <Input />
+            </Form.Item>
+
+             <Form.Item
+                name={'attributeValue'}
+                label="Product Parameter: Attribute Value"
+                rules={[
+                  {
+                    required: false,
+                  },
+                ]}
+              >
+              <InputNumber />
+            </Form.Item>
+
+             <Form.Item
+                name={'productNumber'}
+                label="Product Number"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+              <InputNumber />
+            </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
