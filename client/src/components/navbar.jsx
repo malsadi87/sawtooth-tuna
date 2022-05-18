@@ -28,7 +28,6 @@ class NavBar extends Component {
         this.getItem('Trip', RouteUrl.trip, <MailOutlined />),
         this.getItem('Haul', RouteUrl.haul, <AppstoreOutlined />),
         this.getItem('Pallet', RouteUrl.pallet, <SettingOutlined />),
-        this.getItem('Product', RouteUrl.product, <SettingOutlined />),
         this.getItem('Shipment', RouteUrl.shipment, <SettingOutlined />),
         this.getItem('Cold Storage', RouteUrl.coldStorage, <SettingOutlined />)
     ];

@@ -44,11 +44,13 @@ class App extends Component {
             <Routes>
                 <Route element={<AuthShell />}>
                     <Route exact path={RouteUrl.home} element={<Home />}>
+                        <Route index element={
+                            <Product />
+                        } />
                         <Route path={RouteUrl.trip} element={<Trip />} />
                         <Route path={RouteUrl.newTrip} element={<NewTrip />} />
                         <Route path={RouteUrl.haul} element={<Haul />} />
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
-                        <Route path={RouteUrl.product} element={<Product />} />
                         <Route path={RouteUrl.shipment} element={<Shipment />} />
                         <Route path={RouteUrl.coldStorage} element={<ColdStorage />} />
                     </Route>
