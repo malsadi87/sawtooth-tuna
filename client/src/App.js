@@ -14,6 +14,8 @@ import NewTrip from "./views/feature/trip/newTrip/newTrip";
 import Haul from "./views/feature/haul/haul";
 import Pallet from "./views/feature/pallet/pallet";
 import Product from "./views/feature/product/product";
+import Shipment from "./views/feature/shipment/shipment";
+import ColdStorage from "./views/feature/coldStorage/coldStorage";
 import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
@@ -47,6 +49,8 @@ class App extends Component {
                         <Route path={RouteUrl.haul} element={<Haul />} />
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
                         <Route path={RouteUrl.product} element={<Product />} />
+                        <Route path={RouteUrl.shipment} element={<Shipment />} />
+                        <Route path={RouteUrl.coldStorage} element={<ColdStorage />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>

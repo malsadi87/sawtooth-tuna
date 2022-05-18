@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import { Form, Input, Button, InputNumber, DatePicker, TimePicker } from 'antd';
-import './haul.css';
+import './coldStorage.css';
 
 
 const layout = {
