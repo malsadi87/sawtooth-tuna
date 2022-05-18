@@ -30,12 +30,12 @@ class Home extends Component {
                         <Link className="text-dark text-decoration-none" to={RouteUrl.home}>Sawtooth PassforChain</Link>
                     </h5>
                 </div>
-                <div className="container-fluid">
+                <div className="container-fluid body-div">
                 <div className="row body-div">
-                    <div className="col-md-1">
+                    <div className="col-md-2">
                         <NavBar collapsed={collapsed} />
                     </div>
-                    <div className="col-md-11">
+                    <div className="col-md-10">
                         <Outlet/>
                     </div>
                 </div>
