@@ -1,11 +1,13 @@
 import Dexie from "dexie";
 import storageService from "../storage/storage.service";
 import JWT from 'expo-jwt';
+import axios from "axios";
+import { APIBasePath } from "../../../constants/apiBasePaths";
 
 const privateKey = "NTNUPAASAQUACULTURE";
 const db = new Dexie("NTNUPAASAQUACULTURE");
 db.version(1).stores({
-    users: "++id,fullName,email,password,sTPublicKey"
+    users: "++id,fullName,email,password,publicKey,privateKey"
 });
 
 const token = async (email, password) => {
@@ -15,11 +17,26 @@ const token = async (email, password) => {
 }
 
 const signup = async (fullName, email, password) => {
-    // Try to create a key for the user
-    // Grab the key and save it
-    // If not possible throw exception
-    await db.users.add({fullName, email, password});
-    return true;
+    try {
+        // Try to create a key for the user
+        console.info("Registration Ifo - ", fullName, email, password);
+        const {data: { publicKey, privateKey }} = await axios.get(APIBasePath.Sawtooth.key.createNewPair);
+        console.log(publicKey, privateKey);
+
+        // Grab the key and save it
+        // If not possible throw exception
+        await db.users.add({ 
+            fullName, 
+            email, 
+            password, 
+            publicKey,
+            privateKey 
+        });
+        return true;
+    } catch(e) {
+        console.error(e);
+        return false;
+    }
 }
 
 const changePassword = (oldpassword, newpassword) => {
@@ -31,14 +48,15 @@ const signOut = () => {
 }
 
 const generateToken = (user) => {
-    let now = new Date();
-    now.setDate(now.getDate() + 365);
+    let oneYearFromNow = new Date();
+    oneYearFromNow.setDate(oneYearFromNow.getDate() + 365);
     return JWT.encode({ 
         token_type: 'Bearer', 
         fullName: user.fullName,
         email: user.email,
-        sTPublicKey: user.sTPublicKey
-    }, privateKey, { algorithm: 'HS256', exp: now });
+        publicKey: user.publicKey,
+        privateKey: user.privateKey
+    }, privateKey, { algorithm: 'HS256', exp: oneYearFromNow });
 }
 
 const fakeAuthService = {

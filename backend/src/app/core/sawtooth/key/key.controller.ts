@@ -12,7 +12,7 @@ export class KeyController {
     */
 
     @Get('/createNewPair')
-    CreateKeyPair(): { public: string, private: string } {
+    CreateKeyPair(): { publicKey: string, privateKey: string } {
         return this.keyService.createKeyPair();
     }
 }

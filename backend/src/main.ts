@@ -8,6 +8,7 @@ async function bootstrap() {
   const port = getProjectConfig('server').port;
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1');
+  app.enableCors({ origin: ['http://localhost:3000'] });
   await app.listen(port);
 
   Logger.log(`Current ENVIRONMENT IS ----> ${process.env.NODE_ENV}`);

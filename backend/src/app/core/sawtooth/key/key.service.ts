@@ -19,7 +19,7 @@ export class KeyService {
         return true;
     }
 
-    createKeyPair(): { public: string, private: string } {
+    createKeyPair(): { publicKey: string, privateKey: string } {
         const context = createContext(this.sawtoothConfig.KEY_ALGORITHMN);
         const privateKey = context.newRandomPrivateKey();
 
@@ -29,6 +29,6 @@ export class KeyService {
         // Get the private key from DB and do further oprtaion
         // Maybe create a injector so that for each and every request it get the private key from DB
         // Or you can cache it for better performance
-        return { public: context.getPublicKey(privateKey).asHex(), private: privateKey.asHex() };
+        return { publicKey: context.getPublicKey(privateKey).asHex(), privateKey: privateKey.asHex() };
     }
 }
