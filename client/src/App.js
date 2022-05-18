@@ -20,6 +20,10 @@ import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
 import Home from "./views/feature/home/home";
+import BatchCreation from "./views/feature/batchCreation/batchCreation";
+import BatchLabelling from "./views/feature/batchLabelling/batchLabelling";
+import BatchShipment from "./views/feature/batchShipment/batchShipment";
+
 import authService from "./services/core/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
 
@@ -51,6 +55,10 @@ class App extends Component {
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
                         <Route path={RouteUrl.shipment} element={<Shipment />} />
                         <Route path={RouteUrl.coldStorage} element={<ColdStorage />} />
+                        <Route path={RouteUrl.batchCreation} element={<BatchCreation />} />
+                        <Route path={RouteUrl.batchLabelling} element={<BatchLabelling />} />
+                        <Route path={RouteUrl.batchShipment} element={<BatchShipment />} />
+
                     </Route>
                 </Route>
                 <Route element={<Auth />}>
