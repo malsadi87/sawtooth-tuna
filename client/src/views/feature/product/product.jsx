@@ -3,13 +3,14 @@ import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './product.css';
 import { Form, Input, Button, InputNumber, DatePicker, Table, Tag, Space } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const layout = {
   labelCol: {
     span: 8,
   },
   wrapperCol: {
-    span: 4,
+    span: 15,
   }
 };
 
@@ -89,29 +90,40 @@ class Product extends Component {
               <Input />
             </Form.Item>
 
-            <Form.Item
-                name={'attributeName'}
-                label="Product Parameter: Attribute Name"
-                rules={[
-                  {
-                    required: false,
-                  },
-                ]}
-              >
-              <Input />
-            </Form.Item>
+            <Form.List name="attribute">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline" style={{ width:500 }}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'attributeName']}
+                      rules={[{ required: true, message: 'Missing attribute name' }]}
+                    >
+                      <Input placeholder="Attribute Name" />
+                    </Form.Item>
 
-             <Form.Item
-                name={'attributeValue'}
-                label="Product Parameter: Attribute Value"
-                rules={[
-                  {
-                    required: false,
-                  },
-                ]}
-              >
-              <InputNumber />
-            </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'attributeValue']}
+                      rules={[{ required: true, message: 'Missing attribute value' }]}
+                    >
+                      <Input placeholder="Attribute Value" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                    Add Attribute
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+
+
+
 
              <Form.Item
                 name={'productNumber'}

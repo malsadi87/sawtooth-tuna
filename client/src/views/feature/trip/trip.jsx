@@ -11,7 +11,7 @@ const layout = {
     span: 8,
   },
   wrapperCol: {
-    span: 4,
+    span: 6,
   },
 };
 
@@ -37,7 +37,7 @@ class Trip extends Component {
             tripYearNo: '',
             vesselName: '',
             landingPort: '',
-            lontText: ''
+            longText: ''
             }
      }
 
@@ -166,7 +166,7 @@ class Trip extends Component {
           </Form.Item>
 
           <Form.Item
-                name={'lontText'}
+                name={'longText'}
                 label="Long Text"
                 rules={[
                   {
@@ -174,7 +174,7 @@ class Trip extends Component {
                   },
                 ]}
                >
-               <Input />
+               <Input.TextArea />
             </Form.Item>
 
 
