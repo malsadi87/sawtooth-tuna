@@ -4,12 +4,12 @@ import { firstValueFrom } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { getProjectConfig } from '../../../../utility/methods/helper.methods';
 import { UtilityService } from '../../utility/utility.service';
-import { FishCreationDto } from '../../../../utility/dto/fish-creation.dto';
+import { ProductCreationDto } from '../../../../utility/dto/product-creation.dto';
 import { KeyPairDto } from '../../../../utility/dto/key-pair.dto';
 import { AssetCreationOperation } from '../../../../utility/enum/asset-creation.enum';
 
 @Injectable()
-export class FishService {
+export class ProductService {
     private sawtoothConfig: any;
 
     constructor(
@@ -24,7 +24,7 @@ export class FishService {
         return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${fishAddress}`));
     }
 
-    async createNew(data: FishCreationDto, keyPair: KeyPairDto): Promise<boolean> {
+    async createNew(data: ProductCreationDto, keyPair: KeyPairDto): Promise<boolean> {
         return await this.utilityService.createAsset(AssetCreationOperation.Create, data, keyPair.privateKey, this.sawtoothConfig.FAMILY, this.sawtoothConfig.VERSION, this.sawtoothConfig.PREFIX);
     }
 

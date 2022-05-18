@@ -32,7 +32,7 @@ const signIn = async (email, password) => {
         });
         setAuthentication(true);
     } catch (e) {
-        console.log(e);
+        console.error(e);
         return Promise.reject(e);
     }
 }
@@ -43,7 +43,7 @@ const signUp = async (fullName, email, password) => {
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
-        console.log(e);
+        console.error(e);
         return Promise.reject(e);
     }
 }

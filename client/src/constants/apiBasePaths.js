@@ -22,11 +22,11 @@ export const APIBasePath = {
         },
         tp: {
             base: '/sawtooth/tp',
-            fish: {
-                base: '/sawtooth/tp/fish',
-                getAll: '/sawtooth/tp/fish/',
-                getById: '/sawtooth/tp/fish/getById/:id',
-                createNew: '/sawtooth/tp/fish/new'
+            product: {
+                base: '/sawtooth/tp/product',
+                getAll: '/sawtooth/tp/product/',
+                getById: '/sawtooth/tp/product/getById/:id',
+                createNew: '/sawtooth/tp/product/new'
             }
         }
     }
