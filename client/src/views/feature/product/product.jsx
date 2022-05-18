@@ -94,7 +94,7 @@ class Product extends Component {
             {(fields, { add, remove }) => (
               <>
                 {fields.map(({ key, name, ...restField }) => (
-                  <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline" style={{ width:500 }}>
+                  <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
                     <Form.Item
                       {...restField}
                       name={[name, 'attributeName']}
