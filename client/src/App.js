@@ -44,9 +44,7 @@ class App extends Component {
             <Routes>
                 <Route element={<AuthShell />}>
                     <Route exact path={RouteUrl.home} element={<Home />}>
-                        <Route index element={
-                            <Product />
-                        } />
+                        <Route index element={<Product />} />
                         <Route path={RouteUrl.trip} element={<Trip />} />
                         <Route path={RouteUrl.newTrip} element={<NewTrip />} />
                         <Route path={RouteUrl.haul} element={<Haul />} />

@@ -9,7 +9,7 @@ export const APIBasePath = {
         deleteClaimsAndRoles: '/identity/deleteClaimsAndRoles',
         deleteUsers: '/identity/delete'
     },
-    trip: {
-        base: '/trip',
+    Sawtooth: {
+        
     }
 };

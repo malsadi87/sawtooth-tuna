@@ -9,6 +9,10 @@ const anonymousUrls = [
     APIBasePath.Identity.token
 ];
 
+const fakeBackEndUrls = [ 
+    APIBasePath.Identity.base 
+];
+
 const getFakeServiceMapping = (controllerName) => {
     switch (controllerName) {
         case APIBasePath.Identity.base:
@@ -49,7 +53,7 @@ const RequestInterceptor = {
                 }
             }
 
-            if (environment.fakeBackEnd) {
+            if (environment.fakeBackEnd && fakeBackEndUrls.find(x => config.url.indexOf(x) > -1)) {
                 try {
                     const urlDetails = config.url.split('/').filter(x => x != '');
                     const method = getFakeServiceMapping("/"+urlDetails[0])[urlDetails[1]];
