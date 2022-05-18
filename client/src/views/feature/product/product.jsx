@@ -58,7 +58,7 @@ class Product extends Component {
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }) => (
-                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                <Space key={key} style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
                   <Form.Item {...restField} name={[name, 'attributeName']} rules={[{ required: true, message: 'Missing attribute name' }]}>
                     <Input placeholder="Attribute Name" />
                   </Form.Item>
@@ -69,15 +69,14 @@ class Product extends Component {
                   <MinusCircleOutlined onClick={() => remove(name)} />
                 </Space>
               ))}
+
+            <Space style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
               <Form.Item>
-                <Row>
-                  <Col span={14} offset={13}>
-                    <Button block type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
-                      Add Attribute
-                    </Button>
-                  </Col>
-                </Row>
-              </Form.Item>
+                  <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
+                    Add Attribute
+                  </Button>
+                </Form.Item>
+            </Space>
             </>
           )}
         </Form.List>
