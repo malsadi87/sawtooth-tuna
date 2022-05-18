@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AllowAnonymous } from '../../utility/decorator/AllowAnonymous.decorator';
 import { TestService } from './test.service';
 
@@ -10,5 +10,11 @@ export class TestController {
     @Get('/')
     Get(): string {
         return "Hello world!";
+    }
+
+    @AllowAnonymous()
+    @Get('/url/:id')
+    GetURl(@Param('id') id: number): string {
+        return id.toString();
     }
 }

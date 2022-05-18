@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { FishService } from './fish.service';
 import { FishCreationWithKeyPairDto } from '../../../../utility/dto/fish-creation.dto';
 
-@Controller('sawtooth/fish')
+@Controller('sawtooth/tp/fish')
 export class FishController {
     constructor(private fishService: FishService) {}
 
