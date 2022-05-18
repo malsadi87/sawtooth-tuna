@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import { Form, Input, Button, InputNumber, DatePicker, TimePicker } from 'antd';
+import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Space } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './haul.css';
 
 
@@ -10,7 +11,7 @@ const layout = {
     span: 8,
   },
   wrapperCol: {
-    span: 4,
+    span: 15,
   },
 };
 
@@ -34,8 +35,8 @@ class Haul extends Component {
             launchLatitude: '',
             launchLongitude: '',
             tripId: '',
-            catchProductNumber: '',
-            catchProductId: '',
+            productNumber: '',
+            productId: '',
             catchWeight: ''
             }
      }
@@ -140,44 +141,45 @@ class Haul extends Component {
             <InputNumber />
          </Form.Item>
 
-          {/*Catch: Product Number*/}
-            <Form.Item
-             name={'catchProductNumber'}
-             label="Catch: Product Number"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <InputNumber />
-         </Form.Item>
+            <Form.List name="catch">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline" style={{ width:700 }}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'productNumber']}
+                      rules={[{ required: true, message: 'Missing product number' }]}
+                    >
+                      <Input placeholder="Product Number" />
+                    </Form.Item>
 
-         {/*Catch: Product ID*/}
-            <Form.Item
-             name={'catchProductId'}
-             label="Catch: Product ID"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <InputNumber />
-         </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'productId']}
+                      rules={[{ required: true, message: 'Missing product ID' }]}
+                    >
+                      <Input placeholder="Product ID" />
+                    </Form.Item>
 
-            {/*Catch: Weight*/}
-            <Form.Item
-             name={'catchWeight'}
-             label="Catch: Weight"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <InputNumber />
-         </Form.Item>
+                     <Form.Item
+                      {...restField}
+                      name={[name, 'catchWeight']}
+                      rules={[{ required: true, message: 'Missing catch weight ' }]}
+                    >
+                      <Input placeholder="Catch Weight" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                    Add Catch
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
 
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
