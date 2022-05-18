@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import storageService from "../storage/storage.service";
+import storageService from "../../core/storage/storage.service";
 import JWT from 'expo-jwt';
 import axios from "axios";
 import { APIBasePath } from "../../../constants/apiBasePaths";

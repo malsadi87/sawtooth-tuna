@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import storage from '../storage/storage.service';
+import storageService from "../../core/storage/storage.service";
 import axios from 'axios';
 import { APIBasePath } from '../../../constants/apiBasePaths';
 import { BehaviorSubject } from 'rxjs';
@@ -17,7 +17,7 @@ const setAuthentication = (isAuth) => {
 }
 
 const isTokenExpire = () => {
-    let accessToken = storage.getAccessToken();
+    let accessToken = storageService.getAccessToken();
     if (!accessToken) return true;
 
     let parsedToken = parseJWT(accessToken);
@@ -28,7 +28,7 @@ const signIn = async (email, password) => {
     try {
         const { data: { token } } = await axios.post(APIBasePath.Identity.token, { email, password });
         Object.entries(parseJWT(token)).map(([key, value]) => ({key, value})).forEach(x => {
-            storage.setItem(x.key, x.value);
+            storageService.setItem(x.key, x.value);
         });
         setAuthentication(true);
     } catch (e) {
@@ -54,7 +54,7 @@ const signOut = async () => {
 }
 
 const signOutLocally = () => {
-    storage.reset();
+    storageService.reset();
     setAuthentication(false);
 }
 

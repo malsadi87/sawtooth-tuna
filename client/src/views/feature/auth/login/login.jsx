@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import authService from '../../../../services/core/auth/auth.service';
+import authService from '../../../../services/feature/auth/auth.service';
 import './login.css';
 
 export default class Login extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useLocation, Navigate } from "react-router-dom";
-import storageService from '../../services/core/auth/auth.service';
+import storageService from '../../services/feature/auth/auth.service';
 import { RouteUrl } from '../../constants/routeUrls';
 
 export default function AuthShell() {

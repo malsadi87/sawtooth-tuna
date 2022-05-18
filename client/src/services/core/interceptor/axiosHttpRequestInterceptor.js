@@ -1,9 +1,9 @@
 import axios from 'axios';
 import storageService from './../storage/storage.service';
-import authService from './../auth/auth.service';
 import { environment } from "../../../environments/environment";
 import { APIBasePath } from '../../../constants/apiBasePaths';
-import fakeAuthService from '../auth/fake-auth.service';
+import fakeAuthService from '../../feature/auth/fake-auth.service';
+import authService from '../../feature/auth/auth.service';
 
 const anonymousUrls = [
     APIBasePath.Identity.token

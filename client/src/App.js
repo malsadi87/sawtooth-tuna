@@ -24,7 +24,7 @@ import BatchCreation from "./views/feature/batchCreation/batchCreation";
 import BatchLabelling from "./views/feature/batchLabelling/batchLabelling";
 import BatchShipment from "./views/feature/batchShipment/batchShipment";
 
-import authService from "./services/core/auth/auth.service";
+import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
 
 // Add font-awesome icons to project library

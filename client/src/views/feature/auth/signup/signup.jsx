@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import authService from "../../../../services/core/auth/auth.service";
+import authService from "../../../../services/feature/auth/auth.service";
 import { withParamsAndNavigation } from "../../../../utility/routerHelper";
 import { RouteUrl } from "../../../../constants/routeUrls";
 import './signup.css';
