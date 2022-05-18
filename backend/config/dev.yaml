@@ -13,3 +13,4 @@ sawtooth:
   FAMILY2: "cross-chain"
   VERSION2: "0.1"
   PREFIX2: "5978b3"
+  KEY_ALGORITHMN: "secp256k1"

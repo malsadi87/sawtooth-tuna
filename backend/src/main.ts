@@ -2,12 +2,10 @@ import 'dotenv/config'; //By doing this, this will call the config method of `do
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app/app.module';
-import * as config from 'config';
-
-const serverConfig = config.get('server');
-const port = serverConfig.port;
+import { getProjectConfig } from './app/utility/methods/helper.methods';
 
 async function bootstrap() {
+  const port = getProjectConfig('server').port;
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1');
   await app.listen(port);
