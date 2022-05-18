@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { getProjectConfig } from '../../../../utility/methods/helper.methods';
 import { UtilityService } from '../../utility/utility.service';
@@ -19,18 +19,16 @@ export class FishService {
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
-    getById(fishId: string): Observable<AxiosResponse<any>> {
+    async getById(fishId: string): Promise<AxiosResponse<any>> {
         const fishAddress = this.utilityService.getAssetAddress(fishId);
-        return this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${fishAddress}`);
+        return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${fishAddress}`));
     }
 
     async createNew(data: FishCreationDto, keyPair: KeyPairDto): Promise<boolean> {
-        return await this.utilityService.createAsset(AssetCreationOperation.Create, data, keyPair.privateKey);
+        return await this.utilityService.createAsset(AssetCreationOperation.Create, data, keyPair.privateKey, this.sawtoothConfig.FAMILY, this.sawtoothConfig.VERSION, this.sawtoothConfig.PREFIX);
     }
 
-
-
-    getAll(): Observable<AxiosResponse<any>> {
-        return this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${this.sawtoothConfig.PREFIX}`);
+    async getAll(): Promise<AxiosResponse<any>> {
+        return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${this.sawtoothConfig.PREFIX}`));
     }
 }

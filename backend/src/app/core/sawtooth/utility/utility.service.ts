@@ -32,7 +32,7 @@ export class UtilityService {
         return `${this.hash("cross-chain").substring(0, 6)}00${this.hash(key).slice(0, 62)}`;
     }
 
-    async createAsset(operationType: AssetCreationOperation, payload: any, privateKeyHax: string): Promise<boolean> {
+    async createAsset(operationType: AssetCreationOperation, payload: any, privateKeyHax: string, familyName: string, familyVersion: string, familyPrefix: string): Promise<boolean> {
         try {
             // Add action type to payload
             payload = { action: operationType, ...payload };
@@ -45,10 +45,10 @@ export class UtilityService {
             // Create the TransactionHeader
             const payloadBytes = Buffer.from(JSON.stringify(payload));
             const transactionHeaderBytes: any = TransactionHeader.encode({
-                familyName: this.sawtoothConfig.FAMILY,
-                familyVersion: this.sawtoothConfig.VERSION,
-                inputs: [this.sawtoothConfig.PREFIX],
-                outputs: [this.sawtoothConfig.PREFIX],
+                familyName: familyName,
+                familyVersion: familyVersion,
+                inputs: [familyPrefix],
+                outputs: [familyPrefix],
                 signerPublicKey: signer.getPublicKey().asHex(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
