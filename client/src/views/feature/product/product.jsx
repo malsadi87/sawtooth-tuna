@@ -42,6 +42,11 @@ class Product extends Component {
     console.log(result);
   };
 
+  getAllProduct = async () => {
+    const result = await productService.getAll();
+    console.log(result);
+  }
+
   render() {
     return (
       <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
@@ -92,6 +97,8 @@ class Product extends Component {
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
+
+          <Button className='ms-3' type="primary" onClick={this.getAllProduct}>Get All Product</Button>
         </Form.Item>
       </Form>
     )

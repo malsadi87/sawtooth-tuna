@@ -22,6 +22,7 @@ export class ProductController {
     //TODO:: JWT integration will impact this
     @Post('/new')
     async createNew(@Body() fishCreationWithKeyPairDto: ProductCreationWithKeyPairDto): Promise<boolean> {
-        return await this.fishService.createNew(fishCreationWithKeyPairDto.productData, fishCreationWithKeyPairDto.keyPair);
+        const result = await this.fishService.createNew(fishCreationWithKeyPairDto.productData, fishCreationWithKeyPairDto.keyPair);
+        return result;
     }
 }
