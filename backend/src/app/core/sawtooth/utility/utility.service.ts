@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 import { AssetCreationOperation } from '../../../utility/enum/asset-creation.enum';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
@@ -83,14 +83,11 @@ export class UtilityService {
             }).finish();
 
             // Submit BatchList to Validator
-            const result = await firstValueFrom(this.httpService.post(`${this.sawtoothConfig.API_URL}`, batchListBytes, {
+            const result = await firstValueFrom(this.httpService.post(`${this.sawtoothConfig.API_URL}/batches`, batchListBytes, {
                 headers: { 'Content-Type': 'application/octet-stream' }
-            }));
+            }).pipe(map(x => x.data)));
 
-            if (result.status != 200)
-                throw "Batch append to sawtooth failed!";
-
-            const id = result.data.link.split('?')[1];
+            const id = result.link.split('?')[1];
             const response = await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/batch_statuses?${id}&wait`));
             
             if (response.status != 200)

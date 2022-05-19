@@ -55,8 +55,8 @@ const RequestInterceptor = {
                         ...config.data,
                         keyPair: storageService.getLoggedInUserSawtoothKeyPairs()
                     }
+                    console.info('Sawtooth Request found -', config.data);
                 }
-
 
                 if (accessToken && !isAnAnonymousURL) {
                     const typeToken = `${storageService.getAccessTokenType()} ${accessToken}`;

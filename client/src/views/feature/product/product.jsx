@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
-import './product.css';
-import { Form, Input, Button, InputNumber, Space, Row, Col } from 'antd';
+import { Form, Input, Button, InputNumber, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import productService from '../../../services/feature/product/product.service';
+import './product.css';
 
 class Product extends Component {
   state = {
@@ -35,8 +36,10 @@ class Product extends Component {
     },
   };
 
-  onFinish = (values) => {
+  onFinish = async (values) => {
     console.log(values);
+    const result = await productService.createNew(values);
+    console.log(result);
   };
 
   render() {

@@ -6,7 +6,7 @@ database:
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"
-  API_URL: "http://localhost:8008"
+  API_URL: "http://172.21.16.1:8008"
   FAMILY: "transfer-chain"
   VERSION: "0.0"
   PREFIX: "19d832"
