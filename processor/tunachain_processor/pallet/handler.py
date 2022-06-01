@@ -17,7 +17,7 @@ from tunachain_processor.pallet.state import PALLET_NAMESPACE
 LOGGER = logging.getLogger(__name__)
 
 
-class PALLETTransactionHandler(TransactionHandler):
+class PalletTransactionHandler(TransactionHandler):
 
     @property
     def family_name(self):
