@@ -10,9 +10,9 @@ class Product extends Component {
     productForm: {
       productId: '',
       productName: '',
-      description: '',
-      attributeName: '',
-      attributeValue: '',
+      productDescription: '',
+      name: '',
+      value: '',
       productNumber: ''
     }
   }
@@ -37,6 +37,7 @@ class Product extends Component {
   };
 
   onFinish = async (values) => {
+    alert('New request made!!');
     console.log(values);
     const result = await productService.createNew(values);
     console.log(result);
@@ -58,11 +59,11 @@ class Product extends Component {
           <Input />
         </Form.Item>
 
-        <Form.Item name={'description'} label="Description" rules={[{ required: false }]}>
+        <Form.Item name={'productDescription'} label="Description" rules={[{ required: false }]}>
           <Input />
         </Form.Item>
 
-        <Form.List name="attribute">
+        <Form.List name="productAttribute">
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }) => (

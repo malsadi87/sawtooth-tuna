@@ -1,12 +1,12 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsArray } from 'class-validator';
 import { KeyPairDto } from './key-pair.dto';
 
 export class ProductCreationDto {
     @IsNumber() productId: number;
     @IsString() productName: string;
-    @IsString() description: string;
+    @IsString() productDescription: string;
     @IsNumber() productNumber: number;
-    attribute: { name: string, value: string }[]
+    @IsArray() productAttribute: { name: string, value: string }[]
 }
 
 export class ProductCreationWithKeyPairDto {

@@ -6,11 +6,15 @@ database:
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"
-  API_URL: "http://172.21.16.1:8008"
-  FAMILY: "transfer-chain"
-  VERSION: "0.0"
-  PREFIX: "19d832"
-  FAMILY2: "cross-chain"
-  VERSION2: "0.1"
-  PREFIX2: "5978b3"
+  API_URL: "http://rest-api:8008"
   KEY_ALGORITHMN: "secp256k1"
+  TP:
+    TRANSFER-CHAIN:
+      FAMILY: "transfer-chain"
+      VERSION: "0.0"
+    CROSS-CHAIN:
+      FAMILY2: "cross-chain"
+      VERSION2: "0.1"
+    PRODUCT:
+      FAMILY: "product"
+      VERSION: "0.1"

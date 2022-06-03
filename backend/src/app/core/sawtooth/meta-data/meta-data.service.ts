@@ -11,16 +11,18 @@ import { KeyPairDto } from '../../../utility/dto/key-pair.dto';
 @Injectable()
 export class MetaDataService {
     private sawtoothConfig: any;
+    private familyName: string;
 
     constructor(
         private utilityService: UtilityService,
         private httpService: HttpService
     ) {
+        this.familyName = 'cross-chain';
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
     async getByKey(key: string): Promise<AxiosResponse<any>> {
-        const address = this.utilityService.getMetaKeyAddress(key);
+        const address = this.utilityService.getMetaKeyAddress(key, this.familyName);
         return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`));
     }
 

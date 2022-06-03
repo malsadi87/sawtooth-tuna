@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom, lastValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { AssetCreationOperation } from '../../../utility/enum/asset-creation.enum';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
@@ -20,19 +20,19 @@ export class UtilityService {
         return crypto.createHash('sha512').update(data).digest('hex').toLowerCase();
     }
 
-    getTunachainNamespace(): string {
-        return this.hash("transfer-chain").substring(0, 6);
+    getNamespace(familyName: string): string {
+        return this.hash(familyName).substring(0, 6);
     }
 
-    getAssetAddress(asset: any): string {
-        return `${this.getTunachainNamespace()}00${this.hash(asset).slice(0, 62)}`;
+    getAssetAddress(asset: any, familyName: string): string {
+        return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
     }
 
-    getMetaKeyAddress(key: string): string {
-        return `${this.hash("cross-chain").substring(0, 6)}00${this.hash(key).slice(0, 62)}`;
+    getMetaKeyAddress(key: string, familyName: string): string {
+        return `${this.hash(familyName).substring(0, 6)}00${this.hash(key).slice(0, 62)}`;
     }
 
-    async createAsset(operationType: AssetCreationOperation, payload: any, privateKeyHax: string, familyName: string, familyVersion: string, familyPrefix: string): Promise<boolean> {
+    async createAsset(operationType: AssetCreationOperation, payload: any, privateKeyHax: string, familyName: string, familyVersion: string, familyNamespace: string): Promise<boolean> {
         try {
             // Add action type to payload
             payload = { action: operationType, ...payload };
@@ -47,8 +47,8 @@ export class UtilityService {
             const transactionHeaderBytes: any = TransactionHeader.encode({
                 familyName: familyName,
                 familyVersion: familyVersion,
-                inputs: [familyPrefix],
-                outputs: [familyPrefix],
+                inputs: [familyNamespace],
+                outputs: [familyNamespace],
                 signerPublicKey: signer.getPublicKey().asHex(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
