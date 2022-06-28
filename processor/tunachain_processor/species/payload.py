@@ -10,7 +10,7 @@ from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 LOGGER = logging.getLogger(__name__)
 
-class PalletPayload(object):
+class SpeciesPayload(object):
 
     def __init__(self, payload):
         try:

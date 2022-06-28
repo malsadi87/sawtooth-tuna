@@ -72,7 +72,7 @@ services:
     image: sawtooth-tunachain-tp
     container_name: tunachain-tp
     volumes:
-      - ./processor:/project/sawtooth-tuna
+      - .:/project/sawtooth-tuna
     depends_on:
       - tunachain-shell
     command: |

@@ -10,7 +10,7 @@ from sawtooth_sdk.processor.handler import TransactionHandler
 from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 from tunachain_processor.catch_package.payload import CatchPackagePayload
-from tunachain_processor.catch_package.state import CatchPackagetState
+from tunachain_processor.catch_package.state import CatchPackageState
 from tunachain_processor.catch_package.state import PACKAGE_NAMESPACE
 
 

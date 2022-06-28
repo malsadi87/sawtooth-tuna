@@ -380,3 +380,8 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+processor/tunachain_processor/__pycache__/__init__.cpython-35.pyc
+*.pyc
+*.pyc
+processor/tunachain_processor/__pycache__/__init__.cpython-35.pyc
+*.pyc
