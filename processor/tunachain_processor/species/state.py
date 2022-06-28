@@ -1,4 +1,4 @@
-# Pallet State
+# Species State
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -11,18 +11,18 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-PALLET_NAMESPACE = hashlib.sha512(
-    'pallet'.encode('utf-8')).hexdigest()[0:6]
+SPECIES_NAMESPACE = hashlib.sha512(
+    'species'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(palletId):
-    adr = hashlib.sha512(palletId.encode('utf-8')).hexdigest()[:62]
+def _get_address(speciesId):
+    adr = hashlib.sha512(speciesId.encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_pallet_address(palletNum):
-    add =  PALLET_NAMESPACE + '00' + _get_address(palletNum)
+def _get_species_address(speciesId):
+    add =  SPECIES_NAMESPACE + '00' + _get_address(speciesId)
     LOGGER.info(add)
     return add
 
@@ -35,27 +35,27 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class PalletState(object):
+class SpeciesState(object):
 
     TIMEOUT = 3
 
     def __init__(self, context):
         self._context = context
 
-    def get_pallet(self, palletNum):
-        return self._get_state(_get_pallet_address(palletNum))
+    def get_species(self, speciesId):
+        return self._get_state(_get_species_address(speciesId))
 
     
-    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, tripNo):
-        address = _get_pallet_address(palletNum)
-        LOGGER.info('set_pallet method')
+    def set_species(self, speciesId, quantity, species, packageNum, launchDateTime):
+        address = _get_species_address(speciesId)
+        LOGGER.info('set_species method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "palletNum": palletNum,
-                "productNum": productNum,
-                "supplierId": supplierId,
-                "palletWeight": palletWeight,
-                "tripNo": tripNo
+            {   "speciesId": speciesId,
+                "quantity": quantity,
+                "species": species,
+                "packageNum": packageNum,
+                "launchDateTime": launchDateTime
 
             })
         return self._context.set_state(

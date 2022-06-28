@@ -44,20 +44,19 @@ class PalletTransactionHandler(TransactionHandler):
 
         LOGGER.info('Pallet handler apply method')
         LOGGER.info(payload)
+
         
-        _create_pallet(palletId=payload.palletId,
-                        palletVid=payload.palletVid,
-                        palletNumber=payload.palletNumber,
-                        date=payload.date,
-                        weight=payload.weight,
-                        productId=payload.productId,
-                        productNumber=payload.productNumber,
+        _create_pallet(palletNum=payload.palletNum,
+                        productNum=payload.productNum,
+                        supplierId=payload.supplierId,
+                        palletWeight=payload.palletWeight,
+                        tripNo=payload.tripNo,
                         state=state)
 
 
-def _create_pallet(palletId, palletVid, palletNumber, date, weight, productId, productNumber, state):
-    if state.get_pallet(palletId) is not None:
+def _create_pallet(palletNum, productNum, supplierId, palletWeight, tripNo, state):
+    if state.get_pallet(palletNum) is not None:
         raise InvalidTransaction(
-            'Invalid action: Pallet already exists: {}'.format(productId))
+            'Invalid action: Pallet already exists: {}'.format(palletNum))
 
-    state.set_pallet(palletId, palletVid, palletNumber, date, weight, productId, productNumber)
+    state.set_pallet(palletNum, productNum, supplierId, palletWeight, tripNo)

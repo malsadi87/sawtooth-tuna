@@ -1,4 +1,4 @@
-# Pallet State
+# Catch Package state
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -11,18 +11,18 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-PALLET_NAMESPACE = hashlib.sha512(
-    'pallet'.encode('utf-8')).hexdigest()[0:6]
+PACKAGE_NAMESPACE = hashlib.sha512(
+    'package'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(palletId):
-    adr = hashlib.sha512(palletId.encode('utf-8')).hexdigest()[:62]
+def _get_address(packageNum):
+    adr = hashlib.sha512(packageNum.encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_pallet_address(palletNum):
-    add =  PALLET_NAMESPACE + '00' + _get_address(palletNum)
+def _get_package_address(packageNum):
+    add =  PACKAGE_NAMESPACE + '00' + _get_address(packageNum)
     LOGGER.info(add)
     return add
 
@@ -35,28 +35,27 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class PalletState(object):
+class CatchPackageState(object):
 
     TIMEOUT = 3
 
     def __init__(self, context):
         self._context = context
 
-    def get_pallet(self, palletNum):
-        return self._get_state(_get_pallet_address(palletNum))
+
+    def get_package(self, packageNum):
+        return self._get_state(_get_package_address(packageNum))
+
 
     
-    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, tripNo):
-        address = _get_pallet_address(palletNum)
-        LOGGER.info('set_pallet method')
+    def set_package(self, packageNum, packingDate, palletNum):
+        address = _get_package_address(packageNum)
+        LOGGER.info('set_package_event method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "palletNum": palletNum,
-                "productNum": productNum,
-                "supplierId": supplierId,
-                "palletWeight": palletWeight,
-                "tripNo": tripNo
-
+            {   "packageNum": packageNum,
+                "packingDate": packingDate,
+                "palletNum": palletNum
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

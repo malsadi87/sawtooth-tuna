@@ -1,4 +1,4 @@
-# Pallet State
+# Trip State
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -11,18 +11,18 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-PALLET_NAMESPACE = hashlib.sha512(
-    'pallet'.encode('utf-8')).hexdigest()[0:6]
+TRIP_NAMESPACE = hashlib.sha512(
+    'trip'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(palletId):
-    adr = hashlib.sha512(palletId.encode('utf-8')).hexdigest()[:62]
+def _get_address(tripNo):
+    adr = hashlib.sha512(tripNo.encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_pallet_address(palletNum):
-    add =  PALLET_NAMESPACE + '00' + _get_address(palletNum)
+def _get_trip_address(tripNo):
+    add =  TRIP_NAMESPACE + '00' + _get_address(tripNo)
     LOGGER.info(add)
     return add
 
@@ -35,27 +35,29 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class PalletState(object):
+class TripState(object):
 
     TIMEOUT = 3
 
     def __init__(self, context):
         self._context = context
 
-    def get_pallet(self, palletNum):
-        return self._get_state(_get_pallet_address(palletNum))
+    def get_trip(self, tripNo):
+        return self._get_state(_get_trip_address(tripNo))
 
-    
-    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, tripNo):
-        address = _get_pallet_address(palletNum)
-        LOGGER.info('set_pallet method')
+
+    def set_trip(self, tripNo, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort):
+        address = _get_trip_address(tripNo)
+        LOGGER.info('set_trip method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "palletNum": palletNum,
-                "productNum": productNum,
-                "supplierId": supplierId,
-                "palletWeight": palletWeight,
-                "tripNo": tripNo
+            {   "tripNo": tripNo,
+                "tripWithinYearNo": tripWithinYearNo,
+                "vesselName": vesselName,
+                "departureDate": departureDate,
+                "departurePort": departurePort,
+                "landingDate": landingDate,
+                "landingPort": landingPort
 
             })
         return self._context.set_state(

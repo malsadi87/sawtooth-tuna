@@ -39,7 +39,7 @@ services:
     volumes:
       - ./backend:/project/sawtooth-tuna/backend
       - /project/sawtooth-tuna/backend/node_modules
-    command: npm run start:debug
+    command: npm run start
     ports:
       - 3001:3001
       - 9229:9229
@@ -47,6 +47,19 @@ services:
       - rest-api
       - tunachain-shell
 
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: tunachain-db
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql/init/create.sql:/docker-entrypoint-initdb.d/creat.sql"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysql
 
   tunachain-tp:
     build:
@@ -114,15 +127,19 @@ services:
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
         \""
-    volumes:
-      - ./database/bcdata/data:/var/lib/sawtooth
-      - ./database/bcdata/keys:/etc/sawtooth/keys
-      - ./database/bcdata/userKeys:/root/.sawtooth/keys
-      - ./database/bcdata/logs:/var/log/sawtooth
-
+    #volumes:
+     # - ./database/bcdata/data:/var/lib/sawtooth
+      #- ./database/bcdata/keys:/etc/sawtooth/keys
+      #- ./database/bcdata/userKeys:/root/.sawtooth/keys
+      #- ./database/bcdata/logs:/var/log/sawtooth
+  
   devmode-engine:
     image: hyperledger/sawtooth-devmode-engine-rust
     container_name: sawtooth-devmode-engine-rust-default
     depends_on:
       - validator
     entrypoint: devmode-engine-rust -C tcp://validator:5050
+
+#volumes:
+#    db:
+#      driver: local    
