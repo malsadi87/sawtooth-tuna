@@ -28,6 +28,8 @@ from tunachain_processor.haul.handler import HaulTransactionHandler
 from tunachain_processor.pallet_event.handler import PalletEventTransactionHandler
 from tunachain_processor.catch_package.handler import CatchPackageTransactionHandler
 from tunachain_processor.species.handler import SpeciesTransactionHandler
+from tunachain_processor.custom_package.handler import CustomPackageTransactionHandler
+from tunachain_processor.company.handler import CompanyTransactionHandler
 
 
 def parse_args(args):
@@ -70,6 +72,8 @@ def main(args=None):
         eventHandler = PalletEventTransactionHandler()
         catchHandler = CatchPackageTransactionHandler()
         speciesHandler = SpeciesTransactionHandler()
+        customHandler  = CustomPackageTransactionHandler()
+        companyHandler = CompanyTransactionHandler()
 
         processor.add_handler(handler)
         processor.add_handler(handler2)
@@ -80,6 +84,8 @@ def main(args=None):
         processor.add_handler(eventHandler)
         processor.add_handler(catchHandler)
         processor.add_handler(speciesHandler)
+        processor.add_handler(customHandler)
+        processor.add_handler(companyHandler)
 
         processor.start()
     except KeyboardInterrupt:

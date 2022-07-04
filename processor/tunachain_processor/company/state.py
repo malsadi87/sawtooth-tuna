@@ -1,4 +1,4 @@
-# Catch Package state
+# Company State
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -11,18 +11,18 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-PACKAGE_NAMESPACE = hashlib.sha512(
-    'catch-package'.encode('utf-8')).hexdigest()[0:6]
+COMPANY_NAMESPACE = hashlib.sha512(
+    'company'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(catchPackageId):
-    adr = hashlib.sha512(catchPackageId.encode('utf-8')).hexdigest()[:62]
+def _get_address(companyId):
+    adr = hashlib.sha512(companyId.encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_package_address(catchPackageId):
-    add =  PACKAGE_NAMESPACE + '00' + _get_address(catchPackageId)
+def _get_company_address(companyId):
+    add =  COMPANY_NAMESPACE + '00' + _get_address(companyId)
     LOGGER.info(add)
     return add
 
@@ -35,27 +35,26 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class CatchPackageState(object):
+class CompanyState(object):
 
     TIMEOUT = 3
 
     def __init__(self, context):
         self._context = context
 
-
-    def get_package(self, catchPackageId):
-        return self._get_state(_get_package_address(catchPackageId))
-
+    def get_company(self, companyId):
+        return self._get_state(_get_company_address(companyId))
 
     
-    def set_package(self, catchPackageId, packingDate, palletNum):
-        address = _get_package_address(catchPackageId)
-        LOGGER.info('set_package_event method')
+    def set_company(self, companyId, companyName, companyAddress, contactInfo):
+        address = _get_company_address(companyId)
+        LOGGER.info('set_company method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "catchPackageId": catchPackageId,
-                "packingDate": packingDate,
-                "palletNum": palletNum
+            {   "companyId": companyId,
+                "companyName": companyName,
+                "companyAddress": companyAddress,
+                "contactInfo": contactInfo
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

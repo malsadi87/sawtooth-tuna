@@ -59,10 +59,10 @@ CREATE TABLE pallet_event(
 
 DROP TABLE IF EXISTS catch_package;
 CREATE TABLE catch_package(
-    PackageNum VARCHAR(255) NOT NULL,
+    CatchPackageId VARCHAR(255) NOT NULL,
     PackingDate DATETIME NOT NULL,
     PalletNum VARCHAR(255) NOT NULL,
-    PRIMARY KEY (PackageNum),
+    PRIMARY KEY (catchPackageId),
     FOREIGN KEY (PalletNum) REFERENCES pallet(PalletNum)
 );
 
@@ -71,10 +71,31 @@ CREATE TABLE species_and_weight(
     SpeciesId INT NOT NULL AUTO_INCREMENT,
     Quantity INT NOT NULL,
     Species INT NOT NULL,
-    PackageNum VARCHAR(255) NOT NULL,
+    CatchPackageId VARCHAR(255) NOT NULL,
     LaunchDateTime DATETIME,
-    PRIMARY KEY (PackageNum)
+    PRIMARY KEY (SpeciesId)
+);
+
+DROP TABLE IF EXISTS company ;
+CREATE TABLE company(
+    CompanyId INT NOT NULL,
+    CompanyName VARCHAR(255) NOT NULL,
+    CompanyAddress VARCHAR(255) NOT NULL,
+    ContactInfo VARCHAR(255) NOT NULL,
+    PRIMARY KEY (CompanyId)
+);
+
+
+
+DROP TABLE IF EXISTS custom_level_package ;
+CREATE TABLE custom_level_package(
+    ConsumerPackageId VARCHAR(255) NOT NULL,
+    CatchPackageId VARCHAR(255) NOT NULL,
+    PackingDate DATETIME NOT NULL,
+    Agent INT NOT NULL,
+    PRIMARY KEY (ConsumerPackageId),
+    FOREIGN KEY (CatchPackageId) REFERENCES catch_package(CatchPackageId),
+    FOREIGN KEY (Agent) REFERENCES company(CompanyId)
 );
 
 GRANT ALL ON demo.* TO 'user';
-

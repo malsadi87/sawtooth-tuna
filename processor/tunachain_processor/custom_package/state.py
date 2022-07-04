@@ -1,4 +1,4 @@
-# Catch Package state
+# Custom Package state
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -11,18 +11,18 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-PACKAGE_NAMESPACE = hashlib.sha512(
-    'catch-package'.encode('utf-8')).hexdigest()[0:6]
+CUSTOM_PACKAGE_NAMESPACE = hashlib.sha512(
+    'custom-package'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(catchPackageId):
-    adr = hashlib.sha512(catchPackageId.encode('utf-8')).hexdigest()[:62]
+def _get_address(consumerPackageId):
+    adr = hashlib.sha512(consumerPackageId.encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_package_address(catchPackageId):
-    add =  PACKAGE_NAMESPACE + '00' + _get_address(catchPackageId)
+def _get_custom_package_address(consumerPackageId):
+    add =  CUSTOM_PACKAGE_NAMESPACE + '00' + _get_address(consumerPackageId)
     LOGGER.info(add)
     return add
 
@@ -35,7 +35,7 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class CatchPackageState(object):
+class CustomPackageState(object):
 
     TIMEOUT = 3
 
@@ -43,19 +43,20 @@ class CatchPackageState(object):
         self._context = context
 
 
-    def get_package(self, catchPackageId):
-        return self._get_state(_get_package_address(catchPackageId))
+    def get_custom_package(self, consumerPackageId):
+        return self._get_state(_get_custom_package_address(consumerPackageId))
 
 
     
-    def set_package(self, catchPackageId, packingDate, palletNum):
-        address = _get_package_address(catchPackageId)
-        LOGGER.info('set_package_event method')
+    def set_custom_package(self, consumerPackageId, catchPackageId, packingDate, agent):
+        address = _get_custom_package_address(consumerPackageId)
+        LOGGER.info('set_custom_package method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "catchPackageId": catchPackageId,
+            {   "consumerPackageId":consumerPackageId,
+                "catchPackageId": catchPackageId,
                 "packingDate": packingDate,
-                "palletNum": palletNum
+                "agent": agent
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

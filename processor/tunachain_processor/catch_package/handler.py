@@ -21,7 +21,7 @@ class CatchPackageTransactionHandler(TransactionHandler):
 
     @property
     def family_name(self):
-        return 'package'
+        return 'catch-package'
 
     @property
     def family_versions(self):
@@ -40,21 +40,21 @@ class CatchPackageTransactionHandler(TransactionHandler):
         signer = header.signer_public_key
 
         payload = CatchPackagePayload(transaction.payload)
-        state = CatchPackagetState(context)
+        state = CatchPackageState(context)
 
         LOGGER.info('CatchPackage handler apply method')
         LOGGER.info(payload)
 
        
-        _create_package(packageNum=payload.packageNum,
+        _create_package(catchPackageId=payload.catchPackageId,
                         packingDate=payload.packingDate,
                         palletNum=payload.palletNum,
                         state=state)
 
 
-def _create_package(packageNum, packingDate, palletNum , state):
-    if state.get_package(packageNum) is not None:
+def _create_package(catchPackageId, packingDate, palletNum , state):
+    if state.get_package(catchPackageId) is not None:
         raise InvalidTransaction(
-            'Invalid action: Package already exists: {}'.format(packageNum))
+            'Invalid action: Package already exists: {}'.format(catchPackageId))
 
-    state.set_package(packageNum, packingDate, palletNum )
+    state.set_package(catchPackageId, packingDate, palletNum )
