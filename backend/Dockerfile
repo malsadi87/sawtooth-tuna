@@ -16,7 +16,7 @@ COPY backend/ ./
 
 RUN yarn
 
-RUN yarn global add @nestjs/cli
+RUN yarn global add @nestjs/cli@8.2.8
 
 # Setup base command
 RUN npm run build

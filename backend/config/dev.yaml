@@ -2,7 +2,12 @@ server:
   port: 3001
 
 database:
-  name: "NTNUPAASAQUACULTURE"
+  type: "mysql"
+  isLogEnable: true
+  synchronizeFlag: false
+  encrypt: true
+  trustServerCertificate: false
+  name: "demo"
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"

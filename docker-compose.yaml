@@ -28,26 +28,8 @@ services:
         cd ../
         tail -f /dev/null
       "
-    
-  tunachain-backend:
-    build:
-      context: .
-      target: development
-      dockerfile: ./backend/Dockerfile
-    image: hyperledger/tunachain-backend
-    container_name: tunachain-backend
-    volumes:
-      - ./backend:/project/sawtooth-tuna/backend
-      - /project/sawtooth-tuna/backend/node_modules
-    command: npm run start
-    ports:
-      - 3001:3001
-      - 9229:9229
-    depends_on:
-      - rest-api
-      - tunachain-shell
 
-  db:
+  tunachain-db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     container_name: tunachain-db
@@ -60,6 +42,25 @@ services:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_USER: user
       MYSQL_PASSWORD: mysql
+    
+  tunachain-backend:
+    build:
+      context: .
+      target: development
+      dockerfile: ./backend/Dockerfile
+    image: hyperledger/tunachain-backend
+    container_name: tunachain-backend
+    volumes:
+      - ./backend:/project/sawtooth-tuna/backend
+      - /project/sawtooth-tuna/backend/node_modules
+    command: npm run start:dev
+    ports:
+      - 3001:3001
+      - 9229:9229
+    depends_on:
+      - rest-api
+      - tunachain-shell
+      - tunachain-db
 
   tunachain-tp:
     build:

@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeOrmConfig } from '../environments/db/typeorm.config';
 import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
@@ -7,7 +9,12 @@ import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pip
 import { UtilityModule } from './utility/utility.module';
 
 @Module({
-  imports: [CoreModule, FeatureModule, UtilityModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    CoreModule, 
+    FeatureModule,
+    UtilityModule
+  ],
   controllers: [],
   providers: [
     {
