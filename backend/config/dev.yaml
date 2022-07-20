@@ -1,6 +1,9 @@
 server:
   port: 3001
 
+jwt-config:
+  expiresIn: 604800
+
 database:
   type: "mysql"
   isLogEnable: true

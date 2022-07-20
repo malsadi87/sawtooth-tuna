@@ -1,4 +1,4 @@
-import { KeyPairDto } from "./key-pair.dto";
+import { KeyPairDto } from "./keyPair.dto";
 import { IsString } from 'class-validator';
 
 export class MetaDataCreationDto {

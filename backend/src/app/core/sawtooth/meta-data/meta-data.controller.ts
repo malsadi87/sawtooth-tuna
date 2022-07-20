@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
-import { MetaDataCreationWithKeyPairDto } from '../../../utility/dto/meta-data-creation.dto';
+import { MetaDataCreationWithKeyPairDto } from '../../../utility/dto/metaDataCreation.dto';
 import { MetaDataService } from './meta-data.service';
 
 @Controller('sawtooth/meta-data')

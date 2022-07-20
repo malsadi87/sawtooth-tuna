@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from '../environments/db/typeorm.config';
 import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
+import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
 import { UtilityModule } from './utility/utility.module';
 
@@ -15,7 +16,6 @@ import { UtilityModule } from './utility/utility.module';
     FeatureModule,
     UtilityModule
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_FILTER,
@@ -24,6 +24,10 @@ import { UtilityModule } from './utility/utility.module';
     {
       provide: APP_PIPE,
       useClass: RequestPayloadValidationPipe
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
     }
   ]
 })

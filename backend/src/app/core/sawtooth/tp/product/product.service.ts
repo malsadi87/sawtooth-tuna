@@ -4,8 +4,8 @@ import { firstValueFrom, map } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { getProjectConfig } from '../../../../utility/methods/helper.methods';
 import { UtilityService } from '../../utility/utility.service';
-import { ProductCreationDto } from '../../../../utility/dto/product-creation.dto';
-import { KeyPairDto } from '../../../../utility/dto/key-pair.dto';
+import { ProductCreationDto } from '../../../../utility/dto/productCreation.dto';
+import { KeyPairDto } from '../../../../utility/dto/keyPair.dto';
 import { AssetCreationOperation } from '../../../../utility/enum/asset-creation.enum';
 import { response } from 'express';
 

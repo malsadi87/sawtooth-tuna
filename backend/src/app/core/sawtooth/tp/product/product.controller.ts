@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { ProductService } from './product.service';
-import { ProductCreationWithKeyPairDto } from '../../../../utility/dto/product-creation.dto';
+import { ProductCreationWithKeyPairDto } from '../../../../utility/dto/productCreation.dto';
 
 @Controller('sawtooth/tp/product')
 export class ProductController {

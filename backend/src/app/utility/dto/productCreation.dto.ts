@@ -1,5 +1,5 @@
 import { IsNumber, IsString, IsArray } from 'class-validator';
-import { KeyPairDto } from './key-pair.dto';
+import { KeyPairDto } from './keyPair.dto';
 
 export class ProductCreationDto {
     @IsNumber() productId: number;
