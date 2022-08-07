@@ -25,6 +25,6 @@ export class RolesEntity extends BaseEntity {
     claims: RoleClaimsEntity[];
 
     @OneToMany(() => UserRolesEntity, userRole => userRole.role)
-    @JoinColumn({ referencedColumnName: 'RoleId' })
+    // @JoinColumn({ referencedColumnName: 'RoleId' })
     userRoles!: UserRolesEntity[];
 }

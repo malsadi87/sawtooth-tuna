@@ -3,7 +3,7 @@ import { UsersEntity } from "../../../entity/users.entity";
 import { AuthCredential } from "../../utility/dto/authCredential.dto";
 
 @EntityRepository(UsersEntity)
-export class UsersRepository extends Repository<UsersEntity>{
+export class UsersRepository extends Repository<UsersEntity> {
 
     public async validateCredential(credential: AuthCredential): Promise<boolean> {
         const { email, password } = credential;
@@ -13,5 +13,10 @@ export class UsersRepository extends Repository<UsersEntity>{
             return true;
         }
         return false;
+    }
+
+    public async getUserByEmail(email: string): Promise<UsersEntity> {
+        const user = await this.findOne({ email });
+        return user;
     }
 }

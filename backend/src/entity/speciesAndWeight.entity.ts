@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('species_and_weight')
+@Entity('SpeciesAndWeight')
 export class SpeciesAndWeightEntity extends BaseEntity {
     @PrimaryGeneratedColumn('increment', { name: 'SpeciesId' })
     speciesId: number;

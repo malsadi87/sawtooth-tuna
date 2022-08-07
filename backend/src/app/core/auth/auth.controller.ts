@@ -8,7 +8,7 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @AllowAnonymous()
-    @Post('/SignIn') 
+    @Post('/SignIn')
     SignIn(@Body(ValidationPipe) authCredential: AuthCredential): Promise<{ accessToken: string }> {
         const res = this.authService.validateCredential(authCredential);
         return res;

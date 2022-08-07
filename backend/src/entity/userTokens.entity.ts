@@ -15,6 +15,6 @@ export class UserTokensEntity extends BaseEntity {
     @Column({ type: 'varchar', width: 512, name: 'Value', nullable: true })
     value: string;
 
-    @ManyToOne(() => UsersEntity, (user) => user.tokens)
-    user!: UsersEntity;
+    // @ManyToOne(() => UsersEntity, (user) => user.tokens)
+    // user!: UsersEntity;
 }

@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
 
-@Entity('trip')
+@Entity('Trip')
 export class TripEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type: 'int', name: 'TripNo', nullable: false })
     tripNo: number;

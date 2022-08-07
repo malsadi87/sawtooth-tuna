@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { TripEntity } from "./trip.entity";
 
-@Entity('haul')
+@Entity('Haul')
 export class HaulEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type: 'datetime', name: 'LaunchDateTime', nullable: false })
     launchDateTime: Date;

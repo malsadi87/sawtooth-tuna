@@ -1,10 +1,10 @@
 import { BaseEntity, Column, Entity, Index, PrimaryColumn } from "typeorm";
 
 @Entity('PersistedGrants')
-@Index("IX_PersistedGrants_SubjectId_ClientId_Type", ["SubjectId", "ClientId", "Type"])
-@Index("IX_PersistedGrants_SubjectId_SessionId_Type", ["SubjectId", "SessionId", "Type"])
-@Index("IX_PersistedGrants_SubjectId_ClientId_Type", { synchronize: false })
-@Index("IX_PersistedGrants_SubjectId_SessionId_Type", { synchronize: false })
+// @Index("IX_PersistedGrants_SubjectId_ClientId_Type", ["SubjectId", "ClientId", "Type"])
+// @Index("IX_PersistedGrants_SubjectId_SessionId_Type", ["SubjectId", "SessionId", "Type"])
+// @Index("IX_PersistedGrants_SubjectId_ClientId_Type", { synchronize: false })
+// @Index("IX_PersistedGrants_SubjectId_SessionId_Type", { synchronize: false })
 export class PersistedGrantsEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, width: 256, type: 'varchar', name: 'Key', nullable: false })
     key: string;

@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { PalletEntity } from "./pallet.entity";
 
-@Entity('pallet_event')
+@Entity('PalletEvent')
 export class PalletEventEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type:'datetime', name: 'EventTime', nullable: false })
     eventTime: Date;

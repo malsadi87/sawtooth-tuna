@@ -3,7 +3,7 @@ import { CatchPackageEntity } from "./catchPackage.entity";
 import { PalletEventEntity } from "./palletEvent.entity";
 import { TripEntity } from "./trip.entity";
 
-@Entity('pallet')
+@Entity('Pallet')
 export class PalletEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type:'nvarchar', width: 255, name: 'PalletNum', nullable: false })
     palletNum: string;

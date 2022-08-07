@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { CompanyEntity } from "./company.entity";
 
-@Entity('custom_level_package')
+@Entity('CustomLevelPackage')
 export class CustomLevelPackageEntity extends BaseEntity {
     @PrimaryColumn({ type: 'nvarchar', width: 255, name: 'ConsumerPackageId', nullable: false })
     consumerPackageId: string;

@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
 
-@Entity('company')
+@Entity('Company')
 export class CompanyEntity extends BaseEntity {
     @PrimaryColumn({ type: 'int', name: 'CompanyId', nullable: false })
     companyId: number;
