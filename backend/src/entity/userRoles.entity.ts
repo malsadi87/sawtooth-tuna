@@ -11,9 +11,9 @@ export class UserRolesEntity extends BaseEntity {
     @Index("IX_AspNetUserRoles_RoleId", { synchronize: false })
     roleId: string;
 
-    @ManyToOne(() => UsersEntity, (usere) => usere.userRoles)
-    user!: UsersEntity;
+    // @ManyToOne(() => UsersEntity, (usere) => usere.userRoles)
+    // user!: UsersEntity;
 
-    @ManyToOne(() => RolesEntity, (rolee) => rolee.userRoles)
-    role!: RolesEntity;
+    // @ManyToOne(() => RolesEntity, (rolee) => rolee.userRoles)
+    // role!: RolesEntity;
 }

@@ -89,7 +89,7 @@ export class UsersEntity extends BaseEntity {
     @JoinColumn({ referencedColumnName: 'UserId' })
     tokens: UserTokensEntity;
 
-    @OneToMany(() => UserRolesEntity, userRole => userRole.user)
+    // @OneToMany(() => UserRolesEntity, userRole => userRole.user)
     // @JoinColumn({ referencedColumnName: 'UserId' })
-    userRoles!: UserRolesEntity[];
+    // userRoles!: UserRolesEntity[];
 }

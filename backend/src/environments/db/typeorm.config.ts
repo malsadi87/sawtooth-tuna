@@ -47,10 +47,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         
         UsersEntity,
         RolesEntity,
-        UserRolesEntity,
 
-        RoleClaimsEntity,
         UserClaimsEntity,
+        UserRolesEntity,
+        RoleClaimsEntity,
         UserLoginsEntity,
         UserTokensEntity
     ],
