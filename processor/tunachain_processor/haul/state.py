@@ -40,6 +40,7 @@ class HaulState(object):
     TIMEOUT = 3
 
     def __init__(self, context):
+        LOGGER.info("Haul State is initalised")
         self._context = context
 
     def get_haul(self, launchDateTime):
@@ -60,7 +61,6 @@ class HaulState(object):
                 "haulLatitude": haulLatitude,
                 "haulLongitude": haulLongitude,
                 "tripNo": tripNo
-
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

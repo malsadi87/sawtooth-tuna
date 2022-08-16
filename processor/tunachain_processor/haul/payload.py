@@ -13,11 +13,11 @@ LOGGER = logging.getLogger(__name__)
 class HaulPayload(object):
 
     def __init__(self, payload):
+        LOGGER.info('Haul payload is initalised')
         try:
             data = json.loads(payload.decode('utf-8'))
         except ValueError:
             raise InvalidTransaction("Invalid payload serialization")
-
         LOGGER.info(data)
 
         launchDateTime = data.get('launchDateTime')
@@ -58,6 +58,7 @@ class HaulPayload(object):
         if not tripNo:
             raise InvalidTransaction('Trip No is required')
 
+        LOGGER.info('Haul payload is ready')
         self._launchDateTime = launchDateTime
         self._launchPosition = launchPosition
         self._launchLatitude = launchLatitude

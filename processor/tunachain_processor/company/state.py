@@ -13,6 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 COMPANY_NAMESPACE = hashlib.sha512(
     'company'.encode('utf-8')).hexdigest()[0:6]
+LOGGER.info(COMPANY_NAMESPACE)    
 
 
 def _get_address(companyId):

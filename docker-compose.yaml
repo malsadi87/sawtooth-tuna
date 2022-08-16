@@ -2,64 +2,31 @@ version: '2.1'
 
 services:
   tunachain-shell:
-    build:
-      context: .
-      dockerfile: ./shell/Dockerfile
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
-    image: hyperledger/tunachain-shell
+    image: hyperledger/sawtooth-all
     container_name: tunachain-shell
-    volumes:
-      - ./client:/project/sawtooth-tuna/client
-      - /project/sawtooth-tuna/client/node_modules
-    ports:
-      - 3000:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: |
-      bash -c "
-        if [ ! -f /root/.sawtooth/keys/root.priv ]; then
-          sawtooth keygen
-        fi;
-        cd client
-        npm start
-        cd ../
-        tail -f /dev/null
-      "
-    
-  tunachain-backend:
+    depends_on:
+       - rest-api
+    entrypoint: "bash -c \"\
+        sawtooth keygen && \
+        tail -f /dev/null \
+        \""
+
+  tunachain-server:
     build:
       context: .
-      target: development
-      dockerfile: ./backend/Dockerfile
-    image: hyperledger/tunachain-backend
-    container_name: tunachain-backend
+      #target: development
+      dockerfile: ./server/Dockerfile
+    image: hyperledger/tunachain-server
+    container_name: tunachain-server
     volumes:
-      - ./backend:/project/sawtooth-tuna/backend
-      - /project/sawtooth-tuna/backend/node_modules
+       - ./server:/project/sawtooth-tuna/server
+       - /project/sawtooth-tuna/server/node_modules
     command: npm run start
     ports:
-      - 3001:3001
-      - 9229:9229
+       - 3005:3005
     depends_on:
-      - rest-api
-      - tunachain-shell
-
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    container_name: tunachain-db
-    restart: always
-    ports:
-      - "3306:3306"
-    volumes:
-      - "./mysql/init/create.sql:/docker-entrypoint-initdb.d/creat.sql"
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_USER: user
-      MYSQL_PASSWORD: mysql
+       - rest-api
+  
 
   tunachain-tp:
     build:
@@ -74,8 +41,8 @@ services:
     volumes:
       - .:/project/sawtooth-tuna
     depends_on:
-      - tunachain-shell
-    command: |
+      - validator
+    entrypoint: |
       bash -c "
         sleep 1
         tunachain-tp -vv -C tcp://validator:4004
@@ -97,18 +64,16 @@ services:
       - '8008:8008'
     depends_on:
       - validator
-    entrypoint: |
-      sawtooth-rest-api -vv
-        --connect tcp://validator:4004
-        --bind rest-api:8008
+    entrypoint: sawtooth-rest-api -vv -C tcp://validator:4004 --bind rest-api:8008
 
   validator:
     image: hyperledger/sawtooth-validator
     container_name: sawtooth-validator
     expose:
       - 4004
+      - 8800
     ports:
-      - 4004:4004
+      - '4004:4004'
     entrypoint: "bash -c \"\
       if [ ! -f /etc/sawtooth/keys/validator.priv ]; then
         sawadm keygen && \
@@ -127,6 +92,7 @@ services:
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
         \""
+
     #volumes:
      # - ./database/bcdata/data:/var/lib/sawtooth
       #- ./database/bcdata/keys:/etc/sawtooth/keys
@@ -143,3 +109,5 @@ services:
 #volumes:
 #    db:
 #      driver: local    
+
+

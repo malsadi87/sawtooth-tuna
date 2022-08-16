@@ -45,7 +45,9 @@ class CatchPackageState(object):
 
     def get_package(self, catchPackageId):
         return self._get_state(_get_package_address(catchPackageId))
-
+    
+    def get_context(self):
+        return self._context
 
     
     def set_package(self, catchPackageId, packingDate, palletNum):
