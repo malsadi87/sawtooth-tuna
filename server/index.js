@@ -66,14 +66,14 @@ app.get('/getCompany', async (req, res) => {
 */
 app.post("/addSpecies", async (req, res) => {
   let privateKey = req.body.privateKey;
-  let id = req.body.id;
+  let speciesId = req.body.id;
   let quantity = req.body.quantity;
   let species = req.body.species;
   let packageNum = req.body.packageNum;
   let launchDateTime = req.body.launchDateTime;
   
   const payload = {
-    "speciesId": id,
+    "speciesId": speciesId,
     "quantity": quantity,
     "species": species,
     "packageNum": packageNum,
