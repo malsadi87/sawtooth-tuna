@@ -95,6 +95,32 @@ app.get('/getCompany', async (req, res) => {
 })
 
 /*
+   Box API endpoints .
+*/
+app.post("/addBox", async (req, res) => {
+  let privateKey = req.body.privateKey;
+  let id = req.body.id;
+  const payload = {
+    "boxId": id,
+  }
+  console.log(payload)
+  storeData(payload, privateKey, "box").then(response => {
+    console.log(response)
+    res.send(response)
+  })
+
+})
+
+app.get('/getBox', async (req, res) => {
+  let id = req.query.id
+  const boxAddress = get_address("box", id)
+  getData(boxAddress).then(response => {
+    console.log(response)
+    res.send(response)
+  })
+})
+
+/*
    Compan API endpoints .
 */
 app.post("/addCompan", async (req, res) => {
