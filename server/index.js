@@ -30,6 +30,39 @@ const get_address = (name, key) => {
 }
 
 /*
+   Carp API endpoints .
+*/
+app.post("/addCarp", async (req, res) => {
+  let privateKey = req.body.privateKey;
+  let id = req.body.id;
+  let name = req.body.name;
+  let address = req.body.address;
+  let contactInfo = req.body.contactInfo;
+  const payload = {
+    "carpId": id,
+    "carpName": name,
+    "carpAddress": address,
+    "contactInfo": contactInfo
+  }
+  console.log(payload)
+  storeData(payload, privateKey, "carp").then(response => {
+    console.log(response)
+    res.send(response)
+  })
+
+})
+
+app.get('/getCarp', async (req, res) => {
+  let id = req.query.id
+  const carpAddress = get_address("carp", id)
+  getData(carpAddress).then(response => {
+    console.log(response)
+    res.send(response)
+  })
+})
+
+
+/*
    Company API endpoints .
 */
 app.post("/addCompany", async (req, res) => {
@@ -44,6 +77,7 @@ app.post("/addCompany", async (req, res) => {
     "companyAddress": address,
     "contactInfo": contactInfo
   }
+  console.log(payload)
   storeData(payload, privateKey, "company").then(response => {
     console.log(response)
     res.send(response)
@@ -123,6 +157,7 @@ app.post("/addHaul", async (req, res) => {
   "haulLongitude": haulLongitude,
   "tripNo": tripNo
 }
+  console.log(payload)
   storeData(payload, privateKey, "haul").then(response => {
     console.log(response)
     res.send(response)

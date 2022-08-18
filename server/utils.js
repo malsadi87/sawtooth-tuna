@@ -19,6 +19,7 @@ const atob = require('atob')
 const API_URL = 'http://rest-api:8008'
 
 const transactions=[
+    {family:"carp",version:"0.1", prefix:"deb908"},
     {family:"company",version:"0.1", prefix:"45235d"},
     {family:"haul",vesion:"0.1", prefix:"00a404"},
     {family:"pallet",version:"0.1", prefix:"02cd1c"},
@@ -136,7 +137,8 @@ const storeData = async (payload, privateKeyHex, tp) => {
 
   console.log("submitting request to Sawtooth API")
   // Submit BatchList to Validator
-
+  console.log(batchListBytes)
+  console.log(batchListBytes.toString('hex'))//.match(/../g).join(''))
   const result = await axios.post(`${API_URL}/batches`, batchListBytes, {
     headers: {
       // Overwrite Axios's automatically set Content-Type

@@ -12,6 +12,7 @@ const KEY_NAME = 'transfer-chain.keys'
 const API_URL = 'http://localhost:8000/api'
 
 const transactions=[
+    {family:"carp",version:"0.1", prefix:""},
     {family:"company",version:"0.1", prefix:""},
     {family:"haul",vesion:"0.1", prefix:""},
     {family:"pallet",version:"0.1", prefix:""},
