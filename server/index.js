@@ -95,9 +95,9 @@ app.get('/getCompany', async (req, res) => {
 })
 
 /*
-   Box API endpoints .
+   Speciess API endpoints .
 */
-app.post("/addBox", async (req, res) => {
+app.post("/addSpeciess", async (req, res) => {
   let privateKey = req.body.privateKey;
   let id = req.body.id;
   let quantity = req.body.quantity;
@@ -106,24 +106,24 @@ app.post("/addBox", async (req, res) => {
   let launchDateTime = req.body.launchDateTime;
   
   const payload = {
-    "boxId": id,
+    "speciessId": id,
     "quantity": quantity,
     "species": species,
     "packageNum": packageNum,
     "launchDateTime": launchDateTime
   }
   console.log(payload)
-  storeData(payload, privateKey, "box").then(response => {
+  storeData(payload, privateKey, "speciess").then(response => {
     console.log(response)
     res.send(response)
   })
 
 })
 
-app.get('/getBox', async (req, res) => {
+app.get('/getSpeciess', async (req, res) => {
   let id = req.query.id
-  const boxAddress = get_address("box", id)
-  getData(boxAddress).then(response => {
+  const speciessAddress = get_address("speciess", id)
+  getData(speciessAddress).then(response => {
     console.log(response)
     res.send(response)
   })
