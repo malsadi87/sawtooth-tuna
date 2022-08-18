@@ -101,10 +101,16 @@ app.post("/addBox", async (req, res) => {
   let privateKey = req.body.privateKey;
   let id = req.body.id;
   let quantity = req.body.quantity;
-
+  let species = req.body.species;
+  let packageNum = req.body.packageNum;
+  let launchDateTime = req.body.launchDateTime;
+  
   const payload = {
     "boxId": id,
-    "quantity": quantity
+    "quantity": quantity,
+    "species": species,
+    "packageNum": packageNum,
+    "launchDateTime": launchDateTime
   }
   console.log(payload)
   storeData(payload, privateKey, "box").then(response => {

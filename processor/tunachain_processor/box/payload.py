@@ -21,7 +21,9 @@ class BoxPayload(object):
 
         boxId = data.get('boxId')
         quantity = data.get('quantity')
-
+        species = data.get('species')
+        packageNum = data.get('packageNum')
+        launchDateTime = data.get('launchDateTime')
         
 
         if not boxId:
@@ -30,9 +32,20 @@ class BoxPayload(object):
         if not quantity:
             raise InvalidTransaction('Quantity is required')   
         
+        if not species:
+            raise InvalidTransaction('Species is required')
+
+        if not packageNum:
+            raise InvalidTransaction('Package Num is required')
+
+        if not launchDateTime:
+            raise InvalidTransaction('Launch Date is required')                  
+        
         self._boxId = boxId
         self._quantity = quantity
-       
+        self._species = species
+        self._packageNum = packageNum
+        self._launchDateTime = launchDateTime
        
     @property
     def boxId(self):
@@ -41,3 +54,15 @@ class BoxPayload(object):
     @property
     def quantity(self):
         return self._quantity
+
+    @property
+    def species(self):
+        return self._species       
+    
+    @property
+    def packageNum(self):
+        return self._packageNum
+    
+    @property
+    def launchDateTime(self):
+        return self._launchDateTime

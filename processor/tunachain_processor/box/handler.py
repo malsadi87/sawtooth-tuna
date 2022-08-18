@@ -48,12 +48,15 @@ class BoxTransactionHandler(TransactionHandler):
         
         _create_box(boxId=payload.boxId,
                     quantity=payload.quantity,
+                    species=payload.species,
+                    packageNum=payload.packageNum,
+                    launchDateTime=payload.launchDateTime,
                     state=state)
 
 
-def _create_box(boxId, quantity, state):
+def _create_box(boxId, quantity, species, packageNum, launchDateTime, state):
     if state.get_box(boxId) is not None:
         raise InvalidTransaction(
             'Invalid action: Box already exists: {}'.format(boxId))
 
-    state.set_box(boxId, quantity)
+    state.set_box(boxId, quantity, species, packageNum, launchDateTime)
