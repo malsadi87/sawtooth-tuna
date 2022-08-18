@@ -62,9 +62,9 @@ app.get('/getCompany', async (req, res) => {
 })
 
 /*
-   Speciess API endpoints .
+   Species API endpoints .
 */
-app.post("/addSpeciess", async (req, res) => {
+app.post("/addSpecies", async (req, res) => {
   let privateKey = req.body.privateKey;
   let id = req.body.id;
   let quantity = req.body.quantity;
@@ -73,24 +73,24 @@ app.post("/addSpeciess", async (req, res) => {
   let launchDateTime = req.body.launchDateTime;
   
   const payload = {
-    "speciessId": id,
+    "speciesId": id,
     "quantity": quantity,
     "species": species,
     "packageNum": packageNum,
     "launchDateTime": launchDateTime
   }
   console.log(payload)
-  storeData(payload, privateKey, "speciess").then(response => {
+  storeData(payload, privateKey, "species").then(response => {
     console.log(response)
     res.send(response)
   })
 
 })
 
-app.get('/getSpeciess', async (req, res) => {
+app.get('/getSpecies', async (req, res) => {
   let id = req.query.id
-  const speciessAddress = get_address("speciess", id)
-  getData(speciessAddress).then(response => {
+  const speciesAddress = get_address("species", id)
+  getData(speciesAddress).then(response => {
     console.log(response)
     res.send(response)
   })
@@ -245,42 +245,6 @@ app.get('/getPallet', async (req, res) => {
   let palletNum = req.query.palletNum
   const palletAddress = get_address("pallet", palletNum)
   getData(palletAddress).then(response => {
-    console.log(response)
-    res.send(response)
-  })
-})
-
-
-/*
-   species API endpoints .
-*/
-app.post("/addSpecies", async (req, res) => {
-  let privateKey = req.body.privateKey;
-  let speciesId = req.body.speciesId;
-  let quantity = req.body.quantity;
-  let species = req.body.species;
-  let packageNum = req.body.packageNum;
-  let launchDateTime = req.body.launchDateTime;
-  
-  const payload = {   
-  "speciesId": speciesId,
-  "quantity": quantity,
-  "species": species,
-  "packageNum": packageNum,
-  "launchDateTime": launchDateTime
-}
-console.log("addSpecies payload => " , payload)
-  storeData(payload, privateKey, "species").then(response => {
-    console.log(response)
-    res.send(response)
-  })
-
-})
-
-app.get('/getSpecies', async (req, res) => {
-  let speciesId = req.query.speciesId
-  const address = get_address("species", speciesId)
-  getData(address).then(response => {
     console.log(response)
     res.send(response)
   })

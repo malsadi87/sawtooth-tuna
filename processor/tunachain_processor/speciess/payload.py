@@ -1,4 +1,4 @@
-# Payload for Speciess
+# Payload for Species
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 LOGGER = logging.getLogger(__name__)
 
-class SpeciessPayload(object):
+class SpeciesPayload(object):
 
     def __init__(self, payload):
         try:
@@ -19,15 +19,15 @@ class SpeciessPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
 
-        speciessId = data.get('speciessId')
+        speciesId = data.get('speciesId')
         quantity = data.get('quantity')
         species = data.get('species')
         packageNum = data.get('packageNum')
         launchDateTime = data.get('launchDateTime')
         
 
-        if not speciessId:
-            raise InvalidTransaction('speciessId is required')
+        if not speciesId:
+            raise InvalidTransaction('speciesId is required')
 
         if not quantity:
             raise InvalidTransaction('Quantity is required')   
@@ -41,15 +41,15 @@ class SpeciessPayload(object):
         if not launchDateTime:
             raise InvalidTransaction('Launch Date is required')                  
         
-        self._speciessId = speciessId
+        self._speciesId = speciesId
         self._quantity = quantity
         self._species = species
         self._packageNum = packageNum
         self._launchDateTime = launchDateTime
        
     @property
-    def speciessId(self):
-        return self._speciessId
+    def speciesId(self):
+        return self._speciesId
 
     @property
     def quantity(self):

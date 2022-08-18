@@ -19,14 +19,13 @@ const atob = require('atob')
 const API_URL = 'http://rest-api:8008'
 
 const transactions=[
-    {family:"speciess",version:"0.1", prefix:"8b6a90"},
+    {family:"species",version:"0.1", prefix:"274c22"},
     {family:"company",version:"0.1", prefix:"45235d"},
     {family:"haul",vesion:"0.1", prefix:"00a404"},
     {family:"pallet",version:"0.1", prefix:"02cd1c"},
     {family:"pallet-event",vesion:"0.1", prefix:"6b6112"},
     {family:"custom-package",version:"0.1", prefix:"20e9e3"},
     {family:"product",vesion:"0.1", prefix:"5a5650"},
-    {family:"species",vesion:"0.1", prefix:"274c22"},
     {family:"trip",version:"0.1", prefix:"db25c6"},
     {family:"catch-package",version:"0.1", prefix:"7a21ab"},
 ]

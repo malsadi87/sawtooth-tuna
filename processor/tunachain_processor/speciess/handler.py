@@ -1,4 +1,4 @@
-# Speciess Transaction Handler
+# Species Transaction Handler
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -9,19 +9,19 @@ import logging
 from sawtooth_sdk.processor.handler import TransactionHandler
 from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
-from tunachain_processor.speciess.payload import SpeciessPayload
-from tunachain_processor.speciess.state import SpeciessState
-from tunachain_processor.speciess.state import SPECIESS_NAMESPACE
+from tunachain_processor.species.payload import SpeciesPayload
+from tunachain_processor.species.state import SpeciesState
+from tunachain_processor.species.state import SPECIES_NAMESPACE
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-class SpeciessTransactionHandler(TransactionHandler):
+class SpeciesTransactionHandler(TransactionHandler):
 
     @property
     def family_name(self):
-        return 'speciess'
+        return 'species'
 
     @property
     def family_versions(self):
@@ -33,20 +33,20 @@ class SpeciessTransactionHandler(TransactionHandler):
 
     @property
     def namespaces(self):
-        return [SPECIESS_NAMESPACE]
+        return [SPECIES_NAMESPACE]
 
     def apply(self, transaction, context):
         header = transaction.header
         signer = header.signer_public_key
 
-        payload = SpeciessPayload(transaction.payload)
-        state = SpeciessState(context)
+        payload = SpeciesPayload(transaction.payload)
+        state = SpeciesState(context)
 
-        LOGGER.info('Speciess handler apply method')
+        LOGGER.info('Species handler apply method')
         LOGGER.info(payload)
 
         
-        _create_speciess(speciessId=payload.speciessId,
+        _create_species(speciesId=payload.speciesId,
                     quantity=payload.quantity,
                     species=payload.species,
                     packageNum=payload.packageNum,
@@ -54,9 +54,9 @@ class SpeciessTransactionHandler(TransactionHandler):
                     state=state)
 
 
-def _create_speciess(speciessId, quantity, species, packageNum, launchDateTime, state):
-    if state.get_speciess(speciessId) is not None:
+def _create_species(speciesId, quantity, species, packageNum, launchDateTime, state):
+    if state.get_species(speciesId) is not None:
         raise InvalidTransaction(
-            'Invalid action: Speciess already exists: {}'.format(speciessId))
+            'Invalid action: Species already exists: {}'.format(speciesId))
 
-    state.set_speciess(speciessId, quantity, species, packageNum, launchDateTime)
+    state.set_species(speciesId, quantity, species, packageNum, launchDateTime)

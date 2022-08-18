@@ -27,10 +27,9 @@ from tunachain_processor.trip.handler import TripTransactionHandler
 from tunachain_processor.haul.handler import HaulTransactionHandler
 from tunachain_processor.pallet_event.handler import PalletEventTransactionHandler
 from tunachain_processor.catch_package.handler import CatchPackageTransactionHandler
-from tunachain_processor.species.handler import SpeciesTransactionHandler
 from tunachain_processor.custom_package.handler import CustomPackageTransactionHandler
 from tunachain_processor.company.handler import CompanyTransactionHandler
-from tunachain_processor.speciess.handler import SpeciessTransactionHandler
+from tunachain_processor.species.handler import SpeciesTransactionHandler
 
 import logging
 
@@ -80,12 +79,9 @@ def main(args=None):
         LOGGER.info(haulHandler)
         eventHandler = PalletEventTransactionHandler()
         catchHandler = CatchPackageTransactionHandler()
-        speciesHandler = SpeciesTransactionHandler()
-        LOGGER.info('Species Transaction Handler is initialsed')
-        LOGGER.info(speciesHandler)
         customHandler  = CustomPackageTransactionHandler()
         companyHandler = CompanyTransactionHandler()
-        speciessHandler = SpeciessTransactionHandler()
+        speciesHandler = SpeciesTransactionHandler()
 
         #processor.add_handler(handler)
         #processor.add_handler(handler2)
@@ -96,11 +92,9 @@ def main(args=None):
         LOGGER.info('Haul Transaction Handler is registered')
         processor.add_handler(eventHandler)
         processor.add_handler(catchHandler)
-        processor.add_handler(speciesHandler)
-        LOGGER.info('Species Transaction Handler is registered')
         processor.add_handler(customHandler)
         processor.add_handler(companyHandler)
-        processor.add_handler(speciessHandler)
+        processor.add_handler(speciesHandler)
 
         processor.start()
     except KeyboardInterrupt:
