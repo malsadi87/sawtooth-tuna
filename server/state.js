@@ -13,7 +13,9 @@ const API_URL = 'http://localhost:8000/api'
 
 const transactions=[
     {family:"carp",version:"0.1", prefix:""},
+    {family:"compan",version:"0.1", prefix:""},
     {family:"company",version:"0.1", prefix:""},
+    {family:"companytwo",version:"0.1", prefix:""},
     {family:"haul",vesion:"0.1", prefix:""},
     {family:"pallet",version:"0.1", prefix:""},
     {family:"pallet-event",vesion:"0.1", prefix:""},

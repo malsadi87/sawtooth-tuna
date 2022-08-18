@@ -94,6 +94,70 @@ app.get('/getCompany', async (req, res) => {
   })
 })
 
+/*
+   Compan API endpoints .
+*/
+app.post("/addCompan", async (req, res) => {
+  let privateKey = req.body.privateKey;
+  let id = req.body.id;
+  let name = req.body.name;
+  let address = req.body.address;
+  let contactInfo = req.body.contactInfo;
+  const payload = {
+    "companId": id,
+    "companName": name,
+    "companAddress": address,
+    "contactInfo": contactInfo
+  }
+  console.log(payload)
+  storeData(payload, privateKey, "compan").then(response => {
+    console.log(response)
+    res.send(response)
+  })
+
+})
+
+app.get('/getCompan', async (req, res) => {
+  let id = req.query.id
+  const companAddress = get_address("compan", id)
+  getData(companAddress).then(response => {
+    console.log(response)
+    res.send(response)
+  })
+})
+
+/*
+   Companytwo API endpoints .
+*/
+app.post("/addCompanytwo", async (req, res) => {
+  let privateKey = req.body.privateKey;
+  let id = req.body.id;
+  let name = req.body.name;
+  let address = req.body.address;
+  let contactInfo = req.body.contactInfo;
+  const payload = {
+    "companytwoId": id,
+    "companytwoName": name,
+    "companytwoAddress": address,
+    "contactInfo": contactInfo
+  }
+  console.log(payload)
+  storeData(payload, privateKey, "companytwo").then(response => {
+    console.log(response)
+    res.send(response)
+  })
+
+})
+
+app.get('/getCompanytwo', async (req, res) => {
+  let id = req.query.id
+  const companytwoAddress = get_address("companytwo", id)
+  getData(companytwoAddress).then(response => {
+    console.log(response)
+    res.send(response)
+  })
+})
+
 
 /*
    trip API endpoints .
