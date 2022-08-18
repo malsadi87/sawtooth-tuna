@@ -20,10 +20,7 @@ const API_URL = 'http://rest-api:8008'
 
 const transactions=[
     {family:"speciess",version:"0.1", prefix:"8b6a90"},
-    {family:"carp",version:"0.1", prefix:"deb908"},
-    {family:"compan",version:"0.1", prefix:"13cf57"},
     {family:"company",version:"0.1", prefix:"45235d"},
-    {family:"companytwo",version:"0.1", prefix:"c2ab40"},
     {family:"haul",vesion:"0.1", prefix:"00a404"},
     {family:"pallet",version:"0.1", prefix:"02cd1c"},
     {family:"pallet-event",vesion:"0.1", prefix:"6b6112"},
