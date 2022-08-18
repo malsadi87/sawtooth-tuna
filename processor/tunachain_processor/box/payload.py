@@ -20,20 +20,24 @@ class BoxPayload(object):
         LOGGER.info(data)
 
         boxId = data.get('boxId')
+        quantity = data.get('quantity')
 
         
 
         if not boxId:
             raise InvalidTransaction('boxId is required')
 
-                    
+        if not quantity:
+            raise InvalidTransaction('Quantity is required')   
         
         self._boxId = boxId
-
-
+        self._quantity = quantity
        
        
     @property
     def boxId(self):
         return self._boxId
 
+    @property
+    def quantity(self):
+        return self._quantity

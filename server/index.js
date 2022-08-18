@@ -100,8 +100,11 @@ app.get('/getCompany', async (req, res) => {
 app.post("/addBox", async (req, res) => {
   let privateKey = req.body.privateKey;
   let id = req.body.id;
+  let quantity = req.body.quantity;
+
   const payload = {
     "boxId": id,
+    "quantity": quantity
   }
   console.log(payload)
   storeData(payload, privateKey, "box").then(response => {

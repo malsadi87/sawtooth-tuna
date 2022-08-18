@@ -47,12 +47,13 @@ class BoxState(object):
         return self._get_state(_get_box_address(boxId))
 
     
-    def set_box(self, boxId):
+    def set_box(self, boxId, quantity):
         address = _get_box_address(boxId)
         LOGGER.info('set_box method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "boxId": boxId
+            {   "boxId": boxId,
+                "quantity": quantity
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)
