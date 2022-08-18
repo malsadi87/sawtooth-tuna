@@ -66,7 +66,7 @@ app.get('/getCompany', async (req, res) => {
 */
 app.post("/addSpecies", async (req, res) => {
   let privateKey = req.body.privateKey;
-  let speciesId = req.body.id;
+  let speciesId = req.body.speciesId;
   let quantity = req.body.quantity;
   let species = req.body.species;
   let packageNum = req.body.packageNum;
