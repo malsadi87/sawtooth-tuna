@@ -11,9 +11,9 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-COMPANY_NAMESPACE = hashlib.sha512(
+BOX_NAMESPACE = hashlib.sha512(
     'box'.encode('utf-8')).hexdigest()[0:6]
-LOGGER.info(COMPANY_NAMESPACE)    
+LOGGER.info(BOX_NAMESPACE)    
 
 
 def _get_address(boxId):
@@ -23,7 +23,7 @@ def _get_address(boxId):
 
 
 def _get_box_address(boxId):
-    add =  COMPANY_NAMESPACE + '00' + _get_address(boxId)
+    add =  BOX_NAMESPACE + '00' + _get_address(boxId)
     LOGGER.info(add)
     return add
 

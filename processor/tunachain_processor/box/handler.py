@@ -11,7 +11,7 @@ from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 from tunachain_processor.box.payload import BoxPayload
 from tunachain_processor.box.state import BoxState
-from tunachain_processor.box.state import COMPANY_NAMESPACE
+from tunachain_processor.box.state import BOX_NAMESPACE
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class BoxTransactionHandler(TransactionHandler):
 
     @property
     def namespaces(self):
-        return [COMPANY_NAMESPACE]
+        return [BOX_NAMESPACE]
 
     def apply(self, transaction, context):
         header = transaction.header
