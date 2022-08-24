@@ -44,6 +44,7 @@ class CompanyState(object):
         self._context = context
 
     def get_company(self, companyId):
+        LOGGER.info('Get Company method')
         return self._get_state(_get_company_address(companyId))
 
     
@@ -61,6 +62,7 @@ class CompanyState(object):
             {address: state_data}, timeout=self.TIMEOUT)
 
     def _get_state(self, address):
+        LOGGER.info('Get Company _get_state method')
         state_entries = self._context.get_state(
             [address], timeout=self.TIMEOUT)
         if state_entries:

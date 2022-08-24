@@ -8,9 +8,10 @@ const crypto = require('crypto')
 app.use(parser.json())
 app.use(parser.urlencoded({ extended: true }))
 
-const { getData, storeData } = require('./utils')
+const { getData, storeData, getFullDetails } = require('./utils')
 
 const { ConsensusFailBlockRequest } = require('sawtooth-sdk/protobuf')
+const { get } = require('jquery')
 
 //SERVER CONFIG
 const port = 3005
@@ -308,8 +309,9 @@ app.post("/addCustomPackage", async (req, res) => {
 app.get('/getCustomPackage', async (req, res) => {
   let consumerPackageId = req.query.consumerPackageId
   const address = get_address("custom-package", consumerPackageId)
-  getData(address).then(response => {
+  getFullDetails(address).then(response => {
     console.log(response)
+    
     res.send(response)
   })
 })
