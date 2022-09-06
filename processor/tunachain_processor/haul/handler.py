@@ -36,25 +36,26 @@ class HaulTransactionHandler(TransactionHandler):
         return [HAUL_NAMESPACE]
 
     def apply(self, transaction, context):
+        LOGGER.info('Starting handler method at Haul Processor')
         header = transaction.header
         signer = header.signer_public_key
 
         payload = HaulPayload(transaction.payload)
         state = HaulState(context)
 
-        LOGGER.info('Haul handler apply method')
+        LOGGER.info('Company handler apply method')
         LOGGER.info(payload)
         
         _create_haul(launchDateTime=payload.launchDateTime,
-                        launchPosition=payload.launchPosition,
-                        launchLatitude=payload.launchLatitude,
-                        launchLongitude=payload.launchLongitude,
-                        haulDateTime=payload.haulDateTime,
-                        haulPosition=payload.haulPosition,
-                        haulLatitude=payload.haulLatitude,
-                        haulLongitude=payload.haulLongitude,
-                        tripNo=payload.tripNo,
-                        state=state)
+                     launchPosition=payload.launchPosition,
+                     launchLatitude=payload.launchLatitude,
+                     launchLongitude=payload.launchLongitude,
+                     haulDateTime=payload.haulDateTime,
+                     haulPosition=payload.haulPosition,
+                     haulLatitude=payload.haulLatitude,
+                     haulLongitude=payload.haulLongitude,
+                     tripNo=payload.tripNo,
+                     state=state)
 
 
 def _create_haul(launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, tripNo, state):

@@ -6,6 +6,8 @@
 import hashlib
 import json
 import logging
+from tunachain_processor.catch_package.state import CatchPackageState
+
 
 
 LOGGER = logging.getLogger(__name__)
@@ -44,7 +46,8 @@ class CustomPackageState(object):
 
 
     def get_custom_package(self, consumerPackageId):
-        return self._get_state(_get_custom_package_address(consumerPackageId))
+        custom_package = self._get_state(_get_custom_package_address(consumerPackageId))
+        return custom_package
 
 
     
@@ -63,7 +66,7 @@ class CustomPackageState(object):
 
     def _get_state(self, address):
         state_entries = self._context.get_state(
-            [address], timeout=self.TIMEOUT)
+            [address], timeout=self.TIMEOUT)   
         if state_entries:
             entry = _deserialize(data=state_entries[0].data)
         else:

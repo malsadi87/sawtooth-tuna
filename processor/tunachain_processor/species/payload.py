@@ -19,50 +19,50 @@ class SpeciesPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
 
-        palletNum = data.get('palletNum')
-        productNum = data.get('productNum')
-        supplierId = data.get('supplierId')
-        palletWeight = data.get('palletWeight')
-        tripNo = data.get('tripNo')
+        speciesId = data.get('speciesId')
+        quantity = data.get('quantity')
+        species = data.get('species')
+        packageNum = data.get('packageNum')
+        launchDateTime = data.get('launchDateTime')
 
-        if not palletNum:
-            raise InvalidTransaction('Pallet Number is required')
+        if not speciesId:
+            raise InvalidTransaction('Species ID is required')
 
-        if not productNum:
-            raise InvalidTransaction('Product Number is required')
+        if not quantity:
+            raise InvalidTransaction('Quantity is required')
 
-        if not supplierId:
-            raise InvalidTransaction('Supplier ID is required')
+        if not species:
+            raise InvalidTransaction('Species is required')
 
-        if not palletWeight:
-            raise InvalidTransaction('Pallet Weight is required')
+        if not packageNum:
+            raise InvalidTransaction('Package Num is required')
 
-        if not tripNo:
-            raise InvalidTransaction('Trip No is required')                  
+        if not launchDateTime:
+            raise InvalidTransaction('Launch Date is required')                  
         
-        self._palletNum = palletNum
-        self._productNum = productNum
-        self._supplierId = supplierId
-        self._palletWeight = palletWeight
-        self._tripNo = tripNo
+        self._speciesId = speciesId
+        self._quantity = quantity
+        self._species = species
+        self._packageNum = packageNum
+        self._launchDateTime = launchDateTime
        
        
     @property
-    def palletNum(self):
-        return self._palletNum
+    def speciesId(self):
+        return self._speciesId
 
     @property
-    def productNum(self):
-        return self._productNum
+    def quantity(self):
+        return self._quantity
 
     @property
-    def supplierId(self):
-        return self._supplierId        
+    def species(self):
+        return self._species       
     
     @property
-    def palletWeight(self):
-        return self._palletWeight
+    def packageNum(self):
+        return self._packageNum
     
     @property
-    def tripNo(self):
-        return self._tripNo
+    def launchDateTime(self):
+        return self._launchDateTime

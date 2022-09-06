@@ -46,7 +46,7 @@ class PalletEventTransactionHandler(TransactionHandler):
         LOGGER.info(payload)
 
         
-        _create_pallet(palletNum=payload.palletNum,
+        _create_pallet_event(palletNum=payload.palletNum,
                         eventTime=payload.eventTime,
                         temperature=payload.temperature,
                         location=payload.location,
@@ -55,7 +55,7 @@ class PalletEventTransactionHandler(TransactionHandler):
                         state=state)
 
 
-def _create_pallet(palletNum, eventTime, temperature, location, tilt, shock, state):
+def _create_pallet_event(palletNum, eventTime, temperature, location, tilt, shock, state):
     if state.get_pallet_event(palletNum, eventTime) is not None:
         raise InvalidTransaction(
             'Invalid action: Event already exists: {}'.format(palletNum))

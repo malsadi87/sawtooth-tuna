@@ -31,6 +31,10 @@ from tunachain_processor.species.handler import SpeciesTransactionHandler
 from tunachain_processor.custom_package.handler import CustomPackageTransactionHandler
 from tunachain_processor.company.handler import CompanyTransactionHandler
 
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 def parse_args(args):
     parser = argparse.ArgumentParser(
@@ -57,33 +61,41 @@ def main(args=None):
     processor = None
     try:
         processor = TransactionProcessor(url=opts.connect)
-
+        
+        LOGGER.info('processor is initalised ')
+        LOGGER.info(opts)
         init_console_logging(verbose_level=opts.verbose)
 
-        handler = TunachainTransactionHandler()
+        #handler = TunachainTransactionHandler()
 
         #Metadata handler
-        handler2 = MetadataTransactionHandler()
+       # handler2 = MetadataTransactionHandler()
 
         palletHandler = PalletTransactionHandler()
         productHandler = ProductTransactionHandler()
         tripHandler = TripTransactionHandler()
         haulHandler = HaulTransactionHandler()
+        LOGGER.info('Haul Transaction Handler is initialsed')
+        LOGGER.info(haulHandler)
         eventHandler = PalletEventTransactionHandler()
         catchHandler = CatchPackageTransactionHandler()
         speciesHandler = SpeciesTransactionHandler()
+        LOGGER.info('Species Transaction Handler is initialsed')
+        LOGGER.info(speciesHandler)
         customHandler  = CustomPackageTransactionHandler()
         companyHandler = CompanyTransactionHandler()
 
-        processor.add_handler(handler)
-        processor.add_handler(handler2)
+        #processor.add_handler(handler)
+        #processor.add_handler(handler2)
         processor.add_handler(palletHandler)
         processor.add_handler(productHandler)
         processor.add_handler(tripHandler)
         processor.add_handler(haulHandler)
+        LOGGER.info('Haul Transaction Handler is registered')
         processor.add_handler(eventHandler)
         processor.add_handler(catchHandler)
         processor.add_handler(speciesHandler)
+        LOGGER.info('Species Transaction Handler is registered')
         processor.add_handler(customHandler)
         processor.add_handler(companyHandler)
 

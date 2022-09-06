@@ -22,10 +22,10 @@ class CustomPackagePayload(object):
 
         consumerPackageId = data.get('consumerPackageId')
         catchPackageId = data.get('catchPackageId')
-        packingDate = data.get('PackingDate')
+        packingDate = data.get('packingDate')
         agent = data.get('agent')
        
-
+        LOGGER.info(packingDate)
         if not consumerPackageId:
             raise InvalidTransaction('Consumer Package Id is required')
 
