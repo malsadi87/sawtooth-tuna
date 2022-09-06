@@ -45,14 +45,14 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         DeviceCodesEntity,
         PersistedGrantsEntity,
         
-        UsersEntity,
-        RolesEntity,
+        // UsersEntity,
+        // RolesEntity,
 
-        UserClaimsEntity,
-        UserRolesEntity,
-        RoleClaimsEntity,
-        UserLoginsEntity,
-        UserTokensEntity
+        // UserClaimsEntity,
+        // UserRolesEntity,
+        // RoleClaimsEntity,
+        // UserLoginsEntity,
+        // UserTokensEntity
     ],
     synchronize: true,
     // autoLoadEntities: true,

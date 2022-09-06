@@ -6,10 +6,7 @@ import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-    constructor(
-        @InjectRepository(UsersRepository)
-        private usersRepository: UsersRepository
-    ) { }
+    constructor(private usersRepository: UsersRepository) { }
 
     async validateCredential(authCredential: AuthCredential): Promise<boolean> {
         const isValidate = await this.usersRepository.validateCredential(authCredential);
