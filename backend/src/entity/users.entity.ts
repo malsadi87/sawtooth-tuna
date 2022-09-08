@@ -71,23 +71,23 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'int', name: 'AccessFailedCount', nullable: false })
     accessFailedCount: number;
 
-    @OneToMany((entity) => UserClaimsEntity, (x) => x.userId, {
-        onDelete: "CASCADE",
-        onUpdate: "NO ACTION"
-    })
-    @JoinColumn({ referencedColumnName: 'UserId' })
-    claims: UserClaimsEntity[];
+    // @OneToMany((entity) => UserClaimsEntity, (x) => x.userId, {
+    //     onDelete: "CASCADE",
+    //     onUpdate: "NO ACTION"
+    // })
+    // @JoinColumn({ referencedColumnName: 'UserId' })
+    // claims: UserClaimsEntity[];
 
-    @OneToMany((entity) => UserLoginsEntity, (x) => x.userId, {
-        onDelete: "CASCADE",
-        onUpdate: "NO ACTION"
-    })
-    @JoinColumn({ referencedColumnName: 'UserId' })
-    logins: UserLoginsEntity[];
+    // @OneToMany((entity) => UserLoginsEntity, (x) => x.userId, {
+    //     onDelete: "CASCADE",
+    //     onUpdate: "NO ACTION"
+    // })
+    // @JoinColumn({ referencedColumnName: 'UserId' })
+    // logins: UserLoginsEntity[];
 
-    @OneToMany(() => UserTokensEntity, token => token.userId)
-    @JoinColumn({ referencedColumnName: 'UserId' })
-    tokens: UserTokensEntity;
+    // @OneToMany(() => UserTokensEntity, token => token.userId)
+    // @JoinColumn({ referencedColumnName: 'UserId' })
+    // tokens: UserTokensEntity;
 
     // @OneToMany(() => UserRolesEntity, userRole => userRole.user)
     // @JoinColumn({ referencedColumnName: 'UserId' })

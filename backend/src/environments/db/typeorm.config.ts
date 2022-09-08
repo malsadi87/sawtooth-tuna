@@ -43,11 +43,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         ExternalAPIDetailsEntity,
         ExternalAPISettingsEntity,
         DeviceCodesEntity,
-        PersistedGrantsEntity,
-        
-        // UsersEntity,
-        // RolesEntity,
+        PersistedGrantsEntity,   
+        UsersEntity,
 
+        // RolesEntity,
         // UserClaimsEntity,
         // UserRolesEntity,
         // RoleClaimsEntity,

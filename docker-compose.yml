@@ -1,0 +1,139 @@
+version: '3.6'
+services:
+  tunachain-db:
+    image: postgres
+    container_name: tunachain-db
+    restart: always
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/db-data:/var/lib/postgresql/data
+      - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+  tunachain-db-admin:
+    user: root
+    image: dpage/pgadmin4
+    container_name: tunachain-db-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "test123!"
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "16543:80"
+    depends_on:
+      - tunachain-db
+    volumes:
+     - ./postgres/pgadmin-data:/var/lib/pgadmin
+
+  # tunachain-client:
+  #   build:
+  #     context: .
+  #     dockerfile: ./client/Dockerfile
+  #   image: hyperledger/tunachain-client
+  #   container_name: tunachain-client
+  #   volumes:
+  #     - ./client:/project/sawtooth-tuna/client
+  #     - /project/sawtooth-tuna/client/node_modules
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+  
+  # tunachain-backend:
+  #   build:
+  #     context: .
+  #     target: development
+  #     dockerfile: ./backend/Dockerfile
+  #   image: hyperledger/tunachain-backend
+  #   container_name: tunachain-backend
+  #   volumes:
+  #     - ./backend:/project/sawtooth-tuna/backend
+  #     - /project/sawtooth-tuna/backend/node_modules
+  #   command: npm run start:dev
+  #   ports:
+  #     - 3001:3001
+  #     - 9229:9229
+  #   depends_on:
+  #     - rest-api
+  #     - tunachain-db
+
+  # tunachain-tp:
+  #   build:
+  #     context: .
+  #     dockerfile: ./processor/Dockerfile
+  #     args:
+  #       - http_proxy
+  #       - https_proxy
+  #       - no_proxy
+  #   image: sawtooth-tunachain-tp
+  #   container_name: tunachain-tp
+  #   volumes:
+  #     - .:/project/sawtooth-tuna
+  #   command: |
+  #     bash -c "
+  #       sleep 1
+  #       tunachain-tp -vv -C tcp://validator:4004
+  #     "
+
+  # settings-tp:
+  #   image: hyperledger/sawtooth-settings-tp
+  #   container_name: sawtooth-settings-tp
+  #   depends_on:
+  #     - validator
+  #   entrypoint: settings-tp -vv -C tcp://validator:4004
+
+  # rest-api:
+  #   image: hyperledger/sawtooth-rest-api
+  #   container_name: sawtooth-rest-api
+  #   expose:
+  #     - 8008
+  #   ports:
+  #     - '8008:8008'
+  #   depends_on:
+  #     - validator
+  #   entrypoint: |
+  #     sawtooth-rest-api -vv
+  #       --connect tcp://validator:4004
+  #       --bind rest-api:8008
+
+  # validator:
+  #   image: hyperledger/sawtooth-validator
+  #   container_name: sawtooth-validator
+  #   expose:
+  #     - 4004
+  #   ports:
+  #     - 4004:4004
+  #   entrypoint: "bash -c \"\
+  #     if [ ! -f /etc/sawtooth/keys/validator.priv ]; then
+  #       sawadm keygen && \
+  #       sawtooth keygen my_key && \
+  #       sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
+  #       sawset proposal create \
+  #         -k /root/.sawtooth/keys/my_key.priv \
+  #         sawtooth.consensus.algorithm.name=Devmode \
+  #         sawtooth.consensus.algorithm.version=0.1 \
+  #         -o config.batch && \
+  #       sawadm genesis config-genesis.batch config.batch; \
+  #     fi; \
+  #       sawtooth-validator -vv \
+  #         --endpoint tcp://validator:8800 \
+  #         --bind component:tcp://eth0:4004 \
+  #         --bind network:tcp://eth0:8800 \
+  #         --bind consensus:tcp://eth0:5050 \
+  #       \""
+  #   #volumes:
+  #    # - ./database/bcdata/data:/var/lib/sawtooth
+  #     #- ./database/bcdata/keys:/etc/sawtooth/keys
+  #     #- ./database/bcdata/userKeys:/root/.sawtooth/keys
+  #     #- ./database/bcdata/logs:/var/log/sawtooth
+
+  # devmode-engine:
+  #   image: hyperledger/sawtooth-devmode-engine-rust
+  #   container_name: sawtooth-devmode-engine-rust-default
+  #   depends_on:
+  #     - validator
+  #   entrypoint: devmode-engine-rust -C tcp://validator:5050

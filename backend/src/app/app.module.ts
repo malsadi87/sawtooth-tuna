@@ -15,26 +15,26 @@ import { UtilityModule } from './utility/utility.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    // AuthModule,
+    UsersModule,
+    AuthModule, 
     SawtoothModule,
     TestModule,
-    // UsersModule,
-    // SharedModule,
-    // UtilityModule,
+    SharedModule,
+    UtilityModule,
   ],
   providers: [
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: ApiExceptionFilter
-    // },
-    // {
-    //   provide: APP_PIPE,
-    //   useClass: RequestPayloadValidationPipe
-    // },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard
-    // }
+    {
+      provide: APP_FILTER,
+      useClass: ApiExceptionFilter
+    },
+    {
+      provide: APP_PIPE,
+      useClass: RequestPayloadValidationPipe
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
+    }
   ]
 })
 export class AppModule {}

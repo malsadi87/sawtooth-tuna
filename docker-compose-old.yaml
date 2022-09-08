@@ -1,19 +1,43 @@
 version: '2.1'
 
 services:
-  tunachain-db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    container_name: tunachain-db
+  tunachain-db-psg:
+    image: postgres
+    container_name: tunachain-db-psg
     restart: always
-    ports:
-      - "3306:3306"
-    volumes:
-      - "./mysql/init/create.sql:/docker-entrypoint-initdb.d/creat.sql"
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_USER: user
-      MYSQL_PASSWORD: mysql
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=demo
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ./postgres/init/create.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+  tunachain-db-admin:
+    image: dpage/pgadmin4
+    container_name: tunachain-db-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "test123!"
+    ports:
+      - "16543:3002"
+    depends_on:
+      - tunachain-db-psg
+       
+  # tunachain-db:
+  #   image: mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   container_name: tunachain-db
+  #   restart: always
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - "./mysql/init/create.sql:/docker-entrypoint-initdb.d/creat.sql"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpass
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: mysql
 
   tunachain-client:
     build:
@@ -123,3 +147,4 @@ services:
     depends_on:
       - validator
     entrypoint: devmode-engine-rust -C tcp://validator:5050
+    

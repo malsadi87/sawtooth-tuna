@@ -373,6 +373,10 @@ lerna-debug.log*
 /backend/coverage
 /backend/.nyc_output
 
+# DB VOlumes
+/postgres/db-data
+/postgres/pgadmin-data
+
 # IDEs and editors
 .project
 .classpath
