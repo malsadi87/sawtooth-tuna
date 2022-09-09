@@ -12,8 +12,7 @@ export class UsersRepository extends Repository<UsersEntity> {
     public async validateCredential(credential: AuthCredential): Promise<boolean> {
         const { email, password } = credential;
 
-        // let user: UsersEntity = await this.findOne({ email });
-        let user: UsersEntity = null;
+        let user: UsersEntity = await this.findOneBy({ email: email });
         if (user && user.passwordHash == password) {
             return true;
         }
@@ -21,8 +20,7 @@ export class UsersRepository extends Repository<UsersEntity> {
     }
 
     public async getUserByEmail(email: string): Promise<UsersEntity> {
-        // const user = await this.findOne({ email });
-        const user: UsersEntity = null;
+        const user = await this.findOneBy({ email: email });
         return user;
     }
 }

@@ -5,7 +5,7 @@ import { TestModule } from './test/test.module';
 
 @Module({
     imports: [
-        //AuthModule,
+        AuthModule,
         SawtoothModule,
         TestModule
     ]
