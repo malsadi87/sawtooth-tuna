@@ -5,7 +5,7 @@ jwt-config:
   expiresIn: 604800
 
 database:
-  type: "mysql"
+  type: "postgres"
   isLogEnable: true
   synchronizeFlag: false
   encrypt: true

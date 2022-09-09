@@ -1,7 +1,12 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { DataSource, Repository } from 'typeorm';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
 
-@EntityRepository(PalletEventEntity)
+@Injectable()
 export class PalletEventRepository extends Repository<PalletEventEntity> {
+    constructor(private dataSource: DataSource) {
+        super(PalletEventEntity, dataSource.createEntityManager());
+    }
 
+    
 }

@@ -25,12 +25,12 @@ const { type, name, synchronizeFlag, isLogEnable, encrypt } = dbConfig;
 const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PW } = process.env;
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-    type: 'postgres',
-    host: 'tunachain-db',
-    port: 5432,
-    username: 'root',
-    password: 'root',
-    database: 'demo',
+    type: type,
+    host: DATABASE_HOST,
+    port: +DATABASE_PORT,
+    username: DATABASE_USER,
+    password: DATABASE_PW,
+    database: name,
     entities: [
         TripEntity,
 
@@ -54,8 +54,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         // UserLoginsEntity,
         // UserTokensEntity
     ],
-    synchronize: true,
-    logging: true,
+    synchronize: Boolean(synchronizeFlag),
+    logging: Boolean(isLogEnable),
     // autoLoadEntities: true,
     // logging: true,
     // migrations: ['dist/migrations/*{.ts,.js}'],

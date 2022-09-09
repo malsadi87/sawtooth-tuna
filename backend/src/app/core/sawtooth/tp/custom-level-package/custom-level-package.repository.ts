@@ -1,7 +1,12 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { DataSource, Repository } from 'typeorm';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
 
-@EntityRepository(CustomLevelPackageEntity)
+@Injectable()
 export class CustomLevelPackageRepository extends Repository<CustomLevelPackageEntity> {
+    constructor(private dataSource: DataSource) {
+        super(CustomLevelPackageEntity, dataSource.createEntityManager());
+    }
 
+    
 }
