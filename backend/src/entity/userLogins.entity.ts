@@ -16,6 +16,6 @@ export class UserLoginsEntity extends BaseEntity {
     @Index("IX_AspNetUserLogins_UserId")
     userId: string;
 
-    // @ManyToOne((type) => UsersEntity, x => x.logins)
-    // user: UsersEntity;
+    @ManyToOne((type) => UsersEntity, x => x.logins)
+    user: UsersEntity;
 }

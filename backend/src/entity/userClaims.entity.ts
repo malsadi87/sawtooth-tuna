@@ -16,6 +16,6 @@ export class UserClaimsEntity extends BaseEntity {
     @Column({ type:'varchar', width: 4000, name: 'ClaimValue', nullable: true })
     claimValue: string;
     
-    // @ManyToOne((type) => UsersEntity, x => x.claims)
-    // user: UsersEntity;
+    @ManyToOne((type) => UsersEntity, x => x.claims)
+    user: UsersEntity;
 }

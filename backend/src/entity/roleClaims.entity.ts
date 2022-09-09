@@ -16,6 +16,6 @@ export class RoleClaimsEntity extends BaseEntity {
     @Column({ type:'varchar', width: 512, name: 'ClaimValue', nullable: true })
     claimValue: string;
     
-    // @ManyToOne((type) => RolesEntity, x => x.claims)
-    // role: RolesEntity;
+    @ManyToOne((type) => RolesEntity, x => x.claims)
+    role: RolesEntity;
 }
