@@ -1,6 +1,6 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { AllowAnonymous } from '../../utility/decorator/AllowAnonymous.decorator';
-import { AuthCredential } from '../../utility/dto/authCredential.dto';
+import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')

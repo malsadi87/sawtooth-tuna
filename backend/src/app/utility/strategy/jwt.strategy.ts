@@ -8,9 +8,7 @@ const { JWT_SECRET } = process.env;
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-    constructor(
-        private userService: UsersService
-    ) {
+    constructor(private userService: UsersService) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: JWT_SECRET

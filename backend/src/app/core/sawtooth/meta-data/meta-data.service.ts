@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { UtilityService } from '../utility/utility.service';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import { AssetCreationOperation } from '../../../utility/enum/asset-creation.enum';
-import { MetaDataCreationDto } from '../../../utility/dto/metaDataCreation.dto';
+import { MetaDataCreationDto } from '../../../utility/dto/metaData-creation.dto';
 import { KeyPairDto } from '../../../utility/dto/keyPair.dto';
 
 @Injectable()

@@ -1,3 +1,4 @@
+import { Expose } from "class-transformer";
 import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn, Unique } from "typeorm";
 import { UserClaimsEntity } from "./userClaims.entity";
 import { UserLoginsEntity } from "./userLogins.entity";
@@ -45,6 +46,7 @@ export class UsersEntity extends BaseEntity {
     emailConfirmed: boolean;
 
     @Column({ type:'varchar', width: 2000, name: 'PasswordHash', nullable: true })
+    @Expose({ name: 'password' })
     passwordHash: string;
 
     @Column({ type:'varchar', width: 2000, name: 'SecurityStamp', nullable: true })
