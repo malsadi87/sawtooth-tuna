@@ -1,10 +1,14 @@
-import { Repository, EntityRepository } from "typeorm";
+import { Injectable } from "@nestjs/common";
+import { DataSource, Repository } from "typeorm";
 import { UsersEntity } from "../../../entity/users.entity";
 import { AuthCredential } from "../../utility/dto/authCredential.dto";
 
-@EntityRepository(UsersEntity)
+@Injectable()
 export class UsersRepository extends Repository<UsersEntity> {
-
+    constructor(private dataSource: DataSource) {
+        super(UsersEntity, dataSource.createEntityManager());
+    }
+    
     public async validateCredential(credential: AuthCredential): Promise<boolean> {
         const { email, password } = credential;
 

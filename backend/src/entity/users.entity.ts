@@ -9,29 +9,29 @@ export class UsersEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type: 'varchar', width: 450, name: 'Id', nullable: false })
     id: string;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'FullName', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'FullName', nullable: true })
     fullName: string;
 
     @Column({ type:'boolean', name: 'IsActive' })
     isActive: boolean;
 
-    @Column({ type:'datetime', name: 'CreatedDate', nullable: false })
+    @Column({ type:'timestamp', name: 'CreatedDate', nullable: false })
     createdDate: Date;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'CreatedBy', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'CreatedBy', nullable: true })
     createdBy: string;
 
-    @Column({ type:'datetime', name: 'UpdatedDate', nullable: false })
+    @Column({ type:'timestamp', name: 'UpdatedDate', nullable: false })
     updatedDate: Date;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'UpdatedBy', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'UpdatedBy', nullable: true })
     updatedBy: string;
 
     @Column({ type:'varchar', width: 256, name: 'UserName', nullable: true })
     userName: string;
 
     @Column({ type:'varchar', width: 256, name: 'NormalizedName', nullable: true })
-    @Index("UserNameIndex", { unique: true })
+    @Index({ unique: true })
     normalizedUserName: string;
 
     @Column({ type:'varchar', width: 256, name: 'Email', nullable: true })
@@ -44,16 +44,16 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'boolean', name: 'EmailConfirmed', nullable: false })
     emailConfirmed: boolean;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'PasswordHash', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'PasswordHash', nullable: true })
     passwordHash: string;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'SecurityStamp', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'SecurityStamp', nullable: true })
     securityStamp: string;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'ConcurrencyStamp', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'ConcurrencyStamp', nullable: true })
     concurrencyStamp: string;
 
-    @Column({ type:'nvarchar', width: 2000, name: 'PhoneNumber', nullable: true })
+    @Column({ type:'varchar', width: 2000, name: 'PhoneNumber', nullable: true })
     phoneNumber: string;
 
     @Column({ type:'boolean', name: 'PhoneNumberConfirmed', nullable: false })
@@ -62,7 +62,7 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'boolean', name: 'TwoFactorEnabled', nullable: false })
     twoFactorEnabled: boolean;
 
-    @Column({ type:'datetime', name: 'LockoutEnd', nullable: true })
+    @Column({ type:'timestamp', name: 'LockoutEnd', nullable: true })
     lockoutEnd: Date;
 
     @Column({ type:'boolean', name: 'LockoutEnabled', nullable: false })

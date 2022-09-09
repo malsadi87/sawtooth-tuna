@@ -41,10 +41,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         CompanyEntity,
         CustomLevelPackageEntity,
 
-        // ExternalAPIDetailsEntity,
-        // ExternalAPISettingsEntity,
-
-        // UsersEntity,
+        UsersEntity,
         // DeviceCodesEntity,
         // PersistedGrantsEntity,
 
@@ -54,6 +51,9 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         // RoleClaimsEntity,
         // UserLoginsEntity,
         // UserTokensEntity
+
+        // ExternalAPIDetailsEntity,
+        // ExternalAPISettingsEntity,
     ],
     synchronize: Boolean(synchronizeFlag),
     logging: Boolean(isLogEnable),
