@@ -23,19 +23,19 @@ export class ExternalAPIDetailsEntity extends BaseEntity {
     @Column({ type:'varchar', width: 1000, name: 'RefreshToken', nullable: true })
     refreshToken: string;
 
-    @Column({ type:'datetime', name: 'IssueAt', nullable: false })
+    @Column({ type:'timestamp', name: 'IssueAt', nullable: false })
     issueAt: Date;
 
-    @Column({ type:'datetime', name: 'ExpiresAt', nullable: false })
+    @Column({ type:'timestamp', name: 'ExpiresAt', nullable: false })
     expiresAt: Date;
 
-    @Column({ type:'datetime', name: 'Created', nullable: false })
+    @Column({ type:'timestamp', name: 'Created', nullable: false })
     created: Date;
 
     @Column({ type:'varchar', width: 512, name: 'CreatedBy', nullable: true })
     createdBy: string;
 
-    @Column({ type:'datetime', name: 'LastModified', nullable: true })
+    @Column({ type:'timestamp', name: 'LastModified', nullable: true })
     lastModified: Date;
 
     @Column({ type:'varchar', width: 512, name: 'LastModifiedBy', nullable: true })

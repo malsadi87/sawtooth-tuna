@@ -6,7 +6,7 @@ export class DeviceCodesEntity extends BaseEntity {
     userCode: string;
 
     @Column({ type:'varchar', width: 200, name: 'DeviceCode', nullable: true })
-    @Index("IX_DeviceCodes_DeviceCode", { unique: true })
+    @Index({ unique: true })
     deviceCode: string;
 
     @Column({ type:'varchar', width: 200, name: 'SubjectId', nullable: true })
@@ -21,13 +21,13 @@ export class DeviceCodesEntity extends BaseEntity {
     @Column({ type:'varchar', width: 200, name: 'Description', nullable: true })
     description: string;
 
-    @Column({ type:'datetime', name: 'CreationTime', nullable: false })
+    @Column({ type:'timestamp', name: 'CreationTime', nullable: false })
     creationTime: Date;
 
-    @Column({ type:'datetime', name: 'Expiration', nullable: false })
+    @Column({ type:'timestamp', name: 'Expiration', nullable: false })
     @Index("IX_DeviceCodes_Expiration")
     expiration: Date;
 
-    @Column({ type:'nvarchar', width: 4000, name: 'Data', nullable: true })
+    @Column({ type:'varchar', width: 4000, name: 'Data', nullable: true })
     data: string;
 }

@@ -42,23 +42,21 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         CustomLevelPackageEntity,
 
         UsersEntity,
-        // DeviceCodesEntity,
-        // PersistedGrantsEntity,
+        RolesEntity,
+        DeviceCodesEntity,
+        PersistedGrantsEntity,
+        RoleClaimsEntity,
+        UserClaimsEntity,
+        UserLoginsEntity,
+        UserRolesEntity,
+        UserTokensEntity,
 
-        // RolesEntity,
-        // UserClaimsEntity,
-        // UserRolesEntity,
-        // RoleClaimsEntity,
-        // UserLoginsEntity,
-        // UserTokensEntity
-
-        // ExternalAPIDetailsEntity,
-        // ExternalAPISettingsEntity,
+        ExternalAPIDetailsEntity,
+        ExternalAPISettingsEntity
     ],
     synchronize: Boolean(synchronizeFlag),
     logging: Boolean(isLogEnable),
     // autoLoadEntities: true,
-    // logging: true,
     // migrations: ['dist/migrations/*{.ts,.js}'],
     // migrationsTableName: '__MigrationHistory',
     // migrationsRun: false,

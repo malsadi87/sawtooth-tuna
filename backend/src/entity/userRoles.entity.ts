@@ -8,7 +8,7 @@ export class UserRolesEntity extends BaseEntity {
     userId: string;
 
     @PrimaryColumn({ generated: false, width: 450, type: 'varchar', name: 'RoleId', nullable: false })
-    @Index("IX_AspNetUserRoles_RoleId", { synchronize: false })
+    @Index("IX_AspNetUserRoles_RoleId")
     roleId: string;
 
     // @ManyToOne(() => UsersEntity, (usere) => usere.userRoles)

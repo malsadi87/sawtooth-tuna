@@ -10,19 +10,19 @@ export class RolesEntity extends BaseEntity {
     @Column({ type:'varchar', width: 256, name: 'Name', nullable: true })
     name: string;
 
-    @Index("RoleNameIndex", { unique: true })
     @Column({ type:'varchar', width: 256, name: 'NormalizedName', nullable: true })
+    @Index({ unique: true })
     normalizedName: string;
 
-    @Column({ type:'nvarchar', width: 4000, name: 'ConcurrencyStamp', nullable: true })
+    @Column({ type:'varchar', width: 4000, name: 'ConcurrencyStamp', nullable: true })
     concurrencyStamp: string;
 
-    @OneToMany((entity) => RoleClaimsEntity, (x) => x.roleId, {
-        onDelete: "CASCADE",
-        onUpdate: "NO ACTION"
-    })
-    @JoinColumn({ referencedColumnName: 'RoleId' })
-    claims: RoleClaimsEntity[];
+    // @OneToMany((entity) => RoleClaimsEntity, (x) => x.roleId, {
+    //     onDelete: "CASCADE",
+    //     onUpdate: "NO ACTION"
+    // })
+    // @JoinColumn({ referencedColumnName: 'RoleId' })
+    // claims: RoleClaimsEntity[];
 
     // @OneToMany(() => UserRolesEntity, userRole => userRole.role)
     // @JoinColumn({ referencedColumnName: 'RoleId' })

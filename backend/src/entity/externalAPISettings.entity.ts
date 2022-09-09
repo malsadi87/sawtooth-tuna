@@ -23,13 +23,13 @@ export class ExternalAPISettingsEntity extends BaseEntity {
     @Column({ type:'smallint', name: 'Provider', nullable: false })
     provider: number;
 
-    @Column({ type:'datetime', name: 'Created', nullable: false })
+    @Column({ type:'timestamp', name: 'Created', nullable: false })
     created: Date;
 
     @Column({ type:'varchar', width: 512, name: 'CreatedBy', nullable: true })
     createdBy: string;
     
-    @Column({ type:'datetime', name: 'LastModified', nullable: true })
+    @Column({ type:'timestamp', name: 'LastModified', nullable: true })
     lastModified: Date;
 
     @Column({ type:'varchar', width: 512, name: 'LastModifiedBy', nullable: true })

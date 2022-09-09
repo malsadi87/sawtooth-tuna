@@ -13,7 +13,7 @@ export class UserLoginsEntity extends BaseEntity {
     providerDisplayName: string;
 
     @Column({ type:'varchar', width: 450, name: 'UserId', nullable: true })
-    @Index("IX_AspNetUserLogins_UserId", { synchronize: false })
+    @Index("IX_AspNetUserLogins_UserId")
     userId: string;
 
     // @ManyToOne((type) => UsersEntity, x => x.logins)

@@ -7,7 +7,7 @@ export class RoleClaimsEntity extends BaseEntity {
     id: number;
 
     @Column({ type:'varchar', width: 450, name: 'RoleId', nullable: true })
-    @Index("IX_AspNetRoleClaims_RoleId", { synchronize: false })
+    @Index("IX_AspNetRoleClaims_RoleId")
     roleId: string;
 
     @Column({ type:'varchar', width: 256, name: 'ClaimType', nullable: true })
