@@ -55,6 +55,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         // UserTokensEntity
     ],
     synchronize: true,
+    logging: true,
     // autoLoadEntities: true,
     // logging: true,
     // migrations: ['dist/migrations/*{.ts,.js}'],

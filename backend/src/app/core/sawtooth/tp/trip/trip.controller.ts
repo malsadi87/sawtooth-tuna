@@ -10,4 +10,9 @@ export class TripController {
     async CreateKeyPair(): Promise<TripEntity[]> {
         return await this.tripService.getAllTrip();
     }
+
+    @Get('/hallo')
+    Get(): string {
+        return "Hallo world!";
+    }
 }

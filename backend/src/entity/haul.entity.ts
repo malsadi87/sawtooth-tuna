@@ -30,6 +30,6 @@ export class HaulEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, name: 'TripNo', type: 'int', nullable: false })
     tripNo: number;
 
-    @ManyToOne((type) => TripEntity, x => x.hauls)
-    trip: TripEntity;
+    // @ManyToOne((type) => TripEntity, x => x.hauls)
+    // trip: TripEntity;
 }

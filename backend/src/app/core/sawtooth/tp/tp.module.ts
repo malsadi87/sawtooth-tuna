@@ -13,14 +13,14 @@ import { TripModule } from './trip/trip.module';
 @Module({
     imports: [
         HttpModule,
+        TripModule
         // CatchPackageModule,
         // CompanyModule,
         // CustomLevelPackageModule,
         // HaulModule,
         // PalletModule,
         // PalletEventModule,
-        // SpeciesAndWeightModule,
-        TripModule
+        // SpeciesAndWeightModule
     ],
     providers: [UtilityService]
 })

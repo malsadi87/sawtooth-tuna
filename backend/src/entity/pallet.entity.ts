@@ -20,8 +20,8 @@ export class PalletEntity extends BaseEntity {
     @PrimaryColumn({ type:'int', name: 'TripNo', nullable: false })
     tripNo: number;
 
-    @ManyToOne((type) => TripEntity, x => x.pallets)
-    trip: TripEntity;
+    // @ManyToOne((type) => TripEntity, x => x.pallets)
+    // trip: TripEntity;
 
     @OneToMany((entity) => PalletEventEntity, (x) => x.palletNum)
     @JoinColumn({ referencedColumnName: 'PalletNum' })

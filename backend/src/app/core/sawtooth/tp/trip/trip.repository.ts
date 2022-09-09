@@ -1,10 +1,15 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { Repository, DataSource } from 'typeorm';
 import { TripEntity } from '../../../../../entity/trip.entity';
 
-@EntityRepository(TripEntity)
+@Injectable()
 export class TripRepository extends Repository<TripEntity> {
+    constructor(private dataSource: DataSource) {
+        super(TripEntity, dataSource.createEntityManager());
+    }
+
     async getAll(): Promise<TripEntity[]> {
-        const result = await this.getAll();
+        const result = await this.find();
         return result;
     }
 }
