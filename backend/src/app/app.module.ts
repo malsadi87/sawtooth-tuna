@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 // import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule, } from '@nestjs/typeorm';
-import { TripEntity } from '../entity/trip.entity';
 import { SawtoothModule } from './core/sawtooth/sawtooth.module';
 import { typeOrmConfig } from '../environments/db/typeorm.config';
 // import { AuthModule } from './core/auth/auth.module';
-// import { SawtoothModule } from './core/sawtooth/sawtooth.module';
 import { TripModule } from './core/sawtooth/tp/trip/trip.module';
 import { TestModule } from './core/test/test.module';
 // import { UsersModule } from './feature/users/users.module';
-// import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 // import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
 // import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 // import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
@@ -19,7 +17,8 @@ import { TestModule } from './core/test/test.module';
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     SawtoothModule,
-    TestModule
+    TestModule,
+    SharedModule
   ],
   providers: [
     // {

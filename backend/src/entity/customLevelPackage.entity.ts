@@ -3,13 +3,13 @@ import { CompanyEntity } from "./company.entity";
 
 @Entity('CustomLevelPackage')
 export class CustomLevelPackageEntity extends BaseEntity {
-    @PrimaryColumn({ type: 'nvarchar', width: 255, name: 'ConsumerPackageId', nullable: false })
+    @PrimaryColumn({ type: 'varchar', width: 255, name: 'ConsumerPackageId', nullable: false })
     consumerPackageId: string;
 
-    @Column({ type: 'nvarchar', width: 255, name: 'CatchPackageId', nullable: false })
+    @Column({ type: 'varchar', width: 255, name: 'CatchPackageId', nullable: false })
     catchPackageId: string;
 
-    @Column({ type: 'datetime', name: 'PackingDate', nullable: false })
+    @Column({ type: 'timestamp', name: 'PackingDate', nullable: false })
     packingDate: Date;
 
     @Column({ type: 'int', name: 'Agent', nullable: false })

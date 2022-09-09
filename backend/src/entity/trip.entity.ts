@@ -25,11 +25,11 @@ export class TripEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'LandingPort', nullable: false })
     landingPort: string;
 
-    // @OneToMany((type) => HaulEntity, (x) => x.tripNo)
-    // @JoinColumn({ referencedColumnName: 'TripNo' })
-    // hauls: HaulEntity[];
+    @OneToMany((type) => HaulEntity, (x) => x.tripNo)
+    @JoinColumn({ referencedColumnName: 'TripNo' })
+    hauls: HaulEntity[];
 
-    // @OneToMany((entity) => PalletEntity, (x) => x.tripNo)
-    // @JoinColumn({ referencedColumnName: 'TripNo' })
-    // pallets: PalletEntity[];
+    @OneToMany((entity) => PalletEntity, (x) => x.tripNo)
+    @JoinColumn({ referencedColumnName: 'TripNo' })
+    pallets: PalletEntity[];
 }

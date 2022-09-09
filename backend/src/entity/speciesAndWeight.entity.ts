@@ -11,9 +11,9 @@ export class SpeciesAndWeightEntity extends BaseEntity {
     @Column({ type:'int', name: 'Species', nullable: false })
     species: number;
 
-    @Column({ type:'nvarchar', width: 255, name: 'CatchPackageId', nullable: false })
+    @Column({ type:'varchar', width: 255, name: 'CatchPackageId', nullable: false })
     catchPackageId: string;
 
-    @Column({ type:'datetime', name: 'LaunchDateTime', nullable: true })
+    @Column({ type:'timestamp', name: 'LaunchDateTime', nullable: true })
     launchDateTime: Date;
 }

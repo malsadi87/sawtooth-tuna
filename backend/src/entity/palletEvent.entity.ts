@@ -3,10 +3,10 @@ import { PalletEntity } from "./pallet.entity";
 
 @Entity('PalletEvent')
 export class PalletEventEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, type:'datetime', name: 'EventTime', nullable: false })
+    @PrimaryColumn({ generated: false, type:'timestamp', name: 'EventTime', nullable: false })
     eventTime: Date;
 
-    @PrimaryColumn({ generated: false, type:'nvarchar', width: 255, name: 'PalletNum', nullable: false })
+    @PrimaryColumn({ generated: false, type:'varchar', width: 255, name: 'PalletNum', nullable: false })
     palletNum: string;
 
     @Column({ type:'json', name: 'Temperature', nullable: false })

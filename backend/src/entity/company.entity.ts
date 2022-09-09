@@ -6,13 +6,13 @@ export class CompanyEntity extends BaseEntity {
     @PrimaryColumn({ type: 'int', name: 'CompanyId', nullable: false })
     companyId: number;
 
-    @Column({ type:'nvarchar', width: 255, name: 'CompanyName', nullable: false })
+    @Column({ type:'varchar', width: 255, name: 'CompanyName', nullable: false })
     companyName: string;
 
-    @Column({ type:'nvarchar', width: 255, name: 'CompanyAddress', nullable: false })
+    @Column({ type:'varchar', width: 255, name: 'CompanyAddress', nullable: false })
     companyAddress: string;
 
-    @Column({ type:'nvarchar', width: 255, name: 'ContactInfo', nullable: false })
+    @Column({ type:'varchar', width: 255, name: 'ContactInfo', nullable: false })
     contactInfo: string;
 
     @OneToMany((type) => CustomLevelPackageEntity, (x) => x.agent)

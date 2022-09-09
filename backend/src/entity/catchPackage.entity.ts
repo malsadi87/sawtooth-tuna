@@ -4,13 +4,13 @@ import { PalletEntity } from "./pallet.entity";
 
 @Entity('CatchPackage')
 export class CatchPackageEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, type: 'nvarchar', width: 255, name:'CatchPackageId', nullable: false })
+    @PrimaryColumn({ generated: false, type: 'varchar', width: 255, name:'CatchPackageId', nullable: false })
     catchPackageId: string;
     
-    @Column({ type: 'datetime', name:'PackingDate', nullable: false })
+    @Column({ type: 'timestamp', name:'PackingDate', nullable: false })
     packingDate: Date;
 
-    @Column({ type: 'nvarchar', width: 255, name:'PalletNum', nullable: false })
+    @Column({ type: 'varchar', width: 255, name:'PalletNum', nullable: false })
     palletNum: string;
 
     @ManyToOne((type) => PalletEntity, x => x.catchPackages)
