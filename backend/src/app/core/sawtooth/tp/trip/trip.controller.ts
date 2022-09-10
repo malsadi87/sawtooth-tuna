@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { TripEntity } from '../../../../../entity/trip.entity';
 import { TripService } from './trip.service';
 
@@ -6,13 +6,19 @@ import { TripService } from './trip.service';
 export class TripController {
     constructor(private tripService: TripService){}
 
-    @Get('/get')
-    async CreateKeyPair(): Promise<TripEntity[]> {
-        return await this.tripService.getAllTrip();
+    @Get('/:id')
+    async getById(): Promise<TripEntity> {
+        return null;
     }
 
-    @Get('/hallo')
-    Get(): string {
-        return "Hallo world!";
+    @Post()
+    @HttpCode(204)
+    async create(): Promise<Boolean> {
+        return null;
+    }
+
+    @Get('/')
+    async hallo(): Promise<String> {
+        return "Hallo boss!";
     }
 }
