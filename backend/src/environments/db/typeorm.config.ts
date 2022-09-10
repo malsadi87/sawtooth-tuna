@@ -20,7 +20,7 @@ import { ExternalAPIDetailsEntity } from '../../entity/externalAPIDetails.entity
 import { ExternalAPISettingsEntity } from '../../entity/externalAPISettings.entity';
 import * as config from 'config';
 
-const dbConfig = config.get('database');
+const dbConfig = config.get<any>('database');
 const { type, name, synchronizeFlag, isLogEnable, encrypt } = dbConfig;
 const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PW } = process.env;
 

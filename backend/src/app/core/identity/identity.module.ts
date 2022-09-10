@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AuthService } from './auth.service';
-import { JwtStrategy } from '../../utility/strategy/jwt.strategy';
 import { UsersModule } from '../../feature/users/users.module';
+import { JwtStrategy } from '../../utility/strategy/jwt.strategy';
+import { IdentityService } from './identity.service';
+import { IdentityController } from './identity.controller';
 import * as config from 'config';
 
-const jwtConfig = config.get('jwt-config');
+const jwtConfig = config.get<any>('jwt-config');
 const { JWT_SECRET } = process.env;
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
@@ -22,8 +22,8 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
     UsersModule,
     passportModule
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  controllers: [IdentityController],
+  providers: [IdentityService, JwtStrategy],
   exports: [passportModule]
 })
-export class AuthModule {}
+export class IdentityModule {}

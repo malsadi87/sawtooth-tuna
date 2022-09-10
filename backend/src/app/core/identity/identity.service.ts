@@ -5,7 +5,7 @@ import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { JwtPayload } from '../../utility/vm/jwtPayload.vm';
 
 @Injectable()
-export class AuthService {
+export class IdentityService {
     constructor(
         private usersService: UsersService,
         private jwtService: JwtService
