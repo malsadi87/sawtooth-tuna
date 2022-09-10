@@ -1,10 +1,10 @@
-import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { RoleClaimsEntity } from "./roleClaims.entity";
 import { UserRolesEntity } from "./userRoles.entity";
 
 @Entity('Roles')
 export class RolesEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, type: 'varchar', width: 450, name: 'Id', nullable: false })
+    @PrimaryGeneratedColumn('uuid', { name: 'Id' })
     id: string;
 
     @Column({ type:'varchar', width: 256, name: 'Name', nullable: true })

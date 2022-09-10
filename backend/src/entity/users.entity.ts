@@ -1,5 +1,5 @@
 import { Expose } from "class-transformer";
-import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn, Unique } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserClaimsEntity } from "./userClaims.entity";
 import { UserLoginsEntity } from "./userLogins.entity";
 import { UserRolesEntity } from "./userRoles.entity";
@@ -7,7 +7,7 @@ import { UserTokensEntity } from "./userTokens.entity";
 
 @Entity('Users')
 export class UsersEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, type: 'varchar', width: 450, name: 'Id', nullable: false })
+    @PrimaryGeneratedColumn('uuid', { name: 'Id' })
     id: string;
 
     @Column({ type:'varchar', width: 2000, name: 'FullName', nullable: true })
@@ -31,7 +31,7 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'varchar', width: 256, name: 'UserName', nullable: true })
     userName: string;
 
-    @Column({ type:'varchar', width: 256, name: 'NormalizedName', nullable: true })
+    @Column({ type:'varchar', width: 256, name: 'NormalizedUserName', nullable: true })
     @Index({ unique: true })
     normalizedUserName: string;
 

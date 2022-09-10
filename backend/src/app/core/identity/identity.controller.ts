@@ -19,6 +19,7 @@ export class IdentityController {
         return res;
     }
 
+    @AllowAnonymous()
     @Post('/signup')
 	async signUp(@Body() userAndPermissionDto: UserCreationDto): Promise<any> {
 		const res = await this.usersService.addUser(userAndPermissionDto);

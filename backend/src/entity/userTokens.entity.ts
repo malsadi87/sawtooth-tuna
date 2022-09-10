@@ -3,7 +3,7 @@ import { UsersEntity } from "./users.entity";
 
 @Entity('UserTokens')
 export class UserTokensEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, width: 450, type: 'varchar', name: 'UserId', nullable: false })
+    @PrimaryColumn({ generated: false, type: 'uuid', name: 'UserId', nullable: false })
     userId: string;
 
     @PrimaryColumn({ generated: false, width: 128, type: 'varchar', name: 'LoginProvider', nullable: false })

@@ -53,7 +53,7 @@ services:
     volumes:
       - ./backend:/project/sawtooth-tuna/backend
       - /project/sawtooth-tuna/backend/node_modules
-    command: npm run start:dev
+    command: npm run start:debug
     ports:
       - 3001:3001
       - 9229:9229

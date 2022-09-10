@@ -12,7 +12,7 @@ export class UserLoginsEntity extends BaseEntity {
     @Column({ type:'varchar', width: 512, name: 'ProviderDisplayName', nullable: true })
     providerDisplayName: string;
 
-    @Column({ type:'varchar', width: 450, name: 'UserId', nullable: true })
+    @Column({ type:'uuid', name: 'UserId', nullable: true })
     @Index("IX_AspNetUserLogins_UserId")
     userId: string;
 

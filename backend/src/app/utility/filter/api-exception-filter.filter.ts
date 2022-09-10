@@ -6,6 +6,7 @@ const { NODE_ENV } = process.env;
 @Catch(HttpException)
 export class ApiExceptionFilter extends BaseExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
+    console.log(NODE_ENV);
     if (NODE_ENV && NODE_ENV == 'dev') {
       return super.catch(exception, host);
     }

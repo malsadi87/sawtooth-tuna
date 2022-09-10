@@ -4,10 +4,10 @@ import { UsersEntity } from "./users.entity";
 
 @Entity('UserRoles')
 export class UserRolesEntity extends BaseEntity {
-    @PrimaryColumn({ generated: false, width: 450, type: 'varchar', name: 'UserId', nullable: false })
+    @PrimaryColumn({ generated: false, type: 'uuid', name: 'UserId', nullable: false })
     userId: string;
 
-    @PrimaryColumn({ generated: false, width: 450, type: 'varchar', name: 'RoleId', nullable: false })
+    @PrimaryColumn({ generated: false, type: 'uuid', name: 'RoleId', nullable: false })
     @Index("IX_AspNetUserRoles_RoleId")
     roleId: string;
 

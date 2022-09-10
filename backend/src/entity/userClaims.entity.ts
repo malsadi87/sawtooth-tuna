@@ -6,7 +6,7 @@ export class UserClaimsEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type: 'int', name: 'Id', nullable: false })
     id: number;
 
-    @Column({ type:'varchar', width: 450, name: 'UserId', nullable: true })
+    @Column({ type:'uuid', name: 'UserId', nullable: true })
     @Index("IX_AspNetUserClaims_UserId")
     userId: string;
 
