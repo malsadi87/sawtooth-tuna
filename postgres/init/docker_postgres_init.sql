@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS "Users" (
   "UpdatedDate" TIMESTAMP NOT NULL,
   "UpdatedBy" VARCHAR(2000) NULL,
   "UserName" VARCHAR(256) NULL,
-  "NormalizedUserName" VARCHAR(256) NULL,
+  "NormalizedUserName" VARCHAR(256) NULL UNIQUE,
   "Email" VARCHAR(256) NULL,
   "NormalizedEmail" VARCHAR(256) NULL,
   "EmailConfirmed" BOOLEAN NOT NULL,
@@ -95,9 +95,24 @@ CREATE TABLE IF NOT EXISTS "Users" (
   "LockoutEnd" TIMESTAMP NULL,
   "LockoutEnabled" BOOLEAN NOT NULL,
   "AccessFailedCount" INT NOT NULL,
-  UNIQUE ("NormalizedUserName")
+  "BlockchainInfoId" UUID NULL UNIQUE
 );
 CREATE INDEX "EmailIndex" ON "Users"("NormalizedEmail");
+
+CREATE TABLE IF NOT EXISTS "UsersBlockchainInfo" (
+  "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "UserId" UUID NOT NULL UNIQUE,
+  "PublicKey" VARCHAR(1000) NOT NULL,
+  "PrivateKey" VARCHAR(1000) NOT NULL,
+  "CreatedDate" TIMESTAMP NOT NULL,
+  "CreatedBy" UUID NOT NULL,
+  "UpdatedDate" TIMESTAMP NOT NULL,
+  "UpdatedBy" UUID NULL,
+  "IsActive" BOOLEAN NOT NULL
+);
+
+ALTER TABLE "Users" ADD FOREIGN KEY ("BlockchainInfoId") REFERENCES "UsersBlockchainInfo"("Id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "UsersBlockchainInfo" ADD FOREIGN KEY ("UserId") REFERENCES "Users"("Id") DEFERRABLE INITIALLY DEFERRED;
 
 CREATE TABLE IF NOT EXISTS "Roles" (
   "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

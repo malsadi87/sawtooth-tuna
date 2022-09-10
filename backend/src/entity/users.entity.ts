@@ -1,8 +1,9 @@
 import { Expose } from "class-transformer";
-import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserClaimsEntity } from "./userClaims.entity";
 import { UserLoginsEntity } from "./userLogins.entity";
 import { UserRolesEntity } from "./userRoles.entity";
+import { UsersBlockchainInfoEntity } from "./usersBlockchainInfo.entity";
 import { UserTokensEntity } from "./userTokens.entity";
 
 @Entity('Users')
@@ -73,6 +74,9 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'int', name: 'AccessFailedCount', nullable: false })
     accessFailedCount: number;
 
+    @Column({ type:'uuid', name: 'BlockchainInfoId', nullable: true })
+    blockchainInfoId: string;
+
     @OneToMany((entity) => UserClaimsEntity, (x) => x.userId, {
         onDelete: "CASCADE",
         onUpdate: "NO ACTION"
@@ -94,4 +98,8 @@ export class UsersEntity extends BaseEntity {
     @OneToMany(() => UserRolesEntity, userRole => userRole.user)
     @JoinColumn({ referencedColumnName: 'UserId' })
     userRoles!: UserRolesEntity[];
+
+    @OneToOne((type) => UsersBlockchainInfoEntity, (x) => x.user)
+    @JoinColumn({ name: 'BlockchainInfoId',  referencedColumnName: 'UserId' })
+    userBlockChainInfo: UsersBlockchainInfoEntity;
 }

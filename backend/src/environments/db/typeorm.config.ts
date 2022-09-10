@@ -19,6 +19,7 @@ import { UserTokensEntity } from '../../entity/userTokens.entity';
 import { ExternalAPIDetailsEntity } from '../../entity/externalAPIDetails.entity';
 import { ExternalAPISettingsEntity } from '../../entity/externalAPISettings.entity';
 import * as config from 'config';
+import { UsersBlockchainInfoEntity } from '../../entity/usersBlockchainInfo.entity';
 
 const dbConfig = config.get<any>('database');
 const { type, name, synchronizeFlag, isLogEnable, encrypt } = dbConfig;
@@ -50,6 +51,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         UserLoginsEntity,
         UserRolesEntity,
         UserTokensEntity,
+
+        UsersBlockchainInfoEntity,
 
         ExternalAPIDetailsEntity,
         ExternalAPISettingsEntity

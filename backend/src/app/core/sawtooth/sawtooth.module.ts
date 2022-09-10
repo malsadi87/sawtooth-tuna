@@ -20,6 +20,7 @@ import { UtilityService } from './utility/utility.service';
         KeyService, 
         MetaDataService, 
         UtilityService
-    ]
+    ],
+    exports: [KeyService]
 })
 export class SawtoothModule {}
