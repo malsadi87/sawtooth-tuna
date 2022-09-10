@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { SpeciesAndWeightEntity } from '../../../../../entity/speciesAndWeight.entity';
 
-@Controller('sawtooth/species')
+@Controller('sawtooth/tp/species')
 export class SpeciesAndWeightController {
 
     @Get(':id')

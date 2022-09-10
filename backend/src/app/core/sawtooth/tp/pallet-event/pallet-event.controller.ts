@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
 
-@Controller('sawtooth/pallet-event')
+@Controller('sawtooth/tp/pallet-event')
 export class PalletEventController {
     
     @Get(':id')

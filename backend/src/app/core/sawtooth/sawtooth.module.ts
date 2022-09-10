@@ -8,8 +8,18 @@ import { HttpModule } from '@nestjs/axios';
 import { UtilityService } from './utility/utility.service';
 
 @Module({
-    imports: [TpModule, HttpModule],
-    controllers: [KeyController, MetaDataController],
-    providers: [KeyService, MetaDataService, UtilityService]
+    imports: [
+        TpModule,
+        HttpModule
+    ],
+    controllers: [
+        KeyController, 
+        MetaDataController
+    ],
+    providers: [
+        KeyService, 
+        MetaDataService, 
+        UtilityService
+    ]
 })
 export class SawtoothModule {}

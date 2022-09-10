@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
 
-@Controller('sawtooth/custom-package')
+@Controller('sawtooth/tp/custom-package')
 export class CustomLevelPackageController {
 
     @Get(':id')

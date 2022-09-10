@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CatchPackageEntity } from '../../../../../entity/catchPackage.entity';
 
-@Controller('sawtooth/catch-package')
+@Controller('sawtooth/tp/catch-package')
 export class CatchPackageController {
 
     @Get(':id')

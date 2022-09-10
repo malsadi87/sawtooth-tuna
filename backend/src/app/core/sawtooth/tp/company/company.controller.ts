@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CompanyEntity } from '../../../../../entity/company.entity';
 
-@Controller('sawtooth/company')
+@Controller('sawtooth/tp/company')
 export class CompanyController {
 
     @Get(':id')

@@ -20,18 +20,18 @@ import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pip
     UtilityModule
   ],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: ApiExceptionFilter
-    },
-    {
-      provide: APP_PIPE,
-      useClass: RequestPayloadValidationPipe
-    },
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard
-    }
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: ApiExceptionFilter
+    // },
+    // {
+    //   provide: APP_PIPE,
+    //   useClass: RequestPayloadValidationPipe
+    // },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: JwtAuthGuard
+    // }
   ]
 })
 export class AppModule {}

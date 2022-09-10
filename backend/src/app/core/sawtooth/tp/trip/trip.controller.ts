@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { TripEntity } from '../../../../../entity/trip.entity';
 import { TripService } from './trip.service';
 
-@Controller('sawtooth/trip')
+@Controller('sawtooth/tp/trip')
 export class TripController {
     constructor(private tripService: TripService){}
 
