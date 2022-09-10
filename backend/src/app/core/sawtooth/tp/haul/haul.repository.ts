@@ -8,5 +8,17 @@ export class HaulRepository extends Repository<HaulEntity> {
         super(HaulEntity, dataSource.createEntityManager());
     }
 
-    
+    async getAll(): Promise<HaulEntity[]> {
+        const result = await this.find();
+        return result;
+    }
+
+    async getByLaunchDate(launchDateTime: Date): Promise<HaulEntity> {
+        return await this.findOneBy({ launchDateTime: launchDateTime });
+    }
+
+    async addNewHaul(newHaul: HaulEntity): Promise<Boolean> {
+        const result = await newHaul.save();
+        return result != null;
+    }
 }

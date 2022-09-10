@@ -1,17 +1,20 @@
-import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CompanyEntity } from '../../../../../entity/company.entity';
+import { CompanyCreationDto } from '../../../../utility/dto/tp/company-creation.dto';
+import { CompanyService } from './company.service';
 
 @Controller('sawtooth/tp/company')
 export class CompanyController {
+    constructor(private readonly companyService: CompanyService) {}
 
     @Get(':id')
     async getById(@Param('id') id: number): Promise<CompanyEntity> {
-        return null;
+        return await this.companyService.getById(id);
     }
 
-    @Post()
+    @Post('addNew')
     @HttpCode(204)
-    async create(): Promise<Boolean> {
-        return null;
+    async create(@Body() companyPayload: CompanyCreationDto): Promise<number> {
+        return await this.companyService.addNewCompany(companyPayload);
     }
 }

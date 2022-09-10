@@ -1,17 +1,20 @@
-import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { HaulEntity } from '../../../../../entity/haul.entity';
+import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
+import { HaulService } from './haul.service';
 
 @Controller('sawtooth/tp/haul')
 export class HaulController {
+    constructor(private readonly haulService: HaulService) {}
 
-    @Get(':id')
-    async getById(@Param('id') id: number): Promise<HaulEntity> {
-        return null;
+    @Get(':launchDateTime')
+    async getByLaunchDateTime(@Param('launchDateTime') launchDateTime: Date): Promise<HaulEntity> {
+        return await this.haulService.getByLaunchDate(launchDateTime);
     }
 
-    @Post()
+    @Post('addNew')
     @HttpCode(204)
-    async create(): Promise<Boolean> {
-        return null;
+    async create(@Body() haulPayload: HaulCreationDto): Promise<Boolean> {
+        return await this.haulService.addNewHaul(haulPayload);
     }
 }

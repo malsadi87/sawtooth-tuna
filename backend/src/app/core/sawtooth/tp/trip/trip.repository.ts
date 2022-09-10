@@ -12,4 +12,13 @@ export class TripRepository extends Repository<TripEntity> {
         const result = await this.find();
         return result;
     }
+
+    async getByTripNo(tripNo: number): Promise<TripEntity> {
+        return await this.findOneBy({ tripNo: tripNo });
+    }
+
+    async addNewTrip(newTrip: TripEntity): Promise<number> {
+        await newTrip.save();
+        return newTrip.tripNo;
+    }
 }

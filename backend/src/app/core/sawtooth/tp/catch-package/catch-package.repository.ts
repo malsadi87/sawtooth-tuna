@@ -8,5 +8,17 @@ export class CatchPackageRepository extends Repository<CatchPackageEntity> {
         super(CatchPackageEntity, dataSource.createEntityManager());
     }
 
-    
+    async getAll(): Promise<CatchPackageEntity[]> {
+        const result = await this.find();
+        return result;
+    }
+
+    async getById(id: string): Promise<CatchPackageEntity> {
+        return await this.findOneBy({ catchPackageId: id });
+    }
+
+    async addNewCatchPackage(catchPackage: CatchPackageEntity): Promise<string> {
+        await catchPackage.save();
+        return catchPackage.catchPackageId;
+    }
 }

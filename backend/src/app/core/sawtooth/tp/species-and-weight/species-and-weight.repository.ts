@@ -8,5 +8,17 @@ export class SpeciesAndWeightRepository extends Repository<SpeciesAndWeightEntit
         super(SpeciesAndWeightEntity, dataSource.createEntityManager());
     }
 
-    
+    async getAll(): Promise<SpeciesAndWeightEntity[]> {
+        const result = await this.find();
+        return result;
+    }
+
+    async getById(id: number): Promise<SpeciesAndWeightEntity> {
+        return await this.findOneBy({ speciesId: id });
+    }
+
+    async addNew(newSpecies: SpeciesAndWeightEntity): Promise<number> {
+        await newSpecies.save();
+        return newSpecies.speciesId;
+    }
 }

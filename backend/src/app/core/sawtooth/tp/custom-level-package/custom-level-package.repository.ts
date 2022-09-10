@@ -8,5 +8,17 @@ export class CustomLevelPackageRepository extends Repository<CustomLevelPackageE
         super(CustomLevelPackageEntity, dataSource.createEntityManager());
     }
 
-    
+    async getAll(): Promise<CustomLevelPackageEntity[]> {
+        const result = await this.find();
+        return result;
+    }
+
+    async getByConsumerPackageId(consumerPackageId: string): Promise<CustomLevelPackageEntity> {
+        return await this.findOneBy({ consumerPackageId: consumerPackageId });
+    }
+
+    async addNewPackage(customPackage: CustomLevelPackageEntity): Promise<string> {
+        await customPackage.save();
+        return customPackage.consumerPackageId;
+    }
 }

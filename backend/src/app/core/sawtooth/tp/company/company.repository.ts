@@ -8,5 +8,17 @@ export class CompanyRepository extends Repository<CompanyEntity> {
         super(CompanyEntity, dataSource.createEntityManager());
     }
 
-    
+    async getAll(): Promise<CompanyEntity[]> {
+        const result = await this.find();
+        return result;
+    }
+
+    async getById(id: number): Promise<CompanyEntity> {
+        return await this.findOneBy({ companyId: id});
+    }
+
+    async addNewCompany(newCompany: CompanyEntity): Promise<number> {
+        await newCompany.save();
+        return newCompany.companyId;
+    }
 }

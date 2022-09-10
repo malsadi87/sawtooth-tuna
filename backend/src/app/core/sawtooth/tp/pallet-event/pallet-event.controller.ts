@@ -1,17 +1,20 @@
-import { Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
+import { PalletEventCreationDto } from '../../../../utility/dto/tp/pallet-event-creation.dto';
+import { PalletEventService } from './pallet-event.service';
 
 @Controller('sawtooth/tp/pallet-event')
 export class PalletEventController {
+    constructor(private readonly palletEventService: PalletEventService) {}
     
-    @Get(':id')
-    async getById(@Param('id') id: number): Promise<PalletEventEntity> {
-        return null;
+    @Get(':palletNumber/:eventTime')
+    async getByPalletNumberAndEventTime(@Param('palletNumber') palletNumber: string, @Param('eventTime') eventTime: Date): Promise<PalletEventEntity> {
+        return await this.palletEventService.getByPalletNumberAndEventTime(palletNumber, eventTime);
     }
 
-    @Post()
+    @Post('addNew')
     @HttpCode(204)
-    async create(): Promise<Boolean> {
-        return null;
+    async create(@Body() palletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
+        return await this.palletEventService.addNew(palletEventPayload);
     }
 }

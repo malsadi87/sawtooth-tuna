@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { UserRolesEntity } from '../../../entity/userRoles.entity';
 import { UsersEntity } from '../../../entity/users.entity';
 import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { UserCreationDto } from '../../utility/dto/user-creation.dto';
@@ -26,11 +25,6 @@ export class UsersService {
     async addUser(userPayload: UserCreationDto): Promise<{ user: UsersEntity }> {
         try {
             let userObj: UsersEntity = plainToClass(UsersEntity, userPayload);
-            // const userPermissionObj: UserRolesEntity = plainToClass(UserRolesEntity, userPayload)
-    
-            // let user: UsersEntity = new UsersEntity();
-            // let resp2: UserRolesEntity = new UserRolesEntity();
-    
             userObj.isActive = true;
             userObj.emailConfirmed = false;
             userObj.createdDate = new Date();
@@ -42,18 +36,12 @@ export class UsersService {
     
             await this.dataScource.transaction(async manager => {
                 userObj = await manager.save(userObj);
-                // userPermissionObj.user_id = resp1.id;
-                // resp2 = await manager.save(userPermissionObj);
             });
     
-            const result = { user: userObj, /*permission: resp2*/ }
+            const result = { user: userObj }
             return result;
         } catch(e) {
             console.log(e);
         }
     }
-
-    // async updatePermission(userId: number, orgId: number, userPermission: any): Promise<any> {
-    //     return await this.userOrgPermissionRepository.updatePermission(userId, orgId, userPermission);
-    // }
 }
