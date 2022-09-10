@@ -1,10 +1,8 @@
-import { IsString, MinLength, MaxLength, IsOptional } from "class-validator";
+import { IsString, MinLength, MaxLength, IsEmail } from "class-validator";
 
 export class AuthCredential {
     
-    @IsString()
-    @MinLength(4)
-    @MaxLength(25)
+    @IsEmail()
     email: string;
 
     @MinLength(4)
