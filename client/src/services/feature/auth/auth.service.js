@@ -26,7 +26,7 @@ const isTokenExpire = () => {
 
 const signIn = async (email, password) => {
     try {
-        const { data: { token } } = await axios.post(APIBasePath.Identity.token, { email, password });
+        const { token } = await axios.post(APIBasePath.Identity.token, { email, password });
         Object.entries(parseJWT(token)).map(([key, value]) => ({key, value})).forEach(x => {
             storageService.setItem(x.key, x.value);
         });

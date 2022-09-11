@@ -3,8 +3,6 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const ACCESS_TOKEN_TYPE = 'token_type';
 const LOGGED_IN_USER_FULL_NAME_KEY = 'fullName';
 const LOGGED_IN_USER_EMAIL = 'email';
-const LOGGED_IN_USER_SAWTOOTH_PUBLIC_KEY = "publicKey";
-const LOGGED_IN_USER_SAWTOOTH_PRIVATE_KEY = "privateKey";
 
 const getByRoot = () =>  {
     const data = localStorage.getItem(ROOT_KEY);
@@ -27,21 +25,6 @@ const getLoggedInUserFullName = () => {
 
 const getLoggedInUserEmail = () => {
     return getItem(LOGGED_IN_USER_EMAIL);
-}
-
-const getLoggedInUserSawtoothPublicKey = () => {
-    return getItem(LOGGED_IN_USER_SAWTOOTH_PUBLIC_KEY);
-}
-
-const getLoggedInUserSawtoothPrivateKey = () => {
-    return getItem(LOGGED_IN_USER_SAWTOOTH_PRIVATE_KEY);
-}
-
-const getLoggedInUserSawtoothKeyPairs = () => {
-    return { 
-        publicKey: getLoggedInUserSawtoothPublicKey(), 
-        privateKey: getLoggedInUserSawtoothPrivateKey()
-    };
 }
 
 const getItem =  (key) => {
@@ -76,9 +59,6 @@ const storageService = {
     getAccessTokenType,
     getLoggedInUserFullName,
     getLoggedInUserEmail,
-    getLoggedInUserSawtoothPublicKey,
-    getLoggedInUserSawtoothPrivateKey,
-    getLoggedInUserSawtoothKeyPairs,
     isKeyAvailable,
     removeItem,
     reset,

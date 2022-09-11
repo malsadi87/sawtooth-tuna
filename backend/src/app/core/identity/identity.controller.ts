@@ -16,14 +16,14 @@ export class IdentityController {
 
     @AllowAnonymous()
     @Post('/token')
-    SignIn(@Body(ValidationPipe) authCredential: AuthCredential): Promise<{ accessToken: string }> {
-        const res = this.identityService.validateCredential(authCredential);
-        return res;
+    public async signIn(@Body(ValidationPipe) authCredential: AuthCredential): Promise<{ token: string }> {
+        const token = await this.identityService.validateCredential(authCredential);
+        return { token: token };
     }
 
     @AllowAnonymous()
     @Post('/signup')
-	async signUp(@Body() userAndPermissionDto: UserCreationDto): Promise<any> {
+	public async signUp(@Body() userAndPermissionDto: UserCreationDto): Promise<any> {
         // Create the user
 		const res = await this.usersService.addUser(userAndPermissionDto);
 
@@ -36,22 +36,22 @@ export class IdentityController {
 	}
 
     @Get('/signOut')
-    async signOut(): Promise<Boolean> {
+    public async signOut(): Promise<Boolean> {
         return null;
     }
 
     @Post('/addClaimsAndRoles')
-    async addClaimsAndRoles(): Promise<any> {
+    public async addClaimsAndRoles(): Promise<any> {
         return null;
     }
 
     @Delete('/deleteClaimsAndRoles')
-    async deleteClaimsAndRoles(): Promise<any> {
+    public async deleteClaimsAndRoles(): Promise<any> {
         return null;
     }
 
     @Delete('/delete')
-    async deleteUser(): Promise<any> {
+    public async deleteUser(): Promise<any> {
         return null;
     }
 }

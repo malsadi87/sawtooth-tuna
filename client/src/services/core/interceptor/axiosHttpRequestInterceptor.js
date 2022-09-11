@@ -6,7 +6,8 @@ import fakeAuthService from '../../feature/auth/fake-auth.service';
 import authService from '../../feature/auth/auth.service';
 
 const anonymousUrls = [
-    APIBasePath.Identity.token
+    APIBasePath.Identity.token,
+    APIBasePath.Identity.signUp
 ];
 
 const fakeBackEndUrls = [ 
@@ -50,13 +51,14 @@ const RequestInterceptor = {
                 // If sawtooth url && public and private key available then Add Public and private key with request data
                 // For testing only
                 // In future we could use only public key
-                if (config.url.indexOf(APIBasePath.Sawtooth.base) > -1 && storageService.getLoggedInUserSawtoothPublicKey()) {
-                    config.data = {
-                        ...config.data,
-                        keyPair: storageService.getLoggedInUserSawtoothKeyPairs()
-                    }
-                    console.info('Sawtooth Request found -', config.data);
-                }
+                
+                // if (config.url.indexOf(APIBasePath.Sawtooth.base) > -1 && storageService.getLoggedInUserSawtoothPublicKey()) {
+                //     config.data = {
+                //         ...config.data,
+                //         keyPair: storageService.getLoggedInUserSawtoothKeyPairs()
+                //     }
+                //     console.info('Sawtooth Request found -', config.data);
+                // }
 
                 if (accessToken && !isAnAnonymousURL) {
                     const typeToken = `${storageService.getAccessTokenType()} ${accessToken}`;

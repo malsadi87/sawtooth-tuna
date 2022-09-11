@@ -11,14 +11,13 @@ export class IdentityService {
         private jwtService: JwtService
     ) { }
 
-    async validateCredential(authCredential: AuthCredential): Promise<{ accessToken: string }> {
+    async validateCredential(authCredential: AuthCredential): Promise<string> {
         const isValidate = await this.usersService.validateCredential(authCredential);
         if (!isValidate) {
             throw new UnauthorizedException('Invalid Credential');
         }
         
         const payload: JwtPayload = JSON.parse(JSON.stringify({ email: authCredential.email }));
-        const accessToken = this.jwtService.sign(payload);
-        return { accessToken };
+        return this.jwtService.sign(payload);
     }
 }
