@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { wait } from '../../../utility/methods/helper.methods';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
 

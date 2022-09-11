@@ -17,8 +17,7 @@ export class TripRepository extends Repository<TripEntity> {
         return await this.findOneBy({ tripNo: tripNo });
     }
 
-    async addNewTrip(newTrip: TripEntity): Promise<number> {
-        await newTrip.save();
-        return newTrip.tripNo;
+    async addNewTrip(newTrip: TripEntity): Promise<TripEntity> {
+        return await newTrip.save();
     }
 }

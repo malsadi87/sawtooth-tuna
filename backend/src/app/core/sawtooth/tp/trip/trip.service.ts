@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { TripEntity } from '../../../../../entity/trip.entity';
 import { TripCreationDto } from '../../../../utility/dto/tp/trip-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { TripRepository } from './trip.repository';
 
 @Injectable()
 export class TripService {
-    constructor(private tripRepository: TripRepository) 
-    { }
+    constructor(
+        private tripRepository: TripRepository,
+        private sawtoothUtilityService: SawtoothUtilityService
+    ) { }
 
     async getAllTrip(): Promise<TripEntity[]> {
         return await this.tripRepository.getAll();
@@ -19,6 +22,11 @@ export class TripService {
 
     async addNewTrip(tripPayload: TripCreationDto): Promise<number> {
         let trip: TripEntity = plainToClass(TripEntity, tripPayload);
-        return await this.tripRepository.addNewTrip(trip);
+        const newTrip = await this.tripRepository.addNewTrip(trip);
+        
+        // Save in Sawtooth
+        // await this.sawtoothUtilityService.createAsset(newTrip, )
+
+        return newTrip.tripNo;
     }
 }

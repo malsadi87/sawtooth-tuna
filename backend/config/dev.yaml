@@ -20,9 +20,40 @@ sawtooth:
     TRANSFER-CHAIN:
       FAMILY: "transfer-chain"
       VERSION: "0.0"
+      PREFIX: ''
     CROSS-CHAIN:
       FAMILY2: "cross-chain"
       VERSION2: "0.1"
-    PRODUCT:
-      FAMILY: "product"
+      PREFIX2: ''
+    COMPANY:
+      FAMILY: "company"
       VERSION: "0.1"
+      PREFIX: '45235d'
+    HAUL:
+      FAMILY: "haul"
+      VERSION: "0.1"
+      PREFIX: '00a404'
+    PALLET: 
+      FAMILY: "pallet"
+      VERSION: "0.1"
+      PREFIX: '02cd1c'
+    PALLET-EVENT:
+      FAMILY: "pallet-event"
+      VERSION: "0.1"
+      PREFIX: '6b6112'
+    CUSTOM-PACKAGE:
+      FAMILY: "custom-package"
+      VERSION: "0.1"
+      PREFIX: '20e9e3'
+    SPECIES:
+      FAMILY: "species"
+      VERSION: "0.1"
+      PREFIX: '274c22'
+    TRIP:
+      FAMILY: "trip"
+      VERSION: "0.1"
+      PREFIX: 'db25c6'
+    CATCH-PACKAGE:
+      FAMILY: "catch-package"
+      VERSION: "0.1"
+      PREFIX: '7a21ab'

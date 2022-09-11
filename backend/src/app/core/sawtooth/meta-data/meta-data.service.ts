@@ -2,31 +2,31 @@ import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { UtilityService } from '../utility/utility.service';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
-import { AssetCreationOperation } from '../../../utility/enum/asset-creation.enum';
 import { MetaDataCreationDto } from '../../../utility/dto/metaData-creation.dto';
 import { KeyPairDto } from '../../../utility/dto/keyPair.dto';
+import { SawtoothUtilityService } from '../sawtooth-utility/sawtooth-utility.service';
 
 @Injectable()
 export class MetaDataService {
-    private sawtoothConfig: any;
-    private familyName: string;
+    private readonly sawtoothConfig: any;
+    private readonly familyName: string;
 
     constructor(
-        private utilityService: UtilityService,
-        private httpService: HttpService
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly httpService: HttpService
     ) {
         this.familyName = 'cross-chain';
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
     async getByKey(key: string): Promise<AxiosResponse<any>> {
-        const address = this.utilityService.getMetaKeyAddress(key, this.familyName);
+        const address = this.sawtoothUtilityService.getMetaKeyAddress(key, this.familyName);
         return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`));
     }
 
     async addNew(metaDataCreationDto: MetaDataCreationDto, keyPairDto: KeyPairDto): Promise<boolean> {
-        return await this.utilityService.createAsset(AssetCreationOperation.Create, metaDataCreationDto, keyPairDto.publicKey, this.sawtoothConfig.FAMILY2, this.sawtoothConfig.VERSION2, this.sawtoothConfig.PREFIX2);
+        var result =  await this.sawtoothUtilityService.createAsset(metaDataCreationDto, keyPairDto.privateKey, this.familyName);
+        return !!result;
     }
 }

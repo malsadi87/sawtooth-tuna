@@ -1,15 +1,16 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { KeyController } from './key/key.controller';
 import { KeyService } from './key/key.service';
 import { MetaDataController } from './meta-data/meta-data.controller';
 import { MetaDataService } from './meta-data/meta-data.service';
 import { TpModule } from './tp/tp.module';
-import { HttpModule } from '@nestjs/axios';
-import { UtilityService } from './utility/utility.service';
+import { UtilityModule } from './sawtooth-utility/sawtooth-utility.module';
 
 @Module({
     imports: [
         TpModule,
+        UtilityModule,
         HttpModule
     ],
     controllers: [
@@ -18,8 +19,7 @@ import { UtilityService } from './utility/utility.service';
     ],
     providers: [
         KeyService, 
-        MetaDataService, 
-        UtilityService
+        MetaDataService
     ],
     exports: [KeyService]
 })

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
-import { AssetCreationOperation } from '../../../utility/enum/asset-creation.enum';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
 import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
@@ -9,37 +8,42 @@ import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import * as crypto from 'crypto';
 
 @Injectable()
-export class UtilityService {
+export class SawtoothUtilityService {
     private sawtoothConfig: any;
 
     constructor(private httpService: HttpService) {
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
-    hash(data: any): string {
+    public hash(data: any): string {
         return crypto.createHash('sha512').update(data).digest('hex').toLowerCase();
     }
 
-    getNamespace(familyName: string): string {
+    public getNamespace(familyName: string): string {
         return this.hash(familyName).substring(0, 6);
     }
 
-    getAssetAddress(asset: any, familyName: string): string {
+    public getAssetAddress(asset: any, familyName: string): string {
         return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
     }
 
-    getMetaKeyAddress(key: string, familyName: string): string {
+    public getMetaKeyAddress(key: string, familyName: string): string {
         return `${this.hash(familyName).substring(0, 6)}00${this.hash(key).slice(0, 62)}`;
     }
 
-    async createAsset(operationType: AssetCreationOperation, payload: any, privateKeyHax: string, familyName: string, familyVersion: string, familyNamespace: string): Promise<boolean> {
+    private getTransactionFamilDetails(tpName: string): { family: string, version: string, prefix: string } {
+        const config = this.sawtoothConfig.TP[tpName.toUpperCase()];
+        return { family: config.FAMILY, version: config.VERSION, prefix: config.PREFIX };
+    }
+
+    public async createAsset(payload: any, userPrivateKey: string, tpName: string): Promise<string> {
         try {
-            // Add action type to payload
-            payload = { action: operationType, ...payload };
+            // Get Transaction Famil Details
+            const { family: familyName, version: familyVersion, prefix: familyNamespace } = this.getTransactionFamilDetails(tpName);
 
             // Create signer
             const context = createContext(this.sawtoothConfig.KEY_ALGORITHMN);
-            const privateKey = Secp256k1PrivateKey.fromHex(privateKeyHax);
+            const privateKey = Secp256k1PrivateKey.fromHex(userPrivateKey);
             const signer = new Signer(context, privateKey);
 
             // Create the TransactionHeader
@@ -87,14 +91,37 @@ export class UtilityService {
                 headers: { 'Content-Type': 'application/octet-stream' }
             }).pipe(map(x => x.data)));
 
-            const id = result.link.split('?')[1];
-            const response = await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/batch_statuses?${id}&wait`));
-            
-            if (response.status != 200)
-                throw "Batch append success status is taking too long time!";
-            return true;
+            // const id = result.link.split('?')[1];
+            // const response = await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/batch_statuses?${id}&wait`));
+
+            // if (response.status != 200)
+            //     throw "Batch append success status is taking too long time!";
+            return result.link.split('?')[1].split('=')[1];
         } catch (e) {
             throw e;
+        }
+    }
+
+    public getAsset(address: string): any {
+        try {
+            this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`)
+                .subscribe(res => {
+                    if (res.status == 200) {
+                        if (res.data.data.length == 0)
+                            throw new Error('No result found, try another ID');
+                        else {
+                            const response = res.data.data[0];
+                            if (response !== '')
+                                return JSON.parse(atob(response.data));
+                            else
+                                throw new Error('Empty Response!'); 
+                        }
+                    } else
+                        throw new Error('An error occured, Please try again later');
+                });
+        }
+        catch (err) {
+            console.error(err);
         }
     }
 }

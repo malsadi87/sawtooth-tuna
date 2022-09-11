@@ -4,9 +4,10 @@ import { HaulController } from './haul.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HaulRepository } from './haul.repository';
 import { HaulEntity } from '../../../../../entity/haul.entity';
+import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([HaulEntity])],
+  imports: [TypeOrmModule.forFeature([HaulEntity]), SawtoothUtilityModule],
   providers: [HaulService, HaulRepository],
   controllers: [HaulController]
 })
