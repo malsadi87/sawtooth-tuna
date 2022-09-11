@@ -28,7 +28,7 @@ export class UsersBlockchainInfoEntity extends BaseEntity {
     @Column({ type:'varchar', width: 2000, name: 'UpdatedBy', nullable: true })
     updatedBy: string;
 
-    @Column({ type:'boolean', name: 'IsActive' })
+    @Column({ type:'boolean', name: 'IsActive', nullable: false })
     isActive: boolean;
 
     @OneToOne((type) => UsersEntity, (x) => x.userBlockChainInfo)

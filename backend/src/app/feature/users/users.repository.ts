@@ -19,6 +19,12 @@ export class UsersRepository extends Repository<UsersEntity> {
         return false;
     }
 
+    public async updateUserBlockChainInfoId(user: UsersEntity, blockChainInfoId: string): Promise<Boolean> {
+        user.blockchainInfoId = blockChainInfoId;
+        const updateUser = await user.save();
+        return updateUser != null;
+    }
+
     public async getUserByEmail(email: string): Promise<UsersEntity> {
         const user = await this.findOneBy({ email: email });
         return user;

@@ -3,13 +3,15 @@ import { UsersService } from '../../feature/users/users.service';
 import { AllowAnonymous } from '../../utility/decorator/AllowAnonymous.decorator';
 import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { UserCreationDto } from '../../utility/dto/user-creation.dto';
+import { KeyService } from '../sawtooth/key/key.service';
 import { IdentityService } from './identity.service';
 
 @Controller('identity')
 export class IdentityController {
     constructor(
-        private identityService: IdentityService,
-        private usersService: UsersService
+        private readonly identityService: IdentityService,
+        private readonly usersService: UsersService,
+        private readonly blockChainKeyService: KeyService
     ) { }
 
     @AllowAnonymous()
@@ -22,17 +24,19 @@ export class IdentityController {
     @AllowAnonymous()
     @Post('/signup')
 	async signUp(@Body() userAndPermissionDto: UserCreationDto): Promise<any> {
+        // Create the user
 		const res = await this.usersService.addUser(userAndPermissionDto);
-		return { id: res.user.id };
+
+        // Generate a new Key pair
+        const { publicKey, privateKey } = this.blockChainKeyService.createKeyPair();
+
+        // Save the key pair to blockchaininfor table
+        const user = await this.usersService.updateUserBlockChainInfo(res.user, publicKey, privateKey);
+		return { id: user.id };
 	}
 
     @Get('/signOut')
     async signOut(): Promise<Boolean> {
-        return null;
-    }
-
-    @Post('/signup')
-    async changePassword(): Promise<any> {
         return null;
     }
 

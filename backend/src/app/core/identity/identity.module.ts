@@ -6,6 +6,7 @@ import { JwtStrategy } from '../../utility/strategy/jwt.strategy';
 import { IdentityService } from './identity.service';
 import { IdentityController } from './identity.controller';
 import * as config from 'config';
+import { SawtoothModule } from '../sawtooth/sawtooth.module';
 
 const jwtConfig = config.get<any>('jwt-config');
 const { JWT_SECRET } = process.env;
@@ -20,6 +21,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
       }
     }),
     UsersModule,
+    SawtoothModule,
     passportModule
   ],
   controllers: [IdentityController],

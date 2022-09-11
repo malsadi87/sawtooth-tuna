@@ -5,24 +5,38 @@ import { UserCreationDto } from '../../utility/dto/user-creation.dto';
 import { UsersRepository } from './users.repository';
 import { DataSource } from 'typeorm';
 import { plainToClass } from 'class-transformer';
+import { UsersBlockchainInfoService } from '../usersBlockchainInfo/users-blockchain-info.service';
 
 @Injectable()
 export class UsersService {
     constructor(
         private usersRepository: UsersRepository,
-        private readonly dataScource: DataSource
+        private readonly dataScource: DataSource,
+        private readonly usersBlockchainInfoService: UsersBlockchainInfoService
     ) { }
 
-    async validateCredential(authCredential: AuthCredential): Promise<boolean> {
+    public async validateCredential(authCredential: AuthCredential): Promise<boolean> {
         const isValidate = await this.usersRepository.validateCredential(authCredential);
         return isValidate;
     }
 
-    async getUserByEmail(email: string): Promise<UsersEntity> {
+    public async getUserByEmail(email: string): Promise<UsersEntity> {
         return await this.usersRepository.getUserByEmail(email);
     }
 
-    async addUser(userPayload: UserCreationDto): Promise<{ user: UsersEntity }> {
+    public async updateUserBlockChainInfo(user: UsersEntity, chainPublicKey: string = null, chainPrivateKey: string = null): Promise<UsersEntity> {
+        
+        await this.dataScource.transaction(async manager => {
+            if (chainPublicKey && chainPrivateKey) {
+                const blockChainInfoId = await this.usersBlockchainInfoService.addNewKeyToUser(user.id, chainPublicKey, chainPrivateKey);
+                await this.usersRepository.updateUserBlockChainInfoId(user, blockChainInfoId);
+            }
+        });
+
+        return user;
+    }
+
+    public async addUser(userPayload: UserCreationDto): Promise<{ user: UsersEntity }> {
         try {
             let userObj: UsersEntity = plainToClass(UsersEntity, userPayload);
             userObj.isActive = true;
