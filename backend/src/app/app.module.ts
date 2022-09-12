@@ -10,8 +10,6 @@ import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
 import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
-import { RequestInterceptor } from './utility/interceptor/request.interceptor';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -19,8 +17,7 @@ import { JwtModule } from '@nestjs/jwt';
     CoreModule,
     SharedModule,
     FeatureModule,
-    UtilityModule,
-    JwtModule
+    UtilityModule
   ],
   providers: [
     {
@@ -34,11 +31,7 @@ import { JwtModule } from '@nestjs/jwt';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: RequestInterceptor,
-    },
+    }
   ]
 })
 export class AppModule {}

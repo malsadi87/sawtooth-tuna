@@ -7,6 +7,8 @@ import { IdentityService } from './identity.service';
 import { IdentityController } from './identity.controller';
 import * as config from 'config';
 import { SawtoothModule } from '../sawtooth/sawtooth.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { RequestInterceptor } from '../../utility/interceptor/request.interceptor';
 
 const jwtConfig = config.get<any>('jwt-config');
 const { JWT_SECRET } = process.env;
@@ -25,7 +27,14 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
     passportModule
   ],
   controllers: [IdentityController],
-  providers: [IdentityService, JwtStrategy],
+  providers: [
+    IdentityService, 
+    JwtStrategy,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestInterceptor
+    },
+  ],
   exports: [passportModule]
 })
 export class IdentityModule {}
