@@ -17,8 +17,7 @@ export class PalletRepository extends Repository<PalletEntity> {
         return await this.findOneBy({ palletNum: palletNumber });
     }
 
-    async addNewPallet(newPallet: PalletEntity): Promise<string> {
-        await newPallet.save();
-        return newPallet.palletNum;
+    async addNewPallet(newPallet: PalletEntity): Promise<PalletEntity> {
+        return await newPallet.save();
     }
 }

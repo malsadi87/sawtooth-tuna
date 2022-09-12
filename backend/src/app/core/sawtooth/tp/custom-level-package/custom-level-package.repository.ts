@@ -17,8 +17,7 @@ export class CustomLevelPackageRepository extends Repository<CustomLevelPackageE
         return await this.findOneBy({ consumerPackageId: consumerPackageId });
     }
 
-    async addNewPackage(customPackage: CustomLevelPackageEntity): Promise<string> {
-        await customPackage.save();
-        return customPackage.consumerPackageId;
+    async addNewPackage(customPackage: CustomLevelPackageEntity): Promise<CustomLevelPackageEntity> {
+        return await customPackage.save();
     }
 }

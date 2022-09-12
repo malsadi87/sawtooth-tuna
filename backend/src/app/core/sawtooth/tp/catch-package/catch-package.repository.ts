@@ -17,8 +17,7 @@ export class CatchPackageRepository extends Repository<CatchPackageEntity> {
         return await this.findOneBy({ catchPackageId: id });
     }
 
-    async addNewCatchPackage(catchPackage: CatchPackageEntity): Promise<string> {
-        await catchPackage.save();
-        return catchPackage.catchPackageId;
+    async addNewCatchPackage(catchPackage: CatchPackageEntity): Promise<CatchPackageEntity> {
+        return await catchPackage.save();
     }
 }

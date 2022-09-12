@@ -8,13 +8,13 @@ import { PalletRepository } from './pallet.repository';
 
 @Injectable()
 export class PalletService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private palletRepository: PalletRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'pallet';
     }
 
     async getAll(): Promise<PalletEntity[]> {
@@ -27,6 +27,14 @@ export class PalletService {
 
     async addNewPallet(palletPayload: PalletCreationDto): Promise<string> {
         const pallet = plainToClass(PalletEntity, palletPayload);
-        return await this.palletRepository.addNewPallet(pallet);
+        const newPallet = await this.palletRepository.addNewPallet(pallet);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newPallet, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newPallet.palletNum;
     }
 }

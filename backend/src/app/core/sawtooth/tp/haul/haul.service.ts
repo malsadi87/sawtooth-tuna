@@ -8,13 +8,13 @@ import { HaulRepository } from './haul.repository';
 
 @Injectable()
 export class HaulService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private readonly haulRepository: HaulRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'haul';
     }
 
     async getAll(): Promise<HaulEntity[]> {
@@ -25,8 +25,16 @@ export class HaulService {
         return await this.haulRepository.getByLaunchDate(launchDateTime);
     }
 
-    async addNewHaul(haulPayload: HaulCreationDto): Promise<Boolean> {
+    async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
         const haul = plainToClass(HaulEntity, haulPayload);
-        return await this.haulRepository.addNewHaul(haul);
+        const newHaul =  await this.haulRepository.addNewHaul(haul);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newHaul, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newHaul.launchDateTime;
     }
 }

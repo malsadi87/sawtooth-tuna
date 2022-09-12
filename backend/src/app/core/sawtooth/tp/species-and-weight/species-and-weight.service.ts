@@ -8,13 +8,13 @@ import { SpeciesAndWeightRepository } from './species-and-weight.repository';
 
 @Injectable()
 export class SpeciesAndWeightService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private speciesAndWeightRepository: SpeciesAndWeightRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'species';
     }
 
     async getAllSpecies(): Promise<SpeciesAndWeightEntity[]> {
@@ -26,7 +26,15 @@ export class SpeciesAndWeightService {
     }
 
     async addNew(speciesPayload: SpeciesCreationDto): Promise<number> {
-        let trip: SpeciesAndWeightEntity = plainToClass(SpeciesAndWeightEntity, speciesPayload);
-        return await this.speciesAndWeightRepository.addNew(trip);
+        const species: SpeciesAndWeightEntity = plainToClass(SpeciesAndWeightEntity, speciesPayload);
+        const newSpecies = await this.speciesAndWeightRepository.addNew(species);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newSpecies, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newSpecies.speciesId;
     }
 }

@@ -17,8 +17,7 @@ export class HaulRepository extends Repository<HaulEntity> {
         return await this.findOneBy({ launchDateTime: launchDateTime });
     }
 
-    async addNewHaul(newHaul: HaulEntity): Promise<Boolean> {
-        const result = await newHaul.save();
-        return result != null;
+    async addNewHaul(newHaul: HaulEntity): Promise<HaulEntity> {
+        return await newHaul.save();
     }
 }

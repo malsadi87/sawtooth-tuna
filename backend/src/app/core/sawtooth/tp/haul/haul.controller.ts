@@ -14,7 +14,7 @@ export class HaulController {
 
     @Post('addNew')
     @HttpCode(204)
-    async create(@Body() haulPayload: HaulCreationDto): Promise<Boolean> {
+    async create(@Body() haulPayload: HaulCreationDto): Promise<Date> {
         return await this.haulService.addNewHaul(haulPayload);
     }
 }

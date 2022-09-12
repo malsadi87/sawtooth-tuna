@@ -8,13 +8,13 @@ import { CompanyRepository } from './company.repository';
 
 @Injectable()
 export class CompanyService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private readonly companyRepository: CompanyRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'company';
     }
 
     async getAll(): Promise<CompanyEntity[]> {
@@ -27,6 +27,14 @@ export class CompanyService {
 
     async addNewCompany(newCompanyPayload: CompanyCreationDto): Promise<number> {
         const company = plainToClass(CompanyEntity, newCompanyPayload);
-        return await this.companyRepository.addNewCompany(company);
+        const newCompany =  await this.companyRepository.addNewCompany(company);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newCompany, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newCompany.companyId;
     }
 }

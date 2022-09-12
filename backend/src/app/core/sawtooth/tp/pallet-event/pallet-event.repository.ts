@@ -21,8 +21,7 @@ export class PalletEventRepository extends Repository<PalletEventEntity> {
         return await this.findBy({ palletNum: palletNumber });
     }
 
-    async addNew(newPalletEvent: PalletEventEntity): Promise<{ palletNum: string, eventTime: Date }> {
-        await newPalletEvent.save();
-        return { palletNum: newPalletEvent.palletNum, eventTime: newPalletEvent.eventTime };
+    async addNew(newPalletEvent: PalletEventEntity): Promise<PalletEventEntity> {
+        return await newPalletEvent.save();
     }
 }

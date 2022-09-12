@@ -8,13 +8,13 @@ import { CatchPackageRepository } from './catch-package.repository';
 
 @Injectable()
 export class CatchPackageService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private readonly catchPackageRepository: CatchPackageRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'catch-package';
     }
 
     async getAll(): Promise<CatchPackageEntity[]> {
@@ -27,6 +27,14 @@ export class CatchPackageService {
 
     async addNewCatchPackage(catchPackagePayload: CatchPackageCreationDto): Promise<string> {
         const catchPackage = plainToClass(CatchPackageEntity, catchPackagePayload);
-        return await this.catchPackageRepository.addNewCatchPackage(catchPackage);
+        const newCatchPackage = await this.catchPackageRepository.addNewCatchPackage(catchPackage);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newCatchPackage, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newCatchPackage.catchPackageId;
     }
 }

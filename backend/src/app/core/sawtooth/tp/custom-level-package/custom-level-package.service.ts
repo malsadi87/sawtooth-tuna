@@ -8,13 +8,13 @@ import { CustomLevelPackageRepository } from './custom-level-package.repository'
 
 @Injectable()
 export class CustomLevelPackageService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private readonly customLevelPackageRepository: CustomLevelPackageRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'custom-package';
     }
 
     async getAll(): Promise<CustomLevelPackageEntity[]> {
@@ -27,6 +27,14 @@ export class CustomLevelPackageService {
 
     async addNewPackage(customPackagePayload: CustomPackageCreationDto): Promise<string> {
         const customPackage = plainToClass(CustomLevelPackageEntity, customPackagePayload);
-        return await this.customLevelPackageRepository.addNewPackage(customPackage);
+        const newCustomPackage = await this.customLevelPackageRepository.addNewPackage(customPackage);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newCustomPackage, userInfo.blockChainPrivateKey, this.familyName);
+
+        return newCustomPackage.consumerPackageId;
     }
 }

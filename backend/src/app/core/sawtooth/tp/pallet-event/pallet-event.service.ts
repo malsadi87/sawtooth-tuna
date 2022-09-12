@@ -8,13 +8,13 @@ import { PalletEventRepository } from './pallet-event.repository';
 
 @Injectable()
 export class PalletEventService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private palletEventRepository: PalletEventRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) {
-        this.familyName = '';
+        this.familyName = 'pallet-event';
     }
 
     async getAll(): Promise<PalletEventEntity[]> {
@@ -31,6 +31,14 @@ export class PalletEventService {
 
     async addNew(newPalletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
         const palletEvent = plainToClass(PalletEventEntity, newPalletEventPayload);
-        return await this.palletEventRepository.addNew(palletEvent);
+        const newPalletEvent = await this.palletEventRepository.addNew(palletEvent);
+
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();
+
+        // Save in Sawtooth
+        await this.sawtoothUtilityService.createAsset(newPalletEvent, userInfo.blockChainPrivateKey, this.familyName);
+
+        return { palletNum: newPalletEvent.palletNum, eventTime: newPalletEvent.eventTime };
     }
 }

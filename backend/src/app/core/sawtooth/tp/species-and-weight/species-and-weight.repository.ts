@@ -17,8 +17,7 @@ export class SpeciesAndWeightRepository extends Repository<SpeciesAndWeightEntit
         return await this.findOneBy({ speciesId: id });
     }
 
-    async addNew(newSpecies: SpeciesAndWeightEntity): Promise<number> {
-        await newSpecies.save();
-        return newSpecies.speciesId;
+    async addNew(newSpecies: SpeciesAndWeightEntity): Promise<SpeciesAndWeightEntity> {
+        return await newSpecies.save();
     }
 }
