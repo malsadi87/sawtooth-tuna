@@ -100,6 +100,6 @@ export class UsersEntity extends BaseEntity {
     userRoles!: UserRolesEntity[];
 
     @OneToOne((type) => UsersBlockchainInfoEntity, (x) => x.user)
-    @JoinColumn({ name: 'BlockchainInfoId',  referencedColumnName: 'UserId' })
+    @JoinColumn({ name: 'BlockchainInfoId',  referencedColumnName: 'userId' })
     userBlockChainInfo: UsersBlockchainInfoEntity;
 }

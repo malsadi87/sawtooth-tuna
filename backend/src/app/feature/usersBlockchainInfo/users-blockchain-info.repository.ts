@@ -10,9 +10,9 @@ export class UsersBlockchainInfoRepository extends Repository<UsersBlockchainInf
 
     async addNewKeyToUser(userId: string, publicKey: string, privateKey: string): Promise<UsersBlockchainInfoEntity> {
         const info: UsersBlockchainInfoEntity = new UsersBlockchainInfoEntity();
-        info.UserId = userId;
-        info.PublicKey = publicKey;
-        info.PrivateKey = privateKey;
+        info.userId = userId;
+        info.publicKey = publicKey;
+        info.privateKey = privateKey;
         info.createdDate = new Date();
         info.createdBy = userId;
         info.updatedDate = new Date();

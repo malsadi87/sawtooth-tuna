@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { TripEntity } from '../../../../../entity/trip.entity';
 import { TripCreationDto } from '../../../../utility/dto/tp/trip-creation.dto';
@@ -8,8 +8,8 @@ import { TripRepository } from './trip.repository';
 @Injectable()
 export class TripService {
     constructor(
-        private tripRepository: TripRepository,
-        private sawtoothUtilityService: SawtoothUtilityService
+        private readonly tripRepository: TripRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService
     ) { }
 
     async getAllTrip(): Promise<TripEntity[]> {

@@ -8,13 +8,13 @@ export class UsersBlockchainInfoEntity extends BaseEntity {
 
     @Column({ type:'uuid', name: 'UserId', nullable: false })
     @Index({ unique: true })
-    UserId: string;
+    userId: string;
 
     @Column({ type:'varchar', width: 1000, name: 'PublicKey', nullable: true })
-    PublicKey: string;
+    publicKey: string;
 
     @Column({ type:'varchar', width: 1000, name: 'PrivateKey', nullable: true })
-    PrivateKey: string;
+    privateKey: string;
 
     @Column({ type:'timestamp', name: 'CreatedDate', nullable: false })
     createdDate: Date;

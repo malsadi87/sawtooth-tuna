@@ -6,11 +6,12 @@ import { FeatureModule } from './feature/feature.module';
 import { CoreModule } from './core/core.module';
 import { UtilityModule } from './utility/utility.module';
 
-import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
 import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
-import { LoginUserInfoService } from './utility/common/login-user-info.service';
+import { RequestInterceptor } from './utility/interceptor/request.interceptor';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { LoginUserInfoService } from './utility/common/login-user-info.service';
     CoreModule,
     SharedModule,
     FeatureModule,
-    UtilityModule
+    UtilityModule,
+    JwtModule
   ],
   providers: [
     {
@@ -34,9 +36,9 @@ import { LoginUserInfoService } from './utility/common/login-user-info.service';
       useClass: JwtAuthGuard
     },
     {
-      provide: 'LOGIN_USER_INFO',
-      useClass: LoginUserInfoService
-    }
+      provide: APP_INTERCEPTOR,
+      useClass: RequestInterceptor,
+    },
   ]
 })
 export class AppModule {}
