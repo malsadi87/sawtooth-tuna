@@ -1,6 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { TripEntity } from '../../../../../entity/trip.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { TripCreationDto } from '../../../../utility/dto/tp/trip-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { TripRepository } from './trip.repository';
@@ -9,7 +10,8 @@ import { TripRepository } from './trip.repository';
 export class TripService {
     constructor(
         private readonly tripRepository: TripRepository,
-        private readonly sawtoothUtilityService: SawtoothUtilityService
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
     ) { }
 
     async getAllTrip(): Promise<TripEntity[]> {
@@ -24,9 +26,18 @@ export class TripService {
         let trip: TripEntity = plainToClass(TripEntity, tripPayload);
         const newTrip = await this.tripRepository.addNewTrip(trip);
         
+        // Get the userInfo
+        const userInfo = this.loginUserInfoService.getInfo();;
+
         // Save in Sawtooth
-        // await this.sawtoothUtilityService.createAsset(newTrip, )
+        await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, '');
 
         return newTrip.tripNo;
+    }
+
+    public testMe(): string {
+        const userInfo = this.loginUserInfoService.getInfo();
+        console.log(userInfo);
+        return "Hallo boss!";
     }
 }
