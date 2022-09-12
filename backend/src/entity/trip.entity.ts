@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
+import { Transform } from 'class-transformer';
 
 @Entity({ name: 'Trip' })
 export class TripEntity extends BaseEntity {
@@ -13,12 +14,14 @@ export class TripEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'VesselName' })
     vesselName: string;
 
+    @Transform(x => new Date(x.value))
     @Column({ type:'timestamp', name: 'DepartureDate', nullable: false })
     departureDate: Date;
 
     @Column({ type:'varchar', width: 255, name: 'DeparturePort', nullable: false })
     departurePort: string;
 
+    @Transform(x => new Date(x.value))
     @Column({ type:'timestamp', name: 'LandingDate', nullable: false })
     landingDate: Date;
 

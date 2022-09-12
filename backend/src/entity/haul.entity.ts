@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { TripEntity } from "./trip.entity";
 
@@ -15,6 +16,7 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'numeric', precision: 8, scale: 6, name: 'LaunchLongitude', nullable: false })
     launchLongitude: number;
 
+    @Transform(x => new Date(x.value))
     @Column({ type:'timestamp', name: 'HaulDateTime', nullable: false })
     haulDateTime: Date;
 

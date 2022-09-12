@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('SpeciesAndWeight')
@@ -14,6 +15,7 @@ export class SpeciesAndWeightEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'CatchPackageId', nullable: false })
     catchPackageId: string;
 
+    @Transform(x => new Date(x.value))
     @Column({ type:'timestamp', name: 'LaunchDateTime', nullable: true })
     launchDateTime: Date;
 }

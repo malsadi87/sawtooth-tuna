@@ -1,8 +1,10 @@
+import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { PalletEntity } from "./pallet.entity";
 
 @Entity('PalletEvent')
 export class PalletEventEntity extends BaseEntity {
+    @Transform(x => new Date(x.value))
     @PrimaryColumn({ generated: false, type:'timestamp', name: 'EventTime', nullable: false })
     eventTime: Date;
 
