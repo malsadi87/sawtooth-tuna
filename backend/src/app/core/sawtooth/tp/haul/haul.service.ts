@@ -1,12 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { HaulEntity } from '../../../../../entity/haul.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { HaulRepository } from './haul.repository';
 
 @Injectable()
 export class HaulService {
-    constructor(private readonly haulRepository: HaulRepository) {}
+    private readonly familyName;
+    constructor(
+        private readonly haulRepository: HaulRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
+        this.familyName = '';
+    }
 
     async getAll(): Promise<HaulEntity[]> {
         return await this.haulRepository.getAll();

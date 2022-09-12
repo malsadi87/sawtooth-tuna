@@ -1,12 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CatchPackageEntity } from '../../../../../entity/catchPackage.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { CatchPackageCreationDto } from '../../../../utility/dto/tp/catch-package-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CatchPackageRepository } from './catch-package.repository';
 
 @Injectable()
 export class CatchPackageService {
-    constructor(private readonly catchPackageRepository: CatchPackageRepository) {}
+    private readonly familyName;
+    constructor(
+        private readonly catchPackageRepository: CatchPackageRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
+        this.familyName = '';
+    }
 
     async getAll(): Promise<CatchPackageEntity[]> {
         return await this.catchPackageRepository.getAll();

@@ -5,9 +5,14 @@ import { CustomLevelPackageController } from './custom-level-package.controller'
 import { CustomLevelPackageRepository } from './custom-level-package.repository';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
 import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.module';
+import { LoginUserInfoModule } from '../../../../shared/loginUserInfo/login-user-info.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CustomLevelPackageEntity]), SawtoothUtilityModule],
+  imports: [
+    TypeOrmModule.forFeature([CustomLevelPackageEntity]), 
+    SawtoothUtilityModule,
+    LoginUserInfoModule
+  ],
   providers: [CustomLevelPackageService, CustomLevelPackageRepository],
   controllers: [CustomLevelPackageController]
 })

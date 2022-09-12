@@ -1,13 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { PalletEventCreationDto } from '../../../../utility/dto/tp/pallet-event-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { PalletEventRepository } from './pallet-event.repository';
 
 @Injectable()
 export class PalletEventService {
-    constructor(private palletEventRepository: PalletEventRepository)
-    { }
+    private readonly familyName;
+    constructor(
+        private palletEventRepository: PalletEventRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
+        this.familyName = '';
+    }
 
     async getAll(): Promise<PalletEventEntity[]> {
         return await this.palletEventRepository.getAll();

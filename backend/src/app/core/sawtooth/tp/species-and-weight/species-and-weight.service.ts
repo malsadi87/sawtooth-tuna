@@ -1,13 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { SpeciesAndWeightEntity } from '../../../../../entity/speciesAndWeight.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { SpeciesCreationDto } from '../../../../utility/dto/tp/species-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { SpeciesAndWeightRepository } from './species-and-weight.repository';
 
 @Injectable()
 export class SpeciesAndWeightService {
-    constructor(private speciesAndWeightRepository: SpeciesAndWeightRepository)
-    { }
+    private readonly familyName;
+    constructor(
+        private speciesAndWeightRepository: SpeciesAndWeightRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
+        this.familyName = '';
+    }
 
     async getAllSpecies(): Promise<SpeciesAndWeightEntity[]> {
         return await this.speciesAndWeightRepository.getAll();

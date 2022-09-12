@@ -8,11 +8,14 @@ import { TripRepository } from './trip.repository';
 
 @Injectable()
 export class TripService {
+    private readonly familyName;
     constructor(
         private readonly tripRepository: TripRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
-    ) { }
+    ) { 
+        this.familyName = 'trip';
+    }
 
     async getAllTrip(): Promise<TripEntity[]> {
         return await this.tripRepository.getAll();
@@ -27,10 +30,10 @@ export class TripService {
         const newTrip = await this.tripRepository.addNewTrip(trip);
         
         // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();;
+        const userInfo = this.loginUserInfoService.getInfo();
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, '');
+        await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, this.familyName);
 
         return newTrip.tripNo;
     }

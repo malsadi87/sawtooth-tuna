@@ -1,12 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CompanyEntity } from '../../../../../entity/company.entity';
+import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { CompanyCreationDto } from '../../../../utility/dto/tp/company-creation.dto';
+import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CompanyRepository } from './company.repository';
 
 @Injectable()
 export class CompanyService {
-    constructor(private readonly companyRepository: CompanyRepository) {}
+    private readonly familyName;
+    constructor(
+        private readonly companyRepository: CompanyRepository,
+        private readonly sawtoothUtilityService: SawtoothUtilityService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
+        this.familyName = '';
+    }
 
     async getAll(): Promise<CompanyEntity[]> {
         return await this.companyRepository.getAll();
