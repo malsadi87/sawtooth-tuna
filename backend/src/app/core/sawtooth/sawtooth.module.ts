@@ -4,13 +4,13 @@ import { KeyController } from './key/key.controller';
 import { KeyService } from './key/key.service';
 import { MetaDataController } from './meta-data/meta-data.controller';
 import { MetaDataService } from './meta-data/meta-data.service';
+import { SawtoothUtilityModule } from './sawtooth-utility/sawtooth-utility.module';
 import { TpModule } from './tp/tp.module';
-import { UtilityModule } from './sawtooth-utility/sawtooth-utility.module';
 
 @Module({
     imports: [
         TpModule,
-        UtilityModule,
+        SawtoothUtilityModule,
         HttpModule
     ],
     controllers: [
@@ -18,7 +18,7 @@ import { UtilityModule } from './sawtooth-utility/sawtooth-utility.module';
         MetaDataController
     ],
     providers: [
-        KeyService, 
+        KeyService,
         MetaDataService
     ],
     exports: [KeyService]

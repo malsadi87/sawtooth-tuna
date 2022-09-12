@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { UtilityService } from '../sawtooth-utility/sawtooth-utility.service';
 import { HttpModule } from '@nestjs/axios';
 import { CatchPackageModule } from './catch-package/catch-package.module';
 import { CompanyModule } from './company/company.module';
@@ -21,7 +20,6 @@ import { TripModule } from './trip/trip.module';
         SpeciesAndWeightModule,
         CompanyModule,
         CustomLevelPackageModule
-    ],
-    providers: [UtilityService]
+    ]
 })
 export class TpModule {}

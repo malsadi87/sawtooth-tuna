@@ -17,7 +17,8 @@ export class IdentityService {
             throw new UnauthorizedException('Invalid Credential');
         }
         
-        const payload: JwtPayload = JSON.parse(JSON.stringify({ email: authCredential.email }));
+        var user = await this.usersService.getUserByEmail(authCredential.email);
+        const payload: JwtPayload = JSON.parse(JSON.stringify({ email: authCredential.email, id: user.id }));
         return this.jwtService.sign(payload);
     }
 }

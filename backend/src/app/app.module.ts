@@ -10,6 +10,7 @@ import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
 import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
+import { LoginUserInfoService } from './utility/common/login-user-info.service';
 
 @Module({
   imports: [
@@ -31,6 +32,10 @@ import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pip
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard
+    },
+    {
+      provide: 'LOGIN_USER_INFO',
+      useClass: LoginUserInfoService
     }
   ]
 })
