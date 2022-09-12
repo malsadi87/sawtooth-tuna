@@ -8,7 +8,7 @@ import { TripRepository } from './trip.repository';
 
 @Injectable()
 export class TripService {
-    private readonly familyName;
+    private readonly familyName: string;
     constructor(
         private readonly tripRepository: TripRepository,
         private readonly sawtoothUtilityService: SawtoothUtilityService,
