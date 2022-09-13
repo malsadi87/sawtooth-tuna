@@ -16,7 +16,7 @@ PALLET_EVENT_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(event):
-    adr = hashlib.sha512(event.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(event).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

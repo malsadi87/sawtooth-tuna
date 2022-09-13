@@ -18,7 +18,7 @@ CUSTOM_PACKAGE_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(consumerPackageId):
-    adr = hashlib.sha512(consumerPackageId.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(consumerPackageId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

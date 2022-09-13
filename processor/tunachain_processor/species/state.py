@@ -16,7 +16,7 @@ SPECIES_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(speciesId):
-    adr = hashlib.sha512(speciesId.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(speciesId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

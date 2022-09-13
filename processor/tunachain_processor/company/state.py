@@ -17,7 +17,7 @@ LOGGER.info(COMPANY_NAMESPACE)
 
 
 def _get_address(companyId):
-    adr = hashlib.sha512(companyId.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(companyId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

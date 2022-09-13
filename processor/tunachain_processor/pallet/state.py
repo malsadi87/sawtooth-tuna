@@ -16,7 +16,7 @@ PALLET_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(palletId):
-    adr = hashlib.sha512(palletId.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(palletId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

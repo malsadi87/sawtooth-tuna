@@ -16,7 +16,7 @@ PACKAGE_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(catchPackageId):
-    adr = hashlib.sha512(catchPackageId.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(companyId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

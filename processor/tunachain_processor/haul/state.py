@@ -16,7 +16,7 @@ HAUL_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(launchDateTime):
-    adr = hashlib.sha512(launchDateTime.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(launchDateTime).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
