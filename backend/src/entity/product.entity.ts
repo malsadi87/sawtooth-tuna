@@ -11,7 +11,7 @@ export class ProductEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'ProductDescription' })
     productDescription: string;
 
-    @Column({ type:'int', name: 'ProductNumber', nullable: false })
-    productNumber: number;
+    @Column({ type:'int', name: 'ProductNum', nullable: false })
+    productNum: number;
 
 }

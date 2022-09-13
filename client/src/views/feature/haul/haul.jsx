@@ -35,7 +35,7 @@ class Haul extends Component {
             launchLatitude: '',
             launchLongitude: '',
             tripId: '',
-            productNumber: '',
+            productNum: '',
             productId: '',
             catchWeight: ''
             }
@@ -148,7 +148,7 @@ class Haul extends Component {
                   <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline" style={{ width:700 }}>
                     <Form.Item
                       {...restField}
-                      name={[name, 'productNumber']}
+                      name={[name, 'productNum']}
                       rules={[{ required: true, message: 'Missing product number' }]}
                     >
                       <Input placeholder="Product Number" />

@@ -5,6 +5,6 @@ export class ProductCreationDto {
 
     productDescription: string;
 
-    productNumber: number;
+    productNum: number;
 
 }

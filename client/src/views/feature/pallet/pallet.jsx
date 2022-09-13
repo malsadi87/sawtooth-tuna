@@ -33,7 +33,7 @@ class Pallet extends Component {
             productID: '',
             date: '',
             palletNumber: '',
-            productNumber: '',
+            productNum: '',
             weight: '',
             temperatureIn: ''
          }
@@ -103,7 +103,7 @@ class Pallet extends Component {
       </Form.Item>
 
         <Form.Item
-        name={'productNumber'}
+        name={'productNum'}
         label="Product Number"
         rules={[
           {
