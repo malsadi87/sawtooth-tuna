@@ -16,7 +16,7 @@ TRIP_NAMESPACE = hashlib.sha512(
 
 
 def _get_address(tripNo):
-    adr = hashlib.sha512(tripNo.encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(tripNo).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 

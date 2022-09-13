@@ -14,7 +14,6 @@ export class TripController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() tripPayload: TripCreationDto): Promise<number> {
         return await this.tripService.addNewTrip(tripPayload);
     }
