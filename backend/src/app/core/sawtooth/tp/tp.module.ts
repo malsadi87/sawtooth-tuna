@@ -8,11 +8,13 @@ import { PalletModule } from './pallet/pallet.module';
 import { PalletEventModule } from './pallet-event/pallet-event.module';
 import { SpeciesAndWeightModule } from './species-and-weight/species-and-weight.module';
 import { TripModule } from './trip/trip.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
     imports: [
         HttpModule,
         TripModule,
+        ProductModule,
         HaulModule,
         PalletModule,
         PalletEventModule,

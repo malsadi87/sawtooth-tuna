@@ -21,7 +21,7 @@ class ProductPayload(object):
         productId = data.get('productId')
         productName = data.get('productName')
         productDescription = data.get('productDescription')
-        productNumber = data.get('productNumber')
+        productNum = data.get('productNum')
 
         if not productId:
             raise InvalidTransaction('Product ID is required')
@@ -29,13 +29,13 @@ class ProductPayload(object):
         if not productName:
             raise InvalidTransaction('Product Name is required')
 
-        if not productNumber:
+        if not productNum:
             raise InvalidTransaction('Product Number is required')        
         
         self._productId = productId
         self._productName = productName
         self._productDescription = productDescription
-        self._productNumber = productNumber
+        self._productNum = productNum
        
     @property
     def productId(self):
@@ -50,5 +50,5 @@ class ProductPayload(object):
         return self._productDescription
 
     @property
-    def productNumber(self):
-        return self._productNumber  
+    def productNum(self):
+        return self._productNum  

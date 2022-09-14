@@ -48,13 +48,13 @@ class ProductTransactionHandler(TransactionHandler):
         _create_product(productId=payload.productId,
                         productName=payload.productName,
                         productDescription=payload.productDescription,
-                        productNumber=payload.productNumber,
+                        productNum=payload.productNum,
                         state=state)
 
 
-def _create_product(productId, productName, productDescription, productNumber, state):
+def _create_product(productId, productName, productDescription, productNum, state):
     if state.get_product(productId) is not None:
         raise InvalidTransaction(
             'Invalid action: Product already exists: {}'.format(productId))
 
-    state.set_product(productId, productName, productDescription, productNumber)
+    state.set_product(productId, productName, productDescription, productNum)

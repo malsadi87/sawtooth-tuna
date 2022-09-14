@@ -1,3 +1,10 @@
+CREATE TABLE IF NOT EXISTS "Product" (
+    "ProductId" INT PRIMARY KEY,
+    "ProductName" VARCHAR(255),
+    "ProductDescription" VARCHAR(255),
+    "ProductNum" INT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS "Trip" (
     "TripNo" INT PRIMARY KEY,
     "TripWithinYearNo" INT NOT NULL,

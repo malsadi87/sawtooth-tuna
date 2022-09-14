@@ -5,7 +5,7 @@ export class ProductCreationDto {
     @IsNumber() productId: number;
     @IsString() productName: string;
     @IsString() productDescription: string;
-    @IsNumber() productNumber: number;
+    @IsNumber() productNum: number;
     @IsArray() productAttribute: { name: string, value: string }[]
 }
 

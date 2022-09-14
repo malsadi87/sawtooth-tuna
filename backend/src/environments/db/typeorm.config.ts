@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { TripEntity } from '../../entity/trip.entity';
+import { ProductEntity } from '../../entity/product.entity';
 import { SpeciesAndWeightEntity } from '../../entity/speciesAndWeight.entity';
 import { PalletEntity } from '../../entity/pallet.entity';
 import { PalletEventEntity } from '../../entity/palletEvent.entity';
@@ -34,6 +35,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     database: name,
     entities: [
         TripEntity,
+        ProductEntity,
         HaulEntity,
         PalletEntity,
         PalletEventEntity,

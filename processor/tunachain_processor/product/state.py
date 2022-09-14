@@ -46,7 +46,7 @@ class ProductState(object):
         return self._get_state(_get_product_address(productId))
 
 
-    def set_product(self, productId, productName, productDescription, productNumber):
+    def set_product(self, productId, productName, productDescription, productNum):
         address = _get_product_address(productId)
         LOGGER.info('set_product method')
         LOGGER.info(address)
@@ -54,7 +54,7 @@ class ProductState(object):
             {   "productId": productId,
                 "productName": productName,
                 "productDescription": productDescription,
-                "productNumber": productNumber
+                "productNum": productNum
 
             })
         return self._context.set_state(

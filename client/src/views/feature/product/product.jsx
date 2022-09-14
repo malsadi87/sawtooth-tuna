@@ -13,7 +13,7 @@ class Product extends Component {
       productDescription: '',
       name: '',
       value: '',
-      productNumber: ''
+      productNum: ''
     }
   }
 
@@ -90,7 +90,7 @@ class Product extends Component {
           )}
         </Form.List>
 
-        <Form.Item name={'productNumber'} label="Product Number" rules={[{ required: true }]}>
+        <Form.Item name={'productNum'} label="Product Number" rules={[{ required: true }]}>
           <InputNumber />
         </Form.Item>
 
