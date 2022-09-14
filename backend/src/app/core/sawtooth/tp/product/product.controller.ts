@@ -13,13 +13,7 @@ export class ProductController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() productPayload: ProductCreationDto): Promise<number> {
         return await this.productService.addNewProduct(productPayload);
-    }
-
-    @Get('/')
-    async hallo(): Promise<String> {
-        return this.productService.testMe();
     }
 }

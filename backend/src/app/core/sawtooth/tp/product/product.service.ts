@@ -37,10 +37,4 @@ export class ProductService {
 
         return newProduct.productId;
     }
-
-    public testMe(): string {
-        const userInfo = this.loginUserInfoService.getInfo();
-        console.log(userInfo);
-        return "Hallo boss!";
-    }
 }
