@@ -30,7 +30,7 @@ export class TripService {
         const newTrip = await this.tripRepository.addNewTrip(trip);
         
         // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();
+        const userInfo = this.loginUserInfoService.getInfo();   
 
         // Save in Sawtooth
         await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, this.familyName);

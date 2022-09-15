@@ -5,13 +5,14 @@ import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
 import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
+import 'reflect-metadata';
 import * as crypto from 'crypto';
 
 @Injectable()
 export class SawtoothUtilityService {
     private sawtoothConfig: any;
 
-    constructor(private httpService: HttpService) {
+    constructor(private readonly httpService: HttpService) {
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
@@ -36,10 +37,24 @@ export class SawtoothUtilityService {
         return { family: config.FAMILY, version: config.VERSION, prefix: config.PREFIX };
     }
 
-    public async createAsset(payload: any, userPrivateKey: string, tpName: string): Promise<string> {
+    public async createAsset(payload: any, userPrivateKey: string, tpName: string, entity_type: string = null, identifier: any = null): Promise<string> {
         try {
             // Get Transaction Famil Details
             const { family: familyName, version: familyVersion, prefix: familyNamespace } = this.getTransactionFamilDetails(tpName);
+
+
+            // If entity_type is present then its a generic entity save call
+            if(entity_type && identifier) {
+                // Find the identifiers in a entity
+                // Reflection not working have to find out why?
+                // const properties: string[] = Reflect.getMetadata(Symbol('PrimaryColumn'), payload);
+
+                payload = {
+                    entity_type: entity_type,
+                    identifier: identifier,
+                    data_hash: this.hash(JSON.stringify(payload))
+                }
+            }
 
             // Create signer
             const context = createContext(this.sawtoothConfig.KEY_ALGORITHMN);

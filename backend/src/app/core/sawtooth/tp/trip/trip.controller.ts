@@ -1,7 +1,6 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { TripEntity } from '../../../../../entity/trip.entity';
 import { TripCreationDto } from '../../../../utility/dto/tp/trip-creation.dto';
-import { UserInfoDto } from '../../../../utility/dto/user-info.dto';
 import { TripService } from './trip.service';
 
 @Controller('sawtooth/tp/trip')
