@@ -13,7 +13,7 @@ class Product extends Component {
       productDescription: '',
       name: '',
       value: '',
-      productNum: ''
+      productNumber: ''
     }
   }
 

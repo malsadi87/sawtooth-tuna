@@ -3,7 +3,7 @@ import { APIBasePath } from "../../../constants/apiBasePaths";
 
 const createNew = async (data) => {
     try {
-        const response = await axios.post(APIBasePath.Sawtooth.tp.product.createNew, { productData: data });
+        const response = await axios.post(APIBasePath.Sawtooth.tp.product.createNew, data);
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
