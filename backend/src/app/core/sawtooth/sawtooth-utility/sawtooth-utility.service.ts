@@ -7,29 +7,25 @@ import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 's
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import 'reflect-metadata';
 import * as crypto from 'crypto';
+import { LoginUserInfoService } from '../../../shared/loginUserInfo/login-user-info.service';
 
 @Injectable()
 export class SawtoothUtilityService {
     private sawtoothConfig: any;
 
-    constructor(private readonly httpService: HttpService) {
+    constructor(
+        private readonly httpService: HttpService,
+        private readonly loginUserInfoService: LoginUserInfoService
+    ) {
         this.sawtoothConfig = getProjectConfig('sawtooth');
     }
 
-    public hash(data: any): string {
+    private hash(data: any): string {
         return crypto.createHash('sha512').update(data).digest('hex').toLowerCase();
     }
 
-    public getNamespace(familyName: string): string {
+    private getNamespace(familyName: string): string {
         return this.hash(familyName).substring(0, 6);
-    }
-
-    public getAssetAddress(asset: any, familyName: string): string {
-        return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
-    }
-
-    public getMetaKeyAddress(key: string, familyName: string): string {
-        return `${this.hash(familyName).substring(0, 6)}00${this.hash(key).slice(0, 62)}`;
     }
 
     private getTransactionFamilDetails(tpName: string): { family: string, version: string, prefix: string } {
@@ -37,8 +33,19 @@ export class SawtoothUtilityService {
         return { family: config.FAMILY, version: config.VERSION, prefix: config.PREFIX };
     }
 
-    public async createAsset(payload: any, userPrivateKey: string, tpName: string, entity_type: string = null, identifier: any = null): Promise<string> {
+    public getAssetAddress(asset: any, familyName: string): string {
+        return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
+    }
+
+    public getGeneericAssetAddress(asset: any, familyName: string, entity_type: string): string {
+        return `${this.getNamespace(familyName)}00${this.getNamespace(entity_type)}${this.hash(asset).slice(0, 64)}`;
+    }
+
+    public async createAsset(payload: any, entity_type: string = null, identifier: any = null, tpName: string = 'generic'): Promise<string> {
         try {
+            // Getting Logged in user Info
+            const userInfo = this.loginUserInfoService.getInfo();
+
             // Get Transaction Famil Details
             const { family: familyName, version: familyVersion, prefix: familyNamespace } = this.getTransactionFamilDetails(tpName);
 
@@ -58,7 +65,7 @@ export class SawtoothUtilityService {
 
             // Create signer
             const context = createContext(this.sawtoothConfig.KEY_ALGORITHMN);
-            const privateKey = Secp256k1PrivateKey.fromHex(userPrivateKey);
+            const privateKey = Secp256k1PrivateKey.fromHex(userInfo.blockChainPrivateKey);
             const signer = new Signer(context, privateKey);
 
             // Create the TransactionHeader

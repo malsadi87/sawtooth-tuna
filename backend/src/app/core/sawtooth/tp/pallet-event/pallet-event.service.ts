@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
-import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { PalletEventCreationDto } from '../../../../utility/dto/tp/pallet-event-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { PalletEventRepository } from './pallet-event.repository';
 
 @Injectable()
 export class PalletEventService {
-    private readonly familyName: string;
+    private readonly entityName: string;
     constructor(
         private palletEventRepository: PalletEventRepository,
-        private readonly sawtoothUtilityService: SawtoothUtilityService,
-        private readonly loginUserInfoService: LoginUserInfoService
+        private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
-        this.familyName = 'pallet-event';
+        this.entityName = 'pallet-event';
     }
 
     async getAll(): Promise<PalletEventEntity[]> {
@@ -33,11 +31,8 @@ export class PalletEventService {
         const palletEvent = plainToClass(PalletEventEntity, newPalletEventPayload);
         const newPalletEvent = await this.palletEventRepository.addNew(palletEvent);
 
-        // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();
-
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newPalletEvent, userInfo.blockChainPrivateKey, this.familyName);
+        await this.sawtoothUtilityService.createAsset(newPalletEvent, this.entityName, `${newPalletEvent.palletNum}${newPalletEvent.eventTime.toString()}`);
 
         return { palletNum: newPalletEvent.palletNum, eventTime: newPalletEvent.eventTime };
     }

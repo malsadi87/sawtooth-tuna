@@ -21,7 +21,7 @@ export class MetaDataService {
     }
 
     async getByKey(key: string): Promise<AxiosResponse<any>> {
-        const address = this.sawtoothUtilityService.getMetaKeyAddress(key, this.familyName);
+        const address = this.sawtoothUtilityService.getAssetAddress(key, this.familyName);
         return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`));
     }
 

@@ -21,7 +21,7 @@ def _get_entity_type_address(entity_type):
     return adr
 
 def _get_identifier_address(identifier):
-    adr = hashlib.sha512(str(identifier).encode('utf-8')).hexdigest()[:62]
+    adr = hashlib.sha512(str(identifier).encode('utf-8')).hexdigest()[:54]
     LOGGER.info('Generic entity identifier address')
     LOGGER.info(adr)
     return adr
