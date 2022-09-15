@@ -111,7 +111,7 @@ export class SawtoothUtilityService {
 
             // if (response.status != 200)
             //     throw "Batch append success status is taking too long time!";
-            return result.link.split('?')[1].split('=')[1];
+            return new URL(result.link).searchParams.get('id');
         } catch (e) {
             throw e;
         }

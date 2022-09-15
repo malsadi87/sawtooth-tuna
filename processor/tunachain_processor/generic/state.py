@@ -20,15 +20,15 @@ def _get_entity_type_address(entity_type):
     LOGGER.info(adr)
     return adr
 
-def _get_indetifier_address(identifier):
+def _get_identifier_address(identifier):
     adr = hashlib.sha512(str(identifier).encode('utf-8')).hexdigest()[:62]
     LOGGER.info('Generic entity identifier address')
     LOGGER.info(adr)
     return adr
 
 def _get_generic_entity_address(entity_type, identifier):
-    add =  GENERIC_ENTITY_NAMESPACE + '00' + _get_entity_type_address(entity_type) + '00' + _get_address(identifier)
-    logging.info('Final ddress for a generic entity')
+    add =  GENERIC_ENTITY_NAMESPACE + '00' + _get_entity_type_address(entity_type) + '00' + _get_identifier_address(identifier)
+    logging.info('Final address for the generic entity')
     LOGGER.info(add)
     return add
 

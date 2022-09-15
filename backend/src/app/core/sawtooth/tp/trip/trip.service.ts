@@ -14,7 +14,7 @@ export class TripService {
         private readonly sawtoothUtilityService: SawtoothUtilityService,
         private readonly loginUserInfoService: LoginUserInfoService
     ) { 
-        this.familyName = 'trip';
+        this.familyName = 'generic';
     }
 
     async getAllTrip(): Promise<TripEntity[]> {
@@ -30,10 +30,10 @@ export class TripService {
         const newTrip = await this.tripRepository.addNewTrip(trip);
         
         // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();   
+        const userInfo = this.loginUserInfoService.getInfo(); 
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, this.familyName);
+        await this.sawtoothUtilityService.createAsset(newTrip, userInfo.blockChainPrivateKey, this.familyName, 'trip', newTrip.tripNo);
 
         return newTrip.tripNo;
     }

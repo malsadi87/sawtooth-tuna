@@ -53,6 +53,6 @@ class GenericEntityTransactionHandler(TransactionHandler):
 def _create_generic_entity(entity_type, identifier, data_hash, state):
     if state.get_generic_entity(entity_type, identifier) is not None:
         raise InvalidTransaction(
-            f'Invalid action: {entity_type} Entity with Indentifier {identifier} already exists!')
+            'Invalid action: {} Entity with identifier {} already exists'.format(entity_type, identifier))
 
     state.set_generic_entity(entity_type, identifier, data_hash)
