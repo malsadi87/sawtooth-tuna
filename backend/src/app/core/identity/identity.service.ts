@@ -18,7 +18,12 @@ export class IdentityService {
         }
         
         var user = await this.usersService.getUserByEmail(authCredential.email);
-        const payload: JwtPayload = JSON.parse(JSON.stringify({ email: authCredential.email, id: user.id }));
+        const payload: JwtPayload = JSON.parse(JSON.stringify({ 
+            email: authCredential.email, 
+            id: user.id,
+            fullName: user.fullName,
+            token_type: 'Bearer'
+        }));
         return this.jwtService.sign(payload);
     }
 }
