@@ -51,7 +51,7 @@ export class SawtoothUtilityService {
     }
 
     public getGeneericAssetAddress(asset: any, familyName: string, entity_type: string): string {
-        return `${this.getNamespace(familyName)}00${this.getNamespace(entity_type)}${this.hash(asset).slice(0, 64)}`;
+        return `${this.getNamespace(familyName)}00${this.getNamespace(entity_type)}${this.hash(asset).slice(0, 54)}`;
     }
 
     public async createAsset(payload: any, entity_type: string = null, tpName: string = 'generic'): Promise<string> {
@@ -116,9 +116,7 @@ export class SawtoothUtilityService {
             });
 
             // Encode the Batch in a BatchList
-            const batchListBytes = BatchList.encode({
-                batches: [batch]
-            }).finish();
+            const batchListBytes = BatchList.encode({ batches: [batch] }).finish();
 
             // Submit BatchList to Validator
             const result = await firstValueFrom(this.httpService.post(`${this.sawtoothConfig.API_URL}/batches`, batchListBytes, {
