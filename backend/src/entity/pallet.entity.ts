@@ -23,6 +23,7 @@ export class PalletEntity extends BaseEntity {
     tripNo: number;
 
     @ManyToOne((type) => TripEntity, x => x.pallets)
+    @JoinColumn({ name: 'TripNo', referencedColumnName: 'tripNo' })
     trip: TripEntity;
 
     @OneToMany((entity) => PalletEventEntity, (x) => x.palletNum)

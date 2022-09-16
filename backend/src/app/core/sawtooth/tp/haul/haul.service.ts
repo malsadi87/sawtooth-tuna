@@ -30,6 +30,6 @@ export class HaulService {
         // Save in Sawtooth
         await this.sawtoothUtilityService.createAsset(newHaul, this.entityName);
 
-        return newHaul.launchDateTime;
+        return haul.launchDateTime;
     }
 }

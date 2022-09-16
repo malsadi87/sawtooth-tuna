@@ -6,6 +6,7 @@ import { TripEntity } from "./trip.entity";
 @Entity('Haul')
 export class HaulEntity extends BaseEntity {
     @SawtoothIdentity()
+    @Transform(x => new Date(x.value))
     @PrimaryColumn({ generated: false, type: 'timestamp', name: 'LaunchDateTime', nullable: false })
     launchDateTime: Date;
 
@@ -35,5 +36,6 @@ export class HaulEntity extends BaseEntity {
     tripNo: number;
 
     @ManyToOne((type) => TripEntity, x => x.hauls)
+    @JoinColumn({ name: 'TripNo', referencedColumnName: 'tripNo' })
     trip: TripEntity;
 }
