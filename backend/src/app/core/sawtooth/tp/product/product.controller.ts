@@ -16,4 +16,9 @@ export class ProductController {
     async create(@Body() productPayload: ProductCreationDto): Promise<number> {
         return await this.productService.addNewProduct(productPayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<ProductEntity[]> {
+        return this.productService.getAllProduct();
+    }
 }
