@@ -3,12 +3,8 @@ export const RouteUrl = {
     signup: '/auth/signup',
     login: '/auth/login',
     trip: '/trip',
-    newTrip: '/trip/new',
     haul: '/haul',
     pallet: '/pallet',
-    shipment: '/shipment',
+    product: '/product',
     coldStorage: '/coldStorage',
-    batchCreation: '/batchCreation',
-    batchLabelling: '/batchLabelling',
-    batchShipment: '/batchShipment'
 };

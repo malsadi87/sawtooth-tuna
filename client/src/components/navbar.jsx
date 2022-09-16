@@ -25,14 +25,12 @@ class NavBar extends Component {
     }
 
     items = [
+        this.getItem('Product', RouteUrl.product, <SettingOutlined />),
         this.getItem('Trip', RouteUrl.trip, <MailOutlined />),
         this.getItem('Haul', RouteUrl.haul, <AppstoreOutlined />),
         this.getItem('Pallet', RouteUrl.pallet, <SettingOutlined />),
-        this.getItem('Shipment', RouteUrl.shipment, <SettingOutlined />),
         this.getItem('Cold Storage', RouteUrl.coldStorage, <SettingOutlined />),
-        this.getItem('Batch Creation', RouteUrl.batchCreation, <SettingOutlined />),
-        this.getItem('Batch Labelling', RouteUrl.batchLabelling, <SettingOutlined />),
-        this.getItem('Batch Shipment', RouteUrl.batchShipment, <SettingOutlined />)
+
 
     ];
 
