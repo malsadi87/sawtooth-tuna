@@ -13,7 +13,6 @@ export class CatchPackageController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() catchPackagePayload: CatchPackageCreationDto): Promise<string> {
         return await this.catchPackageService.addNewCatchPackage(catchPackagePayload);
     }

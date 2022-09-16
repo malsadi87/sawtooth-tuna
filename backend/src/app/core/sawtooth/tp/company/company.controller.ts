@@ -13,7 +13,6 @@ export class CompanyController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() companyPayload: CompanyCreationDto): Promise<number> {
         return await this.companyService.addNewCompany(companyPayload);
     }

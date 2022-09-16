@@ -13,7 +13,6 @@ export class CustomLevelPackageController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() customePackagePayload: CustomPackageCreationDto): Promise<string> {
         return await this.customLevelPackageService.addNewPackage(customePackagePayload);
     }
