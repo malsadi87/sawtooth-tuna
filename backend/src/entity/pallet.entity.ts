@@ -1,10 +1,12 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
 import { CatchPackageEntity } from "./catchPackage.entity";
 import { PalletEventEntity } from "./palletEvent.entity";
 import { TripEntity } from "./trip.entity";
 
 @Entity('Pallet')
 export class PalletEntity extends BaseEntity {
+    @SawtoothIdentity()
     @PrimaryColumn({ generated: false, type:'varchar', width: 255, name: 'PalletNum', nullable: false })
     palletNum: string;
 

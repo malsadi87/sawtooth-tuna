@@ -28,7 +28,7 @@ export class CustomLevelPackageService {
         const newCustomPackage = await this.customLevelPackageRepository.addNewPackage(customPackage);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCustomPackage, this.entityName, newCustomPackage.consumerPackageId);
+        await this.sawtoothUtilityService.createAsset(newCustomPackage, this.entityName);
 
         return newCustomPackage.consumerPackageId;
     }

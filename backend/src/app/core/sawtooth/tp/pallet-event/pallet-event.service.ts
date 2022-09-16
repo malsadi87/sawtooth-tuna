@@ -32,7 +32,7 @@ export class PalletEventService {
         const newPalletEvent = await this.palletEventRepository.addNew(palletEvent);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newPalletEvent, this.entityName, `${newPalletEvent.palletNum}${newPalletEvent.eventTime.toString()}`);
+        await this.sawtoothUtilityService.createAsset(newPalletEvent, this.entityName);
 
         return { palletNum: newPalletEvent.palletNum, eventTime: newPalletEvent.eventTime };
     }

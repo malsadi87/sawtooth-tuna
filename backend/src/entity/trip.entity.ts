@@ -2,9 +2,11 @@ import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
 import { Transform } from 'class-transformer';
+import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
 
 @Entity({ name: 'Trip' })
 export class TripEntity extends BaseEntity {
+    @SawtoothIdentity()
     @PrimaryColumn({ generated: false, type: 'int', name: 'TripNo', nullable: false })
     tripNo: number;
 

@@ -28,7 +28,7 @@ export class CatchPackageService {
         const newCatchPackage = await this.catchPackageRepository.addNewCatchPackage(catchPackage);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCatchPackage, this.familyName, newCatchPackage.catchPackageId);
+        await this.sawtoothUtilityService.createAsset(newCatchPackage, this.familyName);
 
         return newCatchPackage.catchPackageId;
     }

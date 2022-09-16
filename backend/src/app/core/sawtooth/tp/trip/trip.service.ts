@@ -28,7 +28,7 @@ export class TripService {
         const newTrip = await this.tripRepository.addNewTrip(trip);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newTrip, this.entityName, newTrip.tripNo);
+        await this.sawtoothUtilityService.createAsset(newTrip, this.entityName); 
 
         return newTrip.tripNo;
     }

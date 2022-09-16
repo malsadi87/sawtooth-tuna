@@ -1,8 +1,10 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
 import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
 
 @Entity('Company')
 export class CompanyEntity extends BaseEntity {
+    @SawtoothIdentity()
     @PrimaryColumn({ type: 'int', name: 'CompanyId', nullable: false })
     companyId: number;
 

@@ -28,7 +28,7 @@ export class PalletService {
         const newPallet = await this.palletRepository.addNewPallet(pallet);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newPallet, this.entityName, newPallet.palletNum);
+        await this.sawtoothUtilityService.createAsset(newPallet, this.entityName);
 
         return newPallet.palletNum;
     }

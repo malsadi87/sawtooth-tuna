@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Post, ValidationPipe } from '@nestjs/common';
 import { UsersService } from '../../feature/users/users.service';
-import { AllowAnonymous } from '../../utility/decorator/AllowAnonymous.decorator';
+import { AllowAnonymous } from '../../utility/decorator/allowAnonymous.decorator';
 import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { UserCreationDto } from '../../utility/dto/user-creation.dto';
 import { KeyService } from '../sawtooth/key/key.service';

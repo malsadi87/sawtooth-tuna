@@ -28,7 +28,7 @@ export class ProductService {
         const newProduct = await this.productRepository.addNewProduct(product);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newProduct, this.entityName, newProduct.productId);
+        await this.sawtoothUtilityService.createAsset(newProduct, this.entityName);
 
         return newProduct.productId;
     }

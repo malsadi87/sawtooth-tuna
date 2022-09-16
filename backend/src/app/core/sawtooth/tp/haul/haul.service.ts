@@ -28,7 +28,7 @@ export class HaulService {
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newHaul, this.entityName, newHaul.launchDateTime);
+        await this.sawtoothUtilityService.createAsset(newHaul, this.entityName);
 
         return newHaul.launchDateTime;
     }

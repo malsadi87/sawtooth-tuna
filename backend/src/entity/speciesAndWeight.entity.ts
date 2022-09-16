@@ -1,8 +1,10 @@
 import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
 
 @Entity('SpeciesAndWeight')
 export class SpeciesAndWeightEntity extends BaseEntity {
+    @SawtoothIdentity()
     @PrimaryGeneratedColumn('increment', { name: 'SpeciesId' })
     speciesId: number;
 

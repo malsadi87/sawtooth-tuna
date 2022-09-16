@@ -28,7 +28,7 @@ export class CompanyService {
         const newCompany =  await this.companyRepository.addNewCompany(company);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCompany, this.entityName, newCompany.companyId);
+        await this.sawtoothUtilityService.createAsset(newCompany, this.entityName);
 
         return newCompany.companyId;
     }

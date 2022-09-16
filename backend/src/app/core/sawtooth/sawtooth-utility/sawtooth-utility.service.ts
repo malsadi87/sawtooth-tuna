@@ -5,9 +5,8 @@ import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
 import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
-import 'reflect-metadata';
-import * as crypto from 'crypto';
 import { LoginUserInfoService } from '../../../shared/loginUserInfo/login-user-info.service';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class SawtoothUtilityService {
@@ -33,6 +32,20 @@ export class SawtoothUtilityService {
         return { family: config.FAMILY, version: config.VERSION, prefix: config.PREFIX };
     }
 
+    // Find the identifiers in a entity using SawtoothIdentity(reflection to 
+    // find the identoies(primary key), which is/are will be used to generate the address of the block)
+    private getIdentity(payload: any): string {
+        if (!payload['identities'])
+            throw 'Invalid Object';
+
+        const identifierKeys: [string] = payload['identities'];
+        let identifier = '';
+        identifierKeys.forEach(key => {
+            identifier = identifier.concat((payload[key] instanceof Date) ? payload[key].toLocaleString(): String(payload[key]));
+        });
+        return identifier;
+    }
+
     public getAssetAddress(asset: any, familyName: string): string {
         return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
     }
@@ -41,7 +54,7 @@ export class SawtoothUtilityService {
         return `${this.getNamespace(familyName)}00${this.getNamespace(entity_type)}${this.hash(asset).slice(0, 64)}`;
     }
 
-    public async createAsset(payload: any, entity_type: string = null, identifier: any = null, tpName: string = 'generic'): Promise<string> {
+    public async createAsset(payload: any, entity_type: string = null, tpName: string = 'generic'): Promise<string> {
         try {
             // Getting Logged in user Info
             const userInfo = this.loginUserInfoService.getInfo();
@@ -51,10 +64,10 @@ export class SawtoothUtilityService {
 
 
             // If entity_type is present then its a generic entity save call
-            if(entity_type && identifier) {
-                // Find the identifiers in a entity
-                // Reflection not working have to find out why?
-                // const properties: string[] = Reflect.getMetadata(Symbol('PrimaryColumn'), payload);
+            if(entity_type) {
+                // Find the identifiers in a entity using SawtoothIdentity(reflection to 
+                // find the identoies(primary key), which is/are will be used to generate the address of the block)
+                const identifier = this.getIdentity(payload);
 
                 payload = {
                     entity_type: entity_type,

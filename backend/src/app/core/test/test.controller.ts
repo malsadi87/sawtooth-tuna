@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { AllowAnonymous } from '../../utility/decorator/AllowAnonymous.decorator';
+import { AllowAnonymous } from '../../utility/decorator/allowAnonymous.decorator';
 import { TestService } from './test.service';
 
 @Controller('test')

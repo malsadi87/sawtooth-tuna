@@ -28,7 +28,7 @@ export class SpeciesAndWeightService {
         const newSpecies = await this.speciesAndWeightRepository.addNew(species);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newSpecies, this.entityName, newSpecies.speciesId);
+        await this.sawtoothUtilityService.createAsset(newSpecies, this.entityName);
 
         return newSpecies.speciesId;
     }
