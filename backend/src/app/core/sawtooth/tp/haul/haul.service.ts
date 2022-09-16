@@ -24,7 +24,7 @@ export class HaulService {
     }
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
-        const haul = plainToClass(HaulEntity, haulPayload);
+        const haul = plainToClass(HaulEntity, haulPayload); 
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 
         // Save in Sawtooth
