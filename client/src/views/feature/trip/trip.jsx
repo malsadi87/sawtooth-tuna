@@ -3,7 +3,7 @@ import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './trip.css';
-
+import tripService from '../../../services/feature/trip/trip.service';
 
 
 const layout = {
@@ -36,34 +36,60 @@ class Trip extends Component {
             tripNumber: '',
             tripYearNo: '',
             vesselName: '',
+            departurePort: '',
             landingPort: '',
             longText: ''
-            }
+            },
+        trips: null
      }
 
-    onFinish = (values) => {
+    onFinish = async (values) => {
         console.log(values);
+        const result = await tripService.createNew(values);
+        console.log(result);
     };
 
+    getAllTrip = async () => {
+      const result = await tripService.getAll();
+      console.log(result)
+      this.setState({trips: result.map((info)=>{
+        return(
+          <tr key={info.tripNo}>
+            <td>{info.tripNo}</td>
+            <td>{info.departureDate}</td>
+            <td>{info.landingDate}</td>
+            <td>{info.supplierName}</td>
+            <td>{info.supplierNumber}</td>
+            <td>{info.tripYearNo}</td>
+            <td>{info.vesselName}</td>
+            <td>{info.landingPort}</td>
+            <td>{info.longText}</td>
+          </tr>
+        )
+      })})
+    }
 
     render() {
         return (
+          <div>
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
-            <Form.Item
-                name={'tripId'}
-                label="Trip ID"
-                rules={[
-                  {
+
+          <Form.Item
+            name={'tripNo'}
+            label="Trip Number"
+            rules={[
+                {
                     required: true,
-                  },
-                ]}
-              >
-              <Input />
-            </Form.Item>
+                    type: 'number'
+                },
+               ]}
+             >
+           <InputNumber />
+          </Form.Item>
 
              <Form.Item
              name={'departureDate'}
-             label="Date"
+             label="Departure date"
              rules={[
                   {
                     required: true
@@ -75,7 +101,7 @@ class Trip extends Component {
 
           <Form.Item
              name={'landingDate'}
-             label="Landing Date"
+             label="Landing date"
              rules={[
                   {
                     required: true
@@ -112,19 +138,6 @@ class Trip extends Component {
            <InputNumber />
           </Form.Item>
 
-           <Form.Item
-            name={'tripNumber'}
-            label="Trip Number"
-            rules={[
-                {
-                    required: true,
-                    type: 'number'
-                },
-               ]}
-             >
-           <InputNumber />
-          </Form.Item>
-
 
          <Form.Item
             name={'tripWithinYearNo'}
@@ -151,7 +164,17 @@ class Trip extends Component {
                <Input />
             </Form.Item>
 
-
+            <Form.Item
+            name={'departurePort'}
+            label="Departure Port"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+            >
+            <Input />
+          </Form.Item>
 
            <Form.Item
             name={'landingPort'}
@@ -182,8 +205,30 @@ class Trip extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllTrip}>Get All Trip</Button>
           </Form.Item>
         </Form>
+        
+          {this.state.trips ? 
+          <table style={{margin: 'auto'}}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Departure date</th>
+                <th>Landing date</th>
+                <th>Supplier Name</th>
+                <th>Supplier Number</th>
+                <th>Vessel Name</th>
+                <th>Departure Port</th>
+                <th>Landing Port</th>
+                <th>Long Text</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.trips}
+            </tbody>
+          </table> : ''}
+        </div>
         )
     };
 }

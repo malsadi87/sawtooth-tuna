@@ -27,6 +27,12 @@ export const APIBasePath = {
                 getAll: '/sawtooth/tp/product/',
                 getById: '/sawtooth/tp/product/getById/:id',
                 createNew: '/sawtooth/tp/product/addNew'
+            },
+            trip: {
+                base: '/sawtooth/tp/trip',
+                getAll: '/sawtooth/tp/trip/',
+                getById: '/sawtooth/tp/trip/getById/:id',
+                createNew: '/sawtooth/tp/trip/addNew'
             }
         }
     }

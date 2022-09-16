@@ -19,7 +19,7 @@ export class TripController {
     }
 
     @Get('/')
-    async hallo(): Promise<String> {
-        return this.tripService.testMe();
+    async getAll(): Promise<TripEntity[]> {
+        return this.tripService.getAllTrip();
     }
 }
