@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
 
 @Entity('Company')

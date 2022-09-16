@@ -6,6 +6,7 @@ import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
 import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
 import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import { LoginUserInfoService } from '../../../shared/loginUserInfo/login-user-info.service';
+import { SAWTOOTH_IDENTITY_KEY } from '../../../utility/decorator/sawtoothIdentity.decorator';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -35,10 +36,9 @@ export class SawtoothUtilityService {
     // Find the identifiers in a entity using SawtoothIdentity(reflection to 
     // find the identoies(primary key), which is/are will be used to generate the address of the block)
     private getIdentity(payload: any): string {
-        if (!payload['identities'])
-            throw 'Invalid Object';
+        if (!payload[SAWTOOTH_IDENTITY_KEY]) throw new Error('Invalid Object!');
 
-        const identifierKeys: [string] = payload['identities'];
+        const identifierKeys: [string] = payload[SAWTOOTH_IDENTITY_KEY];
         let identifier = '';
         identifierKeys.forEach(key => {
             identifier = identifier.concat((payload[key] instanceof Date) ? payload[key].toLocaleString(): String(payload[key]));
@@ -61,7 +61,6 @@ export class SawtoothUtilityService {
 
             // Get Transaction Famil Details
             const { family: familyName, version: familyVersion, prefix: familyNamespace } = this.getTransactionFamilDetails(tpName);
-
 
             // If entity_type is present then its a generic entity save call
             if(entity_type) {
@@ -137,23 +136,21 @@ export class SawtoothUtilityService {
         }
     }
 
-    public getAsset(address: string): any {
+    public async getAsset(address: string): Promise<any> {
         try {
-            this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`)
-                .subscribe(res => {
-                    if (res.status == 200) {
-                        if (res.data.data.length == 0)
-                            throw new Error('No result found, try another ID');
-                        else {
-                            const response = res.data.data[0];
-                            if (response !== '')
-                                return JSON.parse(atob(response.data));
-                            else
-                                throw new Error('Empty Response!'); 
-                        }
-                    } else
-                        throw new Error('An error occured, Please try again later');
-                });
+            const response = await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`));
+            if (response.status == 200) {
+                if (response.data.data.length == 0)
+                    throw new Error('No result found, try another ID');
+                else {
+                    const result = response.data.data[0];
+                    if (result !== '')
+                        return JSON.parse(atob(result.data));
+                    else
+                        throw new Error('Empty Response!'); 
+                }
+            } else
+                throw new Error('An error occured, Please try again later');
         }
         catch (err) {
             console.error(err);

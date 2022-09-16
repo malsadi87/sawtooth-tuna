@@ -1,6 +1,6 @@
 import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { PalletEntity } from "./pallet.entity";
 
 @Entity('PalletEvent')

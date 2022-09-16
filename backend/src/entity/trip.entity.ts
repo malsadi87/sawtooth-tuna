@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
 import { Transform } from 'class-transformer';
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
 @Entity({ name: 'Trip' })
 export class TripEntity extends BaseEntity {

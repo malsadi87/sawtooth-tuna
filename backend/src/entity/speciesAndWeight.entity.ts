@@ -1,6 +1,6 @@
 import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
 @Entity('SpeciesAndWeight')
 export class SpeciesAndWeightEntity extends BaseEntity {

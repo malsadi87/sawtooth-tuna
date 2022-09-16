@@ -1,6 +1,6 @@
 import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { TripEntity } from "./trip.entity";
 
 @Entity('Haul')

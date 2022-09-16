@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
-import { SawtoothIdentity } from "../app/utility/decorator/sawtooth-Identity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
 @Entity({ name: 'Product' })
 export class ProductEntity extends BaseEntity {
