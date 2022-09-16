@@ -14,8 +14,10 @@ class Product extends Component {
       name: '',
       value: '',
       productNumber: ''
-    }
-  }
+    },
+    products: null
+  };
+
 
   layout = {
     labelCol: {
@@ -43,65 +45,95 @@ class Product extends Component {
     console.log(result);
   };
 
+
   getAllProduct = async () => {
     const result = await productService.getAll();
-    console.log(result);
+    this.setState({products: result.map((info)=>{
+      return(
+        <tr key={info.productId}>
+          <td>{info.productId}</td>
+          <td>{info.productName}</td>
+          <td>{info.productDescription}</td>
+          <td>{info.productNum}</td>
+        </tr>
+      )
+    })})
   }
 
   render() {
     return (
-      <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
-        <Form.Item name={'productId'} label="Product ID" rules={[{ required: true }]}>
-          <InputNumber />
-        </Form.Item>
+      <div>
+        <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
+          <Form.Item name={'productId'} label="Product ID" rules={[{ required: true }]}>
+            <InputNumber/>
+          </Form.Item>
 
-        <Form.Item name={'productName'} label="Product Name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
+          <Form.Item name={'productName'} label="Product Name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
 
-        <Form.Item name={'productDescription'} label="Description" rules={[{ required: false }]}>
-          <Input />
-        </Form.Item>
+          <Form.Item name={'productDescription'} label="Description" rules={[{ required: false }]}>
+            <Input />
+          </Form.Item>
 
-        <Form.List name="productAttribute">
-          {(fields, { add, remove }) => (
-            <>
-              {fields.map(({ key, name, ...restField }) => (
-                <Space key={key} style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
-                  <Form.Item {...restField} name={[name, 'name']} rules={[{ required: true, message: 'Missing attribute name' }]}>
-                    <Input placeholder="Attribute Name" />
+          {/* The attributes for Product are not used anywhere else than 
+          here and its not clear if there will be such a variable. 
+          Commenting out the related frontend code for now. */}
+          {/*
+          <Form.List name="productAttribute">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space key={key} style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
+                    <Form.Item {...restField} name={[name, 'name']} rules={[{ required: true, message: 'Missing attribute name' }]}>
+                      <Input placeholder="Attribute Name" />
+                    </Form.Item>
+
+                    <Form.Item {...restField} name={[name, 'value']} rules={[{ required: true, message: 'Missing attribute value' }]}>
+                      <Input placeholder="Attribute Value" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+
+              <Space style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
+                <Form.Item>
+                    <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
+                      Add Attribute
+                    </Button>
                   </Form.Item>
+              </Space>
+              </>
+            )}
+          </Form.List>
+          */}
+          <Form.Item name={'productNum'} label="Product Number" rules={[{ required: true }]}>
+            <InputNumber />
+          </Form.Item>
 
-                  <Form.Item {...restField} name={[name, 'value']} rules={[{ required: true, message: 'Missing attribute value' }]}>
-                    <Input placeholder="Attribute Value" />
-                  </Form.Item>
-                  <MinusCircleOutlined onClick={() => remove(name)} />
-                </Space>
-              ))}
+          <Form.Item wrapperCol={{ ...this.layout.wrapperCol, offset: 8 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
 
-            <Space style={{ display: 'flex', marginBottom: 8, paddingLeft: '33.3%' }} align="baseline">
-              <Form.Item>
-                  <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
-                    Add Attribute
-                  </Button>
-                </Form.Item>
-            </Space>
-            </>
-          )}
-        </Form.List>
-
-        <Form.Item name={'productNum'} label="Product Number" rules={[{ required: true }]}>
-          <InputNumber />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ ...this.layout.wrapperCol, offset: 8 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-
-          <Button className='ms-3' type="primary" onClick={this.getAllProduct}>Get All Product</Button>
-        </Form.Item>
-      </Form>
+            <Button className='ms-3' type="primary" onClick={this.getAllProduct}>Get All Product</Button>
+          </Form.Item>
+        </Form>
+        {this.state.products ? 
+        <table style={{margin: 'auto'}}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.products}
+          </tbody>
+        </table> : ''}
+      </div>
     )
   };
 }
