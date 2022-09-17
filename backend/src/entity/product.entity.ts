@@ -15,5 +15,4 @@ export class ProductEntity extends BaseEntity {
 
     @Column({ type:'int', name: 'ProductNum', nullable: false })
     productNum: number;
-
 }

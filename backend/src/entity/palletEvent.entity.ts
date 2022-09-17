@@ -27,5 +27,6 @@ export class PalletEventEntity extends BaseEntity {
     shock: JSON;
 
     @ManyToOne((type) => PalletEntity, x => x.palletEvenets)
+    @JoinColumn({ name: 'PalletNum', referencedColumnName: 'palletNum' })
     pallet: PalletEntity;
 }

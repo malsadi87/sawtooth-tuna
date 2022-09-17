@@ -18,9 +18,10 @@ export class CatchPackageEntity extends BaseEntity {
     palletNum: string;
 
     @ManyToOne((type) => PalletEntity, x => x.catchPackages)
+    @JoinColumn({ name: 'PalletNum', referencedColumnName: 'palletNum' })
     pallet: PalletEntity;
 
-    @OneToMany((type) => CustomLevelPackageEntity, (x) => x.catchPackageId)
+    @OneToMany((type) => CustomLevelPackageEntity, (x) => x.catchPackage)
     @JoinColumn({ referencedColumnName: 'CatchPackageId' })
     customLevelPackages: CustomLevelPackageEntity[];
 }

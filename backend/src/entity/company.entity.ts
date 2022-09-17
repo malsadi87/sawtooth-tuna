@@ -17,7 +17,7 @@ export class CompanyEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'ContactInfo', nullable: false })
     contactInfo: string;
 
-    @OneToMany((type) => CustomLevelPackageEntity, (x) => x.agent)
+    @OneToMany((type) => CustomLevelPackageEntity, (x) => x.company)
     @JoinColumn({ referencedColumnName: 'Agent' })
     customLevelPackages: CustomLevelPackageEntity[]
 }

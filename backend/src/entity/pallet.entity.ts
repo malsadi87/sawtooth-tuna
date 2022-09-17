@@ -26,11 +26,11 @@ export class PalletEntity extends BaseEntity {
     @JoinColumn({ name: 'TripNo', referencedColumnName: 'tripNo' })
     trip: TripEntity;
 
-    @OneToMany((entity) => PalletEventEntity, (x) => x.palletNum)
+    @OneToMany((entity) => PalletEventEntity, (x) => x.pallet)
     @JoinColumn({ referencedColumnName: 'PalletNum' })
     palletEvenets: PalletEventEntity[];
 
-    @OneToMany((entity) => CatchPackageEntity, (x) => x.palletNum)
+    @OneToMany((entity) => CatchPackageEntity, (x) => x.pallet)
     @JoinColumn({ referencedColumnName: 'PalletNum' })
     catchPackages: CatchPackageEntity[];
 }

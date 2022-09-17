@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, Index, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { UsersEntity } from "./users.entity";
 
 @Entity('UserLogins')
@@ -17,5 +17,6 @@ export class UserLoginsEntity extends BaseEntity {
     userId: string;
 
     @ManyToOne((type) => UsersEntity, x => x.logins)
+    @JoinColumn({ name: 'UserId', referencedColumnName: 'id' })
     user: UsersEntity;
 }

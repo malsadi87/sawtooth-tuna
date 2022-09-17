@@ -17,7 +17,7 @@ export class RolesEntity extends BaseEntity {
     @Column({ type:'varchar', width: 4000, name: 'ConcurrencyStamp', nullable: true })
     concurrencyStamp: string;
 
-    @OneToMany((entity) => RoleClaimsEntity, (x) => x.roleId, {
+    @OneToMany(() => RoleClaimsEntity, (x) => x.role, {
         onDelete: "CASCADE",
         onUpdate: "NO ACTION"
     })
@@ -25,6 +25,6 @@ export class RolesEntity extends BaseEntity {
     claims: RoleClaimsEntity[];
 
     @OneToMany(() => UserRolesEntity, userRole => userRole.role)
-    @JoinColumn({ referencedColumnName: 'RoleId' })
+    @JoinColumn({ referencedColumnName: 'roleId' })
     userRoles!: UserRolesEntity[];
 }
