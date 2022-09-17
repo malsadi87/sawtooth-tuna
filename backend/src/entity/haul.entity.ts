@@ -13,10 +13,10 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'LaunchPosition', nullable: false })
     launchPosition: string;
 
-    @Column({ type:'numeric', precision: 8, scale: 6, name: 'LaunchLatitude', nullable: false })
+    @Column({ type:'numeric', precision: 20, scale: 18, name: 'LaunchLatitude', nullable: false })
     launchLatitude: number;
 
-    @Column({ type:'numeric', precision: 8, scale: 6, name: 'LaunchLongitude', nullable: false })
+    @Column({ type:'numeric', precision: 20, scale: 18, name: 'LaunchLongitude', nullable: false })
     launchLongitude: number;
 
     @Transform(x => new Date(x.value))
@@ -26,10 +26,10 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'HaulPosition', nullable: false })
     haulPosition: string;
 
-    @Column({ type:'numeric', name: 'HaulLatitude', nullable: false })
+    @Column({ type:'numeric', precision: 20, scale: 18, name: 'HaulLatitude', nullable: false })
     haulLatitude: number;
 
-    @Column({ type:'numeric', precision: 8, scale: 6, name: 'HaulLongitude', nullable: false })
+    @Column({ type:'numeric', precision: 20, scale: 18, name: 'HaulLongitude', nullable: false })
     haulLongitude: number;
 
     @PrimaryColumn({ generated: false, name: 'TripNo', type: 'int', nullable: false })

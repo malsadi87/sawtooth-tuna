@@ -1,26 +1,31 @@
-import { Catch, ArgumentsHost, HttpException } from '@nestjs/common';
+import { Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { BaseExceptionFilter } from '@nestjs/core';
 const { NODE_ENV } = process.env;
 
-@Catch(HttpException)
+@Catch()
 export class ApiExceptionFilter extends BaseExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
-    if (NODE_ENV && NODE_ENV == 'dev') {
-      return super.catch(exception, host);
-    }
-
+  catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status = exception.getStatus();
+    const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    const responseObj = {
+      statusCode: status,
+      timestamp: new Date().toISOString(),
+      path: request.url
+    };
+
+    if (NODE_ENV && NODE_ENV == 'dev') {
+      if (exception instanceof HttpException) return super.catch(exception, host);
+      else {
+        responseObj['error'] = (exception as Error).message;
+      }
+    }
 
     response
       .status(status)
-      .json({
-        statusCode: status,
-        timestamp: new Date().toISOString(),
-        path: request.url,
-      });
+      .json(responseObj);
   }
 }
