@@ -7,14 +7,14 @@ import { TripEntity } from "./trip.entity";
 @Entity('Pallet')
 export class PalletEntity extends BaseEntity {
     @SawtoothIdentity()
-    @PrimaryColumn({ generated: false, type:'varchar', width: 255, name: 'PalletNum', nullable: false })
-    palletNum: string;
+    @PrimaryColumn({ generated: true, type:'int', name: 'PalletNum', nullable: false })
+    palletNum: number;
 
     @Column({ type:'int', name: 'ProductNum', nullable: false })
     productNum: number;
 
-    @Column({ type:'varchar', width: 255, name: 'SupplierId', nullable: false })
-    supplierId: string;
+    @Column({ type:'int', name: 'SupplierId', nullable: false })
+    supplierId: number;
 
     @Column({ type:'numeric', precision: 9, scale: 4, name: 'PalletWeight', nullable: false })
     palletWeight: number;

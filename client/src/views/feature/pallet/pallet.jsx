@@ -4,6 +4,7 @@ import { RouteUrl } from '../../../constants/routeUrls';
 import './pallet.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import palletService from '../../../services/feature/pallet/pallet.service';
 
 
 const layout = {
@@ -32,44 +33,24 @@ class Pallet extends Component {
             palletVID: '',
             productID: '',
             date: '',
-            palletNumber: '',
+            palletNum: '',
             productNum: '',
             weight: '',
             temperatureIn: ''
          }
     }
 
-    onFinish = (values) => {
-        console.log(values);
-    };
+    onFinish = async (values) => {
+      console.log(values)
+      const result = await palletService.createNew(values);
+      console.log(result);
+  };
 
     render() {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
             <Form.Item
-                name={'palletID'}
-                label="Pallet ID"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-              <Input />
-            </Form.Item>
-            <Form.Item
-                name={'palletVID'}
-                label="Pallet VID"
-                rules={[
-                  {
-                    required: true
-                  },
-                ]}
-              >
-              <Input />
-            </Form.Item>
-            <Form.Item
-            name={'productID'}
+            name={'productNum'}
             label="Product ID"
             rules={[
               {
@@ -82,15 +63,9 @@ class Pallet extends Component {
             <InputNumber />
           </Form.Item>
 
-         <Form.Item
-             name={'date'}
-             label="Date">
-            <DatePicker />
-         </Form.Item>
-
-       <Form.Item
-        name={'palletNumber'}
-        label="Pallet Number"
+        <Form.Item
+        name={'supplierId'}
+        label="Supplier Id"
         rules={[
           {
             required: true,
@@ -103,21 +78,7 @@ class Pallet extends Component {
       </Form.Item>
 
         <Form.Item
-        name={'productNum'}
-        label="Product Number"
-        rules={[
-          {
-            required: true,
-            type: 'number',
-            min: 0
-          },
-        ]}
-      >
-        <InputNumber />
-      </Form.Item>
-
-        <Form.Item
-        name={'weight'}
+        name={'palletWeight'}
         label="Weight"
         rules={[
           {
@@ -130,7 +91,19 @@ class Pallet extends Component {
         <InputNumber />
       </Form.Item>
 
-
+      <Form.Item
+        name={'tripNo'}
+        label="Trip Id"
+        rules={[
+          {
+            required: true,
+            type: 'number',
+            min: 0
+          },
+        ]}
+      >
+        <InputNumber />
+      </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">

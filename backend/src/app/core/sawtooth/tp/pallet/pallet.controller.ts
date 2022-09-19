@@ -7,13 +7,13 @@ import { PalletService } from './pallet.service';
 export class PalletController {
     constructor(private readonly palletService: PalletService) {}
 
-    @Get(':palletNumber')
-    async getById(@Param('palletNumber') palletNumber: string): Promise<PalletEntity> {
-        return await this.palletService.getByPalletNo(palletNumber);
+    @Get(':palletNum')
+    async getById(@Param('palletNum') palletNum: number): Promise<PalletEntity> {
+        return await this.palletService.getByPalletNo(palletNum);
     }
 
     @Post('addNew')
-    async create(@Body() palletPayload: PalletCreationDto): Promise<string> {
+    async create(@Body() palletPayload: PalletCreationDto): Promise<number> {
         return await this.palletService.addNewPallet(palletPayload);
     }
 }

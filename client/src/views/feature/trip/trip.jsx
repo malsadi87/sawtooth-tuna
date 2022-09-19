@@ -58,12 +58,10 @@ class Trip extends Component {
             <td>{info.tripNo}</td>
             <td>{info.departureDate}</td>
             <td>{info.landingDate}</td>
-            <td>{info.supplierName}</td>
-            <td>{info.supplierNumber}</td>
+            <td>{info.departurePort}</td>
+            <td>{info.landingPort}</td>
             <td>{info.tripYearNo}</td>
             <td>{info.vesselName}</td>
-            <td>{info.landingPort}</td>
-            <td>{info.longText}</td>
           </tr>
         )
       })})
@@ -111,33 +109,30 @@ class Trip extends Component {
             <DatePicker />
          </Form.Item>
 
-         <Form.Item
-            name={'supplierName'}
-            label="Supplier Name"
-            rules={[
-                {
-                    required: false,
-                    type: 'name'
-                },
-               ]}
-             >
-           <Input />
-          </Form.Item>
-
 
          <Form.Item
-            name={'supplierNumber'}
-            label="Supplier Number"
+            name={'departurePort'}
+            label="Departure Port"
             rules={[
-                {
-                    required: true,
-                    type: 'number'
-                },
-               ]}
-             >
-           <InputNumber />
+              {
+                required: true
+              },
+            ]}
+            >
+            <Input />
           </Form.Item>
 
+           <Form.Item
+            name={'landingPort'}
+            label="Landing Port"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+            >
+            <Input />
+          </Form.Item>
 
          <Form.Item
             name={'tripWithinYearNo'}
@@ -164,43 +159,6 @@ class Trip extends Component {
                <Input />
             </Form.Item>
 
-            <Form.Item
-            name={'departurePort'}
-            label="Departure Port"
-            rules={[
-              {
-                required: true
-              },
-            ]}
-            >
-            <Input />
-          </Form.Item>
-
-           <Form.Item
-            name={'landingPort'}
-            label="Landing Port"
-            rules={[
-              {
-                required: true
-              },
-            ]}
-            >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-                name={'longText'}
-                label="Long Text"
-                rules={[
-                  {
-                    required: false
-                  },
-                ]}
-               >
-               <Input.TextArea />
-            </Form.Item>
-
-
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit
@@ -216,12 +174,9 @@ class Trip extends Component {
                 <th>ID</th>
                 <th>Departure date</th>
                 <th>Landing date</th>
-                <th>Supplier Name</th>
-                <th>Supplier Number</th>
-                <th>Vessel Name</th>
                 <th>Departure Port</th>
                 <th>Landing Port</th>
-                <th>Long Text</th>
+                <th>Vessel Name</th>
               </tr>
             </thead>
             <tbody>

@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS "Haul" (
 );
 
 CREATE TABLE IF NOT EXISTS "Pallet" (
-    "PalletNum" VARCHAR(255) PRIMARY KEY,
+    "PalletNum" SERIAL PRIMARY KEY,
     "ProductNum" INT NOT NULL,
-    "SupplierId" VARCHAR(255) NOT NULL,
+    "SupplierId" INT NOT NULL,
     "PalletWeight" NUMERIC(9, 4) NOT NULL,
     "TripNo" INT NOT NULL,
     FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS "Pallet" (
 
 CREATE TABLE IF NOT EXISTS "PalletEvent" (
     "EventTime" TIMESTAMP PRIMARY KEY,
-    "PalletNum" VARCHAR(255) NOT NULL,
+    "PalletNum" INT NOT NULL,
     "Temperature" JSON NOT NULL,
     "Location" JSON NOT NULL,
     "Tilt" JSON NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS "PalletEvent" (
 CREATE TABLE IF NOT EXISTS "CatchPackage" (
     "CatchPackageId" VARCHAR(255) PRIMARY KEY,
     "PackingDate" TIMESTAMP NOT NULL,
-    "PalletNum" VARCHAR(255) NOT NULL,
+    "PalletNum" INT NOT NULL,
     FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
 );
 

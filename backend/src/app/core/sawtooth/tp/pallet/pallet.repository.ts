@@ -13,8 +13,8 @@ export class PalletRepository extends Repository<PalletEntity> {
         return result;
     }
 
-    async getByPalletNo(palletNumber: string): Promise<PalletEntity> {
-        return await this.findOneBy({ palletNum: palletNumber });
+    async getByPalletNo(palletNum: number): Promise<PalletEntity> {
+        return await this.findOneBy({ palletNum: palletNum });
     }
 
     async addNewPallet(newPallet: PalletEntity): Promise<PalletEntity> {

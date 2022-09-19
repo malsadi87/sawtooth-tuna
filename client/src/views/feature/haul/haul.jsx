@@ -48,7 +48,6 @@ class Haul extends Component {
      }
 
      onFinish = async (values) => {
-      console.log(values);
       const result = await haulService.createNew(values);
       console.log(result);
   };
