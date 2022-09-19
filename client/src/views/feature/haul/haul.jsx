@@ -5,6 +5,7 @@ import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Space } from 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './haul.css';
 import haulService from '../../../services/feature/haul/haul.service';
+import moment from 'moment';
 
 
 const layout = {
@@ -30,9 +31,10 @@ class Haul extends Component {
    state = {
         haulForm: {
             haulId: '',
-            launchDate: '',
-            launchTime: '',
+            launchDateTime: '',
+            haulDateTime: '',
             launchPosition: '',
+            haulPosition: '',
             launchLatitude: '',
             launchLongitude: '',
             tripId: '',
@@ -68,29 +70,18 @@ class Haul extends Component {
 
             {/*Launch Date*/}
             <Form.Item
-             name={'launchDate'}
-             label="Launch Date"
+             name={'launchDateTime'}
+             label="Launch Date Time"
              rules={[
                   {
                     required: true
                   },
                 ]}
                 >
-            <DatePicker />
-         </Form.Item>
-
-          {/*Launch Time*/}
-            <Form.Item
-             name={'launchTime'}
-             label="Launch Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <TimePicker />
-         </Form.Item>
+            <DatePicker 
+            showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+            />
+          </Form.Item>
 
           {/*Launch Position*/}
           <Form.Item
@@ -133,28 +124,17 @@ class Haul extends Component {
 
         {/*Haul Date*/}
         <Form.Item
-             name={'haulDate'}
-             label="Haul Date"
+             name={'haulDateTime'}
+             label="Haul Date Time"
              rules={[
                   {
                     required: true
                   },
                 ]}
                 >
-            <DatePicker />
-         </Form.Item>
-
-          {/*Haul Time*/}
-            <Form.Item
-             name={'haulTime'}
-             label="Haul Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <TimePicker />
+            <DatePicker 
+            showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+            />
          </Form.Item>
 
           {/*Haul Position*/}
