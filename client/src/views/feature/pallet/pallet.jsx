@@ -37,7 +37,8 @@ class Pallet extends Component {
             productNum: '',
             weight: '',
             temperatureIn: ''
-         }
+         },
+      pallets: null
     }
 
     onFinish = async (values) => {
@@ -46,8 +47,25 @@ class Pallet extends Component {
       console.log(result);
   };
 
+    getAllPallet = async () => {
+      const result = await palletService.getAll();
+      console.log(result)
+      this.setState({pallets: result.map((info)=>{
+        return(
+          <tr key={info.palletNum}>
+            <td>{info.palletNum}</td>
+            <td>{info.productNum}</td>
+            <td>{info.supplierId}</td>
+            <td>{info.palletWeight}</td>
+            <td>{info.tripNo}</td>
+          </tr>
+        )
+      })})
+    }
+  
     render() {
         return (
+          <div>
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
             <Form.Item
             name={'productNum'}
@@ -109,8 +127,26 @@ class Pallet extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Pallet</Button>
+
           </Form.Item>
         </Form>
+        {this.state.pallets ? 
+          <table style={{margin: 'auto'}}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Product ID</th>
+                <th>Supplier ID</th>
+                <th>Weight</th>
+                <th>Trip ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.pallets}
+            </tbody>
+          </table> : ''}
+        </div>
         )
     };
 }

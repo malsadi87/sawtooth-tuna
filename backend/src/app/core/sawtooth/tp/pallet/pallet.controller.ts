@@ -16,4 +16,9 @@ export class PalletController {
     async create(@Body() palletPayload: PalletCreationDto): Promise<number> {
         return await this.palletService.addNewPallet(palletPayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<PalletEntity[]> {
+        return this.palletService.getAll();
+    }
 }
