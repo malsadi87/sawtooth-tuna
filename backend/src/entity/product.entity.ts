@@ -1,7 +1,9 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
 @Entity({ name: 'Product' })
 export class ProductEntity extends BaseEntity {
+    @SawtoothIdentity()
     @PrimaryColumn({ generated: false, type: 'int', name: 'ProductId', nullable: false })
     productId: number;
 
@@ -13,5 +15,4 @@ export class ProductEntity extends BaseEntity {
 
     @Column({ type:'int', name: 'ProductNum', nullable: false })
     productNum: number;
-
 }

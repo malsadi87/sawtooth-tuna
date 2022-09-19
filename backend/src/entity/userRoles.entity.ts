@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, Index, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Entity, Index, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { RolesEntity } from "./roles.entity";
 import { UsersEntity } from "./users.entity";
 
@@ -12,8 +12,10 @@ export class UserRolesEntity extends BaseEntity {
     roleId: string;
 
     @ManyToOne(() => UsersEntity, (usere) => usere.userRoles)
+    @JoinColumn({ name: 'UserId', referencedColumnName: 'id' })
     user!: UsersEntity;
 
     @ManyToOne(() => RolesEntity, (rolee) => rolee.userRoles)
+    @JoinColumn({ name: 'RoleId', referencedColumnName: 'id' })
     role!: RolesEntity;
 }

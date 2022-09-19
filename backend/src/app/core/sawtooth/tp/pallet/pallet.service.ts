@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { PalletEntity } from '../../../../../entity/pallet.entity';
-import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { PalletCreationDto } from '../../../../utility/dto/tp/pallet-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { PalletRepository } from './pallet.repository';
 
 @Injectable()
 export class PalletService {
-    private readonly familyName: string;
+    private readonly entityName: string;
     constructor(
         private palletRepository: PalletRepository,
-        private readonly sawtoothUtilityService: SawtoothUtilityService,
-        private readonly loginUserInfoService: LoginUserInfoService
+        private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
-        this.familyName = 'pallet';
+        this.entityName = 'pallet';
     }
 
     async getAll(): Promise<PalletEntity[]> {
@@ -29,11 +27,8 @@ export class PalletService {
         const pallet = plainToClass(PalletEntity, palletPayload);
         const newPallet = await this.palletRepository.addNewPallet(pallet);
 
-        // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();
-
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newPallet, userInfo.blockChainPrivateKey, this.familyName);
+        await this.sawtoothUtilityService.createAsset(newPallet, this.entityName);
 
         return newPallet.palletNum;
     }

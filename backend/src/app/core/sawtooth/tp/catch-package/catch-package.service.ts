@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CatchPackageEntity } from '../../../../../entity/catchPackage.entity';
-import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { CatchPackageCreationDto } from '../../../../utility/dto/tp/catch-package-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CatchPackageRepository } from './catch-package.repository';
@@ -11,8 +10,7 @@ export class CatchPackageService {
     private readonly familyName: string;
     constructor(
         private readonly catchPackageRepository: CatchPackageRepository,
-        private readonly sawtoothUtilityService: SawtoothUtilityService,
-        private readonly loginUserInfoService: LoginUserInfoService
+        private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
         this.familyName = 'catch-package';
     }
@@ -29,11 +27,8 @@ export class CatchPackageService {
         const catchPackage = plainToClass(CatchPackageEntity, catchPackagePayload);
         const newCatchPackage = await this.catchPackageRepository.addNewCatchPackage(catchPackage);
 
-        // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();
-
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCatchPackage, userInfo.blockChainPrivateKey, this.familyName);
+        await this.sawtoothUtilityService.createAsset(newCatchPackage, this.familyName);
 
         return newCatchPackage.catchPackageId;
     }

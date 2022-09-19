@@ -13,7 +13,6 @@ export class PalletController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() palletPayload: PalletCreationDto): Promise<string> {
         return await this.palletService.addNewPallet(palletPayload);
     }

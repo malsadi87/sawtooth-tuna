@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
-import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
 import { CustomPackageCreationDto } from '../../../../utility/dto/tp/custom-package-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CustomLevelPackageRepository } from './custom-level-package.repository';
 
 @Injectable()
 export class CustomLevelPackageService {
-    private readonly familyName: string;
+    private readonly entityName: string;
     constructor(
         private readonly customLevelPackageRepository: CustomLevelPackageRepository,
-        private readonly sawtoothUtilityService: SawtoothUtilityService,
-        private readonly loginUserInfoService: LoginUserInfoService
+        private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
-        this.familyName = 'custom-package';
+        this.entityName = 'custom-package';
     }
 
     async getAll(): Promise<CustomLevelPackageEntity[]> {
@@ -29,11 +27,8 @@ export class CustomLevelPackageService {
         const customPackage = plainToClass(CustomLevelPackageEntity, customPackagePayload);
         const newCustomPackage = await this.customLevelPackageRepository.addNewPackage(customPackage);
 
-        // Get the userInfo
-        const userInfo = this.loginUserInfoService.getInfo();
-
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCustomPackage, userInfo.blockChainPrivateKey, this.familyName);
+        await this.sawtoothUtilityService.createAsset(newCustomPackage, this.entityName);
 
         return newCustomPackage.consumerPackageId;
     }

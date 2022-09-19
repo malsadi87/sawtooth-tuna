@@ -19,8 +19,9 @@ import { UserRolesEntity } from '../../entity/userRoles.entity';
 import { UserTokensEntity } from '../../entity/userTokens.entity';
 import { ExternalAPIDetailsEntity } from '../../entity/externalAPIDetails.entity';
 import { ExternalAPISettingsEntity } from '../../entity/externalAPISettings.entity';
-import * as config from 'config';
 import { UsersBlockchainInfoEntity } from '../../entity/usersBlockchainInfo.entity';
+import { ChainEntitySubscriber } from '../../app/utility/subscriber/chainEntity.subscriber';
+import * as config from 'config';
 
 const dbConfig = config.get<any>('database');
 const { type, name, synchronizeFlag, isLogEnable, encrypt } = dbConfig;
@@ -58,6 +59,9 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
 
         ExternalAPIDetailsEntity,
         ExternalAPISettingsEntity
+    ],
+    subscribers: [
+        // ChainEntitySubscriber
     ],
     synchronize: Boolean(synchronizeFlag),
     logging: Boolean(isLogEnable),

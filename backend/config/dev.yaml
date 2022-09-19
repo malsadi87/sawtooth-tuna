@@ -61,3 +61,7 @@ sawtooth:
       FAMILY: "product"
       VERSION: "0.1"
       PREFIX: '5a5650'
+    GENERIC:
+      FAMILY: "generic"
+      VERSION: "0.1"
+      PREFIX: 'cbfdde'

@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, Index, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { RolesEntity } from "./roles.entity";
 
 @Entity('RoleClaims')
@@ -17,5 +17,6 @@ export class RoleClaimsEntity extends BaseEntity {
     claimValue: string;
     
     @ManyToOne((type) => RolesEntity, x => x.claims)
+    @JoinColumn({ name: 'RoleId', referencedColumnName: 'id' })
     role: RolesEntity;
 }

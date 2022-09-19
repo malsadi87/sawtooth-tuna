@@ -77,27 +77,27 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'uuid', name: 'BlockchainInfoId', nullable: true })
     blockchainInfoId: string;
 
-    @OneToMany((entity) => UserClaimsEntity, (x) => x.userId, {
+    @OneToMany((entity) => UserClaimsEntity, (x) => x.user, {
         onDelete: "CASCADE",
         onUpdate: "NO ACTION"
     })
     @JoinColumn({ referencedColumnName: 'UserId' })
     claims: UserClaimsEntity[];
 
-    @OneToMany((entity) => UserLoginsEntity, (x) => x.userId, {
+    @OneToMany((entity) => UserLoginsEntity, (x) => x.user, {
         onDelete: "CASCADE",
         onUpdate: "NO ACTION"
     })
     @JoinColumn({ referencedColumnName: 'UserId' })
     logins: UserLoginsEntity[];
 
-    @OneToMany(() => UserTokensEntity, token => token.userId)
-    @JoinColumn({ referencedColumnName: 'UserId' })
-    tokens: UserTokensEntity;
-
     @OneToMany(() => UserRolesEntity, userRole => userRole.user)
-    @JoinColumn({ referencedColumnName: 'UserId' })
+    @JoinColumn({ referencedColumnName: 'userId' })
     userRoles!: UserRolesEntity[];
+
+    @OneToMany(() => UserTokensEntity, token => token.user)
+    @JoinColumn({ referencedColumnName: 'userId' })
+    tokens: UserTokensEntity;
 
     @OneToOne((type) => UsersBlockchainInfoEntity, (x) => x.user)
     @JoinColumn({ name: 'BlockchainInfoId',  referencedColumnName: 'userId' })

@@ -30,6 +30,7 @@ from tunachain_processor.catch_package.handler import CatchPackageTransactionHan
 from tunachain_processor.species.handler import SpeciesTransactionHandler
 from tunachain_processor.custom_package.handler import CustomPackageTransactionHandler
 from tunachain_processor.company.handler import CompanyTransactionHandler
+from tunachain_processor.generic.handler import GenericEntityTransactionHandler
 
 import logging
 
@@ -84,6 +85,8 @@ def main(args=None):
         LOGGER.info(speciesHandler)
         customHandler  = CustomPackageTransactionHandler()
         companyHandler = CompanyTransactionHandler()
+        genericEntityHandler = GenericEntityTransactionHandler()
+        LOGGER.info('Generic Entity Transaction Handler is initialized')
 
         #processor.add_handler(handler)
         #processor.add_handler(handler2)
@@ -98,6 +101,8 @@ def main(args=None):
         LOGGER.info('Species Transaction Handler is registered')
         processor.add_handler(customHandler)
         processor.add_handler(companyHandler)
+        processor.add_handler(genericEntityHandler)
+        LOGGER.info('Generic Entity Transaction Handler is registered')
 
         processor.start()
     except KeyboardInterrupt:

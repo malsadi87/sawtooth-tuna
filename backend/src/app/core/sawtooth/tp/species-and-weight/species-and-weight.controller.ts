@@ -13,7 +13,6 @@ export class SpeciesAndWeightController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() speciesPayload: SpeciesCreationDto): Promise<number> {
         return await this.speciesAndWeightService.addNew(speciesPayload);
     }

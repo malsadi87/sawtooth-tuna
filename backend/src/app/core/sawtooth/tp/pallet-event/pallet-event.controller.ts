@@ -13,7 +13,6 @@ export class PalletEventController {
     }
 
     @Post('addNew')
-    @HttpCode(204)
     async create(@Body() palletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
         return await this.palletEventService.addNew(palletEventPayload);
     }
