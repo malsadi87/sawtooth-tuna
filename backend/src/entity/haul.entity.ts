@@ -7,7 +7,11 @@ import { TripEntity } from "./trip.entity";
 export class HaulEntity extends BaseEntity {
     @SawtoothIdentity()
     @Transform(x => new Date(x.value))
-    @PrimaryColumn({ generated: false, type: 'timestamp', name: 'LaunchDateTime', nullable: false })
+
+    @PrimaryColumn({ generated: true, type: 'int', name: 'HaulId', nullable: false })
+    haulId: number;
+
+    @Column({ generated: false, type: 'timestamp', name: 'LaunchDateTime', nullable: false })
     launchDateTime: Date;
 
     @Column({ type:'varchar', width: 255, name: 'LaunchPosition', nullable: false })
