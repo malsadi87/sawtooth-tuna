@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 import { LoginUserInfoService } from '../../../../shared/loginUserInfo/login-user-info.service';
@@ -26,6 +26,8 @@ export class HaulService {
     }
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
+        Logger.log('HAUL')
+        Logger.log(JSON.stringify(haulPayload))
         const haul = plainToClass(HaulEntity, haulPayload);
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 

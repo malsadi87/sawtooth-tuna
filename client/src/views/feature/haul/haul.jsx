@@ -4,6 +4,7 @@ import { RouteUrl } from '../../../constants/routeUrls';
 import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './haul.css';
+import haulService from '../../../services/feature/haul/haul.service';
 
 
 const layout = {
@@ -35,23 +36,25 @@ class Haul extends Component {
             launchLatitude: '',
             launchLongitude: '',
             tripId: '',
-            productNum: '',
-            productId: '',
-            catchWeight: ''
+            //productNum: '',
+            //productId: '',
+            //catchWeight: ''
             }
      }
 
-    onFinish = (values) => {
-        console.log(values);
-    };
+     onFinish = async (values) => {
+      console.log(values);
+      const result = await haulService.createNew(values);
+      console.log(result);
+  };
 
 
     render() {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-            {/*Haul ID*/}
-            <Form.Item
+            {/*Haul ID
+            {/*<Form.Item
              name={'haulId'}
              label="Haul ID"
              rules={[
@@ -61,7 +64,7 @@ class Haul extends Component {
                 ]}
                 >
             <InputNumber />
-         </Form.Item>
+         </Form.Item>*/}
 
             {/*Launch Date*/}
             <Form.Item
@@ -128,9 +131,74 @@ class Haul extends Component {
           <Input />
         </Form.Item>
 
+        {/*Haul Date*/}
+        <Form.Item
+             name={'haulDate'}
+             label="Haul Date"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <DatePicker />
+         </Form.Item>
+
+          {/*Haul Time*/}
+            <Form.Item
+             name={'haulTime'}
+             label="Haul Time"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <TimePicker />
+         </Form.Item>
+
+          {/*Haul Position*/}
+          <Form.Item
+             name={'haulPosition'}
+             label="Haul Position (Name of place)"
+             rules={[
+                  {
+                    required: true
+                  },
+                ]}
+                >
+            <Input />
+         </Form.Item>
+
+        {/*Haul Latitude*/}
+        <Form.Item
+            name={'haulLatitude'}
+            label="Haul Latitude"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+          <Input />
+        </Form.Item>
+
+         {/*Haul Longitude*/}
+        <Form.Item
+            name={'haulLongitude'}
+            label="Haul Longitude"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+          <Input />
+        </Form.Item>
+
          {/*Trip ID*/}
             <Form.Item
-             name={'tripId'}
+             name={'tripNo'}
              label="Trip ID"
              rules={[
                   {
@@ -140,7 +208,7 @@ class Haul extends Component {
                 >
             <InputNumber />
          </Form.Item>
-
+            {/*
             <Form.List name="catch">
             {(fields, { add, remove }) => (
               <>
@@ -180,7 +248,7 @@ class Haul extends Component {
               </>
             )}
           </Form.List>
-
+          */}
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button type="primary" htmlType="submit" >
