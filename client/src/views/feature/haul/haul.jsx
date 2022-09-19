@@ -37,11 +37,14 @@ class Haul extends Component {
             haulPosition: '',
             launchLatitude: '',
             launchLongitude: '',
-            tripId: '',
+            haulLatitude: '',
+            haulLongitude: '',
+            tripNd: '',
             //productNum: '',
             //productId: '',
             //catchWeight: ''
-            }
+            },
+      hauls: null
      }
 
      onFinish = async (values) => {
@@ -50,9 +53,30 @@ class Haul extends Component {
       console.log(result);
   };
 
+  getAllHaul = async () => {
+    const result = await haulService.getAll();
+    console.log(result)
+    this.setState({hauls: result.map((info)=>{
+      return(
+        <tr key={info.haulId}>
+          <td>{info.haulId}</td>
+          <td>{info.launchDateTime}</td>
+          <td>{info.launchPosition}</td>
+          <td>{info.launchLatitude}</td>
+          <td>{info.launchLongitude}</td>
+          <td>{info.haulDateTime}</td>
+          <td>{info.haulPosition}</td>
+          <td>{info.haulLatitude}</td>
+          <td>{info.haulLongitude}</td>
+          <td>{info.tripNo}</td>
+        </tr>
+      )
+    })})
+  }
 
     render() {
         return (
+          <div>
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
             {/*Haul ID
@@ -234,8 +258,30 @@ class Haul extends Component {
             <Button type="primary" htmlType="submit" >
               Submit
             </Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllHaul}>Get All Haul</Button>
           </Form.Item>
         </Form>
+        {this.state.hauls ? 
+          <table style={{margin: 'auto'}}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Launch Date Time</th>
+                <th>Launch Position</th>
+                <th>Launch Latitude</th>
+                <th>Launch Longitude</th>
+                <th>Haul Date Time</th>
+                <th>Haul Position</th>
+                <th>Haul Latitude</th>
+                <th>Haul Longitude</th>
+                <th>TripId</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.hauls}
+            </tbody>
+          </table> : ''}
+        </div>
         )
     };
 }

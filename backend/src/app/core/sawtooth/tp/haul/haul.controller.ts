@@ -16,4 +16,9 @@ export class HaulController {
     async create(@Body() haulPayload: HaulCreationDto): Promise<Date> {
         return await this.haulService.addNewHaul(haulPayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<HaulEntity[]> {
+        return this.haulService.getAll();
+    }
 }
