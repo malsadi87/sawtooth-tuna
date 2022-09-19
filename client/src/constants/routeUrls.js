@@ -6,5 +6,5 @@ export const RouteUrl = {
     haul: '/haul',
     pallet: '/pallet',
     product: '/product',
-    coldStorage: '/coldStorage',
+    palletEvent: '/palletEvent',
 };
