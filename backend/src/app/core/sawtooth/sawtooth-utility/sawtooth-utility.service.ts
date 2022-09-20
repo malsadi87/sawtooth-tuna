@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
@@ -128,7 +128,6 @@ export class SawtoothUtilityService {
 
             // if (response.status != 200)
             //     throw "Batch append success status is taking too long time!";
-
             return new URL(result.link).searchParams.get('id');
         } catch (e) {
             throw e;

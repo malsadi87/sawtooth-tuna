@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 
@@ -18,8 +18,6 @@ export class HaulRepository extends Repository<HaulEntity> {
     }
 
     async addNewHaul(newHaul: HaulEntity): Promise<HaulEntity> {
-        Logger.log('Save to db')
-        Logger.log(JSON.stringify(newHaul))
         return await newHaul.save();
     }
 }

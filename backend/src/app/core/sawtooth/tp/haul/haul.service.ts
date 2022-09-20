@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
