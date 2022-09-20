@@ -21,6 +21,7 @@ import Home from "./views/feature/home/home";
 import CatchPackage from "./views/feature/catchPackage/catchPackage";
 import Species from "./views/feature/species/species";
 import Company from "./views/feature/company/company";
+import CustomPackage from "./views/feature/customPackage/customPackage";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
@@ -54,6 +55,7 @@ class App extends Component {
                         <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
                         <Route path={RouteUrl.species} element={<Species />} />
                         <Route path={RouteUrl.company} element={<Company />} />
+                        <Route path={RouteUrl.customPackage} element={<CustomPackage />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>

@@ -9,5 +9,6 @@ export const RouteUrl = {
     palletEvent: '/palletEvent',
     catchPackage: '/catchPackage',
     species: '/species',
-    company: '/company'
+    company: '/company',
+    customPackage: '/customPackage',
 };

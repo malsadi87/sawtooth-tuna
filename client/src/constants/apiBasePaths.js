@@ -59,10 +59,10 @@ export const APIBasePath = {
                 createNew: '/sawtooth/tp/species/addNew'
             },
             customPackage: {
-                base: '/sawtooth/tp/customPackage',
-                getAll: '/sawtooth/tp/customPackage/',
-                getById: '/sawtooth/tp/customPackage/getById/:id',
-                createNew: '/sawtooth/tp/customPackage/addNew'
+                base: '/sawtooth/tp/custom-package',
+                getAll: '/sawtooth/tp/custom-package/',
+                getById: '/sawtooth/tp/custom-package/getById/:id',
+                createNew: '/sawtooth/tp/custom-package/addNew'
             },
             company: {
                 base: '/sawtooth/tp/company',

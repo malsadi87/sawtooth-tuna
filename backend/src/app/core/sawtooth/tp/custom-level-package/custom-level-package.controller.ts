@@ -16,4 +16,9 @@ export class CustomLevelPackageController {
     async create(@Body() customePackagePayload: CustomPackageCreationDto): Promise<string> {
         return await this.customLevelPackageService.addNewPackage(customePackagePayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<CustomLevelPackageEntity[]> {
+        return this.customLevelPackageService.getAll();
+    }
 }

@@ -33,6 +33,7 @@ class NavBar extends Component {
         this.getItem('Catch Package', RouteUrl.catchPackage, <SettingOutlined />),
         this.getItem('Species', RouteUrl.species, <SettingOutlined />),
         this.getItem('Company', RouteUrl.company, <SettingOutlined />),
+        this.getItem('Custom Package', RouteUrl.customPackage, <SettingOutlined />),
 
 
     ];
