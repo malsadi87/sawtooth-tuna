@@ -31,6 +31,7 @@ class NavBar extends Component {
         this.getItem('Pallet', RouteUrl.pallet, <SettingOutlined />),
         this.getItem('Pallet Event', RouteUrl.palletEvent, <SettingOutlined />),
         this.getItem('Catch Package', RouteUrl.catchPackage, <SettingOutlined />),
+        this.getItem('Species', RouteUrl.species, <SettingOutlined />),
 
 
     ];
