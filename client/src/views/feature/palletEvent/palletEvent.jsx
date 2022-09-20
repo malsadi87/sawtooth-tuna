@@ -25,19 +25,9 @@ const validateMessages = {
 };
 
 class palletEvent extends Component {
-   state = {
-        haulForm: {
-            eventId: '',
-            shipmentVID: '',
-            longitude: '',
-            latitude: '',
-            date: '',
-            time: '',
-            temperatureIn: '',
-            consigneeNumber: '',
-            consigneeName: ''
-            }
-     }
+  state = {
+    palletEvents: null
+  }
 
     onFinish = (values) => {
         console.log(values);
@@ -48,31 +38,7 @@ class palletEvent extends Component {
         return (
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-            {/*Event ID*/}
-            <Form.Item
-             name={'eventId'}
-             label="Event ID"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <InputNumber />
-         </Form.Item>
 
-          {/*Shipment VID*/}
-            <Form.Item
-             name={'shipmentVID'}
-             label="Shipment VID"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <InputNumber />
-         </Form.Item>
 
           {/*Latitude*/}
         <Form.Item
@@ -164,15 +130,6 @@ class palletEvent extends Component {
           >
           <InputNumber />
         </Form.Item>
-
-
-
-
-
-
-
-
-
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button type="primary" htmlType="submit" >
               Submit
