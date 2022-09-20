@@ -7,7 +7,11 @@ import { PalletEntity } from "./pallet.entity";
 export class PalletEventEntity extends BaseEntity {
     @SawtoothIdentity()
     @Transform(x => new Date(x.value))
-    @PrimaryColumn({ generated: false, type:'timestamp', name: 'EventTime', nullable: false })
+
+    @PrimaryColumn({ generated: true, type: 'int', name: 'PalletEventId', nullable: false })
+    palletEventId: number;
+
+    @Column({ generated: false, type:'timestamp', name: 'EventTime', nullable: false })
     eventTime: Date;
 
     @SawtoothIdentity()

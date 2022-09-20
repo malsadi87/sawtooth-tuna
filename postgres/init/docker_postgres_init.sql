@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS "Pallet" (
 );
 
 CREATE TABLE IF NOT EXISTS "PalletEvent" (
-    "EventTime" TIMESTAMP PRIMARY KEY,
+    "PalletEventId" SERIAL PRIMARY KEY,
+    "EventTime" TIMESTAMP NOT NULL,
     "PalletNum" VARCHAR(255) NOT NULL,
     "Temperature" JSON NOT NULL,
     "Location" JSON NOT NULL,

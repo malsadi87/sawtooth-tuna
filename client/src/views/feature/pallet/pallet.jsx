@@ -149,8 +149,8 @@ class Pallet extends Component {
           <table style={{margin: 'auto'}}>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Product ID</th>
+                <th>Pallet Number</th>
+                <th>Product Number</th>
                 <th>Supplier ID</th>
                 <th>Weight</th>
                 <th>Trip ID</th>

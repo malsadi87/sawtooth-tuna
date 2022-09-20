@@ -47,10 +47,10 @@ export const APIBasePath = {
                 createNew: '/sawtooth/tp/pallet/addNew'
             },
             palletEvent: {
-                base: '/sawtooth/tp/palletEvent',
-                getAll: '/sawtooth/tp/palletEvent/',
-                getById: '/sawtooth/tp/palletEvent/getById/:id',
-                createNew: '/sawtooth/tp/palletEvent/addNew'
+                base: '/sawtooth/tp/pallet-event',
+                getAll: '/sawtooth/tp/pallet-event/',
+                getById: '/sawtooth/tp/pallet-event/getById/:id',
+                createNew: '/sawtooth/tp/pallet-event/addNew'
             },
             species: {
                 base: '/sawtooth/tp/species',
