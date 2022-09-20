@@ -18,10 +18,11 @@ import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
 import Home from "./views/feature/home/home";
-
+import catchPackage from "./views/feature/catchPackage/catchPackage";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
+import CatchPackage from "./views/feature/catchPackage/catchPackage";
 
 // Add font-awesome icons to project library
 library.add(fab, faFacebook, faTwitter, faGoogle, faLinkedin, faUser, faEnvelope, faLock, faKey);
@@ -49,6 +50,7 @@ class App extends Component {
                         <Route path={RouteUrl.haul} element={<Haul />} />
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
                         <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
+                        <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>

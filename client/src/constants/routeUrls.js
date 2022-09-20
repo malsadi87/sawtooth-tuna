@@ -7,4 +7,5 @@ export const RouteUrl = {
     pallet: '/pallet',
     product: '/product',
     palletEvent: '/palletEvent',
+    catchPackage: '/catchPackage',
 };

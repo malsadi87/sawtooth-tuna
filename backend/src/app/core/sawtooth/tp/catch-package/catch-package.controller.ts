@@ -16,4 +16,9 @@ export class CatchPackageController {
     async create(@Body() catchPackagePayload: CatchPackageCreationDto): Promise<string> {
         return await this.catchPackageService.addNewCatchPackage(catchPackagePayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<CatchPackageEntity[]> {
+        return this.catchPackageService.getAll();
+    }
 }
