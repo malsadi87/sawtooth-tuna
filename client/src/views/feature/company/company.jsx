@@ -1,11 +1,10 @@
 import React, {Component, useState} from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './species.css';
+import './company.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import speciesService from '../../../services/feature/species/species.service';
-import moment from 'moment';
+import companyService from '../../../services/feature/company/company.service';
 
 
 const layout = {
@@ -27,28 +26,27 @@ const validateMessages = {
   },
 };
 
-class Species extends Component {
+class Company extends Component {
     state = {
-      species: null
+      companies: null
     }
 
     onFinish = async (values) => {
       console.log(values)
-      const result = await speciesService.createNew(values);
+      const result = await companyService.createNew(values);
       console.log(result);
   };
 
     getAllPallet = async () => {
-      const result = await speciesService.getAll();
+      const result = await companyService.getAll();
       console.log(result)
-      this.setState({species: result.map((info)=>{
+      this.setState({companies: result.map((info)=>{
         return(
-          <tr key={info.speciesId}>
-            <td>{info.speciesId}</td>
-            <td>{info.quantity}</td>
-            <td>{info.species}</td>
-            <td>{info.catchPackageId}</td>
-            <td>{info.launchDateTime}</td>
+          <tr key={info.companyId}>
+            <td>{info.companyId}</td>
+            <td>{info.companyName}</td>
+            <td>{info.companyAddress}</td>
+            <td>{info.contactInfo}</td>
           </tr>
         )
       })})
@@ -59,40 +57,10 @@ class Species extends Component {
           <div>
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          {/*Quantity*/}
+          {/*companyName*/}
           <Form.Item
-            name={'quantity'}
-            label="Quantity"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*Species*/}
-          <Form.Item
-            name={'species'}
-            label="Species"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*CatchPackageId*/}
-          <Form.Item
-            name={'catchPackageId'}
-            label="Catch Package ID"
+            name={'companyName'}
+            label="Company Name"
             rules={[
               {
                 required: true,
@@ -103,42 +71,54 @@ class Species extends Component {
             <Input />
           </Form.Item>
 
-        {/*LaunchDateTime*/}
-        <Form.Item
-             name={'launchDateTime'}
-             label="Launch Date Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker 
-              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
-            />
-         </Form.Item>
+          {/*companyAddress*/}
+          <Form.Item
+            name={'companyAddress'}
+            label="Company Address"
+            rules={[
+              {
+                required: true,
+                type: 'string',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          {/*contactInfo*/}
+          <Form.Item
+            name={'contactInfo'}
+            label="Contanct Info"
+            rules={[
+              {
+                required: true,
+                type: 'string',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Species</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Companies</Button>
 
           </Form.Item>
         </Form>
-        {this.state.species ? 
+        {this.state.companies ? 
           <table style={{margin: 'auto'}}>
             <thead>
               <tr>
-                <th>Species ID</th>
-                <th>Quantity</th>
-                <th>Species</th>
-                <th>Catch Package ID</th>
-                <th>Launch Date Time</th>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>Company Address</th>
+                <th>Company Contact Info</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.species}
+              {this.state.companies}
             </tbody>
           </table> : ''}
         </div>
@@ -146,6 +126,6 @@ class Species extends Component {
     };
 }
 
-export default withParamsAndNavigation(Species);
+export default withParamsAndNavigation(Company);
 
 //export default () => <FormLayoutDemo />;

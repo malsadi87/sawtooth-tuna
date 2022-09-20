@@ -8,5 +8,6 @@ export const RouteUrl = {
     product: '/product',
     palletEvent: '/palletEvent',
     catchPackage: '/catchPackage',
-    species: '/species'
+    species: '/species',
+    company: '/company'
 };

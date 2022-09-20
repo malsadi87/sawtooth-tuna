@@ -20,6 +20,7 @@ import Signup from "./views/feature/auth/signup/signup";
 import Home from "./views/feature/home/home";
 import CatchPackage from "./views/feature/catchPackage/catchPackage";
 import Species from "./views/feature/species/species";
+import Company from "./views/feature/company/company";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
@@ -52,6 +53,7 @@ class App extends Component {
                         <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
                         <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
                         <Route path={RouteUrl.species} element={<Species />} />
+                        <Route path={RouteUrl.company} element={<Company />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>
