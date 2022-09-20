@@ -67,9 +67,23 @@ class Pallet extends Component {
         return (
           <div>
           <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+
+          <Form.Item
+            name={'palletNum'}
+            label="Pallet Number"
+            rules={[
+              {
+                required: true,
+                type: 'string',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
             <Form.Item
             name={'productNum'}
-            label="Product ID"
+            label="Product Number"
             rules={[
               {
                 required: true,
@@ -87,12 +101,11 @@ class Pallet extends Component {
         rules={[
           {
             required: true,
-            type: 'number',
-            min: 0
+            type: 'string',
           },
         ]}
       >
-        <InputNumber />
+        <Input />
       </Form.Item>
 
         <Form.Item
@@ -102,7 +115,8 @@ class Pallet extends Component {
           {
             required: true,
             type: 'number',
-            min: 0
+            min: 0,
+            max: 99999.9999
           },
         ]}
       >

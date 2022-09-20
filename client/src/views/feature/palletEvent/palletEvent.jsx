@@ -24,7 +24,7 @@ const validateMessages = {
   },
 };
 
-class palletEvent extends Component {
+class PalletEvent extends Component {
   state = {
     palletEvents: null
   }

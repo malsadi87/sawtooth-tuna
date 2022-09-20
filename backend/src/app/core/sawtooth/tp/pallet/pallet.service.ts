@@ -19,11 +19,11 @@ export class PalletService {
         return await this.palletRepository.getAll();
     }
 
-    async getByPalletNo(palletNum: number): Promise<PalletEntity> {
-        return await this.palletRepository.getByPalletNo(palletNum);
+    async getByPalletNo(palletNumber: string): Promise<PalletEntity> {
+        return await this.palletRepository.getByPalletNo(palletNumber);
     }
 
-    async addNewPallet(palletPayload: PalletCreationDto): Promise<number> {
+    async addNewPallet(palletPayload: PalletCreationDto): Promise<string> {
         const pallet = plainToClass(PalletEntity, palletPayload);
         const newPallet = await this.palletRepository.addNewPallet(pallet);
 
