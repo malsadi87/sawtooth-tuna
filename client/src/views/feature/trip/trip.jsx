@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './trip.css';
 import tripService from '../../../services/feature/trip/trip.service';
-
+import moment from 'moment';
 
 const layout = {
   labelCol: {
@@ -26,34 +26,20 @@ const validateMessages = {
 };
 
 class Trip extends Component {
-    state = {
-        tripForm: {
-            tripId: '',
-            departureDate: '',
-            landingDate: '',
-            supplierName: '',
-            supplierNumber: '',
-            tripNumber: '',
-            tripYearNo: '',
-            vesselName: '',
-            departurePort: '',
-            landingPort: '',
-            longText: ''
-            },
-        trips: null
-     }
+  state = {
+    trips: null
+  }
 
-    onFinish = async (values) => {
-        console.log(values);
-        const result = await tripService.createNew(values);
-        console.log(result);
-    };
+  onFinish = async (values) => {
+    const result = await tripService.createNew(values);
+  };
 
-    getAllTrip = async () => {
-      const result = await tripService.getAll();
-      console.log(result)
-      this.setState({trips: result.map((info)=>{
-        return(
+  getAllTrip = async () => {
+    const result = await tripService.getAll();
+    console.log(result)
+    this.setState({
+      trips: result.map((info) => {
+        return (
           <tr key={info.tripNo}>
             <td>{info.tripNo}</td>
             <td>{info.departureDate}</td>
@@ -64,53 +50,58 @@ class Trip extends Component {
             <td>{info.vesselName}</td>
           </tr>
         )
-      })})
-    }
+      })
+    })
+  }
 
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           <Form.Item
             name={'tripNo'}
             label="Trip Number"
             rules={[
-                {
-                    required: true,
-                    type: 'number'
-                },
-               ]}
-             >
-           <InputNumber />
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
           </Form.Item>
 
-             <Form.Item
-             name={'departureDate'}
-             label="Departure date"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker />
-         </Form.Item>
+          <Form.Item
+            name={'departureDate'}
+            label="Departure date"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
+              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+            />
+          </Form.Item>
 
           <Form.Item
-             name={'landingDate'}
-             label="Landing date"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker />
-         </Form.Item>
+            name={'landingDate'}
+            label="Landing date"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
+              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+            />
+          </Form.Item>
 
 
-         <Form.Item
+          <Form.Item
             name={'departurePort'}
             label="Departure Port"
             rules={[
@@ -118,11 +109,11 @@ class Trip extends Component {
                 required: true
               },
             ]}
-            >
+          >
             <Input />
           </Form.Item>
 
-           <Form.Item
+          <Form.Item
             name={'landingPort'}
             label="Landing Port"
             rules={[
@@ -130,11 +121,11 @@ class Trip extends Component {
                 required: true
               },
             ]}
-            >
+          >
             <Input />
           </Form.Item>
 
-         <Form.Item
+          <Form.Item
             name={'tripWithinYearNo'}
             label="Trip within year number"
             rules={[
@@ -142,22 +133,22 @@ class Trip extends Component {
                 required: true
               },
             ]}
-            >
-          <InputNumber />
+          >
+            <InputNumber />
           </Form.Item>
 
-            <Form.Item
-                name={'vesselName'}
-                label="Vessel Name"
-                rules={[
-                  {
-                    required: false,
-                    type: 'name'
-                  },
-                ]}
-               >
-               <Input />
-            </Form.Item>
+          <Form.Item
+            name={'vesselName'}
+            label="Vessel Name"
+            rules={[
+              {
+                required: false,
+                type: 'name'
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
@@ -166,9 +157,9 @@ class Trip extends Component {
             <Button className='ms-3' type="primary" onClick={this.getAllTrip}>Get All Trip</Button>
           </Form.Item>
         </Form>
-        
-          {this.state.trips ? 
-          <table style={{margin: 'auto'}}>
+
+        {this.state.trips ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -183,9 +174,9 @@ class Trip extends Component {
               {this.state.trips}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 

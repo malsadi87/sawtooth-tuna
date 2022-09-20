@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './customPackage.css';
@@ -28,21 +28,19 @@ const validateMessages = {
 };
 
 class CustomPackage extends Component {
-    state = {
-      customPackages: null
-    }
+  state = {
+    customPackages: null
+  }
 
-    onFinish = async (values) => {
-      console.log(values)
-      const result = await customPackageService.createNew(values);
-      console.log(result);
+  onFinish = async (values) => {
+    const result = await customPackageService.createNew(values);
   };
 
-    getAllPallet = async () => {
-      const result = await customPackageService.getAll();
-      console.log(result)
-      this.setState({customPackages: result.map((info)=>{
-        return(
+  getAllPallet = async () => {
+    const result = await customPackageService.getAll();
+    this.setState({
+      customPackages: result.map((info) => {
+        return (
           <tr key={info.consumerPackageId}>
             <td>{info.consumerPackageId}</td>
             <td>{info.catchPackageId}</td>
@@ -50,13 +48,14 @@ class CustomPackage extends Component {
             <td>{info.agent}</td>
           </tr>
         )
-      })})
-    }
-  
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           {/*ConsumerPackageId*/}
           <Form.Item
@@ -86,20 +85,20 @@ class CustomPackage extends Component {
             <Input />
           </Form.Item>
 
-        {/*LaunchDateTime*/}
-        <Form.Item
-             name={'packingDate'}
-             label="Packing Date"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker 
+          {/*LaunchDateTime*/}
+          <Form.Item
+            name={'packingDate'}
+            label="Packing Date"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
             />
-         </Form.Item>
+          </Form.Item>
 
           {/*Agent*/}
           <Form.Item
@@ -124,8 +123,8 @@ class CustomPackage extends Component {
 
           </Form.Item>
         </Form>
-        {this.state.customPackages ? 
-          <table style={{margin: 'auto'}}>
+        {this.state.customPackages ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>Custom Package ID</th>
@@ -138,9 +137,9 @@ class CustomPackage extends Component {
               {this.state.customPackages}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 export default withParamsAndNavigation(CustomPackage);

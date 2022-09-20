@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import { Form, Input, Button, InputNumber, DatePicker, TimePicker } from 'antd';
@@ -30,25 +30,23 @@ class PalletEvent extends Component {
     palletEvents: null
   }
 
-    onFinish = async (values) => {
-        console.log(values);
-        let palletEvent = {
-            'eventTime': values.dateTime,
-            'palletNum': values.palletNum,
-            'temperature': JSON.stringify({'temperature': values.temperature}),
-            'location': JSON.stringify({'latitude': values.latitude, 'longitude': values.longitude}),
-            'tilt': JSON.stringify({'tilt': values.tilt}),
-            'shock': JSON.stringify({'shock': values.shock})
-          }
-        console.log(palletEvent)
-        const result = await palletEventService.createNew(palletEvent);
-    };
+  onFinish = async (values) => {
+    let palletEvent = {
+      'eventTime': values.dateTime,
+      'palletNum': values.palletNum,
+      'temperature': JSON.stringify({ 'temperature': values.temperature }),
+      'location': JSON.stringify({ 'latitude': values.latitude, 'longitude': values.longitude }),
+      'tilt': JSON.stringify({ 'tilt': values.tilt }),
+      'shock': JSON.stringify({ 'shock': values.shock })
+    }
+    const result = await palletEventService.createNew(palletEvent);
+  };
 
-    getAllPalletEvent = async () => {
-      const result = await palletEventService.getAll();
-      console.log(result)
-      this.setState({palletEvents: result.map((info)=>{
-        return(
+  getAllPalletEvent = async () => {
+    const result = await palletEventService.getAll();
+    this.setState({
+      palletEvents: result.map((info) => {
+        return (
           <tr key={info.palletEventId}>
             <td>{info.palletEventId}</td>
             <td>{info.eventTime}</td>
@@ -59,28 +57,29 @@ class PalletEvent extends Component {
             <td>{info.shock}</td>
           </tr>
         )
-      })})
-    }
+      })
+    })
+  }
 
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-        {/*Date*/}
-        <Form.Item
-             name={'dateTime'}
-             label="Date Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker 
+          {/*Date*/}
+          <Form.Item
+            name={'dateTime'}
+            label="Date Time"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
             />
-         </Form.Item>
+          </Form.Item>
 
           {/*Pallet Number*/}
           <Form.Item
@@ -95,9 +94,9 @@ class PalletEvent extends Component {
           >
             <Input />
           </Form.Item>
-          
+
           {/*Latitude*/}
-        <Form.Item
+          <Form.Item
             name={'latitude'}
             label="Latitude"
             rules={[
@@ -106,11 +105,11 @@ class PalletEvent extends Component {
               },
             ]}
           >
-          <Input />
-        </Form.Item>
+            <Input />
+          </Form.Item>
 
-         {/*Longitude*/}
-        <Form.Item
+          {/*Longitude*/}
+          <Form.Item
             name={'longitude'}
             label="Longitude"
             rules={[
@@ -119,11 +118,11 @@ class PalletEvent extends Component {
               },
             ]}
           >
-          <Input />
-        </Form.Item>
+            <Input />
+          </Form.Item>
 
           {/*Temperature In*/}
-        <Form.Item
+          <Form.Item
             name={'temperature'}
             label="Temperature"
             rules={[
@@ -133,11 +132,11 @@ class PalletEvent extends Component {
               },
             ]}
           >
-          <InputNumber />
-        </Form.Item>
+            <InputNumber />
+          </Form.Item>
 
-         {/*Tilt*/}
-         <Form.Item
+          {/*Tilt*/}
+          <Form.Item
             name={'tilt'}
             label="Tilt"
             rules={[
@@ -146,11 +145,11 @@ class PalletEvent extends Component {
               },
             ]}
           >
-          <Input />
-        </Form.Item>
+            <Input />
+          </Form.Item>
 
-         {/*Shock*/}
-         <Form.Item
+          {/*Shock*/}
+          <Form.Item
             name={'shock'}
             label="Shock"
             rules={[
@@ -159,8 +158,8 @@ class PalletEvent extends Component {
               },
             ]}
           >
-          <Input />
-        </Form.Item>
+            <Input />
+          </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button type="primary" htmlType="submit" >
@@ -169,8 +168,8 @@ class PalletEvent extends Component {
             <Button className='ms-3' type="primary" onClick={this.getAllPalletEvent}>Get All Event</Button>
           </Form.Item>
         </Form>
-        {this.state.palletEvents ? 
-          <table style={{margin: 'auto'}}>
+        {this.state.palletEvents ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -186,9 +185,9 @@ class PalletEvent extends Component {
               {this.state.palletEvents}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 export default withParamsAndNavigation(PalletEvent);

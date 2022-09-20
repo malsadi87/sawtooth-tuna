@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './company.css';
@@ -27,21 +27,19 @@ const validateMessages = {
 };
 
 class Company extends Component {
-    state = {
-      companies: null
-    }
+  state = {
+    companies: null
+  }
 
-    onFinish = async (values) => {
-      console.log(values)
-      const result = await companyService.createNew(values);
-      console.log(result);
+  onFinish = async (values) => {
+    const result = await companyService.createNew(values);
   };
 
-    getAllPallet = async () => {
-      const result = await companyService.getAll();
-      console.log(result)
-      this.setState({companies: result.map((info)=>{
-        return(
+  getAllPallet = async () => {
+    const result = await companyService.getAll();
+    this.setState({
+      companies: result.map((info) => {
+        return (
           <tr key={info.companyId}>
             <td>{info.companyId}</td>
             <td>{info.companyName}</td>
@@ -49,13 +47,14 @@ class Company extends Component {
             <td>{info.contactInfo}</td>
           </tr>
         )
-      })})
-    }
-  
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           {/*companyName*/}
           <Form.Item
@@ -107,8 +106,8 @@ class Company extends Component {
 
           </Form.Item>
         </Form>
-        {this.state.companies ? 
-          <table style={{margin: 'auto'}}>
+        {this.state.companies ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>Company ID</th>
@@ -121,9 +120,9 @@ class Company extends Component {
               {this.state.companies}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 export default withParamsAndNavigation(Company);

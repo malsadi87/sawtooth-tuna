@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './species.css';
@@ -28,21 +28,19 @@ const validateMessages = {
 };
 
 class Species extends Component {
-    state = {
-      species: null
-    }
+  state = {
+    species: null
+  }
 
-    onFinish = async (values) => {
-      console.log(values)
-      const result = await speciesService.createNew(values);
-      console.log(result);
+  onFinish = async (values) => {
+    const result = await speciesService.createNew(values);
   };
 
-    getAllPallet = async () => {
-      const result = await speciesService.getAll();
-      console.log(result)
-      this.setState({species: result.map((info)=>{
-        return(
+  getAllPallet = async () => {
+    const result = await speciesService.getAll();
+    this.setState({
+      species: result.map((info) => {
+        return (
           <tr key={info.speciesId}>
             <td>{info.speciesId}</td>
             <td>{info.quantity}</td>
@@ -51,13 +49,14 @@ class Species extends Component {
             <td>{info.launchDateTime}</td>
           </tr>
         )
-      })})
-    }
-  
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           {/*Quantity*/}
           <Form.Item
@@ -103,20 +102,20 @@ class Species extends Component {
             <Input />
           </Form.Item>
 
-        {/*LaunchDateTime*/}
-        <Form.Item
-             name={'launchDateTime'}
-             label="Launch Date Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker 
+          {/*LaunchDateTime*/}
+          <Form.Item
+            name={'launchDateTime'}
+            label="Launch Date Time"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
             />
-         </Form.Item>
+          </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
@@ -126,8 +125,8 @@ class Species extends Component {
 
           </Form.Item>
         </Form>
-        {this.state.species ? 
-          <table style={{margin: 'auto'}}>
+        {this.state.species ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>Species ID</th>
@@ -141,9 +140,9 @@ class Species extends Component {
               {this.state.species}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 export default withParamsAndNavigation(Species);

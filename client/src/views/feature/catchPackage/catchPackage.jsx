@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
 import './catchPackage.css';
@@ -28,34 +28,33 @@ const validateMessages = {
 };
 
 class CatchPackage extends Component {
-    state = {
-      catchPackages: null
-    }
+  state = {
+    catchPackages: null
+  }
 
-    onFinish = async (values) => {
-      console.log(values)
-      const result = await catchPackageService.createNew(values);
-      console.log(result);
+  onFinish = async (values) => {
+    const result = await catchPackageService.createNew(values);
   };
 
-    getAllPallet = async () => {
-      const result = await catchPackageService.getAll();
-      console.log(result)
-      this.setState({catchPackages: result.map((info)=>{
-        return(
+  getAllPallet = async () => {
+    const result = await catchPackageService.getAll();
+    this.setState({
+      catchPackages: result.map((info) => {
+        return (
           <tr key={info.catchPackageId}>
             <td>{info.catchPackageId}</td>
             <td>{info.packingDate}</td>
             <td>{info.palletNum}</td>
           </tr>
         )
-      })})
-    }
-  
-    render() {
-        return (
-          <div>
-          <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           <Form.Item
             name={'catchPackageId'}
@@ -70,22 +69,22 @@ class CatchPackage extends Component {
             <Input />
           </Form.Item>
 
-        {/*Date*/}
-        <Form.Item
-             name={'packingDate'}
-             label="Packing Date Time"
-             rules={[
-                  {
-                    required: true
-                  },
-                ]}
-                >
-            <DatePicker 
+          {/*Date*/}
+          <Form.Item
+            name={'packingDate'}
+            label="Packing Date Time"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <DatePicker
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
             />
-         </Form.Item>
+          </Form.Item>
 
-            <Form.Item
+          <Form.Item
             name={'palletNum'}
             label="Pallet Number"
             rules={[
@@ -106,8 +105,8 @@ class CatchPackage extends Component {
 
           </Form.Item>
         </Form>
-        {this.state.catchPackages ? 
-          <table style={{margin: 'auto'}}>
+        {this.state.catchPackages ?
+          <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>Package ID</th>
@@ -119,9 +118,9 @@ class CatchPackage extends Component {
               {this.state.catchPackages}
             </tbody>
           </table> : ''}
-        </div>
-        )
-    };
+      </div>
+    )
+  };
 }
 
 export default withParamsAndNavigation(CatchPackage);
