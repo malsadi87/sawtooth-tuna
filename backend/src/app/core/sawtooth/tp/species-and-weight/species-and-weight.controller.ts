@@ -16,4 +16,9 @@ export class SpeciesAndWeightController {
     async create(@Body() speciesPayload: SpeciesCreationDto): Promise<number> {
         return await this.speciesAndWeightService.addNew(speciesPayload);
     }
+
+    @Get('/')
+    async getAll(): Promise<SpeciesAndWeightEntity[]> {
+        return this.speciesAndWeightService.getAllSpecies();
+    }
 }

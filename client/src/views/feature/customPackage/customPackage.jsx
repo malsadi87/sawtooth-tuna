@@ -1,10 +1,11 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './pallet.css';
+import './customPackage.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import palletService from '../../../services/feature/pallet/pallet.service';
+import customPackageService from '../../../services/feature/customPackage/customPackage.service';
+import moment from 'moment';
 
 
 const layout = {
@@ -26,26 +27,25 @@ const validateMessages = {
   },
 };
 
-class Pallet extends Component {
+class CustomPackage extends Component {
   state = {
-    pallets: null
+    customPackages: null
   }
 
   onFinish = async (values) => {
-    const result = await palletService.createNew(values);
+    const result = await customPackageService.createNew(values);
   };
 
   getAllPallet = async () => {
-    const result = await palletService.getAll();
+    const result = await customPackageService.getAll();
     this.setState({
-      pallets: result.map((info) => {
+      customPackages: result.map((info) => {
         return (
-          <tr key={info.palletNum}>
-            <td>{info.palletNum}</td>
-            <td>{info.productNum}</td>
-            <td>{info.supplierId}</td>
-            <td>{info.palletWeight}</td>
-            <td>{info.tripNo}</td>
+          <tr key={info.consumerPackageId}>
+            <td>{info.consumerPackageId}</td>
+            <td>{info.catchPackageId}</td>
+            <td>{info.packingDate}</td>
+            <td>{info.agent}</td>
           </tr>
         )
       })
@@ -57,9 +57,10 @@ class Pallet extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
+          {/*ConsumerPackageId*/}
           <Form.Item
-            name={'palletNum'}
-            label="Pallet Number"
+            name={'consumerPackageId'}
+            label="Consumer Package Id"
             rules={[
               {
                 required: true,
@@ -70,23 +71,10 @@ class Pallet extends Component {
             <Input />
           </Form.Item>
 
+          {/*CatchPackageId*/}
           <Form.Item
-            name={'productNum'}
-            label="Product Number"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item
-            name={'supplierId'}
-            label="Supplier Id"
+            name={'catchPackageId'}
+            label="Catch Package Id"
             rules={[
               {
                 required: true,
@@ -97,24 +85,25 @@ class Pallet extends Component {
             <Input />
           </Form.Item>
 
+          {/*LaunchDateTime*/}
           <Form.Item
-            name={'palletWeight'}
-            label="Weight"
+            name={'packingDate'}
+            label="Packing Date"
             rules={[
               {
-                required: true,
-                type: 'number',
-                min: 0,
-                max: 99999.9999
+                required: true
               },
             ]}
           >
-            <InputNumber />
+            <DatePicker
+              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+            />
           </Form.Item>
 
+          {/*Agent*/}
           <Form.Item
-            name={'tripNo'}
-            label="Trip Id"
+            name={'agent'}
+            label="Agent"
             rules={[
               {
                 required: true,
@@ -130,23 +119,22 @@ class Pallet extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Pallet</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Packages</Button>
 
           </Form.Item>
         </Form>
-        {this.state.pallets ?
+        {this.state.customPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
-                <th>Pallet Number</th>
-                <th>Product Number</th>
-                <th>Supplier ID</th>
-                <th>Weight</th>
-                <th>Trip ID</th>
+                <th>Custom Package ID</th>
+                <th>Catch Package ID</th>
+                <th>Packing Time</th>
+                <th>Agent</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.pallets}
+              {this.state.customPackages}
             </tbody>
           </table> : ''}
       </div>
@@ -154,6 +142,6 @@ class Pallet extends Component {
   };
 }
 
-export default withParamsAndNavigation(Pallet);
+export default withParamsAndNavigation(CustomPackage);
 
 //export default () => <FormLayoutDemo />;

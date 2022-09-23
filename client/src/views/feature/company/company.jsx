@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './pallet.css';
+import './company.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import palletService from '../../../services/feature/pallet/pallet.service';
+import companyService from '../../../services/feature/company/company.service';
 
 
 const layout = {
@@ -26,26 +26,25 @@ const validateMessages = {
   },
 };
 
-class Pallet extends Component {
+class Company extends Component {
   state = {
-    pallets: null
+    companies: null
   }
 
   onFinish = async (values) => {
-    const result = await palletService.createNew(values);
+    const result = await companyService.createNew(values);
   };
 
   getAllPallet = async () => {
-    const result = await palletService.getAll();
+    const result = await companyService.getAll();
     this.setState({
-      pallets: result.map((info) => {
+      companies: result.map((info) => {
         return (
-          <tr key={info.palletNum}>
-            <td>{info.palletNum}</td>
-            <td>{info.productNum}</td>
-            <td>{info.supplierId}</td>
-            <td>{info.palletWeight}</td>
-            <td>{info.tripNo}</td>
+          <tr key={info.companyId}>
+            <td>{info.companyId}</td>
+            <td>{info.companyName}</td>
+            <td>{info.companyAddress}</td>
+            <td>{info.contactInfo}</td>
           </tr>
         )
       })
@@ -57,9 +56,10 @@ class Pallet extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
+          {/*companyName*/}
           <Form.Item
-            name={'palletNum'}
-            label="Pallet Number"
+            name={'companyName'}
+            label="Company Name"
             rules={[
               {
                 required: true,
@@ -70,23 +70,10 @@ class Pallet extends Component {
             <Input />
           </Form.Item>
 
+          {/*companyAddress*/}
           <Form.Item
-            name={'productNum'}
-            label="Product Number"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item
-            name={'supplierId'}
-            label="Supplier Id"
+            name={'companyAddress'}
+            label="Company Address"
             rules={[
               {
                 required: true,
@@ -97,56 +84,40 @@ class Pallet extends Component {
             <Input />
           </Form.Item>
 
+          {/*contactInfo*/}
           <Form.Item
-            name={'palletWeight'}
-            label="Weight"
+            name={'contactInfo'}
+            label="Contanct Info"
             rules={[
               {
                 required: true,
-                type: 'number',
-                min: 0,
-                max: 99999.9999
+                type: 'string',
               },
             ]}
           >
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item
-            name={'tripNo'}
-            label="Trip Id"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
+            <Input />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Pallet</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Companies</Button>
 
           </Form.Item>
         </Form>
-        {this.state.pallets ?
+        {this.state.companies ?
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
-                <th>Pallet Number</th>
-                <th>Product Number</th>
-                <th>Supplier ID</th>
-                <th>Weight</th>
-                <th>Trip ID</th>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>Company Address</th>
+                <th>Company Contact Info</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.pallets}
+              {this.state.companies}
             </tbody>
           </table> : ''}
       </div>
@@ -154,6 +125,6 @@ class Pallet extends Component {
   };
 }
 
-export default withParamsAndNavigation(Pallet);
+export default withParamsAndNavigation(Company);
 
 //export default () => <FormLayoutDemo />;

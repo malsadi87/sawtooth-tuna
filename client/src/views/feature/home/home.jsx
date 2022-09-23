@@ -14,7 +14,7 @@ class Home extends Component {
     }
 
     toggleCollapsed = () => {
-        this.setState({ collapsed: !this.state.collapsed });    
+        this.setState({ collapsed: !this.state.collapsed });
     };
 
     render() {
@@ -31,14 +31,14 @@ class Home extends Component {
                     </h5>
                 </div>
                 <div className="container-fluid body-div">
-                <div className="row body-div">
-                    <div className="col-md-2">
-                        <NavBar collapsed={collapsed} />
+                    <div className="row body-div">
+                        <div className="col-md-2">
+                            <NavBar collapsed={collapsed} />
+                        </div>
+                        <div className="col-md-10">
+                            <Outlet />
+                        </div>
                     </div>
-                    <div className="col-md-10">
-                        <Outlet/>
-                    </div>
-                </div>
                 </div>
                 <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
                     <div className="text-white mb-3 mb-md-0">

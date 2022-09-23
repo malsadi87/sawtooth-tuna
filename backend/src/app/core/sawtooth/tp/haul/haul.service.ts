@@ -19,8 +19,8 @@ export class HaulService {
         return await this.haulRepository.getAll();
     }
 
-    async getByLaunchDate(launchDateTime: Date): Promise<HaulEntity> {
-        return await this.haulRepository.getByLaunchDate(launchDateTime);
+    async getByHaulId(haulId: number): Promise<HaulEntity> {
+        return await this.haulRepository.getByHaulId(haulId);
     }
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {

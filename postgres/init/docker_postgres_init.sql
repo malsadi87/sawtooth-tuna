@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS "Trip" (
 );
 
 CREATE TABLE IF NOT EXISTS "Haul" (
-    "LaunchDateTime" TIMESTAMP PRIMARY KEY,
+    "HaulId" SERIAL PRIMARY KEY,
+    "LaunchDateTime" TIMESTAMP NOT NULL,
     "LaunchPosition" VARCHAR(255) NOT NULL,
     "LaunchLatitude" NUMERIC(20, 18) NOT NULL,
     "LaunchLongitude" NUMERIC(20, 18) NOT NULL,
@@ -38,7 +39,8 @@ CREATE TABLE IF NOT EXISTS "Pallet" (
 );
 
 CREATE TABLE IF NOT EXISTS "PalletEvent" (
-    "EventTime" TIMESTAMP PRIMARY KEY,
+    "PalletEventId" SERIAL PRIMARY KEY,
+    "EventTime" TIMESTAMP NOT NULL,
     "PalletNum" VARCHAR(255) NOT NULL,
     "Temperature" JSON NOT NULL,
     "Location" JSON NOT NULL,

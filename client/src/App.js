@@ -10,19 +10,18 @@ import ResponseInterceptor from "./services/core/interceptor/axiosHttpResponseIn
 import {RouteUrl} from './constants/routeUrls';
 import AuthShell from "./views/core/authShell";
 import Trip from "./views/feature/trip/trip";
-import NewTrip from "./views/feature/trip/newTrip/newTrip";
 import Haul from "./views/feature/haul/haul";
 import Pallet from "./views/feature/pallet/pallet";
 import Product from "./views/feature/product/product";
-import Shipment from "./views/feature/shipment/shipment";
-import ColdStorage from "./views/feature/coldStorage/coldStorage";
+import PalletEvent from "./views/feature/palletEvent/palletEvent";
 import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
 import Home from "./views/feature/home/home";
-import BatchCreation from "./views/feature/batchCreation/batchCreation";
-import BatchLabelling from "./views/feature/batchLabelling/batchLabelling";
-import BatchShipment from "./views/feature/batchShipment/batchShipment";
+import CatchPackage from "./views/feature/catchPackage/catchPackage";
+import Species from "./views/feature/species/species";
+import Company from "./views/feature/company/company";
+import CustomPackage from "./views/feature/customPackage/customPackage";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
@@ -48,17 +47,15 @@ class App extends Component {
             <Routes>
                 <Route element={<AuthShell />}>
                     <Route exact path={RouteUrl.home} element={<Home />}>
-                        <Route index element={<Product />} />
+                        <Route path={RouteUrl.product} element={<Product />} />
                         <Route path={RouteUrl.trip} element={<Trip />} />
-                        <Route path={RouteUrl.newTrip} element={<NewTrip />} />
                         <Route path={RouteUrl.haul} element={<Haul />} />
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
-                        <Route path={RouteUrl.shipment} element={<Shipment />} />
-                        <Route path={RouteUrl.coldStorage} element={<ColdStorage />} />
-                        <Route path={RouteUrl.batchCreation} element={<BatchCreation />} />
-                        <Route path={RouteUrl.batchLabelling} element={<BatchLabelling />} />
-                        <Route path={RouteUrl.batchShipment} element={<BatchShipment />} />
-
+                        <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
+                        <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
+                        <Route path={RouteUrl.species} element={<Species />} />
+                        <Route path={RouteUrl.company} element={<Company />} />
+                        <Route path={RouteUrl.customPackage} element={<CustomPackage />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>

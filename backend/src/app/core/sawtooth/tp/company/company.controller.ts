@@ -16,4 +16,9 @@ export class CompanyController {
     async create(@Body() companyPayload: CompanyCreationDto): Promise<number> {
         return await this.companyService.addNewCompany(companyPayload);
     }
+    
+    @Get('/')
+    async getAll(): Promise<CompanyEntity[]> {
+        return this.companyService.getAll();
+    }
 }

@@ -13,8 +13,8 @@ export class HaulRepository extends Repository<HaulEntity> {
         return result;
     }
 
-    async getByLaunchDate(launchDateTime: Date): Promise<HaulEntity> {
-        return await this.findOneBy({ launchDateTime: launchDateTime });
+    async getByHaulId(haulId: number): Promise<HaulEntity> {
+        return await this.findOneBy({ haulId: haulId });
     }
 
     async addNewHaul(newHaul: HaulEntity): Promise<HaulEntity> {

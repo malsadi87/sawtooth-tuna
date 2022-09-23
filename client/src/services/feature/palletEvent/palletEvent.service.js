@@ -3,7 +3,7 @@ import { APIBasePath } from "../../../constants/apiBasePaths";
 
 const createNew = async (data) => {
     try {
-        const response = await axios.post(APIBasePath.Sawtooth.tp.product.createNew, data);
+        const response = await axios.post(APIBasePath.Sawtooth.tp.palletEvent.createNew, data);
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
@@ -14,18 +14,18 @@ const createNew = async (data) => {
 
 const getAll = async () => {
     try {
-        const response = await axios.get(APIBasePath.Sawtooth.tp.product.getAll);
+        const response = await axios.get(APIBasePath.Sawtooth.tp.palletEvent.getAll);
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
         console.error(e);
         return Promise.reject(e);
-    }
+    } 
 }
 
 const getById = async (id) => {
     try {
-        const response = await axios.get(APIBasePath.Sawtooth.tp.product.getById.replace(':id', id));
+        const response = await axios.get(APIBasePath.Sawtooth.tp.palletEvent.getById.replace(':id', id));
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
@@ -34,10 +34,10 @@ const getById = async (id) => {
     }
 }
 
-const productService = {
+const palletEventService = {
     createNew,
     getById,
     getAll
 }
 
-export default productService;
+export default palletEventService;

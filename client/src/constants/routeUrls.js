@@ -3,12 +3,12 @@ export const RouteUrl = {
     signup: '/auth/signup',
     login: '/auth/login',
     trip: '/trip',
-    newTrip: '/trip/new',
     haul: '/haul',
     pallet: '/pallet',
-    shipment: '/shipment',
-    coldStorage: '/coldStorage',
-    batchCreation: '/batchCreation',
-    batchLabelling: '/batchLabelling',
-    batchShipment: '/batchShipment'
+    product: '/product',
+    palletEvent: '/palletEvent',
+    catchPackage: '/catchPackage',
+    species: '/species',
+    company: '/company',
+    customPackage: '/customPackage',
 };

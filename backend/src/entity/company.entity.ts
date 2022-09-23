@@ -5,7 +5,7 @@ import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
 @Entity('Company')
 export class CompanyEntity extends BaseEntity {
     @SawtoothIdentity()
-    @PrimaryColumn({ type: 'int', name: 'CompanyId', nullable: false })
+    @PrimaryColumn({ generated: true, type: 'int', name: 'CompanyId', nullable: false })
     companyId: number;
 
     @Column({ type:'varchar', width: 255, name: 'CompanyName', nullable: false })

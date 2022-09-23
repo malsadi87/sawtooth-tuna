@@ -7,13 +7,18 @@ import { HaulService } from './haul.service';
 export class HaulController {
     constructor(private readonly haulService: HaulService) {}
 
-    @Get(':launchDateTime')
-    async getByLaunchDateTime(@Param('launchDateTime') launchDateTime: Date): Promise<HaulEntity> {
-        return await this.haulService.getByLaunchDate(launchDateTime);
+    @Get(':haulId')
+    async getByHaulId(@Param('haulId') haulId: number): Promise<HaulEntity> {
+        return await this.haulService.getByHaulId(haulId);
     }
 
     @Post('addNew')
     async create(@Body() haulPayload: HaulCreationDto): Promise<Date> {
         return await this.haulService.addNewHaul(haulPayload);
+    }
+
+    @Get('/')
+    async getAll(): Promise<HaulEntity[]> {
+        return this.haulService.getAll();
     }
 }
