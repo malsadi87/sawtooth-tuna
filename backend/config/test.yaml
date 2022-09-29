@@ -12,6 +12,7 @@ database:
   trustServerCertificate: false
   name: "demo"
   password: "root"
+  username: "root"
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"

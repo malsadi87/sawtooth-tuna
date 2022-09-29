@@ -17,27 +17,19 @@ describe('AppController (e2e)', () => {
     console.log(`Current ENVIRONMENT IS ----> ${process.env.NODE_ENV}`);
     console.log(`Current DATABASE HOST IS ----> ${process.env.DATABASE_HOST}`);
 
-    try {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
-    }
-    catch(e){
-      console.log("++++++++++")
-      console.log(e)
-      console.log("++++++++++")
-    }
-
 
   });
 
-  it('/ (GET)', () => {
+  it('/api/v1/test (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .get('/api/v1/test')
+      .expect(404)
+      //.expect('Hello World!');
   });
 });
