@@ -29,10 +29,10 @@ const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PW } = process.env
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
     type: type,
-    host: "127.0.0.1",
-    port: +"5432",
-    username: "root",
-    password: "root",
+    host: DATABASE_HOST,
+    port: +DATABASE_PORT,
+    username: DATABASE_USER,
+    password: DATABASE_PW,
     database: name,
     entities: [
         TripEntity,

@@ -13,3 +13,20 @@ services:
     volumes:
       - ./postgres/db-data:/var/lib/postgresql/data
       - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+  
+  tunachain-backend:
+    build:
+      context: .
+      target: development
+      dockerfile: ./backend/Dockerfile
+    image: hyperledger/tunachain-backend
+    container_name: tunachain-backend
+    volumes:
+      - ./backend:/project/sawtooth-tuna/backend
+      - /project/sawtooth-tuna/backend/node_modules
+    command: npm run test:e2e
+    ports:
+      - 3001:3001
+      - 9229:9229
+    depends_on:
+      - tunachain-db
