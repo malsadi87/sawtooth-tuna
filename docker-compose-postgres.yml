@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  tunachain-db:
+    image: postgres
+    container_name: tunachain-db
+    restart: always
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/db-data:/var/lib/postgresql/data
+      - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
