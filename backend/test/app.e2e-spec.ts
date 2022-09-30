@@ -36,4 +36,12 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello world!');
   });
+
+  afterEach(done => {
+    app.close()
+    done()
+  })
+
 });
+
+

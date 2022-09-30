@@ -10,3 +10,8 @@ The main folders within the project are:
 2. client: this folder contains the codes repsonsible for handling user requests and it's execusion on Sawtooth.
 
 To run the application, you should have docker running in your machine. You just need to run ( dicker-compose up ) from inside the main folder.
+
+## Testing
+
+docker-compose -f docker-compose-postgres.yml up --abort-on-container-exit
+
