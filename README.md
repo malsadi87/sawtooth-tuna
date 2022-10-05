@@ -13,5 +13,5 @@ To run the application, you should have docker running in your machine. You just
 
 ## Testing
 
-docker-compose -f docker-compose-postgres.yml up --abort-on-container-exit
+docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 

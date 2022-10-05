@@ -11,9 +11,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres/db-data:/var/lib/postgresql/data
+      - ./postgres/db-data-test:/var/lib/postgresql/data
       - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-  
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
   tunachain-backend:
     build:
       context: .
@@ -29,4 +34,5 @@ services:
       - 3001:3001
       - 9229:9229
     depends_on:
-      - tunachain-db
+      tunachain-db:
+        condition: service_healthy
