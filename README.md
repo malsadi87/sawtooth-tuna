@@ -15,3 +15,5 @@ To run the application, you should have docker running in your machine. You just
 
 docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 
+delete /postgres/db-data-test to run the tests with a fresh database.
+
