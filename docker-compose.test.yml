@@ -14,8 +14,8 @@ services:
       - ./postgres/db-data-test:/var/lib/postgresql/data
       - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     healthcheck:
-      test: /usr/bin/pg_isready
-      interval: 5s
+      test: /usr/bin/pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      interval: 10s
       timeout: 10s
       retries: 5
 
