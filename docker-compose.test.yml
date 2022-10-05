@@ -13,6 +13,7 @@ services:
     volumes:
       - ./postgres/db-data-test:/var/lib/postgresql/data
       - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+# TEST config:
     healthcheck:
       test: /usr/bin/pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
       interval: 10s
@@ -35,4 +36,5 @@ services:
       - 9229:9229
     depends_on:
       tunachain-db:
+# TEST config:
         condition: service_healthy
