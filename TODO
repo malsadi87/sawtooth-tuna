@@ -1,1 +1,9 @@
 * Move all external config to docker env config
+
+* Authentication:
+- Password validation
+- Email verification
+- Sign out and other controller endpoints return null
+- I agree all statements in Terms of service is not required for API request
+- GUI freezes on "user exists" error 500
+
