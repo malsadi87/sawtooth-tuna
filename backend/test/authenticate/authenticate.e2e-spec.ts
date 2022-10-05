@@ -8,9 +8,6 @@ describe('AppController (e2e)', () => {
 
   beforeEach(async () => {
 
-    console.log(`Current ENVIRONMENT IS ----> ${process.env.NODE_ENV}`);
-    console.log(`Current DATABASE HOST IS ----> ${process.env.DATABASE_HOST}`);
-
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
