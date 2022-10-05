@@ -22,21 +22,34 @@ describe('AppController (e2e)', () => {
   it('/api/v1/identity/signup (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/signup')
-      .send({ "fullName": "hermes", "email": "hermes@ntnu.no", "password": "asd123" }).expect(201)
+      .send({
+        "fullName": "hermes",
+        "email": "hermes@ntnu.no",
+        "password": "asd123"
+      })
+      .expect(201)
     return response
   });
 
   it('/api/v1/identity/token (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/token')
-      .send({ "email": "hermes@ntnu.no", "password": "asd123" }).expect(201)
+      .send({
+        "email": "hermes@ntnu.no",
+        "password": "asd123"
+      })
+      .expect(201)
     return response
   });
 
   it('/api/v1/identity/token (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/token')
-      .send({ "email": "hermes@ntnu.no", "password": "wrong" }).expect(400)
+      .send({
+        "email": "hermes@ntnu.no",
+        "password": "wrong"
+      })
+      .expect(401)
     return response
   });
 
