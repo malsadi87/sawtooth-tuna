@@ -6,7 +6,7 @@ import { AppModule } from './../src/app/app.module';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -21,10 +21,10 @@ describe('AppController (e2e)', () => {
 
   // unit tests for env file
   it('should have a node env', () => {
-      expect(process.env.NODE_ENV).toBeDefined();
+    expect(process.env.NODE_ENV).toBeDefined();
   });
   it('should have a database host', () => {
-      expect(process.env.DATABASE_HOST).toBeDefined();
+    expect(process.env.DATABASE_HOST).toBeDefined();
   });
 
   it('/api/v1/test (GET)', () => {
@@ -34,7 +34,7 @@ describe('AppController (e2e)', () => {
       .expect('Hello world!');
   });
 
-  afterEach(done => {
+  afterAll(done => {
     app.close()
     done()
   })

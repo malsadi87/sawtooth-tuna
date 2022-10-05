@@ -6,7 +6,7 @@ import { AppModule } from './../../src/app/app.module';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -22,20 +22,27 @@ describe('AppController (e2e)', () => {
   it('/api/v1/identity/signup (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/signup')
-      .send({"fullName":"hermes","email":"hermes@ntnu.no","password":"asd123"}).expect(201)
+      .send({ "fullName": "hermes", "email": "hermes@ntnu.no", "password": "asd123" }).expect(201)
     return response
   });
 
   it('/api/v1/identity/token (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/token')
-      .send({"email":"hermes@ntnu.no","password":"asd123"}).expect(201)
+      .send({ "email": "hermes@ntnu.no", "password": "asd123" }).expect(201)
+    return response
+  });
+
+  it('/api/v1/identity/token (POST)', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/identity/token')
+      .send({ "email": "hermes@ntnu.no", "password": "wrong" }).expect(400)
     return response
   });
 
   // TODO: SignOut and possibly other endpoints when implemented
 
-  afterEach(done => {
+  afterAll(done => {
     app.close()
     done()
   })
