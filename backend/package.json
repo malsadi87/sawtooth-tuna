@@ -18,7 +18,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest.config.js"
+    "test:e2e:authenticate": "jest --config ./test/jest.authenticate.config.js",
+    "test:e2e:tp": "jest --config ./test/jest.tp.config.js",
+    "test:e2e": "npm run test:e2e:authenticate && npm run test:e2e:tp"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.7",
