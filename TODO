@@ -7,3 +7,8 @@
 - I agree all statements in Terms of service is not required for API request
 - GUI freezes on "user exists" error 500
 
+* TP
+- Can overwrite values
+
+* Trip
+- Can create trips with conflicting landing and departure
