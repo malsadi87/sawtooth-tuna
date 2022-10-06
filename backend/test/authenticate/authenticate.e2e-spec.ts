@@ -41,6 +41,7 @@ describe('AppController (e2e)', () => {
         "password": "asd123"
       })
       .expect(400)
+      expect(response.body.token).not.toBeDefined()
     return response
   });
 
@@ -63,6 +64,7 @@ describe('AppController (e2e)', () => {
         "password": "wrong"
       })
       .expect(401)
+      expect(response.body.token).not.toBeDefined()
     return response
   });
 
