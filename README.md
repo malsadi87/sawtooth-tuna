@@ -13,7 +13,24 @@ To run the application, you should have docker running in your machine. You just
 
 ## Testing
 
-docker-compose -f docker-compose.test.yml up --abort-on-container-exit
+Run test compose file for end to end testing:
 
-delete /postgres/db-data-test to run the tests with a fresh database.
+`docker-compose -f docker-compose.test.yml up --abort-on-container-exit`
+
+Delete /postgres/db-data-test to run the tests with a fresh database.
+
+The tester will launch the images and run integration testing. To perform more interavtice testing with readable output one may change docker-compose.test.yml with the command line:
+
+`#command: npm run start`
+
+One may then enter the backend container and run tests:
+
+- `docker exec -it tunachain-backend bash`
+- `npm run test:e2e`
+
+Individual tests can be runned in the container as well:
+
+- `npm run test:e2e:<testname>`
+
+### These tests are currenty failing:
 

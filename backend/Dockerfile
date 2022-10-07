@@ -35,5 +35,22 @@ RUN npm install --only=production
 COPY --from=builder /project/sawtooth-tuna/backend/dist ./
 COPY --from=builder /project/sawtooth-tuna/backend/config ./config
 
+# The test run is built on top of the production run
+FROM node:12-stretch AS test
+
+# # Declaring working directory
+WORKDIR /project/sawtooth-tuna/backend
+
+COPY backend/package*.json ./
+
+RUN npm install --only=production
+
+# #Copy build artifacts
+COPY --from=builder /project/sawtooth-tuna/backend/dist ./
+COPY --from=builder /project/sawtooth-tuna/backend/config ./config
+
+# Enable exution of the test script
+RUN chmod+x test/test.sh
+
 # # Start the server
 CMD [ "node", "main.js" ]
