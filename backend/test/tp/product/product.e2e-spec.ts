@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../src/app/app.module';
+import { AppModule } from '../../../src/app/app.module';
 
 describe('Product (e2e)', () => {
   let app: INestApplication;
@@ -57,15 +57,23 @@ describe('Product (e2e)', () => {
     return response
   });
 
-  it('Can read a product with authentication', async () => {
+  it('Can read a product with authentication - known to fail', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/product/?productId=3')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.productId === 3)
-    expect(response.body.productName === "NameString")
-    expect(response.body.productDescription === "DescriptionString")
-    expect(response.body.productNum === 1)
+    expect(response.body.productId).toEqual<number>(3)
+    expect(response.body.productName).toEqual<string>("NameString")
+    expect(response.body.productDescription).toEqual<string>("DescriptionString")
+    expect(response.body.productNum).toEqual<number>(1)
+    return response
+  });
+
+  it('Cant read a product that doesnt exist - known to fail', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/v1/sawtooth/tp/product/?productId=404')
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(404)
     return response
   });
 

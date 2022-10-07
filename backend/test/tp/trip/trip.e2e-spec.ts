@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../src/app/app.module';
+import { AppModule } from '../../../src/app/app.module';
 
 describe('Trip (e2e)', () => {
   let app: INestApplication;
@@ -28,6 +28,7 @@ describe('Trip (e2e)', () => {
         "password": "asd123"
       }).expect(201)
     jwtToken = response.body.token
+    expect(response.body.token).toBeDefined()
     return response
   });
 
@@ -68,7 +69,7 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Cant create a trip with conflicting departure and landing', async () => {
+  it('Cant create a trip with conflicting departure and landing - known to fail', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
@@ -85,18 +86,27 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Can read a trip with authentication', async () => {
+  it('Can read a trip with authentication - known to fail', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/trip/?tripNo=1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.tripNo === 1)
-    expect(response.body.tripWithinYearNo === 12)
-    expect(response.body.vesselName === "Test Vessel")
-    expect(response.body.departureDate === "2022-09-15T14:37:04.837Z")
-    expect(response.body.departurePort === "trondheim")
-    expect(response.body.landingDate === "2022-09-15T14:37:04.837Z")
-    expect(response.body.landingPort === "Hamar")
+    expect(response.body.tripNo).toEqual<number>(1)
+    expect(response.body.tripWithinYearNo).toEqual<number>(12)
+    expect(response.body.vesselName).toEqual<string>("Test Vessel")
+    expect(response.body.departureDate).toEqual<string>("2022-09-15T14:37:04.837Z")
+    expect(response.body.departurePort).toEqual<string>("trondheim")
+    expect(response.body.landingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
+    expect(response.body.landingPort).toEqual<string>("Hamar")
+
+    return response
+  });
+
+  it('Cant read a trip that doesnt exist - known to fail', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/v1/sawtooth/tp/trip/?tripNo=404')
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(404)
 
     return response
   });

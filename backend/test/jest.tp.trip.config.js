@@ -1,6 +1,6 @@
 module.exports = {
   moduleFileExtensions: ["js", "json", "ts"],
-  rootDir: "./tp",
+  rootDir: "./tp/trip",
   testEnvironment: "node",
   testRegex: ".e2e-spec.ts$",
   transform: {

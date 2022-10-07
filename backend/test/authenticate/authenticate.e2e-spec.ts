@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../../src/app/app.module';
 
@@ -53,6 +53,11 @@ describe('AppController (e2e)', () => {
         "password": "asd123"
       })
       .expect(201)
+    expect(response.body.token).toBeDefined()
+    console.log('**************')
+    console.log('JWT TOKEN FOR TESTING')
+    console.log(response.body.token)
+    console.log('**************')
     return response
   });
 

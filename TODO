@@ -9,6 +9,7 @@
 
 * TP
 - Can overwrite values
+- Can create objects with conflicting start and end times
+- Requests for single objects (?objectId=X) returns all object regardless if the object exists or not.
+- Latitudes and longitudes are appended trailing zeros. Is this expected?
 
-* Trip
-- Can create trips with conflicting landing and departure

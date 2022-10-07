@@ -19,8 +19,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e:authenticate": "jest --config ./test/jest.authenticate.config.js",
-    "test:e2e:tp": "jest --config ./test/jest.tp.config.js",
-    "test:e2e": "npm run test:e2e:authenticate && npm run test:e2e:tp"
+    "test:e2e:tp:product": "jest --config ./test/jest.tp.product.config.js",
+    "test:e2e:tp:trip": "jest --config ./test/jest.tp.trip.config.js",
+    "test:e2e:tp:haul": "jest --config ./test/jest.tp.haul.config.js",
+    "test:e2e": "npm run test:e2e:authenticate || echo 'TEST FAILED: authentication' && npm run test:e2e:tp:product || echo 'TEST FAILED: product' && npm run test:e2e:tp:trip || echo 'TEST FAILED: trip' && npm run test:e2e:tp:haul || echo 'TEST FAILED: HAUL'"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.7",
