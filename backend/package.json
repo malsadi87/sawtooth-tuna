@@ -25,6 +25,7 @@
     "test:e2e:tp:pallet": "jest --config ./test/jest.tp.pallet.config.js",
     "test:e2e:tp:catch-package": "jest --config ./test/jest.tp.catch-package.config.js",
     "test:e2e:tp:company": "jest --config ./test/jest.tp.company.config.js",
+    "test:e2e:tp:pallet-event": "jest --config ./test/jest.tp.pallet-event.config.js",
     "test:e2e": "test/test.sh"
   },
   "dependencies": {
