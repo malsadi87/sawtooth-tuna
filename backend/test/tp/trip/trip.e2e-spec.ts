@@ -46,7 +46,6 @@ describe('Trip (e2e)', () => {
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
-      //TODO: Check if the data was stored in the database and on the blokchain.
     return response
   });
 
@@ -156,7 +155,6 @@ describe('Trip (e2e)', () => {
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
-      //TODO: This test is known to fail because the backend does not prevent overwrite.
     return response
   });
 

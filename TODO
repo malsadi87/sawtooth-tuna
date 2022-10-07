@@ -10,6 +10,7 @@
 * TP
 - Can overwrite values
 - Can create objects with conflicting start and end times
+- Many potential datetime issues across entities: Such as the catch time before the trip departure time.
 - Requests for single objects (?objectId=X) returns all object regardless if the object exists or not.
 - Latitudes and longitudes are appended trailing zeros. Is this expected?
-
+- I dont understand if the relations for pallets are correct. There is a productNum there, but it does not relate to productId or any product entity.

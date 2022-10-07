@@ -48,7 +48,6 @@ describe('Haul (e2e)', () => {
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
-    //TODO: Check if the data was stored in the database and on the blokchain.
     return response
   });
 
@@ -123,7 +122,7 @@ describe('Haul (e2e)', () => {
     return response
   });
 
-  it('Can read all hauls with authentication', async () => {
+  it('Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/haul/')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -166,7 +165,6 @@ describe('Haul (e2e)', () => {
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
-    //TODO: This test is known to fail because the backend does not prevent overwrite.
     return response
   });
 

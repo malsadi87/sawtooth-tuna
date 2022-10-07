@@ -22,7 +22,9 @@
     "test:e2e:tp:product": "jest --config ./test/jest.tp.product.config.js",
     "test:e2e:tp:trip": "jest --config ./test/jest.tp.trip.config.js",
     "test:e2e:tp:haul": "jest --config ./test/jest.tp.haul.config.js",
-    "test:e2e": "npm run test:e2e:authenticate || echo 'TEST FAILED: authentication' && npm run test:e2e:tp:product || echo 'TEST FAILED: product' && npm run test:e2e:tp:trip || echo 'TEST FAILED: trip' && npm run test:e2e:tp:haul || echo 'TEST FAILED: HAUL'"
+    "test:e2e:tp:pallet": "jest --config ./test/jest.tp.pallet.config.js",
+    "test:e2e:tp:catch-package": "jest --config ./test/jest.tp.catch-package.config.js",
+    "test:e2e": "test/test.sh"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.7",

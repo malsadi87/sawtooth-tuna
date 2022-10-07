@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../../src/app/app.module';
 
-describe('Product (e2e)', () => {
+describe('Pallet (e2e)', () => {
   let app: INestApplication;
   let jwtToken: string;
 
@@ -23,95 +23,107 @@ describe('Product (e2e)', () => {
   it('Can authenticate', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/identity/token')
-      .send({ "email": "hermes@ntnu.no", "password": "asd123" }).expect(201)
+      .send({
+        "email": "hermes@ntnu.no",
+        "password": "asd123"
+      }).expect(201)
     jwtToken = response.body.token
+    expect(response.body.token).toBeDefined()
     return response
   });
 
-  it('Can create a product with authentication', async () => {
+  it('Can create a pallet with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .post('/api/v1/sawtooth/tp/product/addNew')
+      .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "productId": 3,
-        "productName": "NameString",
-        "productDescription": "DescriptionString",
-        "productNum": 1
+        "palletNum": "1",
+        "productNum": 1,
+        "supplierId": "Supplier",
+        "palletWeight": 1,
+        "tripNo": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
     return response
   });
 
-  it('Cant create a product without authentication', async () => {
+
+
+  it('Cant create a pallet without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .post('/api/v1/sawtooth/tp/product/addNew')
+      .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "productId": 4,
-        "productName": "NameString",
-        "productDescription": "DescriptionString",
-        "productNum": 3
+        "palletNum": "1",
+        "productNum": 1,
+        "supplierId": "Supplier",
+        "palletWeight": 1,
+        "tripNo": 123
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
     return response
   });
 
-  it('Can read a product with authentication - known to fail', async () => {
+  it('Can read a pallet with authentication - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/product/?productId=3')
+      .get('/api/v1/sawtooth/tp/pallet/?palletId=1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.productId).toEqual<number>(3)
-    expect(response.body.productName).toEqual<string>("NameString")
-    expect(response.body.productDescription).toEqual<string>("DescriptionString")
+    expect(response.body.palletNum).toEqual<string>("1")
     expect(response.body.productNum).toEqual<number>(1)
+    expect(response.body.supplierId).toEqual<string>("supplierId")
+    expect(response.body.palletWeight).toEqual<number>(1.0000)
+    expect(response.body.tripNo).toEqual<number>(123)
     return response
   });
 
-  it('Cant read a product that doesnt exist - known to fail', async () => {
+  it('Cant read a pallet that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/product/?productId=404')
+      .get('/api/v1/sawtooth/tp/pallet/?palletId=404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
+
     return response
   });
 
-  it('Cant read a product without authentication', async () => {
+  it('Cant read a pallet without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/product/?productId=3')
+      .get('/api/v1/sawtooth/tp/pallet/?palletId=1')
       .expect(401)
     return response
   });
 
-  it('Can read all products with authentication', async () => {
+  it('Can read all pallets with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/product/')
+      .get('/api/v1/sawtooth/tp/pallet/')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "productId": 3,
-      "productName": "NameString",
-      "productDescription": "DescriptionString",
-      "productNum": 1
+      "palletNum": "1",
+      "productNum": 1,
+      "supplierId": "Supplier",
+      "palletWeight": 1.0000,
+      "tripNo": 123
     }]))
     return response
   });
 
-  it('Cant read all products without authentication', async () => {
+  it('Cant read all pallets without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/product/')
+      .get('/api/v1/sawtooth/tp/pallet/')
       .expect(401)
     return response
   });
 
-  it('Cant overwrite a product with authentication - known to fail', async () => {
+  it('Cant overwrite a pallet with authentication - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .post('/api/v1/sawtooth/tp/product/addNew')
+      .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "productId": 3,
-        "productName": "NameStringChanged",
-        "productDescription": "DescriptionStringChanged",
-        "productNum": 1
+        "palletNum": "1",
+        "productNum": 1,
+        "supplierId": "Supplier",
+        "palletWeight": 1,
+        "tripNo": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
