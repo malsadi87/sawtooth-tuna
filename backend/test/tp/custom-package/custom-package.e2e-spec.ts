@@ -111,8 +111,8 @@ describe('CustomPackage (e2e)', () => {
       .send({
         "consumerPackageId": "1",
         "catchPackageId": "1",
-        "packingDate": "2021-01-15T14:37:04.837Z",
-        "agent": 2
+        "packingDate": "2021-01-15T14:37:20.837Z",
+        "agent": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
