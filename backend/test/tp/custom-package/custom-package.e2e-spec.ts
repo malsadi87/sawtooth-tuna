@@ -119,6 +119,34 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
+  it('Cant create a custom-package without a related agent - fails because of lacking error handling', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/custom-package/addNew')
+      .send({
+        "consumerPackageId": "1",
+        "catchPackageId": "1",
+        "packingDate": "2021-01-15T14:37:20.837Z",
+        "agent": 404
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Cant create a custom-package without a related catchPackageId - fails because of lacking error handling', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/custom-package/addNew')
+      .send({
+        "consumerPackageId": "1",
+        "catchPackageId": "404",
+        "packingDate": "2021-01-15T14:37:20.837Z",
+        "agent": 1
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
   afterAll(done => {
     app.close()
     done()

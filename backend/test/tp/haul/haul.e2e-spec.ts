@@ -161,7 +161,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "asdas",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 12345
+        "tripNo": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

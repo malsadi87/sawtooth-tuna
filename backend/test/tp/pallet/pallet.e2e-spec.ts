@@ -122,8 +122,23 @@ describe('Pallet (e2e)', () => {
         "palletNum": "1",
         "productNum": 1,
         "supplierId": "Supplier",
-        "palletWeight": 1,
+        "palletWeight": 5,
         "tripNo": 123
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Cant create a pallet without a related tripNo - fails because of lacking error handling', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet/addNew')
+      .send({
+        "palletNum": "1",
+        "productNum": 1,
+        "supplierId": "Supplier",
+        "palletWeight": 1,
+        "tripNo": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

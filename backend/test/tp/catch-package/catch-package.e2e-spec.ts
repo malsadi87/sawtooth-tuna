@@ -113,7 +113,20 @@ describe('CatchPackage (e2e)', () => {
       .send({
         "catchPackageId": "1",
         "packingDate": "2022-09-15T14:37:04.837Z",
-        "palletNum": "2"
+        "palletNum": "1"
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Cant create a catch-package without a related palletNum - fails because of lacking error handling', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/catch-package/addNew')
+      .send({
+        "catchPackageId": "2",
+        "packingDate": "2022-09-15T14:37:04.837Z",
+        "palletNum": "404"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

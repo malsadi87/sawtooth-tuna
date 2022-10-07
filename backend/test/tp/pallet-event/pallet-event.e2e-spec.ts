@@ -152,6 +152,30 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
+  it('Cant create a catch-package without a related palletNum - fails because of lacking error handling', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-09-15T14:37:04.837Z",
+        "palletNum": "404",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitude": 63.40595699218346,
+          "longitude": 10.406196141997356,
+        }),
+        "tilt": JSON.stringify({
+          "tilt": 1,
+        }),
+        "shock": JSON.stringify({
+          "vertical": 1,
+          "horisontal": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   afterAll(done => {
     app.close()
     done()
