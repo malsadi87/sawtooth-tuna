@@ -27,6 +27,7 @@
     "test:e2e:tp:company": "jest --config ./test/jest.tp.company.config.js",
     "test:e2e:tp:pallet-event": "jest --config ./test/jest.tp.pallet-event.config.js",
     "test:e2e:tp:species": "jest --config ./test/jest.tp.species.config.js",
+    "test:e2e:tp:custom-package": "jest --config ./test/jest.tp.custom-package.config.js",
     "test:e2e": "test/test.sh"
   },
   "dependencies": {
