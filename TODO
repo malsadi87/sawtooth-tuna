@@ -16,7 +16,7 @@
 - I dont understand if the relations for pallets are correct. There is a productNum there, but it does not relate to productId or any product entity.
 - Some entities with relationships with other entities does not have foreign key contraints.
 
-### These tests are currenty failing:
+### These tests are currently failing:
 
   Product (e2e)
     ✓ Can authenticate (181 ms)
