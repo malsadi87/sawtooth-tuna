@@ -14,3 +14,43 @@
 - Requests for single objects (?objectId=X) returns all object regardless if the object exists or not.
 - Latitudes and longitudes are appended trailing zeros. Is this expected?
 - I dont understand if the relations for pallets are correct. There is a productNum there, but it does not relate to productId or any product entity.
+- Some entities with relationships with other entities does not have foreign key contraints.
+
+### These tests are currenty failing:
+
+- Product (e2e) › Can read a product with authentication - known to fail
+- Product (e2e) › Cant read a product that doesnt exist - known to fail
+- Product (e2e) › Cant overwrite a product with authentication - known to fail
+- Trip (e2e) › Cant create a trip with conflicting departure and landing - known to fail
+- Trip (e2e) › Can read a trip with authentication - known to fail
+- Trip (e2e) › Cant read a trip that doesnt exist - known to fail
+- Trip (e2e) › Cant overwrite a trip with authentication - known to fail
+- Haul (e2e) › Cant create a haul with conflicting launch and haul known to fail
+- Haul (e2e) › Can read a haul with authentication - known to fail
+- Haul (e2e) › Cant read a haul that doesnt exist - known to fail
+- Haul (e2e) › Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros.
+- Haul (e2e) › Cant create a haul without a related trip - fails because of lacking error handling
+- test-2022-10-09.log:> backend@0.0.1 test:e2e /project/sawtooth-tuna/backend
+- Pallet (e2e) › Can read a pallet with authentication - known to fail
+- Pallet (e2e) › Cant read a pallet that doesnt exist - known to fail
+- Pallet (e2e) › Can read all pallets with authentication
+- Pallet (e2e) › Cant overwrite a pallet with authentication - known to fail
+- Pallet (e2e) › Cant create a pallet without a related tripNo - fails because of lacking error handling
+- CatchPackage (e2e) › Can read a catch-package with authentication - known to fail
+- CatchPackage (e2e) › Cant read a catch-package that doesnt exist - known to fail
+- CatchPackage (e2e) › Cant overwrite a catch-package with authentication - known to fail
+- CatchPackage (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
+- Company (e2e) › Can read a company with authentication - known to fail
+- Company (e2e) › Cant read a company that doesnt exist - known to fail
+- PalletEvent (e2e) › Can read a pallet-event with authentication - known to fail
+- PalletEvent (e2e) › Cant read a pallet-event that doesnt exist - known to fail
+- PalletEvent (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
+- Species (e2e) › Can read a species with authentication - known to fail
+- Species (e2e) › Cant read a species that doesnt exist - known to fail
+- CustomPackage (e2e) › Can read a custom-package with authentication - known to fail
+- CustomPackage (e2e) › Cant read a custom-package that doesnt exist - known to fail
+- CustomPackage (e2e) › Cant overwrite a custom-package with authentication - known to fail
+- CustomPackage (e2e) › Cant create a custom-package without a related agent - fails because of lacking error handling
+- CustomPackage (e2e) › Cant create a custom-package without a related catchPackageId - fails because of lacking error handling
+
+

@@ -30,8 +30,8 @@ services:
     volumes:
       - ./backend:/project/sawtooth-tuna/backend
       - /project/sawtooth-tuna/backend/node_modules
-    command: npm run test:e2e
-    #command: npm run start
+    #command: npm run test:e2e
+    command: npm run start
     ports:
       - 3001:3001
       - 9229:9229

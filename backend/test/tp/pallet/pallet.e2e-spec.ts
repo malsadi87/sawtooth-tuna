@@ -93,7 +93,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Can read all pallets with authentication', async () => {
+  it('Can read all pallets with authentication - known to fail, the returned data is a float written as string. The entity is defined as number in the nest API code', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/pallet/')
       .set('Authorization', `Bearer ${jwtToken}`)
