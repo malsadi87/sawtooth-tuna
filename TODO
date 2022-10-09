@@ -18,39 +18,107 @@
 
 ### These tests are currenty failing:
 
-- Product (e2e) › Can read a product with authentication - known to fail
-- Product (e2e) › Cant read a product that doesnt exist - known to fail
-- Product (e2e) › Cant overwrite a product with authentication - known to fail
-- Trip (e2e) › Cant create a trip with conflicting departure and landing - known to fail
-- Trip (e2e) › Can read a trip with authentication - known to fail
-- Trip (e2e) › Cant read a trip that doesnt exist - known to fail
-- Trip (e2e) › Cant overwrite a trip with authentication - known to fail
-- Haul (e2e) › Cant create a haul with conflicting launch and haul known to fail
-- Haul (e2e) › Can read a haul with authentication - known to fail
-- Haul (e2e) › Cant read a haul that doesnt exist - known to fail
-- Haul (e2e) › Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros.
-- Haul (e2e) › Cant create a haul without a related trip - fails because of lacking error handling
-- test-2022-10-09.log:> backend@0.0.1 test:e2e /project/sawtooth-tuna/backend
-- Pallet (e2e) › Can read a pallet with authentication - known to fail
-- Pallet (e2e) › Cant read a pallet that doesnt exist - known to fail
-- Pallet (e2e) › Can read all pallets with authentication
-- Pallet (e2e) › Cant overwrite a pallet with authentication - known to fail
-- Pallet (e2e) › Cant create a pallet without a related tripNo - fails because of lacking error handling
-- CatchPackage (e2e) › Can read a catch-package with authentication - known to fail
-- CatchPackage (e2e) › Cant read a catch-package that doesnt exist - known to fail
-- CatchPackage (e2e) › Cant overwrite a catch-package with authentication - known to fail
-- CatchPackage (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
-- Company (e2e) › Can read a company with authentication - known to fail
-- Company (e2e) › Cant read a company that doesnt exist - known to fail
-- PalletEvent (e2e) › Can read a pallet-event with authentication - known to fail
-- PalletEvent (e2e) › Cant read a pallet-event that doesnt exist - known to fail
-- PalletEvent (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
-- Species (e2e) › Can read a species with authentication - known to fail
-- Species (e2e) › Cant read a species that doesnt exist - known to fail
-- CustomPackage (e2e) › Can read a custom-package with authentication - known to fail
-- CustomPackage (e2e) › Cant read a custom-package that doesnt exist - known to fail
-- CustomPackage (e2e) › Cant overwrite a custom-package with authentication - known to fail
-- CustomPackage (e2e) › Cant create a custom-package without a related agent - fails because of lacking error handling
-- CustomPackage (e2e) › Cant create a custom-package without a related catchPackageId - fails because of lacking error handling
+  Product (e2e)
+    ✓ Can authenticate (181 ms)
+    ✓ Can create a product with authentication (124 ms)
+    ✓ Cant create a product without authentication (7 ms)
+    ✕ Can read a product with authentication - known to fail (30 ms)
+    ✕ Cant read a product that doesnt exist - known to fail (23 ms)
+    ✓ Cant read a product without authentication (10 ms)
+    ✓ Can read all products with authentication (24 ms)
+    ✓ Cant read all products without authentication (4 ms)
+    ✕ Cant overwrite a product with authentication - known to fail (45 ms)
 
+  Trip (e2e)
+    ✓ Can authenticate (158 ms)
+    ✓ Can create a trip with authentication (91 ms)
+    ✓ Cant create a trip without authentication (6 ms)
+    ✕ Cant create a trip with conflicting departure and landing - known to fail (35 ms)
+    ✕ Can read a trip with authentication - known to fail (41 ms)
+    ✕ Cant read a trip that doesnt exist - known to fail (26 ms)
+    ✓ Cant read a trip without authentication (4 ms)
+    ✓ Can read all trips with authentication (25 ms)
+    ✓ Cant read all trips without authentication (4 ms)
+    ✕ Cant overwrite a trip with authentication - known to fail (39 ms)
 
+  Haul (e2e)
+    ✓ Can authenticate (157 ms)
+    ✓ Can create a haul with authentication (135 ms)
+    ✓ Cant create a haul without authentication (10 ms)
+    ✕ Cant create a haul with conflicting launch and haul known to fail (57 ms)
+    ✕ Can read a haul with authentication - known to fail (46 ms)
+    ✕ Cant read a haul that doesnt exist - known to fail (30 ms)
+    ✓ Cant read a haul without authentication (4 ms)
+    ✕ Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros. (36 ms)
+    ✓ Cant read all hauls without authentication (5 ms)
+    ✕ Cant create a haul without a related trip - fails because of lacking error handling (57 ms)
+
+  Pallet (e2e)
+    ✓ Can authenticate (151 ms)
+    ✓ Can create a pallet with authentication (122 ms)
+    ✓ Cant create a pallet without authentication (8 ms)
+    ✕ Can read a pallet with authentication - known to fail (34 ms)
+    ✕ Cant read a pallet that doesnt exist - known to fail (24 ms)
+    ✓ Cant read a pallet without authentication (9 ms)
+    ✕ Can read all pallets with authentication Can read all pallets with authentication - known to fail, the returned data is a float written as string. The entity is defined as number in the nest API code (29 ms)
+    ✓ Cant read all pallets without authentication (5 ms)
+    ✕ Cant overwrite a pallet with authentication - known to fail (44 ms)
+    ✕ Cant create a pallet without a related tripNo - fails because of lacking error handling (81 ms)
+
+  CatchPackage (e2e)
+    ✓ Can authenticate (150 ms)
+    ✓ Can create a catch-package with authentication (94 ms)
+    ✓ Cant create a catch-package without authentication (7 ms)
+    ✕ Can read a catch-package with authentication - known to fail (31 ms)
+    ✕ Cant read a catch-package that doesnt exist - known to fail (22 ms)
+    ✓ Cant read a catch-package without authentication (4 ms)
+    ✓ Can read all catch-packages with authentication (28 ms) 
+    ✓ Cant read all catch-packages without authentication (5 ms)
+    ✕ Cant overwrite a catch-package with authentication - known to fail (36 ms)
+    ✕ Cant create a catch-package without a related palletNum - fails because of lacking error handling (120 ms)
+
+  Company (e2e)
+    ✓ Can authenticate (144 ms)
+    ✓ Can create a company with authentication (152 ms)
+    ✓ Cant create a company without authentication (8 ms)
+    ✕ Can read a company with authentication - known to fail (39 ms)
+    ✕ Cant read a company that doesnt exist - known to fail (24 ms)
+    ✓ Cant read a company without authentication (7 ms)
+    ✓ Can read all companys with authentication (29 ms)
+    ✓ Cant read all companys without authentication (4 ms)
+
+  PalletEvent (e2e)
+    ✓ Can authenticate (151 ms)
+    ✓ Can create a pallet-event with authentication (139 ms)
+    ✓ Cant create a pallet-event without authentication (9 ms)
+    ✕ Can read a pallet-event with authentication - known to fail (45 ms)
+    ✕ Cant read a pallet-event that doesnt exist - known to fail (41 ms)
+    ✓ Cant read a pallet-event without authentication (4 ms)
+    ✓ Can read all pallet-events with authentication (32 ms)
+    ✓ Cant read all pallet-events without authentication (5 ms)
+    ✕ Cant create a catch-package without a related palletNum - fails because of lacking error handling (61 ms)
+
+  Species (e2e)
+    ✓ Can authenticate (144 ms)
+    ✓ Can create a species with authentication (124 ms)
+    ✓ Cant create a species without authentication (7 ms)
+    ✕ Can read a species with authentication - known to fail (38 ms)
+    ✕ Cant read a species that doesnt exist - known to fail (24 ms)
+    ✓ Cant read a species without authentication (5 ms)
+    ✓ Can read all specieses with authentication (24 ms)
+    ✓ Cant read all specieses without authentication (4 ms)
+
+  CustomPackage (e2e)
+    ✓ Can authenticate (109 ms)
+    ✓ Can create a custom-package with authentication (135 ms)
+    ✓ Cant create a custom-package without authentication (7 ms)
+    ✕ Can read a custom-package with authentication - known to fail (32 ms)
+    ✕ Cant read a custom-package that doesnt exist - known to fail (23 ms)
+    ✓ Cant read a custom-package without authentication (4 ms)
+    ✓ Can read all custom-packagees with authentication (26 ms)
+    ✓ Cant read all custom-packagees without authentication (3 ms)
+    ✕ Cant overwrite a custom-package with authentication - known to fail (46 ms)
+    ✕ Cant create a custom-package without a related agent - fails because of lacking error handling (99 ms)
+    ✕ Cant create a custom-package without a related catchPackageId - fails because of lacking error handling (40 ms)
+
+    

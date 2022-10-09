@@ -31,19 +31,3 @@ One may then enter the backend container and run tests:
 Individual tests can be runned in the container as well:
 
 - `npm run test:e2e:<testname>`
-
-### These tests are currenty failing:
-
-- Product (e2e) › Can read a product with authentication - known to fail
-- Product (e2e) › Cant read a product that doesnt exist - known to fail
-- Product (e2e) › Cant overwrite a product with authentication - known to fail
-- Trip (e2e) › Cant create a trip with conflicting departure and landing - known to fail
-- Trip (e2e) › Can read a trip with authentication - known to fail
-- Trip (e2e) › Cant read a trip that doesnt exist - known to fail
-- Trip (e2e) › Cant overwrite a trip with authentication - known to fail
-- Haul (e2e) › Cant create a haul with conflicting launch and haul known to fail
-- Haul (e2e) › Can read a haul with authentication - known to fail
-- Haul (e2e) › Cant read a haul that doesnt exist - known to fail
-- Haul (e2e) › Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros.
-- Haul (e2e) › Cant create a haul without a related trip - fails because of lacking error handling
-- 
