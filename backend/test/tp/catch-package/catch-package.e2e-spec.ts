@@ -60,9 +60,9 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-  it('Can read a catch-package with authentication - known to fail', async () => {
+  it('Can read a catch-package with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/catch-package/?catchPackageId=1')
+      .get('/api/v1/sawtooth/tp/catch-package/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.catchPackageId).toEqual<string>("1")
@@ -73,7 +73,7 @@ describe('CatchPackage (e2e)', () => {
 
   it('Cant read a catch-package that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/catch-package/?catchPackageId=404')
+      .get('/api/v1/sawtooth/tp/catch-package/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
 
@@ -82,7 +82,7 @@ describe('CatchPackage (e2e)', () => {
 
   it('Cant read a catch-package without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/catch-package/?catchPackageId=1')
+      .get('/api/v1/sawtooth/tp/catch-package/1')
       .expect(401)
     return response
   });

@@ -85,12 +85,12 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Can read a trip with authentication - known to fail', async () => {
+  it('Can read a trip with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/trip/?tripNo=1')
+      .get('/api/v1/sawtooth/tp/trip/123')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.tripNo).toEqual<number>(1)
+    expect(response.body.tripNo).toEqual<number>(123)
     expect(response.body.tripWithinYearNo).toEqual<number>(12)
     expect(response.body.vesselName).toEqual<string>("Test Vessel")
     expect(response.body.departureDate).toEqual<string>("2022-09-15T14:37:04.837Z")
@@ -103,7 +103,7 @@ describe('Trip (e2e)', () => {
 
   it('Cant read a trip that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/trip/?tripNo=404')
+      .get('/api/v1/sawtooth/tp/trip/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
 
@@ -112,7 +112,7 @@ describe('Trip (e2e)', () => {
 
   it('Cant read a trip without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/trip/?tripNo=1')
+      .get('/api/v1/sawtooth/tp/trip/123')
       .expect(401)
     return response
   });

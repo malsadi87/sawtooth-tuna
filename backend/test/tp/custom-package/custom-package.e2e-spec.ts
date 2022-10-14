@@ -57,9 +57,9 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
-  it('Can read a custom-package with authentication - known to fail', async () => {
+  it('Can read a custom-package with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/custom-package/?custom-packageId=3')
+      .get('/api/v1/sawtooth/tp/custom-package/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.consumerPackageId).toEqual<string>("1")
@@ -71,7 +71,7 @@ describe('CustomPackage (e2e)', () => {
 
   it('Cant read a custom-package that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/custom-package/?custom-packageId=404')
+      .get('/api/v1/sawtooth/tp/custom-package/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
     return response
@@ -79,7 +79,7 @@ describe('CustomPackage (e2e)', () => {
 
   it('Cant read a custom-package without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/custom-package/?custom-packageId=3')
+      .get('/api/v1/sawtooth/tp/custom-package/1')
       .expect(401)
     return response
   });
