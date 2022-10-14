@@ -97,7 +97,7 @@ describe('Haul (e2e)', () => {
     expect(response.body.haulId).toEqual<number>(1)
     expect(response.body.launchDateTime).toEqual<string>("2022-08-15T22:00:03.092Z")
     expect(response.body.launchPosition).toEqual<string>("PositionOfLaunch1")
-    expect(response.body.launchLatitude).toEqual<number>(63.4059569921834)
+    expect(response.body.launchLatitude).toEqual<number>(63.40595699218346)
     expect(response.body.launchLongitude).toEqual<number>(10.406196141997356)
     expect(response.body.haulDateTime).toEqual<string>("2022-09-15T14:37:04.837Z")
     expect(response.body.haulPosition).toEqual<string>("PositionOfHaul1")

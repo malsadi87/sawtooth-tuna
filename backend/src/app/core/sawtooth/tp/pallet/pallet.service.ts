@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+import { resourceLimits } from 'worker_threads';
 import { PalletEntity } from '../../../../../entity/pallet.entity';
 import { PalletCreationDto } from '../../../../utility/dto/tp/pallet-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
@@ -16,7 +17,8 @@ export class PalletService {
     }
 
     async getAll(): Promise<PalletEntity[]> {
-        return await this.palletRepository.getAll();
+        const result = await this.palletRepository.getAll();
+        return result;
     }
 
     async getByPalletNo(palletNumber: string): Promise<PalletEntity> {

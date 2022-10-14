@@ -3,6 +3,11 @@ import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.deco
 import { CatchPackageEntity } from "./catchPackage.entity";
 import { PalletEventEntity } from "./palletEvent.entity";
 import { TripEntity } from "./trip.entity";
+import * as pg from 'pg';
+
+pg.types.setTypeParser(1700, function(val) {
+    return parseFloat(val);
+});
 
 @Entity('Pallet')
 export class PalletEntity extends BaseEntity {
@@ -16,7 +21,7 @@ export class PalletEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'SupplierId', nullable: false })
     supplierId: string;
 
-    @Column({ type:'numeric', precision: 9, scale: 4, name: 'PalletWeight', nullable: false })
+    @Column({ type:'numeric', name: 'PalletWeight', nullable: false })
     palletWeight: number;
 
     @PrimaryColumn({ type:'int', name: 'TripNo', nullable: false })

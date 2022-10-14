@@ -22,7 +22,7 @@ export class HaulService {
     async getByHaulId(haulId: number): Promise<HaulEntity> {
         const result = await this.haulRepository.getByHaulId(haulId);
         if (!result)
-            throw new NotFoundException('Haul Not Foun!');
+            throw new NotFoundException('Haul Not Found!');
         return result;
     }
 

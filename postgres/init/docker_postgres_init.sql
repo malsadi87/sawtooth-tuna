@@ -19,12 +19,12 @@ CREATE TABLE IF NOT EXISTS "Haul" (
     "HaulId" SERIAL PRIMARY KEY,
     "LaunchDateTime" TIMESTAMP NOT NULL,
     "LaunchPosition" VARCHAR(255) NOT NULL,
-    "LaunchLatitude" NUMERIC(20, 18) NOT NULL,
-    "LaunchLongitude" NUMERIC(20, 18) NOT NULL,
+    "LaunchLatitude" NUMERIC NOT NULL,
+    "LaunchLongitude" NUMERIC NOT NULL,
     "HaulDateTime" TIMESTAMP NOT NULL,
     "HaulPosition" VARCHAR(255) NOT NULL,
-    "HaulLatitude" NUMERIC(20, 18) NOT NULL,
-    "HaulLongitude" NUMERIC(20, 18) NOT NULL,
+    "HaulLatitude" NUMERIC NOT NULL,
+    "HaulLongitude" NUMERIC NOT NULL,
     "TripNo" INT NOT NULL,
     FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE CASCADE
 );
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "Pallet" (
     "PalletNum" VARCHAR(255) PRIMARY KEY,
     "ProductNum" INT NOT NULL,
     "SupplierId" VARCHAR(255) NOT NULL,
-    "PalletWeight" NUMERIC(9, 4) NOT NULL,
+    "PalletWeight" NUMERIC NOT NULL,
     "TripNo" INT NOT NULL,
     FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
 );
