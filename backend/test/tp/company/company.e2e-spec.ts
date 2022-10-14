@@ -54,21 +54,21 @@ describe('Company (e2e)', () => {
     return response
   });
 
-  it('Can read a company with authentication - known to fail', async () => {
+  it('Can read a company with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/company/?companyId=3')
+      .get('/api/v1/sawtooth/tp/company/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.companyId).toEqual<number>(1)
     expect(response.body.companyName).toEqual<string>("Company Name")
     expect(response.body.companyAddress).toEqual<string>("AddressString")
-    expect(response.body.companyNum).toEqual<string>("ContactString")
+    expect(response.body.contactInfo).toEqual<string>("ContactString")
     return response
   });
 
   it('Cant read a company that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/company/?companyId=404')
+      .get('/api/v1/sawtooth/tp/company/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
     return response
@@ -76,7 +76,7 @@ describe('Company (e2e)', () => {
 
   it('Cant read a company without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/company/?companyId=1')
+      .get('/api/v1/sawtooth/tp/company/1')
       .expect(401)
     return response
   });

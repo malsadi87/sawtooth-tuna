@@ -82,9 +82,9 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Can read a pallet-event with authentication - known to fail', async () => {
+  it('Can read a pallet-event with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/?palletEventId=1')
+      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-09-15T14:37:04.837Z')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.palletEventId).toEqual<number>(1)
@@ -106,7 +106,7 @@ describe('PalletEvent (e2e)', () => {
 
   it('Cant read a pallet-event that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/?palletEventId=404')
+      .get('/api/v1/sawtooth/tp/pallet-event/404/2022-10-13T22:00:00.062Z')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
 
@@ -115,7 +115,7 @@ describe('PalletEvent (e2e)', () => {
 
   it('Cant read a pallet-event without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/?palletEventId=1')
+      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-10-13T22:00:00.062Z')
       .expect(401)
     return response
   });
@@ -152,7 +152,7 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cant create a catch-package without a related palletNum - fails because of lacking error handling', async () => {
+  it('Cant create a pallet-event without a related palletNum - fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({

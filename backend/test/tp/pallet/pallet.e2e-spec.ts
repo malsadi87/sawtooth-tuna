@@ -64,14 +64,14 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Can read a pallet with authentication - known to fail', async () => {
+  it('Can read a pallet with authentication - known to fail, the returned palletWeight is differently formatted than what was entered.', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet/?palletId=1')
+      .get('/api/v1/sawtooth/tp/pallet/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.palletNum).toEqual<string>("1")
     expect(response.body.productNum).toEqual<number>(1)
-    expect(response.body.supplierId).toEqual<string>("supplierId")
+    expect(response.body.supplierId).toEqual<string>("Supplier")
     expect(response.body.palletWeight).toEqual<number>(1.0000)
     expect(response.body.tripNo).toEqual<number>(123)
     return response
@@ -79,7 +79,7 @@ describe('Pallet (e2e)', () => {
 
   it('Cant read a pallet that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet/?palletId=404')
+      .get('/api/v1/sawtooth/tp/pallet/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
 
@@ -88,7 +88,7 @@ describe('Pallet (e2e)', () => {
 
   it('Cant read a pallet without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet/?palletId=1')
+      .get('/api/v1/sawtooth/tp/pallet/1')
       .expect(401)
     return response
   });

@@ -91,7 +91,7 @@ describe('Haul (e2e)', () => {
 
   it('Can read a haul with authentication - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/haul/?haulNo=1')
+      .get('/api/v1/sawtooth/tp/haul/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.haulId).toEqual<number>(1)
@@ -109,7 +109,7 @@ describe('Haul (e2e)', () => {
 
   it('Cant read a haul that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/haul/?haulNo=404')
+      .get('/api/v1/sawtooth/tp/haul/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
     return response
@@ -117,12 +117,12 @@ describe('Haul (e2e)', () => {
 
   it('Cant read a haul without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/haul/?haulNo=1')
+      .get('/api/v1/sawtooth/tp/haul/1')
       .expect(401)
     return response
   });
 
-  it('Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros.', async () => {
+  it('Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros. The returned lat long is also formatted as strings instead of numbers.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/haul/')
       .set('Authorization', `Bearer ${jwtToken}`)

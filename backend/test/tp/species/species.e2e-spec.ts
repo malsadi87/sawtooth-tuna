@@ -56,9 +56,9 @@ describe('Species (e2e)', () => {
     return response
   });
 
-  it('Can read a species with authentication - known to fail', async () => {
+  it('Can read a species with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/species/?speciesId=3')
+      .get('/api/v1/sawtooth/tp/species/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.speciesId).toEqual<number>(1)
@@ -71,7 +71,7 @@ describe('Species (e2e)', () => {
 
   it('Cant read a species that doesnt exist - known to fail', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/species/?speciesId=404')
+      .get('/api/v1/sawtooth/tp/species/404')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
     return response
@@ -79,7 +79,7 @@ describe('Species (e2e)', () => {
 
   it('Cant read a species without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/species/?speciesId=3')
+      .get('/api/v1/sawtooth/tp/species/1')
       .expect(401)
     return response
   });
