@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { SpeciesAndWeightEntity } from '../../../../../entity/speciesAndWeight.entity';
 import { SpeciesCreationDto } from '../../../../utility/dto/tp/species-creation.dto';
@@ -20,11 +20,18 @@ export class SpeciesAndWeightService {
     }
 
     async getById(id: number): Promise<SpeciesAndWeightEntity> {
-        return await this.speciesAndWeightRepository.getById(id);
+        const result = await this.speciesAndWeightRepository.getById(id);
+        if (!result)
+            throw new NotFoundException(`Species And Weight Not Found!`);
+        return result;
     }
 
     async addNew(speciesPayload: SpeciesCreationDto): Promise<number> {
         const species: SpeciesAndWeightEntity = plainToClass(SpeciesAndWeightEntity, speciesPayload);
+        const oldSpecies = await this.speciesAndWeightRepository.getByDetails(species.quantity, species.species, species.catchPackageId, species.launchDateTime);
+
+        if (oldSpecies) throw new BadRequestException(`Specied and Weight Already Exist!`);
+
         const newSpecies = await this.speciesAndWeightRepository.addNew(species);
 
         // Save in Sawtooth

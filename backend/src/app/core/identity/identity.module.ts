@@ -33,7 +33,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
     {
       provide: APP_INTERCEPTOR,
       useClass: RequestInterceptor
-    },
+    }
   ],
   exports: [passportModule]
 })

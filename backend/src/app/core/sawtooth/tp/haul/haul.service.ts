@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
@@ -20,11 +20,18 @@ export class HaulService {
     }
 
     async getByHaulId(haulId: number): Promise<HaulEntity> {
-        return await this.haulRepository.getByHaulId(haulId);
+        const result = await this.haulRepository.getByHaulId(haulId);
+        if (!result)
+            throw new NotFoundException('Haul Not Foun!');
+        return result;
     }
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
-        const haul = plainToClass(HaulEntity, haulPayload); 
+        const haul = plainToClass(HaulEntity, haulPayload);
+        const oldHaul = await this.haulRepository.getByHaulId(haul.haulId);
+
+        if (oldHaul) throw new BadRequestException(`Haul with Id - ${haul.haulId}, Already Exist!`);
+
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 
         // Save in Sawtooth

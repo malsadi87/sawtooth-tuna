@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { PalletEventEntity } from '../../../../../entity/palletEvent.entity';
 import { PalletEventCreationDto } from '../../../../utility/dto/tp/pallet-event-creation.dto';
@@ -20,7 +20,10 @@ export class PalletEventService {
     }
 
     async getByPalletNumberAndEventTime(palletNumber: string, eventTime: Date): Promise<PalletEventEntity> {
-        return await this.palletEventRepository.getByPalletNumberAndEventTime(palletNumber, eventTime);
+        const result = await this.palletEventRepository.getByPalletNumberAndEventTime(palletNumber, eventTime);
+        if (!result)
+            throw new NotFoundException('Pallet Event Not Found!');
+        return result;
     }
 
     async getByPalletNumber(palletNumber: string): Promise<PalletEventEntity[]> {
@@ -29,6 +32,10 @@ export class PalletEventService {
 
     async addNew(newPalletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
         const palletEvent = plainToClass(PalletEventEntity, newPalletEventPayload);
+        const oldPalletEvent = await this.palletEventRepository.getByPalletNumberAndEventTime(palletEvent.palletNum, palletEvent.eventTime);
+
+        if (oldPalletEvent) throw new BadRequestException(`Pallet Event with Number - ${palletEvent.palletNum} And Event Time ${palletEvent.eventTime}, Already Exist!`);
+
         const newPalletEvent = await this.palletEventRepository.addNew(palletEvent);
 
         // Save in Sawtooth

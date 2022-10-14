@@ -13,7 +13,11 @@ export function IsEqualOrGreaterThan(property: string, validationOptions?: Valid
                     const [relatedPropertyName] = args.constraints;
                     const relatedValue = (args.object as any)[relatedPropertyName];
                     return typeof value === typeof relatedValue && value >= relatedValue;
-                }
+                },
+                defaultMessage(args: ValidationArguments) {
+                    const [relatedPropertyName] = args.constraints;
+                    return `${args.property} cant be greater than ${relatedPropertyName}!`;
+                  }
             }
         });
    };

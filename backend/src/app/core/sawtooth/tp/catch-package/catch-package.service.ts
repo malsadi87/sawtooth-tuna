@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CatchPackageEntity } from '../../../../../entity/catchPackage.entity';
 import { CatchPackageCreationDto } from '../../../../utility/dto/tp/catch-package-creation.dto';
@@ -20,11 +20,18 @@ export class CatchPackageService {
     }
 
     async getById(id: string): Promise<CatchPackageEntity> {
-        return await this.catchPackageRepository.getById(id);
+        const result = await this.catchPackageRepository.getById(id);
+        if (!result)
+            throw new NotFoundException('Catch Package not found!');
+        return result;
     }
 
     async addNewCatchPackage(catchPackagePayload: CatchPackageCreationDto): Promise<string> {
         const catchPackage = plainToClass(CatchPackageEntity, catchPackagePayload);
+        const oldCatchPackage = await this.catchPackageRepository.getById(catchPackage.catchPackageId);
+
+        if (oldCatchPackage) throw new BadRequestException('Catch Package already exist');
+
         const newCatchPackage = await this.catchPackageRepository.addNewCatchPackage(catchPackage);
 
         // Save in Sawtooth
