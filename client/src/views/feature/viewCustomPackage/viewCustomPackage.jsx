@@ -10,6 +10,7 @@ import catchPackageService from '../../../services/feature/catchPackage/catchPac
 import palletService from '../../../services/feature/pallet/pallet.service';
 import palletEventService from '../../../services/feature/palletEvent/palletEvent.service';
 import tripService from '../../../services/feature/trip/trip.service';
+import companyService from '../../../services/feature/company/company.service';
 
 
 const layout = {
@@ -52,6 +53,9 @@ class ViewCustomPackage extends Component {
 
     const tripResult = await tripService.getById(palletResult.tripNo)
     console.log("tripResult:", tripResult)
+
+    const companyResult = await companyService.getById(customPackageResult.agent)
+    console.log("companyResult:", companyResult)
 
     this.setState({
       customPackages: 
