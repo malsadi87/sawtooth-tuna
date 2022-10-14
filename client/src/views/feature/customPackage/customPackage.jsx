@@ -36,7 +36,7 @@ class CustomPackage extends Component {
     const result = await customPackageService.createNew(values);
   };
 
-  getAllPallet = async () => {
+  getAllCustomPackage = async () => {
     const result = await customPackageService.getAll();
     this.setState({
       customPackages: result.map((info) => {
@@ -119,7 +119,7 @@ class CustomPackage extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Packages</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllCustomPackage}>Get All Packages</Button>
 
           </Form.Item>
         </Form>
