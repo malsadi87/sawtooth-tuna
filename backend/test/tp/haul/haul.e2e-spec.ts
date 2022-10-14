@@ -122,7 +122,7 @@ describe('Haul (e2e)', () => {
     return response
   });
 
-  it('Can read all hauls with authentication - this fails because the API return lat and long with trailing padding of zeros. The returned lat long is also formatted as strings instead of numbers.', async () => {
+  it('Can read all hauls with authentication - known to fail, this fails because the API return lat and long with trailing padding of zeros. The returned lat long is also formatted as strings instead of numbers.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/haul/')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -149,7 +149,7 @@ describe('Haul (e2e)', () => {
     return response
   });
 
-  it('Cant create a haul without a related trip - fails because of lacking error handling', async () => {
+  it('Cant create a haul without a related trip - known to fail, fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/haul/addNew')
       .send({

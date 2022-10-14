@@ -130,7 +130,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Cant create a pallet without a related tripNo - fails because of lacking error handling', async () => {
+  it('Cant create a pallet without a related tripNo - known to fail, fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
