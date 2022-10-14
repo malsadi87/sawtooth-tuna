@@ -120,7 +120,7 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-  it('Cant create a catch-package without a related palletNum - fails because of lacking error handling', async () => {
+  it('Cant create a catch-package without a related palletNum - known to fail, fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/catch-package/addNew')
       .send({
