@@ -375,6 +375,7 @@ lerna-debug.log*
 
 # DB VOlumes
 /postgres/db-data
+/postgres/db-data-test
 /postgres/pgadmin-data
 
 # IDEs and editors

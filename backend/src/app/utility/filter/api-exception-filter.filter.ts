@@ -17,7 +17,7 @@ export class ApiExceptionFilter extends BaseExceptionFilter {
       path: request.url
     };
 
-    if (NODE_ENV && NODE_ENV == 'dev') {
+    if (NODE_ENV && (NODE_ENV == 'dev' || NODE_ENV == 'test')) {
       if (exception instanceof HttpException) return super.catch(exception, host);
       else {
         responseObj['error'] = (exception as Error).message;

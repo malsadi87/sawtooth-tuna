@@ -18,7 +18,17 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e:authenticate": "jest --config ./test/jest.authenticate.config.js",
+    "test:e2e:tp:product": "jest --config ./test/jest.tp.product.config.js",
+    "test:e2e:tp:trip": "jest --config ./test/jest.tp.trip.config.js",
+    "test:e2e:tp:haul": "jest --config ./test/jest.tp.haul.config.js",
+    "test:e2e:tp:pallet": "jest --config ./test/jest.tp.pallet.config.js",
+    "test:e2e:tp:catch-package": "jest --config ./test/jest.tp.catch-package.config.js",
+    "test:e2e:tp:company": "jest --config ./test/jest.tp.company.config.js",
+    "test:e2e:tp:pallet-event": "jest --config ./test/jest.tp.pallet-event.config.js",
+    "test:e2e:tp:species": "jest --config ./test/jest.tp.species.config.js",
+    "test:e2e:tp:custom-package": "jest --config ./test/jest.tp.custom-package.config.js",
+    "test:e2e": "test/test.sh"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.7",
