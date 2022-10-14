@@ -22,6 +22,7 @@ import CatchPackage from "./views/feature/catchPackage/catchPackage";
 import Species from "./views/feature/species/species";
 import Company from "./views/feature/company/company";
 import CustomPackage from "./views/feature/customPackage/customPackage";
+import ViewCustomPackage from "./views/feature/viewCustomPackage/viewCustomPackage";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
@@ -56,6 +57,7 @@ class App extends Component {
                         <Route path={RouteUrl.species} element={<Species />} />
                         <Route path={RouteUrl.company} element={<Company />} />
                         <Route path={RouteUrl.customPackage} element={<CustomPackage />} />
+                        <Route path={RouteUrl.viewCustomPackage} element={<ViewCustomPackage />} />
                     </Route>
                 </Route>
                 <Route element={<Auth />}>
