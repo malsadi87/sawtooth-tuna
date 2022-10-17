@@ -13,6 +13,7 @@ import tripService from '../../../services/feature/trip/trip.service';
 import companyService from '../../../services/feature/company/company.service';
 import speciesService from '../../../services/feature/species/species.service';
 import productService from '../../../services/feature/product/product.service';
+import haulService from '../../../services/feature/haul/haul.service';
 
 
 const layout = {
@@ -64,6 +65,9 @@ class ViewCustomPackage extends Component {
 
     const productResult = await productService.getByProductNum(palletResult.productNum)
     console.log("productResult:", productResult)
+
+    const haulResult = await haulService.getByTripNo(palletResult.tripNo)
+    console.log("haulResult:", haulResult)
 
     this.setState({
       customPackages: 

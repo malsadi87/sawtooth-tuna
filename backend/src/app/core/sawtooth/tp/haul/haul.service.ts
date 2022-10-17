@@ -23,6 +23,10 @@ export class HaulService {
         return await this.haulRepository.getByHaulId(haulId);
     }
 
+    async getByTripNo(tripNo: number): Promise<HaulEntity[]> {
+      return await this.haulRepository.getByTripNo(tripNo);
+    }
+
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
         const haul = plainToClass(HaulEntity, haulPayload); 
         const newHaul =  await this.haulRepository.addNewHaul(haul);
