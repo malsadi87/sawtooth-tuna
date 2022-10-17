@@ -79,6 +79,8 @@ class ViewCustomPackage extends Component {
     console.log("haulResult:", haulResult)
 
     this.setState({productResult: productResult})
+    this.setState({haulResult: haulResult})
+    this.setState({tripResult: tripResult})
 
     this.setState({
       customPackages: 
@@ -116,7 +118,7 @@ class ViewCustomPackage extends Component {
           </Form.Item>
         </Form> 
         <FishView productResult={this.state.productResult}/>
-        <MapChart />
+        <MapChart tripResult = {this.state.tripResult} haulResult = {this.state.haulResult}/>
         {this.state.customPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>
