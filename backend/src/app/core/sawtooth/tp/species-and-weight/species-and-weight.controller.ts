@@ -12,6 +12,11 @@ export class SpeciesAndWeightController {
         return await this.speciesAndWeightService.getById(id);
     }
 
+    @Get('catch-package/:id')
+    async getByCatchPackageId(@Param('id') id: string): Promise<SpeciesAndWeightEntity[]> {
+        return await this.speciesAndWeightService.getByCatchPackageId(id);
+    }
+
     @Post('addNew')
     async create(@Body() speciesPayload: SpeciesCreationDto): Promise<number> {
         return await this.speciesAndWeightService.addNew(speciesPayload);

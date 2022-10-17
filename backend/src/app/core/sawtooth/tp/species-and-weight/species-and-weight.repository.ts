@@ -17,6 +17,10 @@ export class SpeciesAndWeightRepository extends Repository<SpeciesAndWeightEntit
         return await this.findOneBy({ speciesId: id });
     }
 
+    async getByCatchPackageId(id: string): Promise<SpeciesAndWeightEntity[]> {
+      return await this.findBy({ catchPackageId: id });
+    }
+
     async addNew(newSpecies: SpeciesAndWeightEntity): Promise<SpeciesAndWeightEntity> {
         return await newSpecies.save();
     }

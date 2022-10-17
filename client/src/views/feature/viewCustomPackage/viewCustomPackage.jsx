@@ -11,6 +11,7 @@ import palletService from '../../../services/feature/pallet/pallet.service';
 import palletEventService from '../../../services/feature/palletEvent/palletEvent.service';
 import tripService from '../../../services/feature/trip/trip.service';
 import companyService from '../../../services/feature/company/company.service';
+import speciesService from '../../../services/feature/species/species.service';
 
 
 const layout = {
@@ -56,6 +57,9 @@ class ViewCustomPackage extends Component {
 
     const companyResult = await companyService.getById(customPackageResult.agent)
     console.log("companyResult:", companyResult)
+
+    const speciesResult = await speciesService.getByCatchPackageId(customPackageResult.catchPackageId)
+    console.log("speciesResult:", speciesResult)
 
     this.setState({
       customPackages: 

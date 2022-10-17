@@ -34,10 +34,22 @@ const getById = async (id) => {
     }
 }
 
+const getByCatchPackageId = async (id) => {
+  try {
+      const response = await axios.get(APIBasePath.Sawtooth.tp.species.getByCatchPackageId.replace(':id', id));
+      if (!response) return Promise.reject("Invalid form data!");
+      return response;
+  } catch(e) {
+      console.error(e);
+      return Promise.reject(e);
+  }
+}
+
 const speciesService = {
     createNew,
     getById,
-    getAll
+    getAll,
+    getByCatchPackageId
 }
 
 export default speciesService;
