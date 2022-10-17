@@ -14,7 +14,7 @@ import companyService from '../../../services/feature/company/company.service';
 import speciesService from '../../../services/feature/species/species.service';
 import productService from '../../../services/feature/product/product.service';
 import haulService from '../../../services/feature/haul/haul.service';
-
+import FishView from './fishView';
 
 const layout = {
   labelCol: {
@@ -37,7 +37,15 @@ const validateMessages = {
 
 class ViewCustomPackage extends Component {
   state = {
-    customPackages: null
+    customPackageResult: null,
+    catchPackageResult: null,
+    palletResult: null,
+    palletEventResult: null,
+    tripResult: null,
+    companyResult: null,
+    speciesResult: null,
+    haulResult: null,
+    productResult: ""
   }
 
   onFinish = async (values) => {
@@ -68,6 +76,8 @@ class ViewCustomPackage extends Component {
 
     const haulResult = await haulService.getByTripNo(palletResult.tripNo)
     console.log("haulResult:", haulResult)
+
+    this.setState({productResult: productResult})
 
     this.setState({
       customPackages: 
@@ -103,7 +113,8 @@ class ViewCustomPackage extends Component {
               Submit
             </Button>
           </Form.Item>
-        </Form>
+        </Form> 
+        <FishView productResult={this.state.productResult}/>
         {this.state.customPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>
