@@ -12,6 +12,11 @@ export class ProductController {
         return await this.productService.getByProductId(productId);
     }
 
+    @Get('productNum/:productNum')
+    async getByProductNum(@Param('productNum') productNum: number): Promise<ProductEntity[]> {
+        return await this.productService.getByProductNum(productNum);
+    }
+
     @Post('addNew')
     async create(@Body() productPayload: ProductCreationDto): Promise<number> {
         return await this.productService.addNewProduct(productPayload);

@@ -23,6 +23,10 @@ export class ProductService {
         return await this.productRepository.getByProductId(productId);
     }
 
+    async getByProductNum(productNum: number): Promise<ProductEntity[]> {
+      return await this.productRepository.getByProductNum(productNum);
+  }
+
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {
         let product: ProductEntity = plainToClass(ProductEntity, productPayload);
         const newProduct = await this.productRepository.addNewProduct(product);

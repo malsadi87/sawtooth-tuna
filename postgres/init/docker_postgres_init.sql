@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "Pallet" (
     "SupplierId" VARCHAR(255) NOT NULL,
     "PalletWeight" NUMERIC(9, 4) NOT NULL,
     "TripNo" INT NOT NULL,
+    FOREIGN KEY ("ProductNum") REFERENCES "Product"("ProductNum") ON DELETE SET NULL,
     FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
 );
 

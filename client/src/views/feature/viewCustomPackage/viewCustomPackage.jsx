@@ -12,6 +12,7 @@ import palletEventService from '../../../services/feature/palletEvent/palletEven
 import tripService from '../../../services/feature/trip/trip.service';
 import companyService from '../../../services/feature/company/company.service';
 import speciesService from '../../../services/feature/species/species.service';
+import productService from '../../../services/feature/product/product.service';
 
 
 const layout = {
@@ -60,6 +61,9 @@ class ViewCustomPackage extends Component {
 
     const speciesResult = await speciesService.getByCatchPackageId(customPackageResult.catchPackageId)
     console.log("speciesResult:", speciesResult)
+
+    const productResult = await productService.getByProductNum(palletResult.productNum)
+    console.log("productResult:", productResult)
 
     this.setState({
       customPackages: 
