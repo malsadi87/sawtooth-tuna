@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { ProductEntity } from '../../../../../entity/product.entity';
 import { ProductCreationDto } from '../../../../utility/dto/tp/product-creation.dto';
@@ -20,7 +20,10 @@ export class ProductService {
     }
 
     async getByProductId(productId: number): Promise<ProductEntity> {
-        return await this.productRepository.getByProductId(productId);
+        const result = await this.productRepository.getByProductId(productId);
+        if (!result)
+            throw new NotFoundException('Product not found!');
+        return result;
     }
 
     async getByProductNum(productNum: number): Promise<ProductEntity[]> {
@@ -28,12 +31,20 @@ export class ProductService {
   }
 
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {
-        let product: ProductEntity = plainToClass(ProductEntity, productPayload);
-        const newProduct = await this.productRepository.addNewProduct(product);
+        try {
+            const product: ProductEntity = plainToClass(ProductEntity, productPayload);
+            const oldProduct = await this.productRepository.getByProductId(product.productId);
 
-        // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newProduct, this.entityName);
+            if (oldProduct) throw new BadRequestException('Product already exist');
 
-        return newProduct.productId;
+            const newProduct = await this.productRepository.addNewProduct(product);
+    
+            // Save in Sawtooth
+            await this.sawtoothUtilityService.createAsset(newProduct, this.entityName);
+    
+            return newProduct.productId;
+        } catch(e) {
+            throw e;
+        }
     }
 }

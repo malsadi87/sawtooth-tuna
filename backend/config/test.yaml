@@ -6,7 +6,7 @@ jwt-config:
 
 database:
   type: "postgres"
-  isLogEnable: true
+  isLogEnable: false
   synchronizeFlag: false
   encrypt: true
   trustServerCertificate: false

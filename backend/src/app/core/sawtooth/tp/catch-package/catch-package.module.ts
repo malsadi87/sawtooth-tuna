@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatchPackageRepository } from './catch-package.repository';
 import { CatchPackageEntity } from '../../../../../entity/catchPackage.entity';
 import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.module';
+import { PalletModule } from '../pallet/pallet.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([CatchPackageEntity]), 
-    SawtoothUtilityModule
+    SawtoothUtilityModule,
+    PalletModule
   ],
   providers: [CatchPackageService, CatchPackageRepository],
   controllers: [CatchPackageController]

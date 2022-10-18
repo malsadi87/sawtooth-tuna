@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+import { resourceLimits } from 'worker_threads';
 import { PalletEntity } from '../../../../../entity/pallet.entity';
 import { PalletCreationDto } from '../../../../utility/dto/tp/pallet-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
@@ -16,15 +17,23 @@ export class PalletService {
     }
 
     async getAll(): Promise<PalletEntity[]> {
-        return await this.palletRepository.getAll();
+        const result = await this.palletRepository.getAll();
+        return result;
     }
 
     async getByPalletNo(palletNumber: string): Promise<PalletEntity> {
-        return await this.palletRepository.getByPalletNo(palletNumber);
+        const result = await this.palletRepository.getByPalletNo(palletNumber);
+        if (!result)
+            throw new NotFoundException('Pallet Not Found!');
+        return result;
     }
 
     async addNewPallet(palletPayload: PalletCreationDto): Promise<string> {
         const pallet = plainToClass(PalletEntity, palletPayload);
+        const oldPallet = await this.palletRepository.getByPalletNo(pallet.palletNum);
+
+        if (oldPallet) throw new BadRequestException(`Pallet with number - ${pallet.palletNum}, Already Exist!`);
+
         const newPallet = await this.palletRepository.addNewPallet(pallet);
 
         // Save in Sawtooth

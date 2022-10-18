@@ -172,7 +172,7 @@ describe('PalletEvent (e2e)', () => {
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
-      .expect(201)
+      .expect(400)
     return response
   });
 

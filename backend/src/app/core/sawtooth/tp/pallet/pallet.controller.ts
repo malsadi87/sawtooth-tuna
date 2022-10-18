@@ -8,7 +8,7 @@ export class PalletController {
     constructor(private readonly palletService: PalletService) {}
 
     @Get(':palletNumber')
-    async getById(@Param('palletNum') palletNum: string): Promise<PalletEntity> {
+    async getById(@Param('palletNumber') palletNum: string): Promise<PalletEntity> {
         return await this.palletService.getByPalletNo(palletNum);
     }
 

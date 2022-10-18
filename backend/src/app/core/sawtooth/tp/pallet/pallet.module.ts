@@ -12,6 +12,7 @@ import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.m
     SawtoothUtilityModule
   ],
   providers: [PalletService, PalletRepository],
+  exports: [PalletService],
   controllers: [PalletController]
 })
 export class PalletModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CompanyEntity } from '../../../../../entity/company.entity';
 import { CompanyCreationDto } from '../../../../utility/dto/tp/company-creation.dto';
@@ -20,11 +20,18 @@ export class CompanyService {
     }
 
     async getById(id: number): Promise<CompanyEntity> {
-        return await this.companyRepository.getById(id);
+        const result = await this.companyRepository.getById(id);
+        if (!result)
+            throw new NotFoundException('Company Not Found!');
+        return result;
     }
 
     async addNewCompany(newCompanyPayload: CompanyCreationDto): Promise<number> {
         const company = plainToClass(CompanyEntity, newCompanyPayload);
+        const oldCompany =  await this.companyRepository.getByName(company.companyName);
+
+        if (oldCompany) throw new BadRequestException(`Company with name - "${company.companyName}" already exist!`);
+
         const newCompany =  await this.companyRepository.addNewCompany(company);
 
         // Save in Sawtooth
