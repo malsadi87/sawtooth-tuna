@@ -13,9 +13,9 @@ const FishView = (props) => {
       {props.productResult ?
       <div>
         <div>
-          Product name: {props.productResult[1].productName}
+          Product name: {props.productResult[0].productName}
         </div>
-        <img style={{display: 'flex', maxWidth: '500px'}} src={salmon} alt='Salmon'></img>
+        <img style={{maxWidth: '500px'}} src={salmon} alt='Salmon'></img>
       </div>
       : ''}
     </div>

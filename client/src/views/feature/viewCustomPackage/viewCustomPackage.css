@@ -1,4 +1,7 @@
-#fish {
-  max-width: 500px;
-  margin: auto;
+.markerText {
+  visibility: hidden;
+}
+
+.markerCircle:hover~.markerText{
+  visibility: visible;
 }

@@ -100,7 +100,7 @@ class ViewCustomPackage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{margin: 'auto', maxWidth: '1000px'}}>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           {/*ConsumerPackageId*/}
@@ -123,14 +123,14 @@ class ViewCustomPackage extends Component {
           </Form.Item>
         </Form> 
         <FishView productResult={this.state.productResult}/>
+        <EventView palletEventResult={this.state.palletEventResult}/>
         <MapChart 
           tripResult = {this.state.tripResult} 
           haulResult = {this.state.haulResult}
           palletEventResult = {this.state.palletEventResult}
         />
-        <EventView palletEventResult={this.state.palletEventResult}/>
         {this.state.customPackages ?
-          <table style={{ margin: 'auto' }}>
+          <table>
             <thead>
               <tr>
                 <th>Custom Package ID</th>
