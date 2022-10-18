@@ -79,9 +79,13 @@ class ViewCustomPackage extends Component {
     const haulResult = await haulService.getByTripNo(palletResult.tripNo)
     console.log("haulResult:", haulResult)
 
-    this.setState({productResult: productResult})
-    this.setState({haulResult: haulResult})
-    this.setState({tripResult: tripResult})
+    this.setState({
+      productResult: productResult, 
+      haulResult: haulResult, 
+      tripResult: tripResult,
+      palletEventResult: palletEventResult
+    })
+
 
     this.setState({
       customPackages: 
@@ -119,8 +123,12 @@ class ViewCustomPackage extends Component {
           </Form.Item>
         </Form> 
         <FishView productResult={this.state.productResult}/>
-        <MapChart tripResult = {this.state.tripResult} haulResult = {this.state.haulResult}/>
-        <EventView/>
+        <MapChart 
+          tripResult = {this.state.tripResult} 
+          haulResult = {this.state.haulResult}
+          palletEventResult = {this.state.palletEventResult}
+        />
+        <EventView palletEventResult={this.state.palletEventResult}/>
         {this.state.customPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>

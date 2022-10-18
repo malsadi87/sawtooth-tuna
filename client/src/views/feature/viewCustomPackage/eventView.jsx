@@ -8,20 +8,39 @@ const EventView = (props) => {
     console.log(props)
   }, [props]);
 
+  let [x,y] = props.palletEventResult ? props.palletEventResult.reduce(([x,y], {eventTime,temperature})=>{
+    x.push(eventTime);
+    // It is not clear how the format of temperature should be.
+    y.push(temperature.replace(/\D/g, ''));
+    return [x,y];
+  }, [[],[]]) : [[0], [0]]
+
   return (
-    <Plot
-      data={[
-        {
-          x: [1, 2, 3],
-          y: [2, 6, 3],
-          type: 'scatter',
-          mode: 'lines+markers',
-          marker: { color: 'red' },
-        },
-        { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
-      ]}
-      layout={{ width: 320, height: 240, title: 'A Fancy Plot' }}
-    />)
+    <div>
+      {props.palletEventResult ? 
+      <Plot
+        layout={{
+          xaxis: {
+            title: {
+              text: "Time",
+            }},
+          yaxis: {
+            title: {
+              text: "Temprature",
+            }}
+          }}
+        data={[
+          {
+            x: x,
+            y: y,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: 'red' },
+          },
+        ]}
+      /> : ''}
+    </div>
+  )
 }
 
 export default EventView
