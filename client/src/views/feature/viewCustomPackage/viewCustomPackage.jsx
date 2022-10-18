@@ -16,6 +16,7 @@ import productService from '../../../services/feature/product/product.service';
 import haulService from '../../../services/feature/haul/haul.service';
 import FishView from './fishView';
 import MapChart from "./mapChart";
+import EventView from './eventView';
 
 const layout = {
   labelCol: {
@@ -119,6 +120,7 @@ class ViewCustomPackage extends Component {
         </Form> 
         <FishView productResult={this.state.productResult}/>
         <MapChart tripResult = {this.state.tripResult} haulResult = {this.state.haulResult}/>
+        <EventView/>
         {this.state.customPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>
