@@ -29,16 +29,17 @@ const MapChart = (props) => {
           </Geographies>
           {props.haulResult ?
             props.haulResult.map(({ haulId, haulPosition, haulLatitude, haulLongitude }) => (
-              <Marker key={haulId} coordinates={[haulLongitude, haulLatitude]}>
+              <Marker key={haulId} coordinates={[
+                haulLongitude, haulLatitude]}>
                 <circle
-                  class='markerCircle'
+                  className='markerCircle'
                   r={2}
                   fill="#F00"
                   stroke="#fff"
                   strokeWidth={0.1}
                 />
                 <text
-                  class='markerText'
+                  className='markerText'
                   textAnchor="middle"
                   y={5}
                   style={{ fontFamily: "system-ui", fontSize: 6, fill: "#5D5A6D" }}
@@ -51,14 +52,14 @@ const MapChart = (props) => {
             props.haulResult.map(({ haulId, launchPosition, launchLatitude, launchLongitude }) => (
               <Marker key={haulId} coordinates={[launchLongitude, launchLatitude]}>
                 <circle
-                  class='markerCircle'
+                  className='markerCircle'
                   r={2}
                   fill="#F00"
                   stroke="#fff"
-                  strokeWidth={0.1} 
+                  strokeWidth={0.1}
                 />
                 <text
-                  class='markerText'
+                  className='markerText'
                   textAnchor="middle"
                   y={5}
                   style={{ fontFamily: "system-ui", fontSize: 6, fill: "#5D5A6D" }}
@@ -67,6 +68,30 @@ const MapChart = (props) => {
                 </text>
               </Marker>
             )) : ''}
+          {props.palletEventResult ?
+            props.palletEventResult.map(({ palletEventId, location }) => { 
+              const coordinates = JSON.parse(location)
+              const palletEventLatitude = coordinates.latitude
+              const palletEventLongitude = coordinates.longitude
+              return (
+              <Marker key={palletEventId} coordinates={[palletEventLongitude, palletEventLatitude]}>
+                <circle
+                  className='markerCircle'
+                  r={2}
+                  fill="#F00"
+                  stroke="#fff"
+                  strokeWidth={0.1}
+                />
+                <text
+                  className='markerText'
+                  textAnchor="middle"
+                  y={5}
+                  style={{ fontFamily: "system-ui", fontSize: 6, fill: "#5D5A6D" }}
+                >
+                  palletEvent
+                </text>
+              </Marker>
+            )}) : ''}
         </ZoomableGroup>
       </ComposableMap>
     </div>
