@@ -17,47 +17,6 @@ const MapChart = (props) => {
     console.log(props)
   }, [props]);
 
-  const lines = (flightDestinations) => {
-    return (
-      flightDestinations.map((route) => (
-        <>
-          <Line
-            key={route.to.city}
-            from={route.from.coord}
-            to={route.to.coord}
-            stroke="yellow"
-            strokeWidth={1}
-            strokeLinecap="round"
-          />
-          <Marker coordinates={route.to.coord}>
-            <circle r={2} fill="yellow" />
-          </Marker>
-        </>
-      ))
-    )
-  }
-
-  const linesMarkers = (key, label, coordinatesFrom, coordinatesTo = null) => {
-    return (
-      coordinatesTo ? <>
-        <Line
-          key={key}
-          from={coordinatesFrom}
-          to={coordinatesTo}
-          stroke="purple"
-          strokeWidth={1}
-          strokeLinecap="round"
-        />
-        <Marker coordinates={coordinatesFrom}>
-          <circle r={2.5} fill="yellow" />
-        </Marker>
-      </> :
-        <Marker coordinates={coordinatesFrom}>
-          <circle r={2.5} fill="yellow" />
-        </Marker>
-    )
-  }
-
   return (
     <div>
       <ComposableMap projection="geoMercator" style={{ maxHeight: '500px' }}>
@@ -69,26 +28,26 @@ const MapChart = (props) => {
               ))
             }
           </Geographies>
+
           {props.haulResult ?
             props.haulResult.map(({
-              haulId, 
-              haulPosition, 
-              haulLatitude, 
-              haulLongitude, 
-              launchPosition, 
-              launchLatitude, 
+              haulId,
+              haulPosition,
+              haulLatitude,
+              haulLongitude,
+              launchPosition,
+              launchLatitude,
               launchLongitude
             }) =>
-              <>
+              <React.Fragment key={haulId}>
                 <Line
-                  key={haulId}
                   from={[launchLongitude, launchLatitude]}
                   to={[haulLongitude, haulLatitude]}
                   stroke="orange"
                   strokeWidth={1}
                   strokeLinecap="round"
                 />
-                <Marker key={'haulHaulId' + haulId} coordinates={[haulLongitude, haulLatitude]}>
+                <Marker coordinates={[haulLongitude, haulLatitude]}>
                   <circle
                     className='markerCircle'
                     r={2}
@@ -105,7 +64,7 @@ const MapChart = (props) => {
                     {haulPosition}
                   </text>
                 </Marker>
-                <Marker key={'launchHaulId' + haulId} coordinates={[launchLongitude, launchLatitude]}>
+                <Marker coordinates={[launchLongitude, launchLatitude]}>
                   <circle
                     className='markerCircle'
                     r={2}
@@ -122,35 +81,56 @@ const MapChart = (props) => {
                     {launchPosition}
                   </text>
                 </Marker>
-              </>
-            ) : ''}
+              </React.Fragment>
+            ) : <></>}
 
           {props.palletEventResult ?
-            props.palletEventResult.map(({ palletEventId, location }, index) => {
-              const coordinatesFrom = JSON.parse(location)
-              const palletEventLatitude = coordinatesFrom.latitude
-              const palletEventLongitude = coordinatesFrom.longitude
-              let coordinatesTo = null
-              index + 1 < props.palletEventResult.length ?
-                coordinatesTo = JSON.parse(props.palletEventResult[index + 1].location)
-                : coordinatesTo = null
-              console.log("CoordinatesTo", coordinatesTo)
-              return index + 1 < props.palletEventResult.length ?
-                linesMarkers(
-                  palletEventId,
-                  'palletEvent',
-                  [palletEventLongitude, palletEventLatitude],
-                  [
-                    coordinatesTo.longitude,
-                    coordinatesTo.latitude
-                  ]
-                ) :
-                linesMarkers(
-                  palletEventId,
-                  'palletEvent',
-                  [palletEventLongitude, palletEventLatitude]
-                )
-            }) : ''}
+            props.palletEventResult.map(({
+              palletEventId,
+              location
+            },
+              index
+            ) => {
+              return (
+                <React.Fragment key={palletEventId}>
+                  {index + 1 < props.palletEventResult.length ?
+                    <Line
+                      key={palletEventId}
+                      from={[
+                        JSON.parse(location).longitude,
+                        JSON.parse(location).latitude
+                      ]}
+                      to={[
+                        JSON.parse(props.palletEventResult[index + 1].location).longitude,
+                        JSON.parse(props.palletEventResult[index + 1].location).latitude
+                      ]}
+                      stroke="purple"
+                      strokeWidth={1}
+                      strokeLinecap="round"
+                    />
+                    : <></>}
+                  <Marker
+                    key={'palletEventId' + palletEventId}
+                    coordinates={[JSON.parse(location).longitude, JSON.parse(location).latitude]}>
+                    <circle
+                      className='markerCircle'
+                      r={2}
+                      fill="yellow"
+                      stroke="#fff"
+                      strokeWidth={0.1}
+                    />
+                    <text
+                      className='markerText'
+                      textAnchor="middle"
+                      y={5}
+                      style={{ fontFamily: "system-ui", fontSize: 6, fill: "#5D5A6D" }}
+                    >
+                      palletEvent
+                    </text>
+                  </Marker>
+                </React.Fragment>)
+            }) : <></>}
+
         </ZoomableGroup>
       </ComposableMap>
     </div>
