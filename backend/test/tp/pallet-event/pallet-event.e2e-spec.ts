@@ -36,7 +36,7 @@ describe('PalletEvent (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-01T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -44,11 +44,12 @@ describe('PalletEvent (e2e)', () => {
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -60,7 +61,7 @@ describe('PalletEvent (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-02T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -68,11 +69,12 @@ describe('PalletEvent (e2e)', () => {
           "longitude": '10.406196141997356',
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -81,11 +83,11 @@ describe('PalletEvent (e2e)', () => {
   });
 
 
-  it('Cannot create a pallet-event with badly formated ', async () => {
+  it('Cannot create a pallet-event with badly formated shock variable names', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-03T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -93,11 +95,12 @@ describe('PalletEvent (e2e)', () => {
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceletation": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -109,7 +112,7 @@ describe('PalletEvent (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-04T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -120,8 +123,8 @@ describe('PalletEvent (e2e)', () => {
           "thisVariableShould not be accepted": 1,
         }),
         "shock": JSON.stringify({
-          "acceleration": 3,
-          "duration": 3
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -135,7 +138,7 @@ describe('PalletEvent (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-05T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -148,8 +151,8 @@ describe('PalletEvent (e2e)', () => {
           "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -157,23 +160,24 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cannot create a pallet-event with badly formated ', async () => {
+  it('Cannot create a pallet-event with badly formated celsius', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-06T14:37:04.837Z",
         "palletNum": "1",
-        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "temperature": JSON.stringify({ "notAcelsiusVariableName": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -185,7 +189,7 @@ describe('PalletEvent (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-02-07T14:37:04.837Z",
         "palletNum": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -193,11 +197,59 @@ describe('PalletEvent (e2e)', () => {
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "notRightName": 1,
+          "wrongName2": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Cannot create a pallet-event with weird latitude', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-02-08T14:37:04.837Z",
+        "palletNum": "1",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitude": 6340595699218346,
+          "longitude": 10.406196141997356,
+        }),
+        "tilt": JSON.stringify({
+          "x": 1,
+          "y": 1
+        }),
+        "shock": JSON.stringify({
+          "acceleration": 1,
+          "duration": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Cannot create a pallet-event with weird tilt JSON (one too many ,)', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-02-09T14:37:04.837Z",
+        "palletNum": "1",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitudeWeird": 63.40595699218346,
+          "longitude": 10.406196141997356,
+        }),
+        "tilt": "\"{x: 5, y: 5,}\"",
+        "shock": JSON.stringify({
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -214,14 +266,15 @@ describe('PalletEvent (e2e)', () => {
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,
-          "longitude": 10.406196141997356,
+          "longitude": 10.406196141997356
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -230,8 +283,7 @@ describe('PalletEvent (e2e)', () => {
   });
 
 
-
-  it('Cant create a pallet-event without authentication', async () => {
+  it('Cannot create another pallet-event with the same timestamp and palletNum', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
@@ -240,14 +292,90 @@ describe('PalletEvent (e2e)', () => {
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,
+          "longitude": 10.406196141997356
+        }),
+        "tilt": JSON.stringify({
+          "x": 1,
+          "y": 1
+        }),
+        "shock": JSON.stringify({
+          "acceleration": 1,
+          "duration": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(400)
+    return response
+  });
+
+  it('Can create another pallet-event with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-01-30T14:37:04.837Z",
+        "palletNum": "1",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitude": 63.40595699218346,
+          "longitude": 10.406196141997356
+        }),
+        "tilt": JSON.stringify({
+          "x": 1,
+          "y": 1
+        }),
+        "shock": JSON.stringify({
+          "acceleration": 1,
+          "duration": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
+  it('Can create another different pallet-event with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-01-29T14:37:04.837Z",
+        "palletNum": "1",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitude": 64.40595699218346,
+          "longitude": 2.406196141997356
+        }),
+        "tilt": JSON.stringify({
+          "x": 5,
+          "y": 5
+        }),
+        "shock": JSON.stringify({
+          "acceleration": 1,
+          "duration": 1
+        })
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
+  it('Cant create a pallet-event without authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet-event/addNew')
+      .send({
+        "eventTime": "2022-01-28T14:37:04.837Z",
+        "palletNum": "1",
+        "temperature": JSON.stringify({ "Celsius": 1 }),
+        "location": JSON.stringify({
+          "latitude": 63.40595699218346,
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer wrong`)
@@ -257,29 +385,30 @@ describe('PalletEvent (e2e)', () => {
 
   it('Can read a pallet-event with authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-09-15T14:37:04.837Z')
+      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-01-30T14:37:04.837Z')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.palletEventId).toEqual<number>(1)
-    expect(response.body.eventTime).toEqual<string>("2022-09-15T14:37:04.837Z")
+    expect(response.body.palletEventId).toEqual<number>(2)
+    expect(response.body.eventTime).toEqual<string>("2022-01-30T14:37:04.837Z")
     expect(response.body.temperature).toEqual(JSON.stringify({ "Celsius": 1 }))
     expect(response.body.location).toEqual(JSON.stringify({
       "latitude": 63.40595699218346,
-      "longitude": 10.406196141997356,
+      "longitude": 10.406196141997356
     }))
     expect(response.body.tilt).toEqual(JSON.stringify({
-      "tilt": 1,
+      "x": 1,
+      "y": 1
     }))
     expect(response.body.shock).toEqual(JSON.stringify({
-      "vertical": 1,
-      "horisontal": 1
+      "acceleration": 1,
+      "duration": 1
     }))
     return response
   });
 
-  it('Cant read a pallet-event that doesnt exist - known to fail', async () => {
+  it('Cant read a pallet-event that doesnt exist', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/404/2022-10-13T22:00:00.062Z')
+      .get('/api/v1/sawtooth/tp/pallet-event/404/2404-10-13T22:00:00.062Z')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(404)
 
@@ -288,7 +417,7 @@ describe('PalletEvent (e2e)', () => {
 
   it('Cant read a pallet-event without authentication', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-10-13T22:00:00.062Z')
+      .get('/api/v1/sawtooth/tp/pallet-event/1/2022-01-30T22:00:00.062Z')
       .expect(401)
     return response
   });
@@ -299,20 +428,48 @@ describe('PalletEvent (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "palletEventId": 1,
-      "eventTime": "2022-09-15T14:37:04.837Z",
+      "palletEventId": 2,
+      "eventTime": "2022-01-30T14:37:04.837Z",
       "palletNum": "1",
       "temperature": JSON.stringify({ "Celsius": 1 }),
       "location": JSON.stringify({
         "latitude": 63.40595699218346,
-        "longitude": 10.406196141997356,
+        "longitude": 10.406196141997356
       }),
       "tilt": JSON.stringify({
-        "tilt": 1,
-      }),
+        "x": 1,
+        "y": 1
+    }),
       "shock": JSON.stringify({
-        "vertical": 1,
-        "horisontal": 1
+        "acceleration": 1,
+        "duration": 1
+      })
+    }]))
+    return response
+  });
+
+
+  it('Can read all pallet-events for a specific pallet.', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/v1/sawtooth/tp/pallet-event/1')
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(200)
+    expect(response.body).toEqual(expect.arrayContaining([{
+      "palletEventId": 2,
+      "eventTime": "2022-01-30T14:37:04.837Z",
+      "palletNum": "1",
+      "temperature": JSON.stringify({ "Celsius": 1 }),
+      "location": JSON.stringify({
+        "latitude": 63.40595699218346,
+        "longitude": 10.406196141997356
+      }),
+      "tilt": JSON.stringify({
+        "x": 1,
+        "y": 1
+    }),
+      "shock": JSON.stringify({
+        "acceleration": 1,
+        "duration": 1
       })
     }]))
     return response
@@ -325,11 +482,11 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cant create a pallet-event without a related palletNum - known to fail, fails because of lacking error handling', async () => {
+  it('Cant create a pallet-event without a related palletNum', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
-        "eventTime": "2022-09-15T14:37:04.837Z",
+        "eventTime": "2022-01-30T14:37:04.837Z",
         "palletNum": "404",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
@@ -337,11 +494,12 @@ describe('PalletEvent (e2e)', () => {
           "longitude": 10.406196141997356,
         }),
         "tilt": JSON.stringify({
-          "tilt": 1,
+          "x": 1,
+          "y": 1
         }),
         "shock": JSON.stringify({
-          "vertical": 1,
-          "horisontal": 1
+          "acceleration": 1,
+          "duration": 1
         })
       })
       .set('Authorization', `Bearer ${jwtToken}`)

@@ -21,4 +21,11 @@ export class PalletEventController {
     async getAll(): Promise<PalletEventEntity[]> {
         return this.palletEventService.getAll();
     }
+
+    
+
+    @Get(':palletNumber')
+    async getByPalletNumber(@Param('palletNumber') palletNumber: string): Promise<PalletEventEntity[]> {
+        return await this.palletEventService.getByPalletNumber(palletNumber);
+    }
 }

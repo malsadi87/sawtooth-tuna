@@ -9,17 +9,15 @@ The main folders within the project are:
 1. processor: in this folder you can find all transaction processors and handlers. You will find also payload structure.
 2. client: this folder contains the codes repsonsible for handling user requests and it's execusion on Sawtooth.
 
-To run the application, you should have docker running in your machine. You just need to run ( dicker-compose up ) from inside the main folder.
+To run the application, you should have docker running in your machine. You just need to run ( docker-compose up ) from inside the main folder.
 
 ## Testing
 
-Run test compose file for end to end testing:
+Delete /postgres/db-data-test (if exists) to run the tests with a fresh database. Do this, or tests will have FALSE POSITIVES and FALSE NEGATIVES!
 
-`docker-compose -f docker-compose.test.yml up --abort-on-container-exit`
+The tester will launch the images and run integration testing. 
 
-Delete /postgres/db-data-test to run the tests with a fresh database.
-
-The tester will launch the images and run integration testing. To perform more interavtice testing with readable output one may change docker-compose.test.yml with the command line:
+Alternative 1: To perform more interavtice testing with readable output one may use docker-compose.test.yml with the command line:
 
 `#command: npm run start`
 
@@ -31,3 +29,17 @@ One may then enter the backend container and run tests:
 Individual tests can be runned in the container as well:
 
 - `npm run test:e2e:<testname>`
+
+For intance:
+
+- `npm run test:e2e:authenticate`
+
+Alternative 2: Run test compose file for end to end testing:
+
+Change the command for the backend service in docker-compose.yml to:
+
+`command: npm run test:e2e`
+
+And run the tests without further interaction:
+
+`docker-compose -f docker-compose.test.yml up --abort-on-container-exit`
