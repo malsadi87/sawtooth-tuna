@@ -26,6 +26,10 @@ export class ProductService {
         return result;
     }
 
+    async getByProductNum(productNum: number): Promise<ProductEntity[]> {
+      return await this.productRepository.getByProductNum(productNum);
+  }
+
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {
         try {
             const product: ProductEntity = plainToClass(ProductEntity, productPayload);

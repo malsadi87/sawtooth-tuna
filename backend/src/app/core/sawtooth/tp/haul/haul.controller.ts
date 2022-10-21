@@ -12,6 +12,11 @@ export class HaulController {
         return await this.haulService.getByHaulId(haulId);
     }
 
+    @Get('trip/:tripNo')
+    async getByTripNo(@Param('tripNo') tripNo: number): Promise<HaulEntity[]> {
+        return await this.haulService.getByTripNo(tripNo);
+    }
+
     @Post('addNew')
     async create(@Body() haulPayload: HaulCreationDto): Promise<Date> {
         return await this.haulService.addNewHaul(haulPayload);

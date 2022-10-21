@@ -26,6 +26,10 @@ export class HaulService {
         return result;
     }
 
+    async getByTripNo(tripNo: number): Promise<HaulEntity[]> {
+      return await this.haulRepository.getByTripNo(tripNo);
+    }
+
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
         const haul = plainToClass(HaulEntity, haulPayload);
         const oldHaul = await this.haulRepository.getByHaulId(haul.haulId);

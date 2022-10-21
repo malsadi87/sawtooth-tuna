@@ -26,7 +26,8 @@ export const APIBasePath = {
                 base: '/sawtooth/tp/product',
                 getAll: '/sawtooth/tp/product/',
                 getById: '/sawtooth/tp/product/:id',
-                createNew: '/sawtooth/tp/product/addNew'
+                createNew: '/sawtooth/tp/product/addNew',
+                getByProductNum: '/sawtooth/tp/product/productNum/:productNum'
             },
             trip: {
                 base: '/sawtooth/tp/trip',
@@ -38,6 +39,7 @@ export const APIBasePath = {
                 base: '/sawtooth/tp/haul',
                 getAll: '/sawtooth/tp/haul/',
                 getById: '/sawtooth/tp/haul/:id',
+                getByTripNo: '/sawtooth/tp/haul/trip/:tripNo',
                 createNew: '/sawtooth/tp/haul/addNew'
             },
             pallet: {
@@ -56,6 +58,7 @@ export const APIBasePath = {
                 base: '/sawtooth/tp/species',
                 getAll: '/sawtooth/tp/species/',
                 getById: '/sawtooth/tp/species/:id',
+                getByCatchPackageId: '/sawtooth/tp/species/catch-package/:id',
                 createNew: '/sawtooth/tp/species/addNew'
             },
             customPackage: {

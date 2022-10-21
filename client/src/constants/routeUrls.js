@@ -11,4 +11,5 @@ export const RouteUrl = {
     species: '/species',
     company: '/company',
     customPackage: '/customPackage',
+    viewCustomPackage: '/viewCustomPackage',
 };

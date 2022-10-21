@@ -16,6 +16,10 @@ export class ProductRepository extends Repository<ProductEntity> {
     async getByProductId(productId: number): Promise<ProductEntity> {
         return await this.findOneBy({ productId: productId });
     }
+    
+    async getByProductNum(productNum: number): Promise<ProductEntity[]> {
+      return await this.findBy({ productNum: productNum });
+    }
 
     async addNewProduct(newProduct: ProductEntity): Promise<ProductEntity> {
         return await newProduct.save();

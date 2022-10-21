@@ -26,6 +26,10 @@ export class SpeciesAndWeightService {
         return result;
     }
 
+    async getByCatchPackageId(id: string): Promise<SpeciesAndWeightEntity[]> {
+      return await this.speciesAndWeightRepository.getByCatchPackageId(id);
+    }
+
     async addNew(speciesPayload: SpeciesCreationDto): Promise<number> {
         const species: SpeciesAndWeightEntity = plainToClass(SpeciesAndWeightEntity, speciesPayload);
         const oldSpecies = await this.speciesAndWeightRepository.getByDetails(species.quantity, species.species, species.catchPackageId, species.launchDateTime);

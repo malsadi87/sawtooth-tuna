@@ -40,8 +40,9 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary" style={{visibility: 'hidden'}}>
                     <div className="text-white mb-3 mb-md-0">
+                        TODO: This element is hidden untill we fix the footer being badly alligned.
                         Copyright © 2022. All rights reserved.
                     </div>
 

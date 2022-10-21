@@ -1,0 +1,7 @@
+.markerText {
+  visibility: hidden;
+}
+
+.markerCircle:hover~.markerText{
+  visibility: visible;
+}

@@ -16,7 +16,11 @@ export class HaulRepository extends Repository<HaulEntity> {
     async getByHaulId(haulId: number): Promise<HaulEntity> {
         return await this.findOneBy({ haulId: haulId });
     }
-
+    
+    async getByTripNo(tripNo: number): Promise<HaulEntity[]> {
+      return await this.findBy({ tripNo: tripNo });
+    }
+    
     async addNewHaul(newHaul: HaulEntity): Promise<HaulEntity> {
         return await newHaul.save();
     }
