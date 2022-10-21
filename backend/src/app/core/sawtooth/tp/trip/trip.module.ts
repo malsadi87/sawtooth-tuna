@@ -12,6 +12,7 @@ import { TripService } from './trip.service';
     SawtoothUtilityModule
   ],
   controllers: [TripController],
+  exports: [TripService],
   providers: [TripService, TripRepository]
 })
 export class TripModule {}

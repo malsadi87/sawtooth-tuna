@@ -12,6 +12,7 @@ import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.m
     SawtoothUtilityModule
   ],
   providers: [SpeciesAndWeightService, SpeciesAndWeightRepository],
+  exports: [SpeciesAndWeightService],
   controllers: [SpeciesAndWeightController]
 })
 export class SpeciesAndWeightModule {}

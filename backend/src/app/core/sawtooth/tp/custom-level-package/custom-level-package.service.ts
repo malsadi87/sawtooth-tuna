@@ -8,6 +8,11 @@ import { CatchPackageService } from '../catch-package/catch-package.service';
 import { CatchPackageEntity } from 'src/entity/catchPackage.entity';
 import { PalletService } from '../pallet/pallet.service';
 import { HaulService } from '../haul/haul.service';
+import { CompanyService } from '../company/company.service';
+import { PalletEventService } from '../pallet-event/pallet-event.service';
+import { ProductService } from '../product/product.service';
+import { SpeciesAndWeightService } from '../species-and-weight/species-and-weight.service';
+import { TripService } from '../trip/trip.service';
 
 @Injectable()
 export class CustomLevelPackageService {
@@ -15,8 +20,13 @@ export class CustomLevelPackageService {
     constructor(
         private readonly customLevelPackageRepository: CustomLevelPackageRepository,
         private readonly palletService: PalletService,
-//        private readonly haulService: HaulService,
+        private readonly haulService: HaulService,
         private readonly catchPackageService: CatchPackageService,
+        private readonly companyService: CompanyService,
+        private readonly palletEvent: PalletEventService,
+        private readonly product: ProductService,
+        private readonly speciesAndWeight: SpeciesAndWeightService,
+        private readonly trip: TripService,
         private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
         this.entityName = 'custom-package';
@@ -47,17 +57,18 @@ export class CustomLevelPackageService {
         return newCustomPackage.consumerPackageId;
     }
 
-//    async getData(consumerPackageId: string): Promise<{
-//      customLevelPackage: CustomLevelPackageEntity, 
-//      catchPackage: CatchPackageEntity
-//    }> {
-//        
-//        const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
-//        
-//        const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
-//        return {
-//          customLevelPackage: customLevelPackage,
-//          catchPackage: catchPackage
-//        }
-//    }
+    async getData(consumerPackageId: string): Promise<{
+      customLevelPackage: CustomLevelPackageEntity, 
+      catchPackage: CatchPackageEntity
+    }> {
+        
+        const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
+        
+        const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
+        
+        return {
+          customLevelPackage: customLevelPackage,
+          catchPackage: catchPackage
+        }
+    }
 }

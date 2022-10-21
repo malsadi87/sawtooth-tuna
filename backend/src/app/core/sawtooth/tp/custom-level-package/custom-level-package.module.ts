@@ -8,6 +8,11 @@ import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.m
 import { CatchPackageModule } from '../catch-package/catch-package.module';
 import { PalletModule } from '../pallet/pallet.module';
 import { HaulModule } from '../haul/haul.module';
+import { PalletEventModule } from '../pallet-event/pallet-event.module';
+import { ProductModule } from '../product/product.module';
+import { SpeciesAndWeightModule } from '../species-and-weight/species-and-weight.module';
+import { TripModule } from '../trip/trip.module';
+import { CompanyModule } from '../company/company.module';
 
 @Module({
   imports: [
@@ -15,7 +20,12 @@ import { HaulModule } from '../haul/haul.module';
     SawtoothUtilityModule,
     PalletModule,
     CatchPackageModule,
-    HaulModule
+    HaulModule,
+    PalletEventModule,
+    ProductModule,
+    SpeciesAndWeightModule,
+    TripModule,
+    CompanyModule
   ],
   providers: [CustomLevelPackageService, CustomLevelPackageRepository],
   controllers: [CustomLevelPackageController]

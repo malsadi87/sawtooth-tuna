@@ -12,6 +12,7 @@ import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.m
     SawtoothUtilityModule
   ],
   providers: [CompanyService, CompanyRepository],
+  exports: [CompanyService],
   controllers: [CompanyController]
 })
 export class CompanyModule {}

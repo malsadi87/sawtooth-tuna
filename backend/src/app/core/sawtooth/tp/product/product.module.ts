@@ -12,6 +12,7 @@ import { ProductService } from './product.service';
     SawtoothUtilityModule
   ],
   controllers: [ProductController],
+  exports: [ProductService],
   providers: [ProductService, ProductRepository]
 })
 export class ProductModule {}
