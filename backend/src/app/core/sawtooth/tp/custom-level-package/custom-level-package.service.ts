@@ -23,10 +23,10 @@ export class CustomLevelPackageService {
         private readonly haulService: HaulService,
         private readonly catchPackageService: CatchPackageService,
         private readonly companyService: CompanyService,
-        private readonly palletEvent: PalletEventService,
-        private readonly product: ProductService,
-        private readonly speciesAndWeight: SpeciesAndWeightService,
-        private readonly trip: TripService,
+        private readonly palletEventService: PalletEventService,
+        private readonly productService: ProductService,
+        private readonly speciesAndWeightService: SpeciesAndWeightService,
+        private readonly tripService: TripService,
         private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
         this.entityName = 'custom-package';
@@ -65,7 +65,27 @@ export class CustomLevelPackageService {
         const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
         
         const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
+
+        const pallet = await this.palletService.getByPalletNo(catchPackage.palletNum)
+
+  //      const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
         
+        const trip = await this.tripService.getByTripNo(pallet.tripNo)
+
+        const company = await this.companyService.getById(customLevelPackage.agent)
+
+//        const species = await this.speciesAndWeightService.get
+        
+//    const speciesResult = await speciesService.getByCatchPackageId(customPackageResult.catchPackageId)
+//    console.log("speciesResult:", speciesResult)
+//
+//    const productResult = await productService.getByProductNum(palletResult.productNum)
+//    console.log("productResult:", productResult)
+//
+//    const haulResult = await haulService.getByTripNo(palletResult.tripNo)
+//    console.log("haulResult:", haulResult)
+
+
         return {
           customLevelPackage: customLevelPackage,
           catchPackage: catchPackage
