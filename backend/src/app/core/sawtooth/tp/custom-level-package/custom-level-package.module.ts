@@ -14,7 +14,7 @@ import { HaulModule } from '../haul/haul.module';
     TypeOrmModule.forFeature([CustomLevelPackageEntity]),
     SawtoothUtilityModule,
     PalletModule,
-//    CatchPackageModule
+    CatchPackageModule,
     HaulModule
   ],
   providers: [CustomLevelPackageService, CustomLevelPackageRepository],
