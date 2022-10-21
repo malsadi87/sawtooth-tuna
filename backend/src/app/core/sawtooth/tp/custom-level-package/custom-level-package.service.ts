@@ -13,6 +13,13 @@ import { PalletEventService } from '../pallet-event/pallet-event.service';
 import { ProductService } from '../product/product.service';
 import { SpeciesAndWeightService } from '../species-and-weight/species-and-weight.service';
 import { TripService } from '../trip/trip.service';
+import { PalletEntity } from 'src/entity/pallet.entity';
+import { PalletEventEntity } from 'src/entity/palletEvent.entity';
+import { TripEntity } from 'src/entity/trip.entity';
+import { CompanyEntity } from 'src/entity/company.entity';
+import { SpeciesAndWeightEntity } from 'src/entity/speciesAndWeight.entity';
+import { ProductEntity } from 'src/entity/product.entity';
+import { HaulEntity } from 'src/entity/haul.entity';
 
 @Injectable()
 export class CustomLevelPackageService {
@@ -59,36 +66,36 @@ export class CustomLevelPackageService {
 
     async getData(consumerPackageId: string): Promise<{
       customLevelPackage: CustomLevelPackageEntity, 
-      catchPackage: CatchPackageEntity
+      catchPackage: CatchPackageEntity,
+      pallet: PalletEntity,
+      palletEvent: PalletEventEntity[],
+      trip: TripEntity,
+      company: CompanyEntity,
+      species: SpeciesAndWeightEntity[],
+      product: ProductEntity[],
+      haul: HaulEntity[]
     }> {
         
         const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
-        
         const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
-
         const pallet = await this.palletService.getByPalletNo(catchPackage.palletNum)
-
-  //      const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
-        
+        const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
         const trip = await this.tripService.getByTripNo(pallet.tripNo)
-
         const company = await this.companyService.getById(customLevelPackage.agent)
-
-//        const species = await this.speciesAndWeightService.get
-        
-//    const speciesResult = await speciesService.getByCatchPackageId(customPackageResult.catchPackageId)
-//    console.log("speciesResult:", speciesResult)
-//
-//    const productResult = await productService.getByProductNum(palletResult.productNum)
-//    console.log("productResult:", productResult)
-//
-//    const haulResult = await haulService.getByTripNo(palletResult.tripNo)
-//    console.log("haulResult:", haulResult)
-
+        const species = await this.speciesAndWeightService.getByCatchPackageId(customLevelPackage.catchPackageId)
+        const product = await this.productService.getByProductNum(pallet.productNum)
+        const haul = await this.haulService.getByTripNo(pallet.tripNo)
 
         return {
           customLevelPackage: customLevelPackage,
-          catchPackage: catchPackage
+          catchPackage: catchPackage,
+          pallet: pallet,
+          palletEvent: palletEvent,
+          trip: trip,
+          company: company,
+          species: species,
+          product: product,
+          haul: haul
         }
     }
 }
