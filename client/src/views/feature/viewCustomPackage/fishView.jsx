@@ -15,7 +15,6 @@ const FishView = (props) => {
         <div>
           <p>Product name: {props.productResult[0].productName}</p>
           <p>Description: {props.productResult[0].productDescription}</p>
-          <p>Note: A single productNum can relate to several product entities with different ID, name, and description.</p>
         </div>
         <img style={{maxWidth: '500px'}} src={salmon} alt='Salmon'></img>
       </div>

@@ -19,7 +19,7 @@ const MapChart = (props) => {
 
   return (
     <div>
-      <ComposableMap projection="geoMercator" style={{ maxHeight: '500px' }}>
+      <ComposableMap projection="geoMercator" style={{ maxHeight: '500px', maxWidth: '1000px' }}>
         <ZoomableGroup center={[0, 0]} zoom={1}>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
