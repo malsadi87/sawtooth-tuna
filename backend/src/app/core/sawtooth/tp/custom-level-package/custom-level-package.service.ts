@@ -4,12 +4,19 @@ import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPacka
 import { CustomPackageCreationDto } from '../../../../utility/dto/tp/custom-package-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CustomLevelPackageRepository } from './custom-level-package.repository';
+import { CatchPackageService } from '../catch-package/catch-package.service';
+import { CatchPackageEntity } from 'src/entity/catchPackage.entity';
+import { PalletService } from '../pallet/pallet.service';
+import { HaulService } from '../haul/haul.service';
 
 @Injectable()
 export class CustomLevelPackageService {
     private readonly entityName: string;
     constructor(
         private readonly customLevelPackageRepository: CustomLevelPackageRepository,
+        private readonly palletService: PalletService,
+//        private readonly haulService: HaulService,
+        private readonly catchPackageService: CatchPackageService,
         private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
         this.entityName = 'custom-package';
@@ -39,4 +46,18 @@ export class CustomLevelPackageService {
 
         return newCustomPackage.consumerPackageId;
     }
+
+//    async getData(consumerPackageId: string): Promise<{
+//      customLevelPackage: CustomLevelPackageEntity, 
+//      catchPackage: CatchPackageEntity
+//    }> {
+//        
+//        const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
+//        
+//        const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
+//        return {
+//          customLevelPackage: customLevelPackage,
+//          catchPackage: catchPackage
+//        }
+//    }
 }
