@@ -25,7 +25,10 @@ export class PalletEventEntity extends BaseEntity {
     location: JSON;
 
     @Column({ type:'json', name: 'Tilt', nullable: false })
-    tilt: JSON;
+    tilt: {
+      x: number, 
+      y: number
+    };
 
     @Column({ type:'json', name: 'Shock', nullable: false })
     shock: JSON;
