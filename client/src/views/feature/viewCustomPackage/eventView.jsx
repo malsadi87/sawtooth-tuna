@@ -38,6 +38,7 @@ const EventView = (props) => {
       <>
         <Plot
           layout={{
+            width: 1000,
             xaxis: {
               title: {
                 text: "Time",
@@ -61,6 +62,7 @@ const EventView = (props) => {
         />
         <Plot
           layout={{
+            width: 1000,
             xaxis: {
               title: {
                 text: "Time",
@@ -84,6 +86,7 @@ const EventView = (props) => {
         />
         <Plot
           layout={{
+            width: 1000,
             xaxis: {
               title: {
                 text: "Time",
