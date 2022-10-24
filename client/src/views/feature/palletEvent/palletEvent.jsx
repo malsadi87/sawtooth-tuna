@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import { Form, Input, Button, InputNumber, DatePicker, TimePicker } from 'antd';
+import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Checkbox } from 'antd';
 import './palletEvent.css';
 import moment from 'moment';
 import palletEventService from '../../../services/feature/palletEvent/palletEvent.service';
@@ -31,13 +31,28 @@ class PalletEvent extends Component {
   }
 
   onFinish = async (values) => {
+    console.log('Values:', values)
+    console.log('Relative?', values.isRelative)
     let palletEvent = {
       'eventTime': values.dateTime,
       'palletNum': values.palletNum,
-      'temperature': JSON.stringify({ 'temperature': values.temperature }),
-      'location': JSON.stringify({ 'latitude': values.latitude, 'longitude': values.longitude }),
-      'tilt': JSON.stringify({ 'tilt': values.tilt }),
-      'shock': JSON.stringify({ 'shock': values.shock })
+      'temperature': JSON.stringify({ 
+        'isRelative': values.isRelative,
+        'startValue': values.startValue,
+        'value': values.value
+      }),
+      'location': JSON.stringify({ 
+        'latitude': values.latitude, 
+        'longitude': values.longitude 
+    }),
+      'tilt': JSON.stringify({ 
+        'x': values.x,
+        'y': values.y
+      }),
+      'shock': JSON.stringify({ 
+        'acceleration': values.acceleration,
+        'duration': values.duration
+      })
     }
     const result = await palletEventService.createNew(palletEvent);
   };
@@ -101,30 +116,18 @@ class PalletEvent extends Component {
             label="Latitude"
             rules={[
               {
-                required: true
+                required: true,
+                type: 'number'
               },
             ]}
           >
-            <Input />
+            <InputNumber />
           </Form.Item>
 
           {/*Longitude*/}
           <Form.Item
             name={'longitude'}
             label="Longitude"
-            rules={[
-              {
-                required: true
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          {/*Temperature In*/}
-          <Form.Item
-            name={'temperature'}
-            label="Temperature"
             rules={[
               {
                 required: true,
@@ -135,30 +138,102 @@ class PalletEvent extends Component {
             <InputNumber />
           </Form.Item>
 
-          {/*Tilt*/}
+          {/*Temperature isRelative*/}
           <Form.Item
-            name={'tilt'}
-            label="Tilt"
+            name={'isRelative'}
+            label="Temperature is relative?"
+            valuePropName="checked"
             rules={[
               {
-                required: true
+                type: 'boolean'
               },
             ]}
           >
-            <Input />
+            <Checkbox />
           </Form.Item>
 
-          {/*Shock*/}
+          {/*Temperature start value*/}
           <Form.Item
-            name={'shock'}
-            label="Shock"
+            name={'startValue'}
+            label="Temperature start value"
             rules={[
               {
-                required: true
+                required: true,
+                type: 'number'
               },
             ]}
           >
-            <Input />
+            <InputNumber />
+          </Form.Item>
+
+          {/*Temperature change value*/}
+          <Form.Item
+            name={'value'}
+            label="Temperature change value"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          {/*Tilt X*/}
+          <Form.Item
+            name={'x'}
+            label="Tilt x"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          {/*Tilt Y*/}
+          <Form.Item
+            name={'y'}
+            label="Tilt y"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          {/*Shock acceleration*/}
+          <Form.Item
+            name={'acceleration'}
+            label="Acceleration"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+          
+          {/*Shock duration*/}
+          <Form.Item
+            name={'duration'}
+            label="Duration"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
