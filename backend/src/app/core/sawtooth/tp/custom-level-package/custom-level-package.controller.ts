@@ -24,7 +24,7 @@ export class CustomLevelPackageController {
     }
 
 
-    @Get('getAll/:packageId')
+    @Get('getData/:packageId')
     async getData(@Param('packageId') packageId: string): Promise<{ 
       customLevelPackage: CustomLevelPackageEntity,
       catchPackage: CatchPackageEntity 
