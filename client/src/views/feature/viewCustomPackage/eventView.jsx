@@ -8,20 +8,30 @@ const EventView = (props) => {
     console.log(props)
   }, [props]);
 
-  let [x, temperatureY, shockY, tiltY] = props.palletEventResult ? props.palletEventResult.reduce((
-    [x, temperatureY, shockY, tiltY],
+  let [x, temperatureY, temperatureStartValue, temperatureIsRelative, shockObject, tiltY, tiltX] = props.palletEventResult ? props.palletEventResult.reduce((
+    [x, temperatureY, temperatureStartValue, temperatureIsRelative, shockObject, tiltY, tiltX],
     { eventTime, temperature, shock, tilt }) => {
-    x.push(eventTime);
-    // It is not clear how the format of temperature should be.
-    temperatureY.push(temperature.replace(/\D/g, ''));
-    
-    // TODO: Shock and Tilt json object needs strict definition in the entity description.
-    shockY.push(shock.replace(/\D/g, '')); //(JSON.parse(shock).acceleration * JSON.parse(shock).duration)
 
-    tiltY.push(tilt.replace(/\D/g, '')); //(JSON.parse(shock).acceleration * JSON.parse(shock).duration)
+    const endTime = new Date(eventTime)
+    x.push(endTime);
 
-    return [x, temperatureY, shockY, tiltY];
-  }, [[], [], [], []]) : [[0], [0], [0], [0]]
+    if (JSON.parse(temperature).isRelative) {
+      temperatureY.push(JSON.parse(temperature).value + JSON.parse(temperature).startValue);
+    } else {
+      temperatureY.push(JSON.parse(temperature).value);
+    }
+    temperatureStartValue.push(JSON.parse(temperature).startValue)
+    temperatureIsRelative.push(JSON.parse(temperature).isRelative)
+
+    const startTime = new Date(eventTime)
+    startTime.setSeconds(startTime.getSeconds() - JSON.parse(shock).duration)
+    shockObject.push({ startAcceleration: 0, endAcceleration: JSON.parse(shock).acceleration, startTime: startTime, endTime: endTime })
+
+    tiltY.push(JSON.parse(tilt).y);
+    tiltX.push(JSON.parse(tilt).x);
+
+    return [x, temperatureY, temperatureStartValue, temperatureIsRelative, shockObject, tiltY, tiltX];
+  }, [[], [], [], [], [], [], []]) : [[0], [0], [0], [0], [0], [0], [0]]
 
   return (
     props.palletEventResult ?
@@ -62,15 +72,15 @@ const EventView = (props) => {
               }
             }
           }}
-          data={[
-            {
-              x: x,
-              y: shockY,
+          data={
+            shockObject.map(({ startAcceleration, endAcceleration, startTime, endTime }) => ({
+              x: [startTime, endTime],
+              y: [startAcceleration, endAcceleration],
               type: 'scatter',
               mode: 'lines+markers',
               marker: { color: 'red' },
-            },
-          ]}
+            }))
+          }
         />
         <Plot
           layout={{
@@ -92,6 +102,15 @@ const EventView = (props) => {
               type: 'scatter',
               mode: 'lines+markers',
               marker: { color: 'red' },
+              name: 'Tilt Y'
+            },
+            {
+              x: x,
+              y: tiltX,
+              type: 'scatter',
+              mode: 'lines+markers',
+              marker: { color: 'blue' },
+              name: 'Tilt X'
             },
           ]}
         />

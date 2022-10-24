@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
@@ -34,7 +34,8 @@ export class HaulService {
         const haul = plainToClass(HaulEntity, haulPayload);
         const oldHaul = await this.haulRepository.getByHaulId(haul.haulId);
 
-        if (oldHaul) throw new BadRequestException(`Haul with Id - ${haul.haulId}, Already Exist!`);
+        // This check is kind of funny because it will find the first haul if the haulId is undefined. Added a check of whether haulId is defined.
+        if (oldHaul && haul.haulId) throw new BadRequestException(`Haul with Id - ${haul.haulId}, Already Exist!`);
 
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 

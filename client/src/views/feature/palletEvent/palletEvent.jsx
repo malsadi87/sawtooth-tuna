@@ -31,8 +31,6 @@ class PalletEvent extends Component {
   }
 
   onFinish = async (values) => {
-    console.log('Values:', values)
-    console.log('Relative?', values.isRelative)
     let palletEvent = {
       'eventTime': values.dateTime,
       'palletNum': values.palletNum,
