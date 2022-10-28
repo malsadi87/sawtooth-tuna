@@ -12,6 +12,7 @@ import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.m
     SawtoothUtilityModule
   ],
   providers: [HaulService, HaulRepository],
+  exports: [HaulService],
   controllers: [HaulController]
 })
 export class HaulModule {}

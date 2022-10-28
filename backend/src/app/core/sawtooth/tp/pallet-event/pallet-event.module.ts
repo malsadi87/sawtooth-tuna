@@ -14,6 +14,7 @@ import { PalletModule } from '../pallet/pallet.module';
     PalletModule
   ],
   providers: [PalletEventService, PalletEventRepository],
+  exports: [PalletEventService],
   controllers: [PalletEventController]
 })
 export class PalletEventModule {}

@@ -98,6 +98,21 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
+  // TODO: This test should check for more values.
+  it('Can read all custom-package data with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/v1/sawtooth/tp/custom-package/getData/1')
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(200)
+    expect(response.body.customLevelPackage).toEqual({
+      "consumerPackageId": "1",
+      "catchPackageId": "1",
+      "packingDate": "2022-09-15T14:37:04.837Z",
+      "agent": 1
+    })
+    return response
+  });
+
   it('Cant read all custom-packagees without authentication', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/custom-package/')

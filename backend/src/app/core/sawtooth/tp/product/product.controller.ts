@@ -13,7 +13,7 @@ export class ProductController {
     }
 
     @Get('productNum/:productNum')
-    async getByProductNum(@Param('productNum') productNum: number): Promise<ProductEntity[]> {
+    async getByProductNum(@Param('productNum') productNum: number): Promise<ProductEntity> {
         return await this.productService.getByProductNum(productNum);
     }
 

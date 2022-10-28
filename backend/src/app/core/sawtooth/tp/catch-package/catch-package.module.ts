@@ -14,6 +14,7 @@ import { PalletModule } from '../pallet/pallet.module';
     PalletModule
   ],
   providers: [CatchPackageService, CatchPackageRepository],
+  exports: [CatchPackageService],
   controllers: [CatchPackageController]
 })
 export class CatchPackageModule {}
