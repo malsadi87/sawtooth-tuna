@@ -72,7 +72,7 @@ export class CustomLevelPackageService {
       trip: TripEntity,
       company: CompanyEntity,
       species: SpeciesAndWeightEntity[],
-      product: ProductEntity[],
+      product: ProductEntity,
       haul: HaulEntity[]
     }> {
         

@@ -26,7 +26,7 @@ export class ProductService {
         return result;
     }
 
-    async getByProductNum(productNum: number): Promise<ProductEntity[]> {
+    async getByProductNum(productNum: number): Promise<ProductEntity> {
       return await this.productRepository.getByProductNum(productNum);
   }
 
