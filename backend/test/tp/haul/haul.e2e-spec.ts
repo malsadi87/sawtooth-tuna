@@ -51,6 +51,25 @@ describe('Haul (e2e)', () => {
     return response
   });
 
+  it('Can create another haul with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/haul/addNew')
+      .send({
+        "launchDateTime": "2022-08-15T22:00:03.092Z",
+        "launchPosition": "PositionOfLaunch1",
+        "launchLatitude": 63.40595699218346,
+        "launchLongitude": 10.406196141997356,
+        "haulDateTime": "2022-09-15T14:37:04.837Z",
+        "haulPosition": "PositionOfHaul1",
+        "haulLatitude": 63.40595699218346,
+        "haulLongitude": 10.406196141997356,
+        "tripNo": 123
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   it('Cant create a haul without authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/haul/addNew')

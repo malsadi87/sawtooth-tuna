@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+import { isDefined } from 'class-validator';
 import { HaulEntity } from '../../../../../entity/haul.entity';
 import { HaulCreationDto } from '../../../../utility/dto/tp/haul-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
@@ -32,11 +33,9 @@ export class HaulService {
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
         const haul = plainToClass(HaulEntity, haulPayload);
-        const oldHaul = await this.haulRepository.getByHaulId(haul.haulId);
 
-        // This check is kind of funny because it will find the first haul if the haulId is undefined. Added a check of whether haulId is defined.
-        if (oldHaul && haul.haulId) throw new BadRequestException(`Haul with Id - ${haul.haulId}, Already Exist!`);
-
+        // TODO: Check for conflicting times
+        // TODO: Check for telated trip
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 
         // Save in Sawtooth
