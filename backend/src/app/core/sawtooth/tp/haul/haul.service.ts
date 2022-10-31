@@ -34,8 +34,8 @@ export class HaulService {
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {
         const haul = plainToClass(HaulEntity, haulPayload);
 
-        // TODO: Check for conflicting times
-        // TODO: Check for telated trip
+        // TODO: Check for conflicting launch and haul times and the trip times.
+        // TODO: Check that a related trip exists.
         const newHaul =  await this.haulRepository.addNewHaul(haul);
 
         // Save in Sawtooth

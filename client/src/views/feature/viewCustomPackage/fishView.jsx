@@ -13,8 +13,8 @@ const FishView = (props) => {
       {props.productResult ?
       <div>
         <div>
-          <p>Product name: {props.productResult[0].productName}</p>
-          <p>Description: {props.productResult[0].productDescription}</p>
+          <p>Product name: {props.productResult.productName}</p>
+          <p>Description: {props.productResult.productDescription}</p>
         </div>
         <img style={{maxWidth: '500px'}} src={salmon} alt='Salmon'></img>
       </div>
