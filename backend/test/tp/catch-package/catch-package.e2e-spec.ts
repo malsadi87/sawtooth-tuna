@@ -45,7 +45,18 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-
+  it('Can create another catch-package with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/catch-package/addNew')
+      .send({
+        "catchPackageId": "2",
+        "packingDate": "2022-09-15T14:37:04.837Z",
+        "palletNum": "1"
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
 
   it('Cant create a catch-package without authentication', async () => {
     const response = await request(app.getHttpServer())
@@ -71,7 +82,7 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-  it('Cant read a catch-package that doesnt exist - known to fail', async () => {
+  it('Cant read a catch-package that doesnt exist', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/catch-package/404')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -107,7 +118,7 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-  it('Cant overwrite a catch-package with authentication - known to fail', async () => {
+  it('Cant overwrite a catch-package with authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/catch-package/addNew')
       .send({
@@ -120,7 +131,7 @@ describe('CatchPackage (e2e)', () => {
     return response
   });
 
-  it('Cant create a catch-package without a related palletNum - known to fail, fails because of lacking error handling', async () => {
+  it('Cant create a catch-package without a related palletNum', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/catch-package/addNew')
       .send({

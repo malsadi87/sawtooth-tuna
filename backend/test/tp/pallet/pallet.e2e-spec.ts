@@ -47,7 +47,20 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-
+  it('Can create another pallet with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/pallet/addNew')
+      .send({
+        "palletNum": "2",
+        "productNum": 1,
+        "supplierId": "Supplier",
+        "palletWeight": 1,
+        "tripNo": 123
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
 
   it('Cant create a pallet without authentication', async () => {
     const response = await request(app.getHttpServer())
@@ -64,7 +77,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Can read a pallet with authentication - known to fail, the returned palletWeight is differently formatted than what was entered.', async () => {
+  it('Can read a pallet with authentication', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/pallet/1')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -77,7 +90,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Cant read a pallet that doesnt exist - known to fail', async () => {
+  it('Cant read a pallet that doesnt exist', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/pallet/404')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -93,7 +106,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Can read all pallets with authentication - known to fail, the returned data is a float written as string. The entity is defined as number in the nest API code', async () => {
+  it('Can read all pallets with authentication.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/pallet/')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -115,7 +128,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Cant overwrite a pallet with authentication - known to fail', async () => {
+  it('Cant overwrite a pallet with authentication.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
@@ -130,7 +143,7 @@ describe('Pallet (e2e)', () => {
     return response
   });
 
-  it('Cant create a pallet without a related tripNo - known to fail, fails because of lacking error handling', async () => {
+  it('Cant create a pallet without a related tripNo.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({

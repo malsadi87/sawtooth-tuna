@@ -42,6 +42,20 @@ describe('Species (e2e)', () => {
     return response
   });
 
+  it('Can create another species with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/species/addNew')
+      .send({
+        "quantity": 1,
+        "species": 1,
+        "catchPackageId": "1",
+        "launchDateTime": "2022-09-15T14:37:04.837Z"
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   it('Cant create a species without authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/species/addNew')
@@ -69,7 +83,7 @@ describe('Species (e2e)', () => {
     return response
   });
 
-  it('Cant read a species that doesnt exist - known to fail', async () => {
+  it('Cant read a species that doesnt exist.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/species/404')
       .set('Authorization', `Bearer ${jwtToken}`)

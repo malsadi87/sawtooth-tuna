@@ -104,7 +104,7 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cant read a pallet-event that doesnt exist - known to fail', async () => {
+  it('Cant read a pallet-event that doesnt exist.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/pallet-event/404/2022-10-13T22:00:00.062Z')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -152,7 +152,7 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cant create a pallet-event without a related palletNum - known to fail, fails because of lacking error handling', async () => {
+  it('Cant create a pallet-event without a related palletNum.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({

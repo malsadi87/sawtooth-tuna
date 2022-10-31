@@ -43,6 +43,20 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
+  it('Can create another custom-package with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/custom-package/addNew')
+      .send({
+        "consumerPackageId": "2",
+        "catchPackageId": "1",
+        "packingDate": "2022-09-15T14:37:04.837Z",
+        "agent": 1
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   it('Cant create a custom-package without authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
@@ -69,7 +83,7 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
-  it('Cant read a custom-package that doesnt exist - known to fail', async () => {
+  it('Cant read a custom-package that doesnt exist', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/custom-package/404')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -120,7 +134,7 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
-  it('Cant overwrite a custom-package with authentication - known to fail', async () => {
+  it('Cant overwrite a custom-package with authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({

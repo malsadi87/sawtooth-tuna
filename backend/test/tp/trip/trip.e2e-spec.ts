@@ -68,7 +68,7 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Cant create a trip with conflicting departure and landing - known to fail', async () => {
+  it('Cant create a trip with conflicting departure and landing.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
@@ -101,7 +101,7 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Cant read a trip that doesnt exist - known to fail', async () => {
+  it('Cant read a trip that doesnt exist.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/trip/404')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -141,7 +141,7 @@ describe('Trip (e2e)', () => {
     return response
   });
 
-  it('Cant overwrite a trip with authentication - known to fail', async () => {
+  it('Cant overwrite a trip with authentication.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({

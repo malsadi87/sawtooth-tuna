@@ -41,6 +41,19 @@ describe('Company (e2e)', () => {
     return response
   });
 
+  it('Can create another company with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/company/addNew')
+      .send({
+        "companyName": "Company Name",
+        "companyAddress": "AddressString",
+        "contactInfo": "ContactString"
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   it('Cant create a company without authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/company/addNew')
@@ -66,7 +79,7 @@ describe('Company (e2e)', () => {
     return response
   });
 
-  it('Cant read a company that doesnt exist - known to fail', async () => {
+  it('Cant read a company that doesnt exist', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/company/404')
       .set('Authorization', `Bearer ${jwtToken}`)

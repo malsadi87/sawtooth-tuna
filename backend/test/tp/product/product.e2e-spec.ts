@@ -42,6 +42,20 @@ describe('Product (e2e)', () => {
     return response
   });
 
+  it('Can create another product with authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/api/v1/sawtooth/tp/product/addNew')
+      .send({
+        "productId": 4,
+        "productName": "NameString",
+        "productDescription": "DescriptionString",
+        "productNum": 2
+      })
+      .set('Authorization', `Bearer ${jwtToken}`)
+      .expect(201)
+    return response
+  });
+
   it('Cant create a product without authentication', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
@@ -68,7 +82,7 @@ describe('Product (e2e)', () => {
     return response
   });
 
-  it('Cant read a product that doesnt exist - known to fail', async () => {
+  it('Cant read a product that doesnt exist.', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/v1/sawtooth/tp/product/404')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -104,7 +118,7 @@ describe('Product (e2e)', () => {
     return response
   });
 
-  it('Cant overwrite a product with authentication - known to fail', async () => {
+  it('Cant overwrite a product with authentication.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
       .send({
