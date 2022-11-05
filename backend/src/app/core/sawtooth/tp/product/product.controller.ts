@@ -22,6 +22,11 @@ export class ProductController {
         return await this.productService.addNewProduct(productPayload);
     }
 
+    @Get('verify/:productId')
+    async verify(@Param('productId') productId: number): Promise<boolean> {
+        return await this.productService.verifyData(productId);
+    }
+
     @Get('/')
     async getAll(): Promise<ProductEntity[]> {
         return this.productService.getAllProduct();

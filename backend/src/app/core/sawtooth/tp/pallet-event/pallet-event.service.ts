@@ -52,4 +52,16 @@ export class PalletEventService {
             throw e;
         }
     }
+
+    async verifyData(palletNumber: string, eventTime: Date): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+         const result = await this.palletEventRepository.getByPalletNumberAndEventTime(palletNumber, eventTime);
+        if (!result) throw new NotFoundException(`Pallet With Number - ${palletNumber} And Time - ${eventTime} Not Found!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
+    }
 }

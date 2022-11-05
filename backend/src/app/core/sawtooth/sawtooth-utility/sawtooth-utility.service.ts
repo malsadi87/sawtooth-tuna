@@ -24,8 +24,8 @@ export class SawtoothUtilityService {
         return crypto.createHash('sha512').update(data).digest('hex').toLowerCase();
     }
 
-    private getNamespace(familyName: string): string {
-        return this.hash(familyName).substring(0, 6);
+    private getNamespace(tpName: string): string {
+        return this.hash(tpName).substring(0, 6);
     }
 
     private getTransactionFamilDetails(tpName: string): { family: string, version: string, prefix: string } {
@@ -46,12 +46,12 @@ export class SawtoothUtilityService {
         return identifier;
     }
 
-    public getAssetAddress(asset: any, familyName: string): string {
-        return `${this.getNamespace(familyName)}00${this.hash(asset).slice(0, 62)}`;
+    public getAssetAddress(tpName: string, identifier: any): string {
+        return `${this.getNamespace(tpName)}00${this.hash(identifier).slice(0, 62)}`;
     }
 
-    public getGeneericAssetAddress(asset: any, familyName: string, entity_type: string): string {
-        return `${this.getNamespace(familyName)}00${this.getNamespace(entity_type)}${this.hash(asset).slice(0, 54)}`;
+    public getGeneericAssetAddress(tpName: string, entity_type: string, identifier: any): string {
+        return `${this.getNamespace(tpName)}00${this.getNamespace(entity_type)}00${this.hash(identifier).slice(0, 54)}`;
     }
 
     public async createAsset(payload: any, entity_type: string = null, tpName: string = 'generic'): Promise<string> {
@@ -143,7 +143,7 @@ export class SawtoothUtilityService {
                 else {
                     const result = response.data.data[0];
                     if (result !== '')
-                        return JSON.parse(atob(result.data));
+                        return JSON.parse(Buffer.from(result.data, 'base64').toString());
                     else
                         throw new Error('Empty Response!'); 
                 }
@@ -153,5 +153,16 @@ export class SawtoothUtilityService {
         catch (err) {
             console.error(err);
         }
+    }
+
+    public async verifyAsset(payload: any, entity_type: string = null, tpName: string = 'generic'): Promise<boolean> {
+        // Find the identifiers in a entity using SawtoothIdentity(reflection to
+        // find the identoies(primary key), which is/are will be used to generate the address of the block)
+        const identifier = this.getIdentity(payload);
+        let address: string = entity_type ? this.getGeneericAssetAddress(tpName, entity_type, identifier) : this.getAssetAddress(tpName, identifier);
+
+        const assetBCHash = await this.getAsset(address);
+
+        return this.hash(JSON.stringify(payload)) == assetBCHash.data_hash;
     }
 }

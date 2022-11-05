@@ -40,4 +40,16 @@ export class CompanyService {
 
         return newCompany.companyId;
     }
+
+    async verifyData(id: number): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+        const result = await this.companyRepository.getById(id);
+        if (!result) throw new NotFoundException(`Company with ID - ${id} Not Found!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
+    }
 }

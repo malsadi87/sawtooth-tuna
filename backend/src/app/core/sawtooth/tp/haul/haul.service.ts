@@ -43,4 +43,16 @@ export class HaulService {
 
         return haul.launchDateTime;
     }
+
+    async verifyData(haulId: number): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+        const result = await this.haulRepository.getByHaulId(haulId);
+        if (!result) throw new NotFoundException(`Haul with ID - ${haulId} Not Found!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
+    }
 }

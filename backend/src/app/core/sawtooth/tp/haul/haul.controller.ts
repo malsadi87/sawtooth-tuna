@@ -22,6 +22,11 @@ export class HaulController {
         return await this.haulService.addNewHaul(haulPayload);
     }
 
+    @Get('verify/:haulId')
+    async verify(@Param('haulId') haulId: number): Promise<boolean> {
+        return await this.haulService.verifyData(haulId);
+    }
+
     @Get('/')
     async getAll(): Promise<HaulEntity[]> {
         return this.haulService.getAll();

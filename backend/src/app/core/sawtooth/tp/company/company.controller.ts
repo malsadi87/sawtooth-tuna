@@ -16,6 +16,11 @@ export class CompanyController {
     async create(@Body() companyPayload: CompanyCreationDto): Promise<number> {
         return await this.companyService.addNewCompany(companyPayload);
     }
+
+    @Get('verify/:id')
+    async verify(@Param('id') id: number): Promise<boolean> {
+        return await this.companyService.verifyData(id);
+    }
     
     @Get('/')
     async getAll(): Promise<CompanyEntity[]> {

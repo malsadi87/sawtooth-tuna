@@ -27,8 +27,8 @@ export class ProductService {
     }
 
     async getByProductNum(productNum: number): Promise<ProductEntity> {
-      return await this.productRepository.getByProductNum(productNum);
-  }
+        return await this.productRepository.getByProductNum(productNum);
+    }
 
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {
         try {
@@ -46,5 +46,17 @@ export class ProductService {
         } catch(e) {
             throw e;
         }
+    }
+
+    async verifyData(productId: number): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+        const result = await this.productRepository.getByProductId(productId);
+        if (!result) throw new NotFoundException(`NO Product found with ID - ${productId}!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
     }
 }

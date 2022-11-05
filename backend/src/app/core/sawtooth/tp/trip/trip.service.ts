@@ -40,7 +40,15 @@ export class TripService {
         return newTrip.tripNo;
     }
 
-    public testMe(): string {
-        return "Hallo boss!";
+    async verifyData(tripNo: number): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+        const result = await this.tripRepository.getByTripNo(tripNo);
+        if (!result) throw new BadRequestException(`No trip found with No - ${tripNo}`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
     }
 }

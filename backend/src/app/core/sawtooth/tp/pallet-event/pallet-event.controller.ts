@@ -21,6 +21,11 @@ export class PalletEventController {
     async create(@Body() palletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
         return await this.palletEventService.addNew(palletEventPayload);
     }
+
+    @Get('verify/:palletNumber/:eventTime')
+    async verify(@Param('palletNumber') palletNumber: string, @Param('eventTime') eventTime: Date): Promise<boolean> {
+        return await this.palletEventService.verifyData(palletNumber, eventTime);
+    }
     
     @Get('/')
     async getAll(): Promise<PalletEventEntity[]> {

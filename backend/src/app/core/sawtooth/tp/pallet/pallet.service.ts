@@ -41,4 +41,16 @@ export class PalletService {
 
         return newPallet.palletNum;
     }
+
+    async verifyData(palletNumber: string): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+        const result = await this.palletRepository.getByPalletNo(palletNumber);
+        if (!result) throw new NotFoundException(`Pallet with Number - ${palletNumber} Not Found!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
+    }
 }
