@@ -4,7 +4,7 @@ import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.deco
 import { TripEntity } from "./trip.entity";
 import * as pg from 'pg';
 
-pg.types.setTypeParser(1700, function(val) {
+pg.types.setTypeParser(1700, function(val: string) {
     return parseFloat(val);
 });
 

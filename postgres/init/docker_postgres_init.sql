@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS "PalletEvent" (
     "PalletEventId" SERIAL PRIMARY KEY,
     "EventTime" TIMESTAMP NOT NULL,
     "PalletNum" VARCHAR(255) NOT NULL,
-    "Temperature" JSON NOT NULL,
-    "Location" JSON NOT NULL,
+    "Temperature" NUMERIC NOT NULL,
     "Tilt" JSON NOT NULL,
     "Shock" JSON NOT NULL,
+    "Location" JSON NOT NULL,
     FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
 );
 
