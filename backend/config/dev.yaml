@@ -1,5 +1,6 @@
 server:
   port: 3001
+  cors: "http://localhost:3000"
 
 jwt-config:
   expiresIn: 604800

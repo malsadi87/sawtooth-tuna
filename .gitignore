@@ -390,3 +390,4 @@ lerna-debug.log*
 *.sublime-workspace
 *.pyc
 /processor/tunachain_processor/__pycache__
+postgres/pgadmin-data/pgadmin4.db
