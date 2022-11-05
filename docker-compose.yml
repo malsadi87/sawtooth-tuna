@@ -38,7 +38,7 @@ services:
     container_name: tunachain-client
     volumes:
       - ./client:/project/sawtooth-tuna/client
-      - /project/sawtooth-tuna/client/node_modules
+      - ./client/node_modules:/project/sawtooth-tuna/client/node_modules
     ports:
       - 3000:3000
     environment:

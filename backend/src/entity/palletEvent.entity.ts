@@ -2,6 +2,11 @@ import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { PalletEntity } from "./pallet.entity";
+import * as pg from 'pg';
+
+pg.types.setTypeParser(1700, function(val: string) {
+    return parseFloat(val);
+});
 
 @Entity('PalletEvent')
 export class PalletEventEntity extends BaseEntity {
@@ -18,8 +23,8 @@ export class PalletEventEntity extends BaseEntity {
     @PrimaryColumn({ generated: false, type:'varchar', width: 255, name: 'PalletNum', nullable: false })
     palletNum: string;
 
-    @Column({ type:'json', name: 'Temperature', nullable: false })
-    temperature: JSON;
+    @Column({ type:'numeric', name: 'Temperature', nullable: false })
+    temperature: number;
 
     @Column({ type:'json', name: 'Location', nullable: false })
     location: JSON;
