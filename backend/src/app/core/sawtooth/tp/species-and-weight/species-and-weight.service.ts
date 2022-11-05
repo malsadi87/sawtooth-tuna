@@ -44,4 +44,16 @@ export class SpeciesAndWeightService {
 
         return newSpecies.speciesId;
     }
+
+    async verifyData(id: number): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+         const result = await this.speciesAndWeightRepository.getById(id);
+        if (!result) throw new NotFoundException(`NO Species And Weight Not Found with ID - ${id}!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
+    }
 }

@@ -55,11 +55,7 @@ class GenericEntityState(object):
         LOGGER.info('set_generic_entity method')
         LOGGER.info(address)
 
-        state_data = _serialize(
-            {   "entity_type": entity_type,
-                "identifier": identifier,
-                "data_hash": data_hash
-            })
+        state_data = _serialize({ "data_hash": data_hash })
         return self._context.set_state({address: state_data}, timeout=self.TIMEOUT)
 
     def _get_state(self, address):

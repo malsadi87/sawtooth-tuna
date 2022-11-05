@@ -17,6 +17,11 @@ export class PalletController {
         return await this.palletService.addNewPallet(palletPayload);
     }
 
+    @Get('verify/:palletNumber')
+    async verify(@Param('palletNumber') palletNum: string): Promise<boolean> {
+        return await this.palletService.verifyData(palletNum);
+    }
+
     @Get('/')
     async getAll(): Promise<PalletEntity[]> {
         return this.palletService.getAll();

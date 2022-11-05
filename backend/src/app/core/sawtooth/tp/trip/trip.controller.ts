@@ -17,6 +17,11 @@ export class TripController {
         return await this.tripService.addNewTrip(tripPayload);
     }
 
+    @Get('verify/:tripNo')
+    async verify(@Param('tripNo') tripNo: number): Promise<boolean> {
+        return await this.tripService.verifyData(tripNo);
+    }
+
     @Get('/')
     async getAll(): Promise<TripEntity[]> {
         return this.tripService.getAllTrip();

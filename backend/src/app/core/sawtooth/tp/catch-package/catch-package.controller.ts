@@ -17,6 +17,11 @@ export class CatchPackageController {
         return await this.catchPackageService.addNewCatchPackage(catchPackagePayload);
     }
 
+    @Get('verify/:id')
+    async verify(@Param('id') id: string): Promise<boolean> {
+        return await this.catchPackageService.verifyData(id);
+    }
+
     @Get('/')
     async getAll(): Promise<CatchPackageEntity[]> {
         return this.catchPackageService.getAll();

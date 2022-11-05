@@ -23,6 +23,10 @@ export class CustomLevelPackageController {
         return this.customLevelPackageService.getAll();
     }
 
+    @Get('verify/:packageId')
+    async verify(@Param('packageId') packageId: string): Promise<boolean> {
+        return await this.customLevelPackageService.verifyData(packageId);
+    }
 
     @Get('getData/:packageId')
     async getData(@Param('packageId') packageId: string): Promise<{ 

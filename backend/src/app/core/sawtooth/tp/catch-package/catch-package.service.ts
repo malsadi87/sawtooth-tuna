@@ -8,13 +8,13 @@ import { CatchPackageRepository } from './catch-package.repository';
 
 @Injectable()
 export class CatchPackageService {
-    private readonly familyName: string;
+    private readonly entityName: string;
     constructor(
         private readonly catchPackageRepository: CatchPackageRepository,
         private readonly palletService: PalletService,
         private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
-        this.familyName = 'catch-package';
+        this.entityName = 'catch-package';
     }
 
     async getAll(): Promise<CatchPackageEntity[]> {
@@ -39,7 +39,7 @@ export class CatchPackageService {
             const newCatchPackage = await this.catchPackageRepository.addNewCatchPackage(catchPackage);
     
             // Save in Sawtooth
-            await this.sawtoothUtilityService.createAsset(newCatchPackage, this.familyName);
+            await this.sawtoothUtilityService.createAsset(newCatchPackage, this.entityName);
     
             return newCatchPackage.catchPackageId;
         } catch(e) {
@@ -47,5 +47,17 @@ export class CatchPackageService {
                 throw new BadRequestException(`A Pallet has to created first before adding Catch Package!`);
             throw e;
         }
+    }
+
+    async verifyData(id: string): Promise<boolean> {
+        /**
+         * Get the whole entity from DB
+         * As, Entity cound change between time, by another client
+         * And, getting the whole entity from Frontend, is not safe
+         */
+         const result = await this.catchPackageRepository.getById(id);
+        if (!result) throw new NotFoundException(`Catch Package with ID - ${id} not found!`);
+
+        return this.sawtoothUtilityService.verifyAsset(result, this.entityName);
     }
 }

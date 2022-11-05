@@ -22,6 +22,11 @@ export class SpeciesAndWeightController {
         return await this.speciesAndWeightService.addNew(speciesPayload);
     }
 
+    @Get('verify/:id')
+    async verify(@Param('id') id: number): Promise<boolean> {
+        return await this.speciesAndWeightService.verifyData(id);
+    }
+
     @Get('/')
     async getAll(): Promise<SpeciesAndWeightEntity[]> {
         return this.speciesAndWeightService.getAllSpecies();
