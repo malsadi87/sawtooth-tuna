@@ -26,7 +26,6 @@ import ViewCustomPackage from "./views/feature/viewCustomPackage/viewCustomPacka
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
-import 'dotenv/config'; 
 
 // Add font-awesome icons to project library
 library.add(fab, faFacebook, faTwitter, faGoogle, faLinkedin, faUser, faEnvelope, faLock, faKey);
