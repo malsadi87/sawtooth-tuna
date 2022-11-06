@@ -17,6 +17,7 @@ import PalletEvent from "./views/feature/palletEvent/palletEvent";
 import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
+import ForgetPassword from "./views/feature/auth/forgetPassword/forgetPassword";
 import Home from "./views/feature/home/home";
 import CatchPackage from "./views/feature/catchPackage/catchPackage";
 import Species from "./views/feature/species/species";
@@ -66,6 +67,7 @@ class App extends Component {
                     <Route element={<Auth />}>
                         <Route path={RouteUrl.login} element={<Login />} />
                         <Route path={RouteUrl.signup} element={<Signup />} />
+                        <Route path={RouteUrl.forgetPassword} element={<ForgetPassword />} />
                     </Route>
                 </Routes> 
             </>

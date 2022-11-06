@@ -2,6 +2,7 @@ export const RouteUrl = {
     home: '/',
     signup: '/auth/signup',
     login: '/auth/login',
+    forgetPassword: '/auth/forgetPassword',
     trip: '/trip',
     haul: '/haul',
     pallet: '/pallet',
