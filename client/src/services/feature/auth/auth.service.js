@@ -25,27 +25,17 @@ const isTokenExpire = () => {
 }
 
 const signIn = async (email, password) => {
-    try {
-        const { token } = await axios.post(APIBasePath.Identity.token, { email, password });
-        Object.entries(parseJWT(token)).map(([key, value]) => ({key, value})).forEach(x => {
-            storageService.setItem(x.key, x.value);
-        });
-        setAuthentication(true);
-    } catch (e) {
-        console.error(e);
-        return Promise.reject(e);
-    }
+    const { token } = await axios.post(APIBasePath.Identity.token, { email, password });
+    Object.entries(parseJWT(token)).map(([key, value]) => ({key, value})).forEach(x => {
+        storageService.setItem(x.key, x.value);
+    });
+    setAuthentication(true);
 }
 
 const signUp = async (fullName, email, password) => {
-    try {
-        const response = await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
-        if (!response) return Promise.reject("Invalid form data!");
-        return response;
-    } catch(e) {
-        console.error(e);
-        return Promise.reject(e);
-    }
+    const response = await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
+    if (!response) return Promise.reject("Invalid form data!");
+    return response;
 }
 
 const signOut = async () => {
