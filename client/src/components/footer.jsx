@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Footer() {
     return (
-        <div className="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary" style={{visibility: 'hidden'}}>
+        <footer className="flex-shrink-0 py-4 bg-dark text-white-50" style={{visibility: 'hidden'}}>
             <div className="text-white mb-3 mb-md-0">
                 TODO: This element is hidden untill we fix the footer being badly alligned.
                 Copyright © 2022. All rights reserved.
@@ -22,6 +22,11 @@ export default function Footer() {
                     <FontAwesomeIcon icon={['fab', 'linkedin']} />
                 </a>
             </div>
-        </div>
+        </footer>
+        // <footer className="flex-shrink-0 py-4 bg-dark text-white-50">
+        //     <div className="container text-center">
+        //         <small>Copyright &copy; Your Website</small>
+        //     </div>
+        // </footer>
     )
 }

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, useFormState } from "react-hook-form";
 import authService from '../../../../services/feature/auth/auth.service';
+import { RouteUrl } from "../../../../constants/routeUrls";
 import Footer from "../../../../components/footer";
 import toast from 'react-hot-toast';
 import * as yup from "yup";
@@ -106,7 +107,7 @@ export default function Login() {
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="#!" className="text-body">Forgot password?</a>
+                                <Link to={RouteUrl.forgetPassword} className="text-body">Forgot password?</Link>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
@@ -115,7 +116,7 @@ export default function Login() {
                                 </button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">
                                     Don't have an account?
-                                    <Link to="/auth/signup" className="link-danger">Register</Link>
+                                    <Link to={RouteUrl.signup} style={{ marginLeft: '0.2em' }} className="link-danger">Register</Link>
                                 </p>
                             </div>
 
