@@ -1,11 +1,11 @@
-import { IsString, MinLength, MaxLength, IsEmail } from "class-validator";
+import { MinLength, MaxLength, IsEmail } from "class-validator";
 
 export class AuthCredential {
     
     @IsEmail()
     email: string;
 
-    @MinLength(4)
+    @MinLength(5)
     @MaxLength(16)
     password: string;
 }

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../../feature/users/users.service';
 import { AuthCredential } from '../../utility/dto/auth-credential.dto';
@@ -14,7 +14,7 @@ export class IdentityService {
     async validateCredential(authCredential: AuthCredential): Promise<string> {
         const isValidate = await this.usersService.validateCredential(authCredential);
         if (!isValidate) {
-            throw new UnauthorizedException('Invalid Credential');
+            throw new BadRequestException('Invalid Credential! Please register first');
         }
         
         var user = await this.usersService.getUserByEmail(authCredential.email);
