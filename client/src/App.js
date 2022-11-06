@@ -23,6 +23,7 @@ import Species from "./views/feature/species/species";
 import Company from "./views/feature/company/company";
 import CustomPackage from "./views/feature/customPackage/customPackage";
 import ViewCustomPackage from "./views/feature/viewCustomPackage/viewCustomPackage";
+import { Toaster } from 'react-hot-toast';
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
@@ -45,26 +46,29 @@ class App extends Component {
 
     render() {
         return (
-            <Routes>
-                <Route element={<AuthShell />}>
-                    <Route exact path={RouteUrl.home} element={<Home />}>
-                        <Route path={RouteUrl.product} element={<Product />} />
-                        <Route path={RouteUrl.trip} element={<Trip />} />
-                        <Route path={RouteUrl.haul} element={<Haul />} />
-                        <Route path={RouteUrl.pallet} element={<Pallet />} />
-                        <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
-                        <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
-                        <Route path={RouteUrl.species} element={<Species />} />
-                        <Route path={RouteUrl.company} element={<Company />} />
-                        <Route path={RouteUrl.customPackage} element={<CustomPackage />} />
-                        <Route path={RouteUrl.viewCustomPackage} element={<ViewCustomPackage />} />
+            <>
+                <Toaster position="top-right" reverseOrder={false} />
+                <Routes>
+                    <Route element={<AuthShell />}>
+                        <Route exact path={RouteUrl.home} element={<Home />}>
+                            <Route path={RouteUrl.product} element={<Product />} />
+                            <Route path={RouteUrl.trip} element={<Trip />} />
+                            <Route path={RouteUrl.haul} element={<Haul />} />
+                            <Route path={RouteUrl.pallet} element={<Pallet />} />
+                            <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
+                            <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
+                            <Route path={RouteUrl.species} element={<Species />} />
+                            <Route path={RouteUrl.company} element={<Company />} />
+                            <Route path={RouteUrl.customPackage} element={<CustomPackage />} />
+                            <Route path={RouteUrl.viewCustomPackage} element={<ViewCustomPackage />} />
+                        </Route>
                     </Route>
-                </Route>
-                <Route element={<Auth />}>
-                    <Route path={RouteUrl.login} element={<Login />} />
-                    <Route path={RouteUrl.signup} element={<Signup />} />
-                </Route>
-            </Routes>
+                    <Route element={<Auth />}>
+                        <Route path={RouteUrl.login} element={<Login />} />
+                        <Route path={RouteUrl.signup} element={<Signup />} />
+                    </Route>
+                </Routes> 
+            </>
         )
     }
 }
