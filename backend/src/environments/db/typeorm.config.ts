@@ -21,52 +21,54 @@ import { ExternalAPIDetailsEntity } from '../../entity/externalAPIDetails.entity
 import { ExternalAPISettingsEntity } from '../../entity/externalAPISettings.entity';
 import { UsersBlockchainInfoEntity } from '../../entity/usersBlockchainInfo.entity';
 import { ChainEntitySubscriber } from '../../app/utility/subscriber/chainEntity.subscriber';
-import * as config from 'config';
+import { ConfigService } from '@nestjs/config';
 
-const dbConfig = config.get<any>('database');
-const { type, name, synchronizeFlag, isLogEnable, encrypt } = dbConfig;
-const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PW } = process.env;
 
-export const typeOrmConfig: TypeOrmModuleOptions = {
-    type: type,
-    host: DATABASE_HOST,
-    port: +DATABASE_PORT,
-    username: DATABASE_USER,
-    password: DATABASE_PW,
-    database: name,
-    entities: [
-        TripEntity,
-        ProductEntity,
-        HaulEntity,
-        PalletEntity,
-        PalletEventEntity,
-        CatchPackageEntity,
-        SpeciesAndWeightEntity,
-        CompanyEntity,
-        CustomLevelPackageEntity,
+export const typeOrmConfig = (config: ConfigService): TypeOrmModuleOptions => {
+    const { type, name, synchronizeFlag, isLogEnable, encrypt } = config.get('database');
+    const { DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PW } = config.get('env');
 
-        UsersEntity,
-        RolesEntity,
-        DeviceCodesEntity,
-        PersistedGrantsEntity,
-        RoleClaimsEntity,
-        UserClaimsEntity,
-        UserLoginsEntity,
-        UserRolesEntity,
-        UserTokensEntity,
-
-        UsersBlockchainInfoEntity,
-
-        ExternalAPIDetailsEntity,
-        ExternalAPISettingsEntity
-    ],
-    subscribers: [
-        // ChainEntitySubscriber
-    ],
-    synchronize: Boolean(synchronizeFlag),
-    logging: Boolean(isLogEnable),
-    // autoLoadEntities: true,
-    // migrations: ['dist/migrations/*{.ts,.js}'],
-    // migrationsTableName: '__MigrationHistory',
-    // migrationsRun: false,
+    return {
+        type: type,
+        host: DATABASE_HOST,
+        port: +DATABASE_PORT,
+        username: DATABASE_USER,
+        password: DATABASE_PW,
+        database: name,
+        entities: [
+            TripEntity,
+            ProductEntity,
+            HaulEntity,
+            PalletEntity,
+            PalletEventEntity,
+            CatchPackageEntity,
+            SpeciesAndWeightEntity,
+            CompanyEntity,
+            CustomLevelPackageEntity,
+    
+            UsersEntity,
+            RolesEntity,
+            DeviceCodesEntity,
+            PersistedGrantsEntity,
+            RoleClaimsEntity,
+            UserClaimsEntity,
+            UserLoginsEntity,
+            UserRolesEntity,
+            UserTokensEntity,
+    
+            UsersBlockchainInfoEntity,
+    
+            ExternalAPIDetailsEntity,
+            ExternalAPISettingsEntity
+        ],
+        subscribers: [
+            // ChainEntitySubscriber
+        ],
+        synchronize: Boolean(synchronizeFlag),
+        logging: Boolean(isLogEnable),
+        // autoLoadEntities: true,
+        // migrations: ['dist/migrations/*{.ts,.js}'],
+        // migrationsTableName: '__MigrationHistory',
+        // migrationsRun: false,
+    }
 }

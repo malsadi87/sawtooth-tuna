@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { getProjectConfig } from '../../../utility/methods/helper.methods';
+// import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import { MetaDataCreationDto } from '../../../utility/dto/metaData-creation.dto';
 import { KeyPairDto } from '../../../utility/dto/keyPair.dto';
 import { SawtoothUtilityService } from '../sawtooth-utility/sawtooth-utility.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MetaDataService {
@@ -14,10 +15,11 @@ export class MetaDataService {
 
     constructor(
         private readonly sawtoothUtilityService: SawtoothUtilityService,
-        private readonly httpService: HttpService
+        private readonly httpService: HttpService,
+        private readonly configService: ConfigService
     ) {
         this.familyName = 'cross-chain';
-        this.sawtoothConfig = getProjectConfig('sawtooth');
+        this.sawtoothConfig = this.configService.get('sawtooth');
     }
 
     async getByKey(key: string): Promise<AxiosResponse<any>> {

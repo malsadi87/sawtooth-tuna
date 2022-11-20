@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
-import { getProjectConfig } from '../../../utility/methods/helper.methods';
+// import { getProjectConfig } from '../../../utility/methods/helper.methods';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class KeyService {
     private sawtoothConfig: any;
 
-    constructor() {
-        this.sawtoothConfig = getProjectConfig('sawtooth');
+    constructor(config: ConfigService) {
+        this.sawtoothConfig = config.get('sawtooth');
     }
 
     private getPrivateKey(publicKey: string): string {
