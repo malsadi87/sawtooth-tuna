@@ -5,22 +5,28 @@ import { UsersModule } from '../../feature/users/users.module';
 import { JwtStrategy } from '../../utility/strategy/jwt.strategy';
 import { IdentityService } from './identity.service';
 import { IdentityController } from './identity.controller';
-import * as config from 'config';
 import { SawtoothModule } from '../sawtooth/sawtooth.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestInterceptor } from '../../utility/interceptor/request.interceptor';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
-const jwtConfig = config.get<any>('jwt-config');
-const { JWT_SECRET } = process.env;
+
+// import * as config from 'config';
+// const jwtConfig = config.get<any>('jwt-config');
+// const { JWT_SECRET } = process.env;
+
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: JWT_SECRET,
-      signOptions: {
-        expiresIn: jwtConfig.expiresIn
-      }
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        secret: config.get<string>('env.JWT_SECRET'),
+        signOptions: {
+          expiresIn: config.get<number>('jwt-config.expiresIn')
+        }
+      })
     }),
     UsersModule,
     SawtoothModule,

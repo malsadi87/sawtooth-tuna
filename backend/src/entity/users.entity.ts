@@ -1,5 +1,5 @@
 import { Expose } from "class-transformer";
-import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { BaseEntity, Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserClaimsEntity } from "./userClaims.entity";
 import { UserLoginsEntity } from "./userLogins.entity";
 import { UserRolesEntity } from "./userRoles.entity";
@@ -46,8 +46,10 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'boolean', name: 'EmailConfirmed', nullable: false })
     emailConfirmed: boolean;
 
+    password: string;
+
     @Column({ type:'varchar', width: 2000, name: 'PasswordHash', nullable: true })
-    @Expose({ name: 'password' })
+    // @Expose({ name: 'password' })
     passwordHash: string;
 
     @Column({ type:'varchar', width: 2000, name: 'SecurityStamp', nullable: true })

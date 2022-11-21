@@ -33,9 +33,15 @@ const signIn = async (email, password) => {
 }
 
 const signUp = async (fullName, email, password) => {
-    const response = await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
-    if (!response) return Promise.reject("Invalid form data!");
-    return response;
+    return await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
+}
+
+const resetPassword = async (email) => {
+    return await axios.post(APIBasePath.Identity.resetPassword, { email });
+}
+
+const resetPasswordConfirmation = async (token, newPassword) => {
+    return await axios.post(APIBasePath.Identity.resetPasswordConfirmation, { token, newPassword });
 }
 
 const signOut = async () => {
@@ -57,6 +63,8 @@ const authService = {
     isTokenExpire,
     signIn,
     signUp,
+    resetPassword,
+    resetPasswordConfirmation,
     signOut,
     signOutLocally,
     getAuthentication

@@ -4,7 +4,8 @@ export const APIBasePath = {
         token: '/identity/token',
         signUp: '/identity/signup',
         signOut: '/identity/signOut',
-        changePassword: '/identity/changePassword',
+        resetPassword: '/identity/resetPassword',
+        resetPasswordConfirmation: '/identity/resetPasswordConfirmation',
         addClaimsAndRoles: '/identity/addClaimsAndRoles',
         deleteClaimsAndRoles: '/identity/deleteClaimsAndRoles',
         deleteUsers: '/identity/delete'

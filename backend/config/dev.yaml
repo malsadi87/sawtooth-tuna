@@ -1,9 +1,13 @@
 server:
   port: 3001
-  cors: "http://localhost:3000" # Could be plutiple sepersted by ;(semicolon)
+  cors: "http://localhost:3000" # Could be multiple sepersted by ;(semicolon) EX: "http://localhost:3000;"http://localhost:3001"
+  emailConfirmationURL: 'http://localhost:3001/identity/confirm?token='
+  resetPasswordURL: 'http://localhost:3000/auth/forgetPassword?token='
 
 jwt-config:
   expiresIn: 604800
+  verificationTokenExpiresIn: '1h'
+  resetPasswordTokenExpiresIn: '1h'
 
 database:
   type: "postgres"
@@ -12,8 +16,14 @@ database:
   encrypt: true
   trustServerCertificate: false
   name: "demo"
-  password: "root"
-  username: "root"
+
+email:
+  host: 'smtp.example.com'
+  secure: false
+  username: 'user@example.com'
+  password: '12345'
+  from: '"No Reply" <noreply@example.com>'
+
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"

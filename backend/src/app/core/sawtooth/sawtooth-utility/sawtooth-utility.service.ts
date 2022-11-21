@@ -4,9 +4,9 @@ import { firstValueFrom, map } from 'rxjs';
 import { createContext, Signer } from 'sawtooth-sdk/signing';
 import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
 import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
-import { getProjectConfig } from '../../../utility/methods/helper.methods';
 import { LoginUserInfoService } from '../../../shared/loginUserInfo/login-user-info.service';
 import { SAWTOOTH_IDENTITY_KEY } from '../../../utility/decorator/sawtoothIdentity.decorator';
+import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -15,9 +15,10 @@ export class SawtoothUtilityService {
 
     constructor(
         private readonly httpService: HttpService,
-        private readonly loginUserInfoService: LoginUserInfoService
+        private readonly loginUserInfoService: LoginUserInfoService,
+        private readonly configService: ConfigService
     ) {
-        this.sawtoothConfig = getProjectConfig('sawtooth');
+        this.sawtoothConfig = this.configService.get('sawtooth');
     }
 
     private hash(data: any): string {

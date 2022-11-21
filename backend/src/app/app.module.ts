@@ -5,19 +5,28 @@ import { SharedModule } from './shared/shared.module';
 import { FeatureModule } from './feature/feature.module';
 import { CoreModule } from './core/core.module';
 import { UtilityModule } from './utility/utility.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ApiExceptionFilter } from './utility/filter/api-exception-filter.filter';
 import { JwtAuthGuard } from './utility/guard/JwtAuth.guard';
 import { RequestPayloadValidationPipe } from './utility/pipe/request-Payload.pipe';
+import configuration from 'config/configuration';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
     CoreModule,
     SharedModule,
     FeatureModule,
     UtilityModule,
+    ConfigModule.forRoot({
+      load:[configuration],
+      isGlobal: true
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => typeOrmConfig(configService)
+    }),
   ],
   providers: [
     {
