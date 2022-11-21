@@ -64,6 +64,10 @@ export class UsersService {
 
     public async addUser(userPayload: UserCreationDto): Promise<{ user: UsersEntity }> {
         try {
+            const existingUser = await this.getUserByEmail(userPayload.email);
+            if (existingUser)
+                throw new BadRequestException(`User already exist with email - ${existingUser.email}`);
+
             let userObj: UsersEntity = plainToClass(UsersEntity, userPayload);
             userObj.isActive = true;
             userObj.emailConfirmed = false;

@@ -46,7 +46,6 @@ export class UsersEntity extends BaseEntity {
     @Column({ type:'boolean', name: 'EmailConfirmed', nullable: false })
     emailConfirmed: boolean;
 
-    @Column({ select: false })
     password: string;
 
     @Column({ type:'varchar', width: 2000, name: 'PasswordHash', nullable: true })

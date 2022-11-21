@@ -56,7 +56,7 @@ export class IdentityController {
     }
 
     @AllowAnonymous()
-    @Get('/resetPassword/:email')
+    @Post('/resetPassword')
     public async resetPassword(@Param() params: ResetPasswordDto): Promise<boolean> {
         // Validate if email is valid
         const validUser = await this.usersService.validateExistingEmail(params.email);
@@ -67,7 +67,7 @@ export class IdentityController {
     }
 
     @AllowAnonymous()
-    @Post('/resetPassword')
+    @Post('/resetPasswordConfirmation')
     public async resetPasswordConfirmation(@Body() resetPasswordConfirmationDto: ResetPasswordConfirmationDto): Promise<boolean> {
         // validate the token
         const email = await this.identityService.validateSecondaryToken(resetPasswordConfirmationDto.token);

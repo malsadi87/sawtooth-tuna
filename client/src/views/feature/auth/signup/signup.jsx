@@ -7,6 +7,7 @@ import authService from "../../../../services/feature/auth/auth.service";
 import { withParamsAndNavigation } from "../../../../utility/routerHelper";
 import { RouteUrl } from "../../../../constants/routeUrls";
 import Footer from "../../../../components/footer";
+import toast from 'react-hot-toast';
 import * as yup from "yup";
 import './signup.css';
 
@@ -18,7 +19,7 @@ const schema = yup.object({
     agreeTerms: yup.boolean().default(true)
 }).required();
 
-function Signup() {
+const Signup = (props) => {
     const { register, handleSubmit, control, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange'
@@ -29,11 +30,14 @@ function Signup() {
     });
 
     const signUp = async (data) => {
-        console.log(data);
         const { fullName, email, password } = data;
         
-        await authService.signUp(fullName, email, password);
-        this.props.navigate(RouteUrl.login);
+        try { 
+            await authService.signUp(fullName, email, password);
+            props.navigate(RouteUrl.login);
+        } catch(e) {
+            toast.error(e.data.message);
+        }
     }
 
     return (

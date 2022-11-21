@@ -12,6 +12,7 @@ import { join } from 'path';
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
                 const { host, secure, username, password, from } = configService.get('email');
+                // console.log(join(__dirname.split('/src')[0], '/emailTemplates'));
 
                 return {
                     transport: {
@@ -26,7 +27,7 @@ import { join } from 'path';
                         from: from
                     },
                     template: {
-                        dir: join(__dirname, '../../../../', 'emailTemplates'),
+                        dir: join(__dirname.split('/src')[0], '/emailTemplates'),
                         adapter: new HandlebarsAdapter(),
                         options: {
                             strict: true,

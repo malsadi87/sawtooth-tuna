@@ -107,7 +107,7 @@ export default function Login() {
                                         Remember me
                                     </label>
                                 </div>
-                                <Link to={RouteUrl.forgetPassword} className="text-body">Forgot password?</Link>
+                                <Link to={RouteUrl.resetPassword} className="text-body">Reset password?</Link>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">

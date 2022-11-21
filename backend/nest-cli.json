@@ -4,7 +4,7 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "assets": [
-      {"include": "**/*.hbs", "outDir": "./dist/emailTemplates", "watchAssets": true },
+      {"include": "../templates/*.hbs", "outDir": "./dist/emailTemplates", "watchAssets": true },
       {"include": "../config/*.yaml", "outDir": "./dist/config", "watchAssets": true }
     ]
   }
