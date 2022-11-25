@@ -1,0 +1,80 @@
+server:
+  port: 3001
+  cors: "http://16.171.28.229:3000" # Could be multiple sepersted by ;(semicolon) EX: "http://localhost:3000;"http://localhost:3001"
+  emailConfirmationURL: 'http://16.171.28.229:3001/identity/confirm?token='
+  resetPasswordURL: 'http://16.171.28.229:3000/auth/forgetPassword?token='
+
+jwt-config:
+  expiresIn: 604800
+  verificationTokenExpiresIn: '1h'
+  resetPasswordTokenExpiresIn: '1h'
+
+database:
+  type: "postgres"
+  isLogEnable: true
+  synchronizeFlag: false
+  encrypt: true
+  trustServerCertificate: false
+  name: "demo"
+
+email:
+  host: 'smtp.example.com'
+  secure: false
+  username: 'user@example.com'
+  password: '12345'
+  from: '"No Reply" <noreply@example.com>'
+
+
+sawtooth:
+  KEY_NAME: "transfer-chain.keys"
+  API_URL: "http://rest-api:8008"
+  KEY_ALGORITHMN: "secp256k1"
+  TP:
+    TRANSFER-CHAIN:
+      FAMILY: "transfer-chain"
+      VERSION: "0.0"
+      PREFIX: ''
+    CROSS-CHAIN:
+      FAMILY2: "cross-chain"
+      VERSION2: "0.1"
+      PREFIX2: ''
+    COMPANY:
+      FAMILY: "company"
+      VERSION: "0.1"
+      PREFIX: '45235d'
+    HAUL:
+      FAMILY: "haul"
+      VERSION: "0.1"
+      PREFIX: '00a404'
+    PALLET: 
+      FAMILY: "pallet"
+      VERSION: "0.1"
+      PREFIX: '02cd1c'
+    PALLET-EVENT:
+      FAMILY: "pallet-event"
+      VERSION: "0.1"
+      PREFIX: '6b6112'
+    CUSTOM-PACKAGE:
+      FAMILY: "custom-package"
+      VERSION: "0.1"
+      PREFIX: '20e9e3'
+    SPECIES:
+      FAMILY: "species"
+      VERSION: "0.1"
+      PREFIX: '274c22'
+    TRIP:
+      FAMILY: "trip"
+      VERSION: "0.1"
+      PREFIX: 'db25c6'
+    CATCH-PACKAGE:
+      FAMILY: "catch-package"
+      VERSION: "0.1"
+      PREFIX: '7a21ab'
+    PRODUCT:
+      FAMILY: "product"
+      VERSION: "0.1"
+      PREFIX: '5a5650'
+    GENERIC:
+      FAMILY: "generic"
+      VERSION: "0.1"
+      PREFIX: 'cbfdde'

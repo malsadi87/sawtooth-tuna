@@ -43,7 +43,7 @@ WORKDIR /project/sawtooth-tuna/backend
 
 COPY backend/package*.json ./
 
-RUN npm install --only=production
+RUN npm install --only=test
 
 # #Copy build artifacts
 COPY --from=builder /project/sawtooth-tuna/backend/dist ./

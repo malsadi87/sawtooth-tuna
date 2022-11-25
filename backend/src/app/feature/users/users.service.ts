@@ -50,6 +50,8 @@ export class UsersService {
         return user;
     }
 
+    // Invalid implementation
+    // Should only contains business logic
     public async updateUserBlockChainInfo(user: UsersEntity, chainPublicKey: string = null, chainPrivateKey: string = null): Promise<UsersEntity> {
         
         await this.dataScource.transaction(async manager => {
@@ -62,6 +64,8 @@ export class UsersService {
         return user;
     }
 
+    // Invalid implementation
+    // Should only contains business logic
     public async addUser(userPayload: UserCreationDto): Promise<{ user: UsersEntity }> {
         try {
             const existingUser = await this.getUserByEmail(userPayload.email);

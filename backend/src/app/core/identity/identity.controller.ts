@@ -46,10 +46,10 @@ export class IdentityController {
         // Update DB for email confirmation
         const user = await this.usersService.updateUserEmailConfirmation(email, true);
         
-        // // Generate a new Key pair
+        // Generate a new Key pair
         const { publicKey, privateKey } = this.blockChainKeyService.createKeyPair();
 
-        // // Save the key pair to blockchaininfor table
+        // Save the key pair to blockchaininfor table
         await this.usersService.updateUserBlockChainInfo(user, publicKey, privateKey);
 
         return true;
@@ -78,23 +78,10 @@ export class IdentityController {
         return true;
     }
 
-    @Get('/signOut')
-    public async signOut(): Promise<Boolean> {
-        return null;
-    }
-
-    @Post('/addClaimsAndRoles')
-    public async addClaimsAndRoles(): Promise<any> {
-        return null;
-    }
-
-    @Delete('/deleteClaimsAndRoles')
-    public async deleteClaimsAndRoles(): Promise<any> {
-        return null;
-    }
-
-    @Delete('/delete')
-    public async deleteUser(): Promise<any> {
-        return null;
-    }
+    // No backend activity needs to perform for dign out
+    // As the application dont track the token activity 
+    // @Get('/signOut')
+    // public async signOut(): Promise<Boolean> {
+    //     return null;
+    // }
 }

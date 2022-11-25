@@ -40,7 +40,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cp -f ./src/environments/environment.prod.js ./src/environments/environment.js && react-scripts build",
+    "build": "react-scripts build",
+    "prodbuild": "cp -f ./src/environments/environment.prod.js ./src/environments/environment.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
