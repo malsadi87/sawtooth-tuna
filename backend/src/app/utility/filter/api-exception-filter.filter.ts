@@ -21,14 +21,15 @@ export class ApiExceptionFilter extends BaseExceptionFilter {
     const responseObj = {
       statusCode: status,
       timestamp: new Date().toISOString(),
-      path: request.url,
-      error: ''
+      path: request.url
     };
 
-    if (this.NODE_ENV == 'prod' && status == 500)
-        responseObj.error = (exception as Error).message;
-    else
-      return super.catch(exception, host);
+    if (this.NODE_ENV && ['dev', 'test'].includes(this.NODE_ENV)) {
+      if (exception instanceof HttpException) 
+        return super.catch(exception, host);
+      else
+        responseObj['error'] = (exception as Error).message;
+    }
 
     response
       .status(status)
