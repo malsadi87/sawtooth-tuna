@@ -4,8 +4,8 @@ WORKDIR /project/sawtooth-tuna/client
 ENV PATH /project/sawtooth-tuna/client/node_modules/.bin:$PATH
 
 COPY client/package*.json ./
-RUN npm install --silent --only=development
-RUN npm install react-scripts@4.0.3 -g --silent --only=development
+RUN npm install --silent
+RUN npm install react-scripts@4.0.3 -g --silent
 
 COPY client/ ./
 
