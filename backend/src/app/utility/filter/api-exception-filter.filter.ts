@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 export class ApiExceptionFilter extends BaseExceptionFilter {
   private readonly NODE_ENV: string;
 
-  constructor(private config: ConfigService) {
+  constructor(config: ConfigService) {
     super();
     this.NODE_ENV = config.get('env.NODE_ENV');
   }
@@ -21,15 +21,14 @@ export class ApiExceptionFilter extends BaseExceptionFilter {
     const responseObj = {
       statusCode: status,
       timestamp: new Date().toISOString(),
-      path: request.url
+      path: request.url,
+      error: ''
     };
 
-    if (this.NODE_ENV && ['dev', 'test'].includes(this.NODE_ENV)) {
-      if (exception instanceof HttpException) 
-        return super.catch(exception, host);
-      else
-        responseObj['error'] = (exception as Error).message;
-    }
+    if (this.NODE_ENV == 'prod' && status == 500)
+        responseObj.error = (exception as Error).message;
+    else
+      return super.catch(exception, host);
 
     response
       .status(status)
