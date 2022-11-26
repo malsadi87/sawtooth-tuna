@@ -14,45 +14,36 @@ services:
       - ./postgres/db-data:/var/lib/postgresql/data
       - ./postgres/init/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
 
+  tunachain-backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile.prod
+    image: hyperledger/tunachain-backend
+    container_name: tunachain-backend
+    ports:
+      - 3001:3001
+    depends_on:
+      - rest-api
+      - tunachain-db
+    environment:
+      - NODE_ENV=prod
+      - DATABASE_HOST=tunachain-db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=root
+      - DATABASE_PW=root
+      - JWT_SECRET=njvdfkjvndfkvjndfvjkndfvkjknkj
+      - JWT_SECONDARY_TOKEN_SECRET=dhdbvjhdbvjhdfbhdvbsdjhb
+
   tunachain-client:
     build:
       context: .
       dockerfile: ./client/Dockerfile.prod
     image: hyperledger/tunachain-client
     container_name: tunachain-client
-    volumes:
-      - ./client:/project/sawtooth-tuna/client
-      - ./client/node_modules:/project/sawtooth-tuna/client/node_modules
     ports:
-      - 3000:3000
+      - 3000:80
     environment:
-      - CHOKIDAR_USEPOLLING=true
-
-  tunachain-backend:
-    build:
-      context: .
-      target: development
-      dockerfile: ./backend/Dockerfile.prod
-    image: hyperledger/tunachain-backend
-    container_name: tunachain-backend
-    volumes:
-      - ./backend:/project/sawtooth-tuna/backend
-      - /project/sawtooth-tuna/backend/node_modules
-    command: npm run start:debug
-    ports:
-      - 3001:3001
-      - 9229:9229
-    depends_on:
-      - rest-api
-      - tunachain-db
-    environment:
-      - NODE_ENV=dev
-      - DATABASE_HOST=tunachain-db
-      - DATABASE_PORT=5432
-      - DATABASE_USER=root
-      - DATABASE_PW=root
-      - JWT_SECRET=123456789101112
-      - JWT_SECONDARY_TOKEN_SECRET=999875fthgjhgg
+      - CHOKIDAR_USEPOLLING=false
 
   tunachain-tp:
     build:
@@ -64,8 +55,6 @@ services:
         - no_proxy
     image: sawtooth-tunachain-tp
     container_name: tunachain-tp
-    volumes:
-      - .:/project/sawtooth-tuna
     command: |
       bash -c "
         sleep 1
