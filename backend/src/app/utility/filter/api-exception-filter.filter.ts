@@ -22,14 +22,14 @@ export class ApiExceptionFilter extends BaseExceptionFilter {
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
-      error: (exception as Error).message
+      message: (exception as Error).message
     };
 
     if (this.NODE_ENV && ['dev', 'test'].includes(this.NODE_ENV) && (exception instanceof HttpException))
         return super.catch(exception, host);
 
     if (this.NODE_ENV == 'prod' && status == 500)
-      responseObj.error = "Something went wrong! please contact the administrator!";
+      responseObj.message = "Something went wrong! please contact the administrator!";
 
     response
       .status(status)
