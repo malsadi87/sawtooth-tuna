@@ -35,7 +35,7 @@ export class ApiExceptionFilter extends BaseExceptionFilter {
     if (this.NODE_ENV == 'prod' && status == 500)
       responseObj.error = "Something went wrong! please contact the administrator!";
     else if (this.NODE_ENV == 'prod')
-      responseObj.error = (exception instanceof HttpException) ? JSON.stringify(exception.getResponse()) : (exception as Error).message;     
+      responseObj.error = (exception as Error).message;
 
     response
       .status(status)
