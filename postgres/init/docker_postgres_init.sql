@@ -1,10 +1,3 @@
-CREATE TABLE IF NOT EXISTS "Product" (
-    "ProductId" INT PRIMARY KEY,
-    "ProductName" VARCHAR(255),
-    "ProductDescription" VARCHAR(255),
-    "ProductNum" INT NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS "Trip" (
     "TripNo" INT PRIMARY KEY,
     "TripWithinYearNo" INT NOT NULL,
@@ -29,40 +22,29 @@ CREATE TABLE IF NOT EXISTS "Haul" (
     FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS "Pallet" (
-    "PalletNum" VARCHAR(255) PRIMARY KEY,
-    "ProductNum" INT NOT NULL,
-    "SupplierId" VARCHAR(255) NOT NULL,
-    "PalletWeight" NUMERIC NOT NULL,
-    "TripNo" INT NOT NULL,
-    --FOREIGN KEY ("ProductNum") REFERENCES "Product"("ProductNum") ON DELETE SET NULL,
-    FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
-);
-
-CREATE TABLE IF NOT EXISTS "PalletEvent" (
-    "PalletEventId" SERIAL PRIMARY KEY,
-    "EventTime" TIMESTAMP NOT NULL,
-    "PalletNum" VARCHAR(255) NOT NULL,
-    "Temperature" JSON NOT NULL,
-    "Location" JSON NOT NULL,
-    "Tilt" JSON NOT NULL,
-    "Shock" JSON NOT NULL,
-    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS "CatchPackage" (
-    "CatchPackageId" VARCHAR(255) PRIMARY KEY,
-    "PackingDate" TIMESTAMP NOT NULL,
-    "PalletNum" VARCHAR(255) NOT NULL,
-    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS "Catch" (
+    "CatchId" VARCHAR(255) PRIMARY KEY,
+    "UpdatedDateTime" TIMESTAMP NOT NULL,
+    "Quantity" INT NOT NULL,
+    "HaulId" INT NOT NULL,
+    FOREIGN KEY ("HaulId") REFERENCES "Haul"("HaulId") ON DELETE SET DEFAULT
 );
 
 CREATE TABLE IF NOT EXISTS "SpeciesAndWeight" (
     "SpeciesId" SERIAL PRIMARY KEY,
+    -- TODO: Should we even have weight or quantity here? There is a auantity on the catch and possibly weight on catchPackage, product, and Pallet.
     "Quantity" INT NOT NULL,
     "Species" INT NOT NULL,
-    "CatchPackageId" VARCHAR(255) NOT NULL,
     "LaunchDateTime" TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "Product" (
+    "ProductId" INT PRIMARY KEY,
+    "ProductName" VARCHAR(255),
+    "ProductDescription" VARCHAR(255),
+    "ProductNum" INT NOT NULL,
+    "SpeciesId" INT NOT NULL,
+    FOREIGN KEY ("SpeciesId") REFERENCES "SpeciesAndWeight"("SpeciesId") ON DELETE SET DEFAULT
 );
 
 CREATE TABLE IF NOT EXISTS "Company" (
@@ -72,13 +54,45 @@ CREATE TABLE IF NOT EXISTS "Company" (
     "ContactInfo" VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS "Pallet" (
+    "PalletNum" VARCHAR(255) PRIMARY KEY,
+    "ProductId" INT NOT NULL,
+    "CompanyId" INT NOT NULL,
+    "PalletWeight" NUMERIC NOT NULL,
+    "TripNo" INT NOT NULL,
+    FOREIGN KEY ("ProductId") REFERENCES "Product"("ProductId") ON DELETE SET NULL,
+    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET NULL,
+    FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
+);
+
+CREATE TABLE IF NOT EXISTS "PalletEvent" (
+    "PalletEventId" SERIAL PRIMARY KEY,
+    "EventTime" TIMESTAMP NOT NULL,
+    "PalletNum" VARCHAR(255) NOT NULL,
+    "Temperature" DOUBLE PRECISION NOT NULL,
+    "Location" JSON NOT NULL,
+    "Tilt" JSON NOT NULL,
+    "Shock" JSON NOT NULL,
+    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS "CatchPackage" (
+    "CatchPackageId" VARCHAR(255) PRIMARY KEY,
+    "PackingDate" TIMESTAMP NOT NULL,
+    "PalletNum" VARCHAR(255) NOT NULL,
+    "CompanyId" INT NOT NULL,
+    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET DEFAULT,
+    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS "CustomLevelPackage" (
     "ConsumerPackageId" VARCHAR(255) PRIMARY KEY,
     "CatchPackageId" VARCHAR(255) NOT NULL,
     "PackingDate" TIMESTAMP NOT NULL,
-    "Agent" INT NOT NULL,
+    "CompanyId" INT NOT NULL,
     FOREIGN KEY ("CatchPackageId") REFERENCES "CatchPackage"("CatchPackageId") ON DELETE SET DEFAULT,
-    FOREIGN KEY ("Agent") REFERENCES "Company"("CompanyId") ON DELETE SET NULL
+    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET NULL
 );
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
