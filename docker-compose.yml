@@ -61,6 +61,14 @@ services:
     depends_on:
       - rest-api
       - tunachain-db
+    environment:
+      - NODE_ENV=dev
+      - DATABASE_HOST=tunachain-db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=root
+      - DATABASE_PW=root
+      - JWT_SECRET=njvdfkjvndfkvjndfvjkndfvkjknkj
+      - JWT_SECONDARY_TOKEN_SECRET=dhdbvjhdbvjhdfbhdvbsdjhb
 
   tunachain-tp:
     build:
