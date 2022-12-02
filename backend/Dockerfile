@@ -1,53 +1,31 @@
 # Download base image
-FROM node:12-stretch AS development
+FROM node:18.9-alpine AS development
 
 # Define Base Directory
 WORKDIR /project/sawtooth-tuna/backend
 
 # Copy and restore packages
 COPY backend/package*.json ./
-
-RUN npm install glob rimraf
-
-RUN npm install --only=development
+RUN npm install -g @nestjs/cli
+RUN npm install
 
 # Copy all other directories
 COPY backend/ ./
 
-RUN yarn
-
-RUN yarn global add @nestjs/cli@8.2.8
-
 # Setup base command
 RUN npm run build
 
-# # # second phase
-FROM node:12-stretch AS production
+# The test run is built on top of the dev run
+FROM node:18.9-alpine AS test
 
 # # Declaring working directory
 WORKDIR /project/sawtooth-tuna/backend
 
 COPY backend/package*.json ./
-
-RUN npm install --only=production
-
-# #Copy build artifacts
-COPY --from=builder /project/sawtooth-tuna/backend/dist ./
-COPY --from=builder /project/sawtooth-tuna/backend/config ./config
-
-# The test run is built on top of the production run
-FROM node:12-stretch AS test
-
-# # Declaring working directory
-WORKDIR /project/sawtooth-tuna/backend
-
-COPY backend/package*.json ./
-
-RUN npm install
+RUN npm install --slient --only=production
 
 # #Copy build artifacts
-COPY --from=builder /project/sawtooth-tuna/backend/dist ./
-COPY --from=builder /project/sawtooth-tuna/backend/config ./config
+COPY --from=development /project/sawtooth-tuna/backend/dist ./
 
 # Enable exution of the test script
 RUN chmod+x test/test.sh
