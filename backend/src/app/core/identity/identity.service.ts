@@ -1,10 +1,11 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { MailService } from 'src/app/shared/mail/mail.service';
+import { MailService } from 'src/app/shared/mail/awsmail.service';
 import { UsersService } from '../../feature/users/users.service';
 import { AuthCredential } from '../../utility/dto/auth-credential.dto';
 import { JwtPayload } from '../../utility/vm/jwtPayload.vm';
 import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class IdentityService {
@@ -30,13 +31,15 @@ export class IdentityService {
         }));
         return this.jwtService.sign(payload);
     }
-
+    
     public async sendEmailVerification(userId: string, email: string, fullName: string): Promise<boolean> {
         const token = this.jwtService.sign({ userId, email, fullName }, {
           secret: this.configService.get('env.JWT_SECONDARY_TOKEN_SECRET'),
           expiresIn: this.configService.get('jwt-config.verificationTokenExpiresIn')
         });
-
+        Logger.log("**SEND MAIL**", email, fullName, token)
+        Logger.log("Token", token)
+        Logger.log("Type", typeof(token))
         return this.mailService.sendUserConfirmation(email, fullName, token);
     }
 

@@ -27,7 +27,7 @@ import { join } from 'path';
                         from: from
                     },
                     template: {
-                        dir: join(__dirname.split('/src')[0], '/emailTemplates'),
+                        dir: join(__dirname.split('/src')[0], '/templates'),
                         adapter: new HandlebarsAdapter(),
                         options: {
                             strict: true,

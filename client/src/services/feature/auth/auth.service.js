@@ -33,6 +33,7 @@ const signIn = async (email, password) => {
 }
 
 const signUp = async (fullName, email, password) => {
+    console.log("SIGNUP", fullName, email, password)
     return await axios.post(APIBasePath.Identity.signUp, { fullName, email, password });
 }
 

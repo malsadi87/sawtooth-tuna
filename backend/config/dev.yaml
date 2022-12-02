@@ -24,6 +24,16 @@ email:
   password: '12345'
   from: '"No Reply" <noreply@example.com>'
 
+awsEmail:
+  AWS_SES_REGION: "eu-north-1"
+  AWS_SES_ACCESS_KEY: "asd"
+  AWS_SES_KEY_SECRET: "asd"
+  MAIL_HOST: "email-smtp.eu-north-1.amazonaws.com"
+  MAIL_PORT: "25"
+  MAIL_USERNAME: "ses-smtp-user.20221129-115544"
+  MAIL_PASSWORD: "t(Ehw$p0]sPj5]0"
+  MAIL_FROM_NAME: "server@paas4chain.xyz"
+  MAIL_FROM_ADDRESS: '"No Reply" <server@paas4chain.xyz>'
 
 sawtooth:
   KEY_NAME: "transfer-chain.keys"

@@ -9,8 +9,8 @@ import { SawtoothModule } from '../sawtooth/sawtooth.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestInterceptor } from '../../utility/interceptor/request.interceptor';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
-
+import { MailModule } from 'src/app/shared/mail/awsmail.module';
+import { MailService } from 'src/app/shared/mail/awsmail.service';
 // import * as config from 'config';
 // const jwtConfig = config.get<any>('jwt-config');
 // const { JWT_SECRET } = process.env;
@@ -19,6 +19,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
   imports: [
+    MailModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
@@ -34,6 +35,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
   ],
   controllers: [IdentityController],
   providers: [
+    MailService,
     IdentityService, 
     JwtStrategy,
     {
