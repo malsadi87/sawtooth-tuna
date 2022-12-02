@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
-import { HttpService } from '@nestjs/axios';
+import { HttpService, } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-// import { getProjectConfig } from '../../../utility/methods/helper.methods';
+import { AxiosResponse } from 'axios';
 import { MetaDataCreationDto } from '../../../utility/dto/metaData-creation.dto';
 import { KeyPairDto } from '../../../utility/dto/keyPair.dto';
 import { SawtoothUtilityService } from '../sawtooth-utility/sawtooth-utility.service';
@@ -24,7 +23,7 @@ export class MetaDataService {
 
     async getByKey(key: string): Promise<AxiosResponse<any>> {
         const address = this.sawtoothUtilityService.getAssetAddress(key, this.familyName);
-        return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`));
+        return await firstValueFrom(this.httpService.get(`${this.sawtoothConfig.API_URL}/state?address=${address}`)) as AxiosResponse<any, any>;
     }
 
     async addNew(metaDataCreationDto: MetaDataCreationDto, keyPairDto: KeyPairDto): Promise<boolean> {

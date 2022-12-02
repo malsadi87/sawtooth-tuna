@@ -3,13 +3,11 @@ FROM node:12-stretch AS development
 WORKDIR /project/sawtooth-tuna/backend
 
 COPY backend/package*.json ./
-RUN npm install glob rimraf
+RUN npm install -g @nestjs/cli --slient
 RUN npm install --silent
 
 COPY backend/ ./
 
-RUN yarn
-RUN yarn global add @nestjs/cli@8.2.8
 RUN npm run build
 
 # ==========================================================
@@ -18,7 +16,6 @@ FROM node:12-stretch as production
 WORKDIR /project/sawtooth-tuna/backend
 
 COPY backend/package*.json ./
-RUN npm install glob rimraf --slient
 RUN npm install --slient --only=production
 
 COPY --from=development /project/sawtooth-tuna/backend/dist ./dist

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { createContext, Signer } from 'sawtooth-sdk/signing';
-// import { getProjectConfig } from '../../../utility/methods/helper.methods';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { createContext } from 'sawtooth-sdk-js/signing';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class KeyService {

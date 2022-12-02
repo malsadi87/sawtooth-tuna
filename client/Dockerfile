@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:13.12.0-alpine
+FROM node:18.9-alpine
 
 # set working directory
 WORKDIR /project/sawtooth-tuna/client
@@ -9,8 +9,8 @@ ENV PATH /project/sawtooth-tuna/client/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY client/package*.json ./
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
+RUN npm install -g react-scripts
+RUN npm install
 
 # add app
 COPY client/ ./
