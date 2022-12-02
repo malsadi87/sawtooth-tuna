@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { createContext } from 'sawtooth-sdk-js/signing';
+import { createContext } from 'sawtooth-sdk/signing';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

@@ -1,6 +1,5 @@
 import Dexie from "dexie";
-import storageService from "../../core/storage/storage.service";
-import JWT from 'expo-jwt';
+import jwt_encode from "jwt-encode";
 import axios from "axios";
 import { APIBasePath } from "../../../constants/apiBasePaths";
 
@@ -50,13 +49,14 @@ const signOut = () => {
 const generateToken = (user) => {
     let oneYearFromNow = new Date();
     oneYearFromNow.setDate(oneYearFromNow.getDate() + 365);
-    return JWT.encode({ 
+    return jwt_encode({ 
         token_type: 'Bearer', 
         fullName: user.fullName,
         email: user.email,
         publicKey: user.publicKey,
-        privateKey: user.privateKey
-    }, privateKey, { algorithm: 'HS256', exp: oneYearFromNow });
+        privateKey: user.privateKey,
+        iat: oneYearFromNow
+    }, privateKey);
 }
 
 const fakeAuthService = {

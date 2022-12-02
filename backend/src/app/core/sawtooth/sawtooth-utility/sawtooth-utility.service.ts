@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
-import { createContext, Signer } from 'sawtooth-sdk-js/signing';
-import { Secp256k1PrivateKey } from 'sawtooth-sdk-js/signing/secp256k1';
-import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk-js/protobuf';
+import { createContext, Signer } from 'sawtooth-sdk/signing';
+import { Secp256k1PrivateKey } from 'sawtooth-sdk/signing/secp256k1';
+import { TransactionHeader, Transaction, BatchHeader, Batch, BatchList } from 'sawtooth-sdk/protobuf';
 import { LoginUserInfoService } from '../../../shared/loginUserInfo/login-user-info.service';
 import { SAWTOOTH_IDENTITY_KEY } from '../../../utility/decorator/sawtoothIdentity.decorator';
 import { ConfigService } from '@nestjs/config';
