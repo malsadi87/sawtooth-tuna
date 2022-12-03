@@ -11,26 +11,13 @@ export class MailService {
     ) {}
     public async sendUserConfirmation(email: string, fullName: string, token: string): Promise<boolean> {
       const url = `${this.configService.get<string>('server.emailConfirmationURL')}${token}`;
-
-      Logger.log('**AWS SENDING MAIL**')
-      Logger.log(url)
-      Logger.log('**TYPES**')
-      Logger.log(typeof(email))
-      Logger.log(typeof(url))
-      Logger.log(typeof(fullName))
+      Logger.log("Email confirmation URL (for dev purpose):", url)
       await this.mailerService.sendMail({
-          from: "server@paas4chain.xyz",
+          from: '"no-reply" <server@paas4chain.xyz>',
           to: email,
           subject: 'Welcome to PaaSforChain! PLease, Confirm your Email',
-          //template: './confirmation',
-          text: "I hope this message gets sent!",
-          //context: {
-          //  name: fullName,
-          //  url: url
-          //},
-          html: "<p>HTML version of the message</p>"
+          html: "<p>Hi " + fullName + ", here is your confirmation link for paas4chain: " + url + "</p>"
       });
-
       return true;
     }
 
@@ -38,14 +25,10 @@ export class MailService {
       const url = `${this.configService.get<string>('server.resetPasswordURL')}${token}`;
 
       await this.mailerService.sendMail({
+          from: '"no-reply" <server@paas4chain.xyz>',
           to: email,
           subject: 'Takk, for using PaaSforChain! Please follow the instruction, to rest your password',
-          //template: './resetPassword',
-          text: "I hope this message gets sent!",
-          context: {
-            name: fullName,
-            url: url
-          },
+          html: "<p>Hi " + fullName + ", here is your reset link for paas4chain: " + url + "</p>"
       });
 
       return true;

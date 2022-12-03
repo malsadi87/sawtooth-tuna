@@ -1,7 +1,7 @@
 server:
   port: 3001
   cors: "http://localhost:3000" # Could be multiple sepersted by ;(semicolon) EX: "http://localhost:3000;"http://localhost:3001"
-  emailConfirmationURL: 'http://localhost:3001/identity/confirm?token='
+  emailConfirmationURL: 'http://localhost:3001/api/v1/identity/confirm/'
   resetPasswordURL: 'http://localhost:3000/auth/forgetPassword?token='
 
 jwt-config:
@@ -26,8 +26,8 @@ email:
 
 awsEmail:
   AWS_SES_REGION: "eu-north-1"
-  AWS_SES_ACCESS_KEY: "asd"
-  AWS_SES_KEY_SECRET: "asd"
+  AWS_SES_ACCESS_KEY: "AKIA2NK6FFFGJG32GI2N"
+  AWS_SES_KEY_SECRET: "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"
   MAIL_HOST: "email-smtp.eu-north-1.amazonaws.com"
   MAIL_PORT: "25"
   MAIL_USERNAME: "ses-smtp-user.20221129-115544"

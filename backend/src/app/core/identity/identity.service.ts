@@ -37,9 +37,6 @@ export class IdentityService {
           secret: this.configService.get('env.JWT_SECONDARY_TOKEN_SECRET'),
           expiresIn: this.configService.get('jwt-config.verificationTokenExpiresIn')
         });
-        Logger.log("**SEND MAIL**", email, fullName, token)
-        Logger.log("Token", token)
-        Logger.log("Type", typeof(token))
         return this.mailService.sendUserConfirmation(email, fullName, token);
     }
 
@@ -48,7 +45,6 @@ export class IdentityService {
             secret: this.configService.get('env.JWT_SECONDARY_TOKEN_SECRET'),
             expiresIn: this.configService.get('jwt-config.resetPasswordTokenExpiresIn')
         });
-
         return this.mailService.sendResetPasswordEmail(email, fullName, token);
     }
 
