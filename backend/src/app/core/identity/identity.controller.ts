@@ -38,7 +38,8 @@ export class IdentityController {
 
     @AllowAnonymous()
     @Get('/confirm/:token')
-    @Redirect('http://localhost:3000/auth/login', 302) //Should be come from config, dont know how(design choice), will decide later
+    // TODO: Make this work in both production and localhost.
+    //@Redirect('http://localhost:3000/auth/login', 302) //Should be come from config, dont know how(design choice), will decide later
     public async confirm(@Param() params: ConfirmEmailDto): Promise<boolean> {
         // validate the token
         const email = await this.identityService.validateSecondaryToken(params.token);
