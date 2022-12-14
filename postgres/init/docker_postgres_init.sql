@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "Trip" (
-    "TripNo" INT PRIMARY KEY,
-    "TripWithinYearNo" INT NOT NULL,
-    "VesselName" VARCHAR(255),
+    "PkTrip" SERIAL PRIMARY KEY,
+    "TripWithinYearNo" INT NOT NULL, -- Based on Hermes´ TripNo.
+    "VesselName" VARCHAR(255), -- In Hermes´ model this variable is kept in a separate vessel entity.
     "DepartureDate" TIMESTAMP NOT NULL,
     "DeparturePort" VARCHAR(255) NOT NULL,
     "LandingDate" TIMESTAMP NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS "Trip" (
 );
 
 CREATE TABLE IF NOT EXISTS "Haul" (
-    "HaulId" SERIAL PRIMARY KEY,
+    "PkHaul" SERIAL PRIMARY KEY,
     "LaunchDateTime" TIMESTAMP NOT NULL,
     "LaunchPosition" VARCHAR(255) NOT NULL,
     "LaunchLatitude" NUMERIC NOT NULL,
@@ -18,81 +18,77 @@ CREATE TABLE IF NOT EXISTS "Haul" (
     "HaulPosition" VARCHAR(255) NOT NULL,
     "HaulLatitude" NUMERIC NOT NULL,
     "HaulLongitude" NUMERIC NOT NULL,
-    "TripNo" INT NOT NULL,
-    FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE CASCADE
+    "FkTrip" INT NOT NULL,
+    FOREIGN KEY ("FkTrip") REFERENCES "Trip"("PkTrip") ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "Species" (
+    "PkSpecies" SERIAL PRIMARY KEY,
+    "Name" VARCHAR(255) NOT NULL,
+    "Description" VARCHAR(255) -- This variable is made up and not in Hermes´ model.
 );
 
 CREATE TABLE IF NOT EXISTS "Catch" (
-    "CatchId" VARCHAR(255) PRIMARY KEY,
+    "PkCatch" SERIAL PRIMARY KEY,
     "UpdatedDateTime" TIMESTAMP NOT NULL,
-    "Quantity" INT NOT NULL,
-    "HaulId" INT NOT NULL,
-    FOREIGN KEY ("HaulId") REFERENCES "Haul"("HaulId") ON DELETE SET DEFAULT
+    "Quantity" INT NOT NULL, -- Quantity means weight in kg.
+    "FkHaul" INT NOT NULL,
+    "FkSpecies" INT NOT NULL,
+    FOREIGN KEY ("FkHaul") REFERENCES "Haul"("PkHaul") ON DELETE NO ACTION,
+    FOREIGN KEY ("FkSpecies") REFERENCES "Species"("PkSpecies") ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS "SpeciesAndWeight" (
-    "SpeciesId" SERIAL PRIMARY KEY,
-    -- TODO: Should we even have weight or quantity here? There is a auantity on the catch and possibly weight on catchPackage, product, and Pallet.
-    "Quantity" INT NOT NULL,
-    "Species" INT NOT NULL,
-    "LaunchDateTime" TIMESTAMP
+CREATE TABLE IF NOT EXISTS "Product" ( -- This entity is not interesting for the end consumer.
+    "PkProduct" SERIAL PRIMARY KEY,
+    "Title" VARCHAR(255), -- Example: Cod, headed and gutted.
+    "ProductId" VARCHAR(255) NOT NULL,
+    "FkSpecies" INT NOT NULL,
+    FOREIGN KEY ("FkSpecies") REFERENCES "Species"("PkSpecies") ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS "Product" (
-    "ProductId" INT PRIMARY KEY,
-    "ProductName" VARCHAR(255),
-    "ProductDescription" VARCHAR(255),
-    "ProductNum" INT NOT NULL,
-    "SpeciesId" INT NOT NULL,
-    FOREIGN KEY ("SpeciesId") REFERENCES "SpeciesAndWeight"("SpeciesId") ON DELETE SET DEFAULT
-);
-
-CREATE TABLE IF NOT EXISTS "Company" (
-    "CompanyId" SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS "Company" ( -- This entity is made up.
+    "PkCompany" SERIAL PRIMARY KEY,
     "CompanyName" VARCHAR(255) NOT NULL,
     "CompanyAddress" VARCHAR(255) NOT NULL,
     "ContactInfo" VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "Pallet" (
-    "PalletNum" VARCHAR(255) PRIMARY KEY,
-    "ProductId" INT NOT NULL,
-    "CompanyId" INT NOT NULL,
-    "PalletWeight" NUMERIC NOT NULL,
-    "TripNo" INT NOT NULL,
-    FOREIGN KEY ("ProductId") REFERENCES "Product"("ProductId") ON DELETE SET NULL,
-    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET NULL,
-    FOREIGN KEY ("TripNo") REFERENCES "Trip"("TripNo") ON DELETE SET DEFAULT
+CREATE TABLE IF NOT EXISTS "Pallet" ( -- This entity is made up.
+    "PkPallet" SERIAL PRIMARY KEY,
+    "PalletId" VARCHAR(255) NOT NULL,
+    "Quantity" INT NOT NULL, -- Quantity means weight in kg.
+    "FkCompany" INT NOT NULL,
+    FOREIGN KEY ("FkCompany") REFERENCES "Company"("PkCompany") ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS "PalletEvent" (
-    "PalletEventId" SERIAL PRIMARY KEY,
-    "EventTime" TIMESTAMP NOT NULL,
-    "PalletNum" VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS "PalletEvent" ( -- This entity is made up
+    "PkPalletEvent" SERIAL PRIMARY KEY,
+    "EventDateTime" TIMESTAMP NOT NULL,
     "Temperature" DOUBLE PRECISION NOT NULL,
     "Location" JSON NOT NULL,
     "Tilt" JSON NOT NULL,
     "Shock" JSON NOT NULL,
-    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
+    "FkPallet" INT NOT NULL,
+    FOREIGN KEY ("FkPallet") REFERENCES "Pallet"("PkPallet") ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS "CatchPackage" (
-    "CatchPackageId" VARCHAR(255) PRIMARY KEY,
-    "PackingDate" TIMESTAMP NOT NULL,
-    "PalletNum" VARCHAR(255) NOT NULL,
-    "CompanyId" INT NOT NULL,
-    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET DEFAULT,
-    FOREIGN KEY ("PalletNum") REFERENCES "Pallet"("PalletNum") ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS "Production" ( -- Also known as "Bag".
+    "PkProduction" SERIAL PRIMARY KEY,
+    "ProductionDate" TIMESTAMP NOT NULL,
+    "FkPallet" INT NOT NULL,
+    "FkProduct" INT NOT NULL,
+    "FkHaul" INT NOT NULL,
+    FOREIGN KEY ("FkPallet") REFERENCES "Pallet"("PkPallet") ON DELETE NO ACTION,
+    FOREIGN KEY ("FkProduct") REFERENCES "Product"("PkProduct") ON DELETE NO ACTION,
+    FOREIGN KEY ("FkHaul") REFERENCES "Haul"("PkHaul") ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS "CustomLevelPackage" (
-    "ConsumerPackageId" VARCHAR(255) PRIMARY KEY,
-    "CatchPackageId" VARCHAR(255) NOT NULL,
-    "PackingDate" TIMESTAMP NOT NULL,
-    "CompanyId" INT NOT NULL,
-    FOREIGN KEY ("CatchPackageId") REFERENCES "CatchPackage"("CatchPackageId") ON DELETE SET DEFAULT,
-    FOREIGN KEY ("CompanyId") REFERENCES "Company"("CompanyId") ON DELETE SET NULL
+CREATE TABLE IF NOT EXISTS "ConsumerPackage" ( -- This entity is made up.
+    "PkConsumerPackage" SERIAL PRIMARY KEY,
+    "PackingDateTime" TIMESTAMP NOT NULL,
+    "FkPallet" INT NOT NULL,
+    FOREIGN KEY ("FkPallet") REFERENCES "Pallet"("PkPallet") ON DELETE NO ACTION
 );
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
