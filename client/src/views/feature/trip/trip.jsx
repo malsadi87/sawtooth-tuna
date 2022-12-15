@@ -40,8 +40,8 @@ class Trip extends Component {
     this.setState({
       trips: result.map((info) => {
         return (
-          <tr key={info.tripNo}>
-            <td>{info.tripNo}</td>
+          <tr key={info.pkTrip}>
+            <td>{info.pkTrip}</td>
             <td>{info.departureDate}</td>
             <td>{info.landingDate}</td>
             <td>{info.departurePort}</td>
@@ -60,7 +60,7 @@ class Trip extends Component {
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
           <Form.Item
-            name={'tripNo'}
+            name={'pkTrip'}
             label="Trip Number"
             rules={[
               {

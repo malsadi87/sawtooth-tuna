@@ -19,8 +19,8 @@ export class TripService {
         return await this.tripRepository.getAll();
     }
 
-    async getByTripNo(tripNo: number): Promise<TripEntity> {
-        const result = await this.tripRepository.getByTripNo(tripNo);
+    async getByPkTrip(pkTrip: number): Promise<TripEntity> {
+        const result = await this.tripRepository.getByPkTrip(pkTrip);
         if (!result)
             throw new NotFoundException('Trip not Found!');
         return result;
@@ -28,16 +28,12 @@ export class TripService {
 
     async addNewTrip(tripPayload: TripCreationDto): Promise<number> {
         const trip: TripEntity = plainToClass(TripEntity, tripPayload);
-        const oldTrip = await this.tripRepository.getByTripNo(trip.tripNo);
-
-        if (oldTrip) throw new BadRequestException(`Trip with No - ${trip.tripNo}, Already Exist!`);
-
         const newTrip = await this.tripRepository.addNewTrip(trip);
 
         // Save in Sawtooth
         await this.sawtoothUtilityService.createAsset(newTrip, this.entityName); 
 
-        return newTrip.tripNo;
+        return newTrip.pkTrip;
     }
 
     public testMe(): string {

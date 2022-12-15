@@ -7,14 +7,14 @@ import { HaulService } from './haul.service';
 export class HaulController {
     constructor(private readonly haulService: HaulService) {}
 
-    @Get(':haulId')
-    async getByHaulId(@Param('haulId') haulId: number): Promise<HaulEntity> {
-        return await this.haulService.getByHaulId(haulId);
+    @Get(':pkHaul')
+    async getByPkHaul(@Param('pkHaul') pkHaul: number): Promise<HaulEntity> {
+        return await this.haulService.getByPkHaul(pkHaul);
     }
 
-    @Get('trip/:tripNo')
-    async getByTripNo(@Param('tripNo') tripNo: number): Promise<HaulEntity[]> {
-        return await this.haulService.getByTripNo(tripNo);
+    @Get('trip/:pkTrip')
+    async getByPkTrip(@Param('pkTrip') pkTrip: number): Promise<HaulEntity[]> {
+        return await this.haulService.getByPkTrip(pkTrip);
     }
 
     @Post('addNew')

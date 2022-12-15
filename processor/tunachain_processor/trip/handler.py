@@ -45,7 +45,7 @@ class TripTransactionHandler(TransactionHandler):
         LOGGER.info('Trip handler apply method')
         LOGGER.info(payload)
         
-        _create_trip(tripNo=payload.tripNo,
+        _create_trip(pkTrip=payload.pkTrip,
                         tripWithinYearNo=payload.tripWithinYearNo,
                         vesselName=payload.vesselName,
                         departureDate=payload.departureDate,
@@ -55,9 +55,9 @@ class TripTransactionHandler(TransactionHandler):
                         state=state)
 
 
-def _create_trip(tripNo, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort, state):
-    if state.get_trip(tripNo) is not None:
+def _create_trip(pkTrip, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort, state):
+    if state.get_trip(pkTrip) is not None:
         raise InvalidTransaction(
-            'Invalid action: trip already exists: {}'.format(tripNo))
+            'Invalid action: trip already exists: {}'.format(pkTrip))
 
-    state.set_trip(tripNo, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort)
+    state.set_trip(pkTrip, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort)

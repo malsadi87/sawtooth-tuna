@@ -15,5 +15,5 @@ export class PalletCreationDto {
     palletWeight: number;
 
     @IsNumber()
-    tripNo: number;
+    pkTrip: number;
 }

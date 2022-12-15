@@ -28,7 +28,7 @@ class HaulPayload(object):
         haulPosition = data.get('haulPosition')
         haulLatitude = data.get('haulLatitude')
         haulLongitude = data.get('haulLongitude')
-        tripNo = data.get('tripNo')
+        pkTrip = data.get('pkTrip')
 
 
         if not launchDateTime:
@@ -55,7 +55,7 @@ class HaulPayload(object):
         if not haulLongitude:
             raise InvalidTransaction('Haul Longitude is required')
         
-        if not tripNo:
+        if not pkTrip:
             raise InvalidTransaction('Trip No is required')
 
         LOGGER.info('Haul payload is ready')
@@ -67,7 +67,7 @@ class HaulPayload(object):
         self._haulPosition = haulPosition
         self._haulLatitude = haulLatitude
         self._haulLongitude = haulLongitude
-        self._tripNo = tripNo
+        self._pkTrip = pkTrip
        
     @property
     def launchDateTime(self):
@@ -102,5 +102,5 @@ class HaulPayload(object):
         return self._haulLongitude
 
     @property
-    def tripNo(self):
-        return self._tripNo        
+    def pkTrip(self):
+        return self._pkTrip        

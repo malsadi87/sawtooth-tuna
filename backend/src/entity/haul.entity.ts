@@ -13,8 +13,8 @@ export class HaulEntity extends BaseEntity {
     @SawtoothIdentity()
     @Transform(x => new Date(x.value))
 
-    @PrimaryColumn({ generated: true, type: 'int', name: 'HaulId', nullable: false })
-    haulId: number;
+    @PrimaryColumn({ generated: true, type: 'int', name: 'PkHaul', nullable: false })
+    pkHaul: number;
 
     @Column({ generated: false, type: 'timestamp', name: 'LaunchDateTime', nullable: false })
     launchDateTime: Date;
@@ -41,10 +41,10 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'numeric', name: 'HaulLongitude', nullable: false })
     haulLongitude: number;
 
-    @PrimaryColumn({ generated: false, name: 'TripNo', type: 'int', nullable: false })
-    tripNo: number;
+    @PrimaryColumn({ generated: false, name: 'FkTrip', type: 'int', nullable: false })
+    fkTrip: number;
 
     @ManyToOne((type) => TripEntity, x => x.hauls)
-    @JoinColumn({ name: 'TripNo', referencedColumnName: 'tripNo' })
+    @JoinColumn({ name: 'FkTrip', referencedColumnName: 'pkTrip' })
     trip: TripEntity;
 }

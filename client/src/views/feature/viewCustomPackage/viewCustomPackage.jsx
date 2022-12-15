@@ -64,7 +64,7 @@ class ViewCustomPackage extends Component {
     const palletEventResult = await palletEventService.getById(catchPackageResult.palletNum)
     console.log("palletEventResult:", palletEventResult)
 
-    const tripResult = await tripService.getById(palletResult.tripNo)
+    const tripResult = await tripService.getById(palletResult.pkTrip)
     console.log("tripResult:", tripResult)
 
     const companyResult = await companyService.getById(customPackageResult.agent)
@@ -76,7 +76,7 @@ class ViewCustomPackage extends Component {
     const productResult = await productService.getByProductNum(palletResult.productNum)
     console.log("productResult:", productResult)
 
-    const haulResult = await haulService.getByTripNo(palletResult.tripNo)
+    const haulResult = await haulService.getByPkTrip(palletResult.pkTrip)
     console.log("haulResult:", haulResult)
 
     this.setState({

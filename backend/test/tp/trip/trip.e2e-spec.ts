@@ -36,7 +36,7 @@ describe('Trip (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
-        "tripNo": 123,
+        "pkTrip": 123,
         "tripWithinYearNo": 12,
         "vesselName": "Test Vessel",
         "departureDate": "2022-09-15T14:37:04.837Z",
@@ -55,7 +55,7 @@ describe('Trip (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
-        "tripNo": 123,
+        "pkTrip": 123,
         "tripWithinYearNo": 12,
         "vesselName": "Test Vessel",
         "departureDate": "2022-09-15T14:37:04.837Z",
@@ -72,7 +72,7 @@ describe('Trip (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
-        "tripNo": 1234,
+        "pkTrip": 1234,
         "tripWithinYearNo": 12,
         "vesselName": "Test Vessel",
         "departureDate": "2022-10-15T14:37:04.837Z",
@@ -90,7 +90,7 @@ describe('Trip (e2e)', () => {
       .get('/api/v1/sawtooth/tp/trip/123')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.tripNo).toEqual<number>(123)
+    expect(response.body.pkTrip).toEqual<number>(123)
     expect(response.body.tripWithinYearNo).toEqual<number>(12)
     expect(response.body.vesselName).toEqual<string>("Test Vessel")
     expect(response.body.departureDate).toEqual<string>("2022-09-15T14:37:04.837Z")
@@ -123,7 +123,7 @@ describe('Trip (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "tripNo": 123,
+      "pkTrip": 123,
       "tripWithinYearNo": 12,
       "vesselName": "Test Vessel",
       "departureDate": "2022-09-15T14:37:04.837Z",
@@ -145,7 +145,7 @@ describe('Trip (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/trip/addNew')
       .send({
-        "tripNo": 123,
+        "pkTrip": 123,
         "tripWithinYearNo": 12,
         "vesselName": "Test Vessel",
         "departureDate": "2022-09-15T14:37:04.837Z",

@@ -44,7 +44,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "PositionOfHaul1",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -63,7 +63,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "PositionOfHaul1",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -82,7 +82,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "asdas",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
@@ -101,7 +101,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "asdas",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
@@ -113,7 +113,7 @@ describe('Haul (e2e)', () => {
       .get('/api/v1/sawtooth/tp/haul/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.haulId).toEqual<number>(1)
+    expect(response.body.pkHaul).toEqual<number>(1)
     expect(response.body.launchDateTime).toEqual<string>("2022-08-15T22:00:03.092Z")
     expect(response.body.launchPosition).toEqual<string>("PositionOfLaunch1")
     expect(response.body.launchLatitude).toEqual<number>(63.40595699218346)
@@ -122,7 +122,7 @@ describe('Haul (e2e)', () => {
     expect(response.body.haulPosition).toEqual<string>("PositionOfHaul1")
     expect(response.body.haulLatitude).toEqual<number>(63.40595699218346,)
     expect(response.body.haulLongitude).toEqual<number>(10.406196141997356)
-    expect(response.body.tripNo).toEqual<number>(123)
+    expect(response.body.pkTrip).toEqual<number>(123)
     return response
   });
 
@@ -147,7 +147,7 @@ describe('Haul (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "haulId": 1,
+      "pkHaul": 1,
       "launchDateTime": "2022-08-15T22:00:03.092Z",
       "launchPosition": "PositionOfLaunch1",
       "launchLatitude": 63.40595699218346,
@@ -156,7 +156,7 @@ describe('Haul (e2e)', () => {
       "haulPosition": "PositionOfHaul1",
       "haulLatitude": 63.40595699218346,
       "haulLongitude": 10.406196141997356,
-      "tripNo": 123
+      "pkTrip": 123
     }]))
     return response
   });
@@ -180,7 +180,7 @@ describe('Haul (e2e)', () => {
         "haulPosition": "asdas",
         "haulLatitude": 63.40595699218346,
         "haulLongitude": 10.406196141997356,
-        "tripNo": 404
+        "pkTrip": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

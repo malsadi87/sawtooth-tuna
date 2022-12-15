@@ -47,7 +47,7 @@ class HaulState(object):
         return self._get_state(_get_haul_address(launchDateTime))
 
 
-    def set_haul(self, launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, tripNo):
+    def set_haul(self, launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, pkTrip):
         address = _get_haul_address(launchDateTime)
         LOGGER.info('set_haul method')
         LOGGER.info(address)
@@ -60,7 +60,7 @@ class HaulState(object):
                 "haulPosition": haulPosition,
                 "haulLatitude": haulLatitude,
                 "haulLongitude": haulLongitude,
-                "tripNo": tripNo
+                "pkTrip": pkTrip
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

@@ -45,7 +45,7 @@ class Pallet extends Component {
             <td>{info.productNum}</td>
             <td>{info.supplierId}</td>
             <td>{info.palletWeight}</td>
-            <td>{info.tripNo}</td>
+            <td>{info.pkTrip}</td>
           </tr>
         )
       })
@@ -113,7 +113,7 @@ class Pallet extends Component {
           </Form.Item>
 
           <Form.Item
-            name={'tripNo'}
+            name={'pkTrip'}
             label="Trip Id"
             rules={[
               {

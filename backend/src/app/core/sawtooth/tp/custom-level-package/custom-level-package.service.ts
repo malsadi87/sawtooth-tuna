@@ -80,11 +80,11 @@ export class CustomLevelPackageService {
         const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
         const pallet = await this.palletService.getByPalletNo(catchPackage.palletNum)
         const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
-        const trip = await this.tripService.getByTripNo(pallet.tripNo)
+        const trip = await this.tripService.getByPkTrip(pallet.pkTrip)
         const company = await this.companyService.getById(customLevelPackage.agent)
         const species = await this.speciesAndWeightService.getByCatchPackageId(customLevelPackage.catchPackageId)
         const product = await this.productService.getByProductNum(pallet.productNum)
-        const haul = await this.haulService.getByTripNo(pallet.tripNo)
+        const haul = await this.haulService.getByPkTrip(pallet.pkTrip)
 
         return {
           customLevelPackage: customLevelPackage,

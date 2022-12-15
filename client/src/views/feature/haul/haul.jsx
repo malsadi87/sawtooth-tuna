@@ -41,8 +41,8 @@ class Haul extends Component {
     this.setState({
       hauls: result.map((info) => {
         return (
-          <tr key={info.haulId}>
-            <td>{info.haulId}</td>
+          <tr key={info.pkHaul}>
+            <td>{info.pkHaul}</td>
             <td>{info.launchDateTime}</td>
             <td>{info.launchPosition}</td>
             <td>{info.launchLatitude}</td>
@@ -51,7 +51,7 @@ class Haul extends Component {
             <td>{info.haulPosition}</td>
             <td>{info.haulLatitude}</td>
             <td>{info.haulLongitude}</td>
-            <td>{info.tripNo}</td>
+            <td>{info.pkTrip}</td>
           </tr>
         )
       })
@@ -173,7 +173,7 @@ class Haul extends Component {
 
           {/*Trip ID*/}
           <Form.Item
-            name={'tripNo'}
+            name={'pkTrip'}
             label="Trip ID"
             rules={[
               {

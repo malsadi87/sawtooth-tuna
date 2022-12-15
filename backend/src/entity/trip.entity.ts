@@ -7,8 +7,8 @@ import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.deco
 @Entity({ name: 'Trip' })
 export class TripEntity extends BaseEntity {
     @SawtoothIdentity()
-    @PrimaryColumn({ generated: false, type: 'int', name: 'TripNo', nullable: false })
-    tripNo: number;
+    @PrimaryColumn({ generated: true, type: 'int', name: 'PkTrip', nullable: false })
+    pkTrip: number;
 
     @Column({ type:'int', name: 'TripWithinYearNo', nullable: false })
     tripWithinYearNo: number;
@@ -31,10 +31,10 @@ export class TripEntity extends BaseEntity {
     landingPort: string;
 
     @OneToMany((type) => HaulEntity, (x) => x.trip)
-    @JoinColumn({ referencedColumnName: 'TripNo' })
+    @JoinColumn({ referencedColumnName: 'PkTrip' })
     hauls: HaulEntity[];
 
     @OneToMany((entity) => PalletEntity, (x) => x.trip)
-    @JoinColumn({ referencedColumnName: 'TripNo' })
+    @JoinColumn({ referencedColumnName: 'PkTrip' })
     pallets: PalletEntity[];
 }

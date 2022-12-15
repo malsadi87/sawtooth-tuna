@@ -26,5 +26,5 @@ export class HaulCreationDto {
     haulLongitude: number;
 
     @IsNumber()
-    tripNo: number;
+    fkTrip: number;
 }

@@ -23,7 +23,7 @@ class PalletPayload(object):
         productNum = data.get('productNum')
         supplierId = data.get('supplierId')
         palletWeight = data.get('palletWeight')
-        tripNo = data.get('tripNo')
+        pkTrip = data.get('pkTrip')
 
         if not palletNum:
             raise InvalidTransaction('Pallet Number is required')
@@ -37,14 +37,14 @@ class PalletPayload(object):
         if not palletWeight:
             raise InvalidTransaction('Pallet Weight is required')
 
-        if not tripNo:
+        if not pkTrip:
             raise InvalidTransaction('Trip No is required')                  
         
         self._palletNum = palletNum
         self._productNum = productNum
         self._supplierId = supplierId
         self._palletWeight = palletWeight
-        self._tripNo = tripNo
+        self._pkTrip = pkTrip
        
        
     @property
@@ -64,5 +64,5 @@ class PalletPayload(object):
         return self._palletWeight
     
     @property
-    def tripNo(self):
-        return self._tripNo
+    def pkTrip(self):
+        return self._pkTrip

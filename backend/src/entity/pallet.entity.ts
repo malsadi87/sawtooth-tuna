@@ -24,11 +24,11 @@ export class PalletEntity extends BaseEntity {
     @Column({ type:'numeric', name: 'PalletWeight', nullable: false })
     palletWeight: number;
 
-    @PrimaryColumn({ type:'int', name: 'TripNo', nullable: false })
-    tripNo: number;
+    @PrimaryColumn({ type:'int', name: 'PkTrip', nullable: false })
+    pkTrip: number;
 
     @ManyToOne((type) => TripEntity, x => x.pallets)
-    @JoinColumn({ name: 'TripNo', referencedColumnName: 'tripNo' })
+    @JoinColumn({ name: 'PkTrip', referencedColumnName: 'pkTrip' })
     trip: TripEntity;
 
     @OneToMany((entity) => PalletEventEntity, (x) => x.pallet)

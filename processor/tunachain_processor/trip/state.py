@@ -15,14 +15,14 @@ TRIP_NAMESPACE = hashlib.sha512(
     'trip'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(tripNo):
-    adr = hashlib.sha512(str(tripNo).encode('utf-8')).hexdigest()[:62]
+def _get_address(pkTrip):
+    adr = hashlib.sha512(str(pkTrip).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_trip_address(tripNo):
-    add =  TRIP_NAMESPACE + '00' + _get_address(tripNo)
+def _get_trip_address(pkTrip):
+    add =  TRIP_NAMESPACE + '00' + _get_address(pkTrip)
     LOGGER.info(add)
     return add
 
@@ -42,16 +42,16 @@ class TripState(object):
     def __init__(self, context):
         self._context = context
 
-    def get_trip(self, tripNo):
-        return self._get_state(_get_trip_address(tripNo))
+    def get_trip(self, pkTrip):
+        return self._get_state(_get_trip_address(pkTrip))
 
 
-    def set_trip(self, tripNo, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort):
-        address = _get_trip_address(tripNo)
+    def set_trip(self, pkTrip, tripWithinYearNo, vesselName, departureDate, departurePort, landingDate, landingPort):
+        address = _get_trip_address(pkTrip)
         LOGGER.info('set_trip method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "tripNo": tripNo,
+            {   "pkTrip": pkTrip,
                 "tripWithinYearNo": tripWithinYearNo,
                 "vesselName": vesselName,
                 "departureDate": departureDate,

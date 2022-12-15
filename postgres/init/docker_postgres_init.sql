@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "Trip" (
     "PkTrip" SERIAL PRIMARY KEY,
-    "TripWithinYearNo" INT NOT NULL, -- Based on Hermes´ TripNo.
+    "TripWithinYearNo" INT NOT NULL, -- Based on Hermes´ PkTrip.
     "VesselName" VARCHAR(255), -- In Hermes´ model this variable is kept in a separate vessel entity.
     "DepartureDate" TIMESTAMP NOT NULL,
     "DeparturePort" VARCHAR(255) NOT NULL,

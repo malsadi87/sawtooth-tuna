@@ -54,13 +54,13 @@ class HaulTransactionHandler(TransactionHandler):
                      haulPosition=payload.haulPosition,
                      haulLatitude=payload.haulLatitude,
                      haulLongitude=payload.haulLongitude,
-                     tripNo=payload.tripNo,
+                     pkTrip=payload.pkTrip,
                      state=state)
 
 
-def _create_haul(launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, tripNo, state):
+def _create_haul(launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, pkTrip, state):
     if state.get_haul(launchDateTime) is not None:
         raise InvalidTransaction(
             'Invalid action: Haul already exists: {}'.format(launchDateTime))
 
-    state.set_haul(launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, tripNo)
+    state.set_haul(launchDateTime, launchPosition, launchLatitude, launchLongitude, haulDateTime, haulPosition, haulLatitude, haulLongitude, pkTrip)

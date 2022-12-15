@@ -31,7 +31,7 @@ const MapChart = (props) => {
 
           {props.haulResult ?
             props.haulResult.map(({
-              haulId,
+              pkHaul,
               haulPosition,
               haulLatitude,
               haulLongitude,
@@ -39,7 +39,7 @@ const MapChart = (props) => {
               launchLatitude,
               launchLongitude
             }) =>
-              <React.Fragment key={haulId}>
+              <React.Fragment key={pkHaul}>
                 <Line
                   from={[launchLongitude, launchLatitude]}
                   to={[haulLongitude, haulLatitude]}

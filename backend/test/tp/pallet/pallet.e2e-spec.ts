@@ -40,7 +40,7 @@ describe('Pallet (e2e)', () => {
         "productNum": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -55,7 +55,7 @@ describe('Pallet (e2e)', () => {
         "productNum": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -70,7 +70,7 @@ describe('Pallet (e2e)', () => {
         "productNum": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
@@ -86,7 +86,7 @@ describe('Pallet (e2e)', () => {
     expect(response.body.productNum).toEqual<number>(1)
     expect(response.body.supplierId).toEqual<string>("Supplier")
     expect(response.body.palletWeight).toEqual<number>(1.0000)
-    expect(response.body.tripNo).toEqual<number>(123)
+    expect(response.body.pkTrip).toEqual<number>(123)
     return response
   });
 
@@ -116,7 +116,7 @@ describe('Pallet (e2e)', () => {
       "productNum": 1,
       "supplierId": "Supplier",
       "palletWeight": 1.0000,
-      "tripNo": 123
+      "pkTrip": 123
     }]))
     return response
   });
@@ -136,14 +136,14 @@ describe('Pallet (e2e)', () => {
         "productNum": 1,
         "supplierId": "Supplier",
         "palletWeight": 5,
-        "tripNo": 123
+        "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
     return response
   });
 
-  it('Cant create a pallet without a related tripNo.', async () => {
+  it('Cant create a pallet without a related pkTrip.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
@@ -151,7 +151,7 @@ describe('Pallet (e2e)', () => {
         "productNum": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
-        "tripNo": 404
+        "pkTrip": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

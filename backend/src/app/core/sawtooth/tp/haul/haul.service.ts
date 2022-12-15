@@ -20,15 +20,15 @@ export class HaulService {
         return await this.haulRepository.getAll();
     }
 
-    async getByHaulId(haulId: number): Promise<HaulEntity> {
-        const result = await this.haulRepository.getByHaulId(haulId);
+    async getByPkHaul(pkHaul: number): Promise<HaulEntity> {
+        const result = await this.haulRepository.getByPkHaul(pkHaul);
         if (!result)
             throw new NotFoundException('Haul Not Found!');
         return result;
     }
 
-    async getByTripNo(tripNo: number): Promise<HaulEntity[]> {
-      return await this.haulRepository.getByTripNo(tripNo);
+    async getByPkTrip(fkTrip: number): Promise<HaulEntity[]> {
+      return await this.haulRepository.getByFkTrip(fkTrip);
     }
 
     async addNewHaul(haulPayload: HaulCreationDto): Promise<Date> {

@@ -18,6 +18,6 @@ export class BaseRepository<T extends ObjectLiteral> extends Repository<T> {
 
     // async addNewTrip(newTrip: TripEntity): Promise<number> {
     //     await newTrip.save();
-    //     return newTrip.tripNo;
+    //     return newTrip.pkTrip;
     // }
 }

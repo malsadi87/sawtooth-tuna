@@ -39,7 +39,7 @@ export const APIBasePath = {
                 base: '/sawtooth/tp/haul',
                 getAll: '/sawtooth/tp/haul/',
                 getById: '/sawtooth/tp/haul/:id',
-                getByTripNo: '/sawtooth/tp/haul/trip/:tripNo',
+                getByPkTrip: '/sawtooth/tp/haul/trip/:pkTrip',
                 createNew: '/sawtooth/tp/haul/addNew'
             },
             pallet: {

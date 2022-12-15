@@ -46,7 +46,7 @@ class PalletState(object):
         return self._get_state(_get_pallet_address(palletNum))
 
     
-    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, tripNo):
+    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, pkTrip):
         address = _get_pallet_address(palletNum)
         LOGGER.info('set_pallet method')
         LOGGER.info(address)
@@ -55,7 +55,7 @@ class PalletState(object):
                 "productNum": productNum,
                 "supplierId": supplierId,
                 "palletWeight": palletWeight,
-                "tripNo": tripNo
+                "pkTrip": pkTrip
 
             })
         return self._context.set_state(

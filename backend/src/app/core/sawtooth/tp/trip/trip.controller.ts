@@ -7,9 +7,9 @@ import { TripService } from './trip.service';
 export class TripController {
     constructor(private readonly tripService: TripService){}
 
-    @Get('/:tripNo')
-    async getById(@Param('tripNo') tripNo: number): Promise<TripEntity> {
-        return await this.tripService.getByTripNo(tripNo);
+    @Get('/:pkTrip')
+    async getById(@Param('pkTrip') pkTrip: number): Promise<TripEntity> {
+        return await this.tripService.getByPkTrip(pkTrip);
     }
 
     @Post('addNew')

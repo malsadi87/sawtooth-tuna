@@ -20,7 +20,7 @@ class TripPayload(object):
 
         LOGGER.info(data)
 
-        tripNo = data.get('tripNo')
+        pkTrip = data.get('pkTrip')
         tripWithinYearNo = data.get('tripWithinYearNo')
         vesselName = data.get('vesselName')
         departureDate = data.get('departureDate')
@@ -28,7 +28,7 @@ class TripPayload(object):
         landingDate = data.get('landingDate')
         landingPort = data.get('landingPort')
 
-        if not tripNo:
+        if not pkTrip:
             raise InvalidTransaction('Trip No is required')
 
         if not tripWithinYearNo:
@@ -49,7 +49,7 @@ class TripPayload(object):
         if not landingPort:
             raise InvalidTransaction('Landing Port is required')
 
-        self._tripNo = tripNo
+        self._pkTrip = pkTrip
         self._tripWithinYearNo = tripWithinYearNo
         self._vesselName = vesselName
         self._departureDate = departureDate
@@ -58,8 +58,8 @@ class TripPayload(object):
         self._landingPort = landingPort
        
     @property
-    def tripNo(self):
-        return self._tripNo
+    def pkTrip(self):
+        return self._pkTrip
 
     @property
     def tripWithinYearNo(self):

@@ -2,8 +2,6 @@ import { IsDateString, IsNumber, Length } from "class-validator";
 import { IsEqualOrGreaterThan } from "../../decorator/isEqualOrGreaterThan.decorator";
 
 export class TripCreationDto {
-    @IsNumber()
-    tripNo: number;
 
     @IsNumber()
     tripWithinYearNo: number;

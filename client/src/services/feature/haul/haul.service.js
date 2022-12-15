@@ -34,9 +34,9 @@ const getById = async (id) => {
     }
 }
 
-const getByTripNo = async (tripNo) => {
+const getByPkTrip = async (pkTrip) => {
   try {
-      const response = await axios.get(APIBasePath.Sawtooth.tp.haul.getByTripNo.replace(':tripNo', tripNo));
+      const response = await axios.get(APIBasePath.Sawtooth.tp.haul.getByPkTrip.replace(':pkTrip', pkTrip));
       if (!response) return Promise.reject("Invalid form data!");
       return response;
   } catch(e) {
@@ -48,7 +48,7 @@ const getByTripNo = async (tripNo) => {
 const haulService = {
     createNew,
     getById,
-    getByTripNo,
+    getByPkTrip,
     getAll
 }
 
