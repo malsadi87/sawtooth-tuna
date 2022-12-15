@@ -5,7 +5,7 @@ export class PalletCreationDto {
     palletNum: string;
 
     @IsNumber()
-    productNum: number;
+    productId: number;
 
     @Length(1, 255)
     supplierId: string;

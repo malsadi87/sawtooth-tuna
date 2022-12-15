@@ -7,14 +7,6 @@ import './product.css';
 
 class Product extends Component {
   state = {
-    productForm: {
-      productId: '',
-      productName: '',
-      productDescription: '',
-      name: '',
-      value: '',
-      productNumber: ''
-    },
     products: null
   };
 
@@ -48,11 +40,11 @@ class Product extends Component {
     this.setState({
       products: result.map((info) => {
         return (
-          <tr key={info.productId}>
+          <tr key={info.pkProduct}>
+            <td>{info.pkProduct}</td>
+            <td>{info.title}</td>
             <td>{info.productId}</td>
-            <td>{info.productName}</td>
-            <td>{info.productDescription}</td>
-            <td>{info.productNum}</td>
+            <td>{info.fkSpecies}</td>
           </tr>
         )
       })
@@ -63,19 +55,25 @@ class Product extends Component {
     return (
       <div>
         <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
-          <Form.Item name={'productId'} label="Product ID" rules={[{ required: true }]}>
-            <InputNumber />
-          </Form.Item>
 
-          <Form.Item name={'productName'} label="Product Name" rules={[{ required: true }]}>
+          <Form.Item name={'title'} label="Title" rules={[{ 
+            required: true,
+            type: "string"
+          }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item name={'productDescription'} label="Description" rules={[{ required: false }]}>
+          <Form.Item name={'productId'} label="ProductId" rules={[{
+            required: true,
+            type: "string"
+          }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item name={'productNum'} label="Product Number" rules={[{ required: true }]}>
+          <Form.Item name={'fkSpecies'} label="FkSpecies" rules={[{
+             required: true,
+             type: "number"
+            }]}>
             <InputNumber />
           </Form.Item>
 
@@ -91,10 +89,10 @@ class Product extends Component {
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Number</th>
+                <th>PkProduct</th>
+                <th>Title</th>
+                <th>ProductID</th>
+                <th>FkSpecies</th>
               </tr>
             </thead>
             <tbody>

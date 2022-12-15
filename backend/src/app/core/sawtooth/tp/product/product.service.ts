@@ -19,30 +19,26 @@ export class ProductService {
         return await this.productRepository.getAll();
     }
 
-    async getByProductId(productId: number): Promise<ProductEntity> {
-        const result = await this.productRepository.getByProductId(productId);
+    async getByPkProduct(pkProduct: number): Promise<ProductEntity> {
+        const result = await this.productRepository.getByPkProduct(pkProduct);
         if (!result)
             throw new NotFoundException('Product not found!');
         return result;
     }
 
-    async getByProductNum(productNum: number): Promise<ProductEntity> {
-      return await this.productRepository.getByProductNum(productNum);
+    async getByProductId(productId: string): Promise<ProductEntity> {
+      return await this.productRepository.getByProductId(productId);
   }
 
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {
         try {
             const product: ProductEntity = plainToClass(ProductEntity, productPayload);
-            const oldProduct = await this.productRepository.getByProductId(product.productId);
-
-            if (oldProduct) throw new BadRequestException('Product already exist');
-
             const newProduct = await this.productRepository.addNewProduct(product);
     
             // Save in Sawtooth
             await this.sawtoothUtilityService.createAsset(newProduct, this.entityName);
     
-            return newProduct.productId;
+            return newProduct.pkProduct;
         } catch(e) {
             throw e;
         }

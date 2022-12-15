@@ -1,11 +1,12 @@
 import { IsNumber, IsString, IsArray } from 'class-validator';
 import { KeyPairDto } from './keyPair.dto';
 
+// TODO: Why are there two ProductCreationDto's? Can this one be deleted?
 export class ProductCreationDto {
-    @IsNumber() productId: number;
-    @IsString() productName: string;
-    @IsString() productDescription: string;
-    @IsNumber() productNum: number;
+    @IsNumber() pkProduct: number;
+    @IsString() title: string;
+    @IsString() productId: string;
+    @IsNumber() fkSpecies: number;
     @IsArray() productAttribute: { name: string, value: string }[]
 }
 

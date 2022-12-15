@@ -46,13 +46,13 @@ class PalletState(object):
         return self._get_state(_get_pallet_address(palletNum))
 
     
-    def set_pallet(self, palletNum, productNum, supplierId, palletWeight, pkTrip):
+    def set_pallet(self, palletNum, productId, supplierId, palletWeight, pkTrip):
         address = _get_pallet_address(palletNum)
         LOGGER.info('set_pallet method')
         LOGGER.info(address)
         state_data = _serialize(
             {   "palletNum": palletNum,
-                "productNum": productNum,
+                "productId": productId,
                 "supplierId": supplierId,
                 "palletWeight": palletWeight,
                 "pkTrip": pkTrip

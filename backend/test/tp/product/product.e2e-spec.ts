@@ -32,10 +32,10 @@ describe('Product (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
       .send({
-        "productId": 3,
-        "productName": "NameString",
-        "productDescription": "DescriptionString",
-        "productNum": 1
+        "pkProduct": 3,
+        "title": "NameString",
+        "productId": "DescriptionString",
+        "productId": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -46,10 +46,10 @@ describe('Product (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
       .send({
-        "productId": 4,
-        "productName": "NameString",
-        "productDescription": "DescriptionString",
-        "productNum": 2
+        "pkProduct": 4,
+        "title": "NameString",
+        "productId": "DescriptionString",
+        "productId": 2
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -60,10 +60,10 @@ describe('Product (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
       .send({
-        "productId": 4,
-        "productName": "NameString",
-        "productDescription": "DescriptionString",
-        "productNum": 3
+        "pkProduct": 4,
+        "title": "NameString",
+        "productId": "DescriptionString",
+        "productId": 3
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
@@ -75,10 +75,10 @@ describe('Product (e2e)', () => {
       .get('/api/v1/sawtooth/tp/product/3')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.productId).toEqual<number>(3)
-    expect(response.body.productName).toEqual<string>("NameString")
-    expect(response.body.productDescription).toEqual<string>("DescriptionString")
-    expect(response.body.productNum).toEqual<number>(1)
+    expect(response.body.pkProduct).toEqual<number>(3)
+    expect(response.body.title).toEqual<string>("NameString")
+    expect(response.body.productId).toEqual<string>("DescriptionString")
+    expect(response.body.productId).toEqual<number>(1)
     return response
   });
 
@@ -103,10 +103,10 @@ describe('Product (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "productId": 3,
-      "productName": "NameString",
-      "productDescription": "DescriptionString",
-      "productNum": 1
+      "pkProduct": 3,
+      "title": "NameString",
+      "productId": "DescriptionString",
+      "productId": 1
     }]))
     return response
   });
@@ -122,10 +122,10 @@ describe('Product (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/product/addNew')
       .send({
-        "productId": 3,
-        "productName": "NameStringChanged",
-        "productDescription": "DescriptionStringChanged",
-        "productNum": 1
+        "pkProduct": 3,
+        "title": "NameStringChanged",
+        "productId": "DescriptionStringChanged",
+        "productId": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

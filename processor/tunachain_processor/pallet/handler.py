@@ -47,16 +47,16 @@ class PalletTransactionHandler(TransactionHandler):
 
         
         _create_pallet(palletNum=payload.palletNum,
-                        productNum=payload.productNum,
+                        productId=payload.productId,
                         supplierId=payload.supplierId,
                         palletWeight=payload.palletWeight,
                         pkTrip=payload.pkTrip,
                         state=state)
 
 
-def _create_pallet(palletNum, productNum, supplierId, palletWeight, pkTrip, state):
+def _create_pallet(palletNum, productId, supplierId, palletWeight, pkTrip, state):
     if state.get_pallet(palletNum) is not None:
         raise InvalidTransaction(
             'Invalid action: Pallet already exists: {}'.format(palletNum))
 
-    state.set_pallet(palletNum, productNum, supplierId, palletWeight, pkTrip)
+    state.set_pallet(palletNum, productId, supplierId, palletWeight, pkTrip)

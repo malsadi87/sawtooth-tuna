@@ -42,7 +42,7 @@ class Pallet extends Component {
         return (
           <tr key={info.palletNum}>
             <td>{info.palletNum}</td>
-            <td>{info.productNum}</td>
+            <td>{info.productId}</td>
             <td>{info.supplierId}</td>
             <td>{info.palletWeight}</td>
             <td>{info.pkTrip}</td>
@@ -71,7 +71,7 @@ class Pallet extends Component {
           </Form.Item>
 
           <Form.Item
-            name={'productNum'}
+            name={'productId'}
             label="Product Number"
             rules={[
               {

@@ -1,16 +1,13 @@
 import { IsNumber, Length } from "class-validator";
 
 export class ProductCreationDto {
-    @IsNumber()
-    productId: number;
 
     @Length(1, 255)
-    productName: string;
+    title: string;
 
     @Length(1, 255)
-    productDescription: string;
+    productId: string;
 
     @IsNumber()
-    productNum: number;
-
+    fkSpecies: number;
 }

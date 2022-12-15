@@ -45,16 +45,16 @@ class ProductTransactionHandler(TransactionHandler):
         LOGGER.info('Product handler apply method')
         LOGGER.info(payload)
         
-        _create_product(productId=payload.productId,
-                        productName=payload.productName,
-                        productDescription=payload.productDescription,
-                        productNum=payload.productNum,
+        _create_product(pkProduct=payload.pkProduct,
+                        title=payload.title,
+                        productId=payload.productId,
+                        productId=payload.productId,
                         state=state)
 
 
-def _create_product(productId, productName, productDescription, productNum, state):
-    if state.get_product(productId) is not None:
+def _create_product(pkProduct, title, productId, productId, state):
+    if state.get_product(pkProduct) is not None:
         raise InvalidTransaction(
-            'Invalid action: Product already exists: {}'.format(productId))
+            'Invalid action: Product already exists: {}'.format(pkProduct))
 
-    state.set_product(productId, productName, productDescription, productNum)
+    state.set_product(pkProduct, title, productId, productId)

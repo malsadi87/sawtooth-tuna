@@ -34,9 +34,9 @@ const getById = async (id) => {
     }
 }
 
-const getByProductNum = async (productNum) => {
+const getByProductId = async (productId) => {
   try {
-      const response = await axios.get(APIBasePath.Sawtooth.tp.product.getByProductNum.replace(':productNum', productNum));
+      const response = await axios.get(APIBasePath.Sawtooth.tp.product.getByProductId.replace(':productId', productId));
       if (!response) return Promise.reject("Invalid form data!");
       return response;
   } catch(e) {
@@ -49,7 +49,7 @@ const productService = {
     createNew,
     getById,
     getAll,
-    getByProductNum
+    getByProductId
 }
 
 export default productService;

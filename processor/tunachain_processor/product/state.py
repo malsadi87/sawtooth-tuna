@@ -15,14 +15,14 @@ PRODUCT_NAMESPACE = hashlib.sha512(
     'product'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(productId):
-    adr = hashlib.sha512(str(productId).encode('utf-8')).hexdigest()[:62]
+def _get_address(pkProduct):
+    adr = hashlib.sha512(str(pkProduct).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_product_address(productId):
-    add =  PRODUCT_NAMESPACE + '00' + _get_address(productId)
+def _get_product_address(pkProduct):
+    add =  PRODUCT_NAMESPACE + '00' + _get_address(pkProduct)
     LOGGER.info(add)
     return add
 
@@ -42,19 +42,19 @@ class ProductState(object):
     def __init__(self, context):
         self._context = context
 
-    def get_product(self, productId):
-        return self._get_state(_get_product_address(productId))
+    def get_product(self, pkProduct):
+        return self._get_state(_get_product_address(pkProduct))
 
 
-    def set_product(self, productId, productName, productDescription, productNum):
-        address = _get_product_address(productId)
+    def set_product(self, pkProduct, title, productId, productId):
+        address = _get_product_address(pkProduct)
         LOGGER.info('set_product method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "productId": productId,
-                "productName": productName,
-                "productDescription": productDescription,
-                "productNum": productNum
+            {   "pkProduct": pkProduct,
+                "title": title,
+                "productId": productId,
+                "productId": productId
 
             })
         return self._context.set_state(

@@ -259,7 +259,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."ProductId" AS "ProductEntity_ProductId", "ProductEntity"."ProductName" AS "ProductEntity_ProductName", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductNum" AS "ProductEntity_ProductNum" FROM "Product" "ProductEntity" WHERE "ProductEntity"."ProductId" IN ($1) -- PARAMETERS: [3]
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -269,7 +269,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "Product" SET "ProductName" = $1, "ProductDescription" = $2 WHERE "ProductId" IN ($3) -- PARAMETERS: ["NameString","DescriptionString",3]
+    query: UPDATE "Product" SET "Title" = $1, "ProductDescription" = $2 WHERE "PkProduct" IN ($3) -- PARAMETERS: ["NameString","DescriptionString",3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -290,7 +290,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."ProductId" AS "ProductEntity_ProductId", "ProductEntity"."ProductName" AS "ProductEntity_ProductName", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductNum" AS "ProductEntity_ProductNum" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -305,7 +305,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."ProductId" AS "ProductEntity_ProductId", "ProductEntity"."ProductName" AS "ProductEntity_ProductName", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductNum" AS "ProductEntity_ProductNum" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -320,7 +320,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."ProductId" AS "ProductEntity_ProductId", "ProductEntity"."ProductName" AS "ProductEntity_ProductName", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductNum" AS "ProductEntity_ProductNum" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -335,7 +335,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."ProductId" AS "ProductEntity_ProductId", "ProductEntity"."ProductName" AS "ProductEntity_ProductName", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductNum" AS "ProductEntity_ProductNum" FROM "Product" "ProductEntity" WHERE "ProductEntity"."ProductId" IN ($1) -- PARAMETERS: [3]
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -345,7 +345,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "Product" SET "ProductName" = $1, "ProductDescription" = $2 WHERE "ProductId" IN ($3) -- PARAMETERS: ["NameStringChanged","DescriptionStringChanged",3]
+    query: UPDATE "Product" SET "Title" = $1, "ProductDescription" = $2 WHERE "PkProduct" IN ($3) -- PARAMETERS: ["NameStringChanged","DescriptionStringChanged",3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -376,11 +376,11 @@ TEST FAILED: authenticate
 
       62 |       .set('Authorization', `Bearer ${jwtToken}`)
       63 |       .expect(200)
-    > 64 |     expect(response.body.productId).toEqual<number>(3)
+    > 64 |     expect(response.body.pkProduct).toEqual<number>(3)
          |                                     ^
-      65 |     expect(response.body.productName).toEqual<string>("NameString")
-      66 |     expect(response.body.productDescription).toEqual<string>("DescriptionString")
-      67 |     expect(response.body.productNum).toEqual<number>(1)
+      65 |     expect(response.body.title).toEqual<string>("NameString")
+      66 |     expect(response.body.productId).toEqual<string>("DescriptionString")
+      67 |     expect(response.body.productId).toEqual<number>(1)
 
       at Object.<anonymous> (product.e2e-spec.ts:64:37)
 
@@ -388,7 +388,7 @@ TEST FAILED: authenticate
 
     expected 404 "Not Found", got 200 "OK"
 
-      73 |       .get('/api/v1/sawtooth/tp/product/?productId=404')
+      73 |       .get('/api/v1/sawtooth/tp/product/?pkProduct=404')
       74 |       .set('Authorization', `Bearer ${jwtToken}`)
     > 75 |       .expect(404)
          |        ^
@@ -1014,7 +1014,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1045,7 +1045,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1060,7 +1060,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1075,7 +1075,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1090,7 +1090,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1121,7 +1121,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductNum" AS "PalletEntity_ProductNum", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",404]
+    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",404]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1131,12 +1131,12 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "Pallet"("PalletNum", "ProductNum", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
+    query: INSERT INTO "Pallet"("PalletNum", "ProductId", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query failed: INSERT INTO "Pallet"("PalletNum", "ProductNum", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
+    query failed: INSERT INTO "Pallet"("PalletNum", "ProductId", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
@@ -1201,7 +1201,7 @@ TEST FAILED: haul
       71 |       .expect(200)
     > 72 |     expect(response.body.palletNum).toEqual<string>("1")
          |                                     ^
-      73 |     expect(response.body.productNum).toEqual<number>(1)
+      73 |     expect(response.body.productId).toEqual<number>(1)
       74 |     expect(response.body.supplierId).toEqual<string>("supplierId")
       75 |     expect(response.body.palletWeight).toEqual<number>(1.0000)
 
@@ -1231,15 +1231,15 @@ TEST FAILED: haul
 
     expect(received).toEqual(expected) // deep equality
 
-    Expected: ArrayContaining [{"palletNum": "1", "palletWeight": 1, "productNum": 1, "supplierId": "Supplier", "pkTrip": 123}]
-    Received: [{"palletNum": "1", "palletWeight": "1.0000", "productNum": 1, "supplierId": "Supplier", "pkTrip": 123}]
+    Expected: ArrayContaining [{"palletNum": "1", "palletWeight": 1, "productId": 1, "supplierId": "Supplier", "pkTrip": 123}]
+    Received: [{"palletNum": "1", "palletWeight": "1.0000", "productId": 1, "supplierId": "Supplier", "pkTrip": 123}]
 
        99 |       .set('Authorization', `Bearer ${jwtToken}`)
       100 |       .expect(200)
     > 101 |     expect(response.body).toEqual(expect.arrayContaining([{
           |                           ^
       102 |       "palletNum": "1",
-      103 |       "productNum": 1,
+      103 |       "productId": 1,
       104 |       "supplierId": "Supplier",
 
       at Object.<anonymous> (pallet.e2e-spec.ts:101:27)

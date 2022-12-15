@@ -37,7 +37,7 @@ describe('Pallet (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
         "palletNum": "1",
-        "productNum": 1,
+        "productId": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
         "pkTrip": 123
@@ -52,7 +52,7 @@ describe('Pallet (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
         "palletNum": "2",
-        "productNum": 1,
+        "productId": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
         "pkTrip": 123
@@ -67,7 +67,7 @@ describe('Pallet (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
         "palletNum": "1",
-        "productNum": 1,
+        "productId": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
         "pkTrip": 123
@@ -83,7 +83,7 @@ describe('Pallet (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.palletNum).toEqual<string>("1")
-    expect(response.body.productNum).toEqual<number>(1)
+    expect(response.body.productId).toEqual<number>(1)
     expect(response.body.supplierId).toEqual<string>("Supplier")
     expect(response.body.palletWeight).toEqual<number>(1.0000)
     expect(response.body.pkTrip).toEqual<number>(123)
@@ -113,7 +113,7 @@ describe('Pallet (e2e)', () => {
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
       "palletNum": "1",
-      "productNum": 1,
+      "productId": 1,
       "supplierId": "Supplier",
       "palletWeight": 1.0000,
       "pkTrip": 123
@@ -133,7 +133,7 @@ describe('Pallet (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
         "palletNum": "1",
-        "productNum": 1,
+        "productId": 1,
         "supplierId": "Supplier",
         "palletWeight": 5,
         "pkTrip": 123
@@ -148,7 +148,7 @@ describe('Pallet (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
         "palletNum": "1",
-        "productNum": 1,
+        "productId": 1,
         "supplierId": "Supplier",
         "palletWeight": 1,
         "pkTrip": 404

@@ -7,14 +7,14 @@ import { ProductService } from './product.service';
 export class ProductController {
     constructor(private readonly productService: ProductService){}
 
-    @Get('/:productId')
-    async getById(@Param('productId') productId: number): Promise<ProductEntity> {
-        return await this.productService.getByProductId(productId);
+    @Get('/:pkProduct')
+    async getById(@Param('pkProduct') pkProduct: number): Promise<ProductEntity> {
+        return await this.productService.getByPkProduct(pkProduct);
     }
 
-    @Get('productNum/:productNum')
-    async getByProductNum(@Param('productNum') productNum: number): Promise<ProductEntity> {
-        return await this.productService.getByProductNum(productNum);
+    @Get('productId/:productId')
+    async getByProductId(@Param('productId') productId: string): Promise<ProductEntity> {
+        return await this.productService.getByProductId(productId);
     }
 
     @Post('addNew')

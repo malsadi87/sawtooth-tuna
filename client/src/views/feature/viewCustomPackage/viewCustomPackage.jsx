@@ -72,7 +72,7 @@ class ViewCustomPackage extends Component {
 
     // TODO: GetSpecies
 
-    const productResult = await productService.getByProductNum(palletResult.productNum)
+    const productResult = await productService.getByProductId(palletResult.productId)
     console.log("productResult:", productResult)
 
     const haulResult = await haulService.getByPkTrip(palletResult.pkTrip)

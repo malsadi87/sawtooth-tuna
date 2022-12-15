@@ -18,37 +18,37 @@ class ProductPayload(object):
         except ValueError:
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
+        pkProduct = data.get('pkProduct')
+        title = data.get('title')
         productId = data.get('productId')
-        productName = data.get('productName')
-        productDescription = data.get('productDescription')
-        productNum = data.get('productNum')
+        productId = data.get('productId')
 
-        if not productId:
+        if not pkProduct:
             raise InvalidTransaction('Product ID is required')
 
-        if not productName:
+        if not title:
             raise InvalidTransaction('Product Name is required')
 
-        if not productNum:
+        if not productId:
             raise InvalidTransaction('Product Number is required')        
         
+        self._pkProduct = pkProduct
+        self._title = title
+        self._productDescription = productId
         self._productId = productId
-        self._productName = productName
-        self._productDescription = productDescription
-        self._productNum = productNum
        
     @property
-    def productId(self):
-        return self._productId
+    def pkProduct(self):
+        return self._pkProduct
     
     @property
-    def productName(self):
-        return self._productName
+    def title(self):
+        return self._title
 
     @property
-    def productDescription(self):
+    def productId(self):
         return self._productDescription
 
     @property
-    def productNum(self):
-        return self._productNum  
+    def productId(self):
+        return self._productId  

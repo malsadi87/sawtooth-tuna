@@ -20,7 +20,7 @@ class PalletPayload(object):
         LOGGER.info(data)
 
         palletNum = data.get('palletNum')
-        productNum = data.get('productNum')
+        productId = data.get('productId')
         supplierId = data.get('supplierId')
         palletWeight = data.get('palletWeight')
         pkTrip = data.get('pkTrip')
@@ -28,7 +28,7 @@ class PalletPayload(object):
         if not palletNum:
             raise InvalidTransaction('Pallet Number is required')
 
-        if not productNum:
+        if not productId:
             raise InvalidTransaction('Product Number is required')
 
         if not supplierId:
@@ -41,7 +41,7 @@ class PalletPayload(object):
             raise InvalidTransaction('Trip No is required')                  
         
         self._palletNum = palletNum
-        self._productNum = productNum
+        self._productId = productId
         self._supplierId = supplierId
         self._palletWeight = palletWeight
         self._pkTrip = pkTrip
@@ -52,8 +52,8 @@ class PalletPayload(object):
         return self._palletNum
 
     @property
-    def productNum(self):
-        return self._productNum
+    def productId(self):
+        return self._productId
 
     @property
     def supplierId(self):

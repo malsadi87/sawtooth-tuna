@@ -2,6 +2,7 @@ import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { CatchEntity } from "./catch.entity";
+import { ProductEntity } from "./product.entity";
 
 @Entity('Species')
 export class SpeciesEntity extends BaseEntity {
@@ -17,6 +18,10 @@ export class SpeciesEntity extends BaseEntity {
     description: string;
 
     @OneToMany((entity) => CatchEntity, (x) => x.species)
-    @JoinColumn({ referencedColumnName: 'PkTrip' })
+    @JoinColumn({ referencedColumnName: 'PkCatch' })
     catches: CatchEntity[];
+
+    @OneToMany((entity) => ProductEntity, (x) => x.species)
+    @JoinColumn({ referencedColumnName: 'PkCatch' })
+    products: CatchEntity[];
 }

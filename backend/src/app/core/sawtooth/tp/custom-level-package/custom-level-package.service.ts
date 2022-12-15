@@ -83,7 +83,7 @@ export class CustomLevelPackageService {
         const palletEvent = await this.palletEventService.getByPalletNumber(catchObject.palletNum)
         const trip = await this.tripService.getByPkTrip(pallet.pkTrip)
         const company = await this.companyService.getById(customLevelPackage.agent)
-        const product = await this.productService.getByProductNum(pallet.productNum)
+        const product = await this.productService.getByProductId(pallet.productId)
         const haul = await this.haulService.getByPkTrip(pallet.pkTrip)
         const species = null // TODO: getSpecies
 

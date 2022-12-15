@@ -13,12 +13,12 @@ export class ProductRepository extends Repository<ProductEntity> {
         return result;
     }
 
-    async getByProductId(productId: number): Promise<ProductEntity> {
-        return await this.findOneBy({ productId: productId });
+    async getByPkProduct(pkProduct: number): Promise<ProductEntity> {
+        return await this.findOneBy({ pkProduct: pkProduct });
     }
     
-    async getByProductNum(productNum: number): Promise<ProductEntity> {
-      return await this.findOneBy({ productNum: productNum });
+    async getByProductId(productId: string): Promise<ProductEntity> {
+      return await this.findOneBy({ productId: productId });
     }
 
     async addNewProduct(newProduct: ProductEntity): Promise<ProductEntity> {
