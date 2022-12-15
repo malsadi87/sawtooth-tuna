@@ -3,7 +3,7 @@ import { APIBasePath } from "../../../constants/apiBasePaths";
 
 const createNew = async (data) => {
     try {
-        const response = await axios.post(APIBasePath.Sawtooth.tp.catchPackage.createNew, data);
+        const response = await axios.post(APIBasePath.Sawtooth.tp.catch.createNew, data);
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
@@ -14,7 +14,7 @@ const createNew = async (data) => {
 
 const getAll = async () => {
     try {
-        const response = await axios.get(APIBasePath.Sawtooth.tp.catchPackage.getAll);
+        const response = await axios.get(APIBasePath.Sawtooth.tp.catch.getAll);
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
@@ -25,7 +25,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
     try {
-        const response = await axios.get(APIBasePath.Sawtooth.tp.catchPackage.getById.replace(':id', id));
+        const response = await axios.get(APIBasePath.Sawtooth.tp.catch.getById.replace(':id', id));
         if (!response) return Promise.reject("Invalid form data!");
         return response;
     } catch(e) {
@@ -34,10 +34,10 @@ const getById = async (id) => {
     }
 }
 
-const catchPackageService = {
+const catchService = {
     createNew,
     getById,
     getAll
 }
 
-export default catchPackageService;
+export default catchService;

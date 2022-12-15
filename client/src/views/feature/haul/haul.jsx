@@ -177,7 +177,8 @@ class Haul extends Component {
             label="Trip ID"
             rules={[
               {
-                required: true
+                required: true,
+                type: "number"
               },
             ]}
           >

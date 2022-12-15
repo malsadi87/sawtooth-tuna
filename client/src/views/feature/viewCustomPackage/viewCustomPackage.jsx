@@ -6,7 +6,7 @@ import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import customPackageService from '../../../services/feature/customPackage/customPackage.service';
 import moment from 'moment';
-import catchPackageService from '../../../services/feature/catchPackage/catchPackage.service';
+import catchService from '../../../services/feature/catch/catch.service';
 import palletService from '../../../services/feature/pallet/pallet.service';
 import palletEventService from '../../../services/feature/palletEvent/palletEvent.service';
 import tripService from '../../../services/feature/trip/trip.service';
@@ -40,7 +40,7 @@ const validateMessages = {
 class ViewCustomPackage extends Component {
   state = {
     customPackageResult: null,
-    catchPackageResult: null,
+    catchResult: null,
     palletResult: null,
     palletEventResult: null,
     tripResult: null,
@@ -55,13 +55,13 @@ class ViewCustomPackage extends Component {
     const customPackageResult = await customPackageService.getById(values.consumerPackageId);
     console.log("customPackageResult:", customPackageResult)
 
-    const catchPackageResult = await catchPackageService.getById(customPackageResult.catchPackageId)
-    console.log("catchPackageResult:", catchPackageResult)
+    const catchResult = await catchService.getById(customPackageResult.pkCatch)
+    console.log("catchResult:", catchResult)
 
-    const palletResult = await palletService.getById(catchPackageResult.palletNum)
+    const palletResult = await palletService.getById(catchResult.palletNum)
     console.log("palletResult:", palletResult)
     
-    const palletEventResult = await palletEventService.getById(catchPackageResult.palletNum)
+    const palletEventResult = await palletEventService.getById(catchResult.palletNum)
     console.log("palletEventResult:", palletEventResult)
 
     const tripResult = await tripService.getById(palletResult.pkTrip)
@@ -90,7 +90,7 @@ class ViewCustomPackage extends Component {
       customPackages: 
           <tr key={customPackageResult.consumerPackageId}>
             <td>{customPackageResult.consumerPackageId}</td>
-            <td>{customPackageResult.catchPackageId}</td>
+            <td>{customPackageResult.pkCatch}</td>
             <td>{customPackageResult.packingDate}</td>
             <td>{customPackageResult.agent}</td>
           </tr>
@@ -133,7 +133,7 @@ class ViewCustomPackage extends Component {
             <thead>
               <tr>
                 <th>Custom Package ID</th>
-                <th>Catch Package ID</th>
+                <th>Catch ID</th>
                 <th>Packing Time</th>
                 <th>Agent</th>
               </tr>

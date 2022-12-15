@@ -56,7 +56,7 @@ sawtooth:
       VERSION: "0.1"
       PREFIX: 'db25c6'
     CATCH-PACKAGE:
-      FAMILY: "catch-package"
+      FAMILY: "catch"
       VERSION: "0.1"
       PREFIX: '7a21ab'
     PRODUCT:

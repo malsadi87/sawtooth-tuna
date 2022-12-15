@@ -1,4 +1,4 @@
-# Catch Package state
+# Catch state
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -12,17 +12,17 @@ LOGGER = logging.getLogger(__name__)
 
 
 PACKAGE_NAMESPACE = hashlib.sha512(
-    'catch-package'.encode('utf-8')).hexdigest()[0:6]
+    'catch'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(catchPackageId):
+def _get_address(pkCatch):
     adr = hashlib.sha512(str(companyId).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_package_address(catchPackageId):
-    add =  PACKAGE_NAMESPACE + '00' + _get_address(catchPackageId)
+def _get_package_address(pkCatch):
+    add =  PACKAGE_NAMESPACE + '00' + _get_address(pkCatch)
     LOGGER.info(add)
     return add
 
@@ -35,7 +35,7 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class CatchPackageState(object):
+class CatchState(object):
 
     TIMEOUT = 3
 
@@ -43,20 +43,20 @@ class CatchPackageState(object):
         self._context = context
 
 
-    def get_package(self, catchPackageId):
-        return self._get_state(_get_package_address(catchPackageId))
+    def get_package(self, pkCatch):
+        return self._get_state(_get_package_address(pkCatch))
     
     def get_context(self):
         return self._context
 
     
-    def set_package(self, catchPackageId, packingDate, palletNum):
-        address = _get_package_address(catchPackageId)
+    def set_package(self, pkCatch, updatedDateTime, palletNum):
+        address = _get_package_address(pkCatch)
         LOGGER.info('set_package_event method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "catchPackageId": catchPackageId,
-                "packingDate": packingDate,
+            {   "pkCatch": pkCatch,
+                "updatedDateTime": updatedDateTime,
                 "palletNum": palletNum
             })
         return self._context.set_state(

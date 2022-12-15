@@ -31,10 +31,10 @@ export class TripEntity extends BaseEntity {
     landingPort: string;
 
     @OneToMany((type) => HaulEntity, (x) => x.trip)
-    @JoinColumn({ referencedColumnName: 'PkTrip' })
+    @JoinColumn({ referencedColumnName: 'pkTrip' })
     hauls: HaulEntity[];
 
     @OneToMany((entity) => PalletEntity, (x) => x.trip)
-    @JoinColumn({ referencedColumnName: 'PkTrip' })
+    @JoinColumn({ referencedColumnName: 'pkTrip' })
     pallets: PalletEntity[];
 }

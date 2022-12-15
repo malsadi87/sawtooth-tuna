@@ -10,7 +10,7 @@ from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 LOGGER = logging.getLogger(__name__)
 
-class CatchPackagePayload(object):
+class CatchPayload(object):
 
     def __init__(self, payload):
         try:
@@ -20,32 +20,32 @@ class CatchPackagePayload(object):
         LOGGER.info(data)
 
 
-        catchPackageId = data.get('catchPackageId')
-        packingDate = data.get('packingDate')
+        pkCatch = data.get('pkCatch')
+        updatedDateTime = data.get('updatedDateTime')
         palletNum = data.get('palletNum')
        
 
         if not palletNum:
             raise InvalidTransaction('Pallet Number is required')
 
-        if not catchPackageId:
-            raise InvalidTransaction('Catch Package ID is required')
+        if not pkCatch:
+            raise InvalidTransaction('Catch ID is required')
 
-        if not packingDate:
+        if not updatedDateTime:
             raise InvalidTransaction('Packing Date is required')
                    
         
-        self._catchPackageId = catchPackageId
-        self._packingDate = packingDate
+        self._pkCatch = pkCatch
+        self._packingDate = updatedDateTime
         self._palletNum = palletNum
     
        
     @property
-    def catchPackageId(self):
-        return self._catchPackageId
+    def pkCatch(self):
+        return self._pkCatch
 
     @property
-    def packingDate(self):
+    def updatedDateTime(self):
         return self._packingDate
 
     @property

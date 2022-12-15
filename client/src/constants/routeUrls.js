@@ -7,7 +7,7 @@ export const RouteUrl = {
     pallet: '/pallet',
     product: '/product',
     palletEvent: '/palletEvent',
-    catchPackage: '/catchPackage',
+    catch: '/catch',
     species: '/species',
     company: '/company',
     customPackage: '/customPackage',

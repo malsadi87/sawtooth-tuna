@@ -3,6 +3,7 @@ import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryCo
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { TripEntity } from "./trip.entity";
 import * as pg from 'pg';
+import { CatchEntity } from "./catch.entity";
 
 pg.types.setTypeParser(1700, function(val) {
     return parseFloat(val);
@@ -42,10 +43,14 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'numeric', name: 'HaulLongitude', nullable: false })
     haulLongitude: number;
 
-    @PrimaryColumn({ generated: false, name: 'FkTrip', type: 'int', nullable: false })
+    @Column({ generated: false, name: 'FkTrip', type: 'int', nullable: false })
     fkTrip: number;
 
     @ManyToOne((type) => TripEntity, x => x.hauls)
     @JoinColumn({ name: 'FkTrip', referencedColumnName: 'pkTrip' })
     trip: TripEntity;
+
+    @OneToMany((entity) => CatchEntity, (x) => x.haul)
+    @JoinColumn({ referencedColumnName: 'pkHaul' })
+    catches: CatchEntity[];
 }

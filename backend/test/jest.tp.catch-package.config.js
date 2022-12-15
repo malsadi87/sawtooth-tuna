@@ -1,6 +1,6 @@
 module.exports = {
   moduleFileExtensions: ["js", "json", "ts"],
-  rootDir: "./tp/catch-package",
+  rootDir: "./tp/catch",
   testEnvironment: "node",
   testRegex: ".e2e-spec.ts$",
   transform: {

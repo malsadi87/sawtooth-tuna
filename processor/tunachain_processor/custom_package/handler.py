@@ -47,15 +47,15 @@ class CustomPackageTransactionHandler(TransactionHandler):
 
        
         _create_custom_package(consumerPackageId=payload.consumerPackageId,
-                        catchPackageId=payload.catchPackageId,
+                        pkCatch=payload.pkCatch,
                         packingDate=payload.packingDate,
                         agent=payload.agent,
                         state=state)
 
 
-def _create_custom_package(consumerPackageId, catchPackageId, packingDate, agent , state):
+def _create_custom_package(consumerPackageId, pkCatch, packingDate, agent , state):
     if state.get_custom_package(consumerPackageId) is not None:
         raise InvalidTransaction(
             'Invalid action: Consumer Package already exists: {}'.format(consumerPackageId))
 
-    state.set_custom_package(consumerPackageId, catchPackageId, packingDate, agent )
+    state.set_custom_package(consumerPackageId, pkCatch, packingDate, agent )

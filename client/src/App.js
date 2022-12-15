@@ -18,7 +18,7 @@ import Auth from "./views/feature/auth";
 import Login from "./views/feature/auth/login/login";
 import Signup from "./views/feature/auth/signup/signup";
 import Home from "./views/feature/home/home";
-import CatchPackage from "./views/feature/catchPackage/catchPackage";
+import Catch from "./views/feature/catch/catch";
 import Species from "./views/feature/species/species";
 import Company from "./views/feature/company/company";
 import CustomPackage from "./views/feature/customPackage/customPackage";
@@ -53,7 +53,7 @@ class App extends Component {
                         <Route path={RouteUrl.haul} element={<Haul />} />
                         <Route path={RouteUrl.pallet} element={<Pallet />} />
                         <Route path={RouteUrl.palletEvent} element={<PalletEvent />} />
-                        <Route path={RouteUrl.catchPackage} element={<CatchPackage />} />
+                        <Route path={RouteUrl.catch} element={<Catch />} />
                         <Route path={RouteUrl.species} element={<Species />} />
                         <Route path={RouteUrl.company} element={<Company />} />
                         <Route path={RouteUrl.customPackage} element={<CustomPackage />} />

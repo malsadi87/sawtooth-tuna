@@ -5,7 +5,7 @@ export class CustomPackageCreationDto {
     consumerPackageId: string;
 
     @Length(1, 255)
-    catchPackageId: string;
+    pkCatch: string;
 
     @IsDateString()
     packingDate: Date;

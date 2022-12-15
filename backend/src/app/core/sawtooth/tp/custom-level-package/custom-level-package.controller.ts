@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
-import { CatchPackageEntity } from 'src/entity/catchPackage.entity';
+import { CatchEntity } from 'src/entity/catch.entity';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
 import { CustomPackageCreationDto } from '../../../../utility/dto/tp/custom-package-creation.dto';
 import { CustomLevelPackageService } from './custom-level-package.service';
@@ -24,11 +24,11 @@ export class CustomLevelPackageController {
     }
 
 
-    @Get('getData/:packageId')
-    async getData(@Param('packageId') packageId: string): Promise<{ 
-      customLevelPackage: CustomLevelPackageEntity,
-      catchPackage: CatchPackageEntity 
-    }> {
-        return await this.customLevelPackageService.getData(packageId);
-    }
+    //@Get('getData/:packageId')
+    //async getData(@Param('packageId') packageId: string): Promise<{ 
+    //  customLevelPackage: CustomLevelPackageEntity,
+    //  catch: CatchEntity 
+    //}> {
+    //    return await this.customLevelPackageService.getData(packageId);
+    //}
 }

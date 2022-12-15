@@ -21,7 +21,7 @@ class CustomPackagePayload(object):
 
 
         consumerPackageId = data.get('consumerPackageId')
-        catchPackageId = data.get('catchPackageId')
+        pkCatch = data.get('pkCatch')
         packingDate = data.get('packingDate')
         agent = data.get('agent')
        
@@ -29,8 +29,8 @@ class CustomPackagePayload(object):
         if not consumerPackageId:
             raise InvalidTransaction('Consumer Package Id is required')
 
-        if not catchPackageId:
-            raise InvalidTransaction('Catch Package ID is required')
+        if not pkCatch:
+            raise InvalidTransaction('Catch ID is required')
 
         if not packingDate:
             raise InvalidTransaction('Packing Date is required')
@@ -39,7 +39,7 @@ class CustomPackagePayload(object):
             raise InvalidTransaction('agent is required')    
                    
         self._consumerPackageId = consumerPackageId
-        self._catchPackageId = catchPackageId
+        self._pkCatch = pkCatch
         self._packingDate = packingDate
         self._agent = agent
     
@@ -48,8 +48,8 @@ class CustomPackagePayload(object):
         return self._consumerPackageId
 
     @property
-    def catchPackageId(self):
-        return self._catchPackageId
+    def pkCatch(self):
+        return self._pkCatch
 
     @property
     def packingDate(self):

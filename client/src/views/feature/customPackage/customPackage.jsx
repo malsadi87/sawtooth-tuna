@@ -43,7 +43,7 @@ class CustomPackage extends Component {
         return (
           <tr key={info.consumerPackageId}>
             <td>{info.consumerPackageId}</td>
-            <td>{info.catchPackageId}</td>
+            <td>{info.pkCatch}</td>
             <td>{info.packingDate}</td>
             <td>{info.agent}</td>
           </tr>
@@ -71,10 +71,10 @@ class CustomPackage extends Component {
             <Input />
           </Form.Item>
 
-          {/*CatchPackageId*/}
+          {/*PkCatch*/}
           <Form.Item
-            name={'catchPackageId'}
-            label="Catch Package Id"
+            name={'pkCatch'}
+            label="Catch Id"
             rules={[
               {
                 required: true,
@@ -128,7 +128,7 @@ class CustomPackage extends Component {
             <thead>
               <tr>
                 <th>Custom Package ID</th>
-                <th>Catch Package ID</th>
+                <th>Catch ID</th>
                 <th>Packing Time</th>
                 <th>Agent</th>
               </tr>

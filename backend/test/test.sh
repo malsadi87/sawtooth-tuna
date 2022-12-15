@@ -5,7 +5,7 @@ npm run test:e2e:tp:product || echo 'TEST FAILED: product' &&
 npm run test:e2e:tp:trip || echo 'TEST FAILED: trip' && 
 npm run test:e2e:tp:haul || echo 'TEST FAILED: haul' && 
 npm run test:e2e:tp:pallet || echo 'TEST FAILED: pallet' && 
-npm run test:e2e:tp:catch-package || echo 'TEST FAILED: catch-package' &&
+npm run test:e2e:tp:catch || echo 'TEST FAILED: catch' &&
 npm run test:e2e:tp:company || echo 'TEST FAILED: Company' &&
 npm run test:e2e:tp:pallet-event || echo 'TEST FAILED: Pallet-event'
 npm run test:e2e:tp:species || echo 'TEST FAILED: species'

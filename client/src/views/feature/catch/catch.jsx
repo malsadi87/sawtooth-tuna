@@ -1,12 +1,11 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './catchPackage.css';
+import './catch.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import catchPackageService from '../../../services/feature/catchPackage/catchPackage.service';
 import moment from 'moment';
-
+import catchService from '../../../services/feature/catch/catch.service';
 
 const layout = {
   labelCol: {
@@ -27,24 +26,26 @@ const validateMessages = {
   },
 };
 
-class CatchPackage extends Component {
+class Catch extends Component {
   state = {
-    catchPackages: null
+    catchs: null
   }
 
   onFinish = async (values) => {
-    const result = await catchPackageService.createNew(values);
+    const result = await catchService.createNew(values);
   };
 
   getAllPallet = async () => {
-    const result = await catchPackageService.getAll();
+    const result = await catchService.getAll();
     this.setState({
-      catchPackages: result.map((info) => {
+      catchs: result.map((info) => {
         return (
-          <tr key={info.catchPackageId}>
-            <td>{info.catchPackageId}</td>
-            <td>{info.packingDate}</td>
-            <td>{info.palletNum}</td>
+          <tr key={info.pkCatch}>
+            <td>{info.pkCatch}</td>
+            <td>{info.updatedDateTime}</td>
+            <td>{info.quantity}</td>
+            <td>{info.fkHaul}</td>
+            <td>{info.fkSpecies}</td>
           </tr>
         )
       })
@@ -56,22 +57,9 @@ class CatchPackage extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          <Form.Item
-            name={'catchPackageId'}
-            label="CatchPackageId"
-            rules={[
-              {
-                required: true,
-                type: 'string',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
           {/*Date*/}
           <Form.Item
-            name={'packingDate'}
+            name={'updatedDateTime'}
             label="Packing Date Time"
             rules={[
               {
@@ -85,16 +73,42 @@ class CatchPackage extends Component {
           </Form.Item>
 
           <Form.Item
-            name={'palletNum'}
-            label="Pallet Number"
+            name={'quantity'}
+            label="Quantity"
             rules={[
               {
                 required: true,
-                type: 'string',
+                type: 'number'
               },
             ]}
           >
-            <Input />
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item
+            name={'fkHaul'}
+            label="FkHaul"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item
+            name={'fkSpecies'}
+            label="FkSpecies"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
@@ -105,17 +119,19 @@ class CatchPackage extends Component {
 
           </Form.Item>
         </Form>
-        {this.state.catchPackages ?
+        {this.state.catchs ?
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th>Package ID</th>
                 <th>Packing Date</th>
-                <th>Pallet Number</th>
+                <th>Quantity</th>
+                <th>FkHaul</th>
+                <th>FkSpecies</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.catchPackages}
+              {this.state.catchs}
             </tbody>
           </table> : ''}
       </div>
@@ -123,6 +139,6 @@ class CatchPackage extends Component {
   };
 }
 
-export default withParamsAndNavigation(CatchPackage);
+export default withParamsAndNavigation(Catch);
 
 //export default () => <FormLayoutDemo />;

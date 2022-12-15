@@ -23,7 +23,7 @@
     "test:e2e:tp:trip": "jest --config ./test/jest.tp.trip.config.js",
     "test:e2e:tp:haul": "jest --config ./test/jest.tp.haul.config.js",
     "test:e2e:tp:pallet": "jest --config ./test/jest.tp.pallet.config.js",
-    "test:e2e:tp:catch-package": "jest --config ./test/jest.tp.catch-package.config.js",
+    "test:e2e:tp:catch": "jest --config ./test/jest.tp.catch.config.js",
     "test:e2e:tp:company": "jest --config ./test/jest.tp.company.config.js",
     "test:e2e:tp:pallet-event": "jest --config ./test/jest.tp.pallet-event.config.js",
     "test:e2e:tp:species": "jest --config ./test/jest.tp.species.config.js",

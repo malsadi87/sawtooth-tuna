@@ -1,6 +1,7 @@
 import { Transform } from "class-transformer";
-import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
+import { CatchEntity } from "./catch.entity";
 
 @Entity('Species')
 export class SpeciesEntity extends BaseEntity {
@@ -14,4 +15,8 @@ export class SpeciesEntity extends BaseEntity {
 
     @Column({ type:'varchar', width: 255, name: 'Description', nullable: true })
     description: string;
+
+    @OneToMany((entity) => CatchEntity, (x) => x.species)
+    @JoinColumn({ referencedColumnName: 'PkTrip' })
+    catches: CatchEntity[];
 }

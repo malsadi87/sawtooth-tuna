@@ -1301,8 +1301,8 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     /root/.npm/_logs/2022-10-09T12_50_40_446Z-debug.log
 TEST FAILED: pallet
 
-> backend@0.0.1 test:e2e:tp:catch-package /project/sawtooth-tuna/backend
-> jest --config ./test/jest.tp.catch-package.config.js
+> backend@0.0.1 test:e2e:tp:catch /project/sawtooth-tuna/backend
+> jest --config ./test/jest.tp.catch.config.js
 
   console.log
     query: SELECT * FROM current_schema()
@@ -1340,7 +1340,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity" WHERE "CatchPackageEntity"."CatchPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1355,7 +1355,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1370,7 +1370,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1385,7 +1385,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1400,7 +1400,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity" WHERE "CatchPackageEntity"."CatchPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1415,7 +1415,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchPackageEntity"."CatchPackageId" AS "CatchPackageEntity_CatchPackageId", "CatchPackageEntity"."PackingDate" AS "CatchPackageEntity_PackingDate", "CatchPackageEntity"."PalletNum" AS "CatchPackageEntity_PalletNum" FROM "CatchPackage" "CatchPackageEntity" WHERE "CatchPackageEntity"."CatchPackageId" IN ($1) -- PARAMETERS: ["2"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["2"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1425,17 +1425,17 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "CatchPackage"("CatchPackageId", "PackingDate", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
+    query: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query failed: INSERT INTO "CatchPackage"("CatchPackageId", "PackingDate", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
+    query failed: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "CatchPackage" violates foreign key constraint "CatchPackage_PalletNum_fkey"
+    error: error: insert or update on table "Catch" violates foreign key constraint "Catch_PalletNum_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -1455,10 +1455,10 @@ TEST FAILED: pallet
       internalQuery: undefined,
       where: undefined,
       schema: 'public',
-      table: 'CatchPackage',
+      table: 'Catch',
       column: undefined,
       dataType: undefined,
-      constraint: 'CatchPackage_PalletNum_fkey',
+      constraint: 'Catch_PalletNum_fkey',
       file: 'ri_triggers.c',
       line: '2528',
       routine: 'ri_ReportViolation'
@@ -1471,20 +1471,20 @@ TEST FAILED: pallet
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
- FAIL  test/tp/catch-package/catch-package.e2e-spec.ts (7.868 s)
-  CatchPackage (e2e)
+ FAIL  test/tp/catch/catch.e2e-spec.ts (7.868 s)
+  Catch (e2e)
     ✓ Can authenticate (150 ms)
-    ✓ Can create a catch-package with authentication (94 ms)
-    ✓ Cant create a catch-package without authentication (7 ms)
-    ✕ Can read a catch-package with authentication - known to fail (31 ms)
-    ✕ Cant read a catch-package that doesnt exist - known to fail (22 ms)
-    ✓ Cant read a catch-package without authentication (4 ms)
-    ✓ Can read all catch-packages with authentication (28 ms)
-    ✓ Cant read all catch-packages without authentication (5 ms)
-    ✕ Cant overwrite a catch-package with authentication - known to fail (36 ms)
-    ✕ Cant create a catch-package without a related palletNum - fails because of lacking error handling (120 ms)
+    ✓ Can create a catch with authentication (94 ms)
+    ✓ Cant create a catch without authentication (7 ms)
+    ✕ Can read a catch with authentication - known to fail (31 ms)
+    ✕ Cant read a catch that doesnt exist - known to fail (22 ms)
+    ✓ Cant read a catch without authentication (4 ms)
+    ✓ Can read all catchs with authentication (28 ms)
+    ✓ Cant read all catchs without authentication (5 ms)
+    ✕ Cant overwrite a catch with authentication - known to fail (36 ms)
+    ✕ Cant create a catch without a related palletNum - fails because of lacking error handling (120 ms)
 
-  ● CatchPackage (e2e) › Can read a catch-package with authentication - known to fail
+  ● Catch (e2e) › Can read a catch with authentication - known to fail
 
     expect(received).toEqual(expected) // deep equality
 
@@ -1493,19 +1493,19 @@ TEST FAILED: pallet
 
       66 |       .set('Authorization', `Bearer ${jwtToken}`)
       67 |       .expect(200)
-    > 68 |     expect(response.body.catchPackageId).toEqual<string>("1")
+    > 68 |     expect(response.body.pkCatch).toEqual<string>("1")
          |                                          ^
       69 |     expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
       70 |     expect(response.body.palletNum).toEqual<string>("1")
       71 |     return response
 
-      at Object.<anonymous> (catch-package.e2e-spec.ts:68:42)
+      at Object.<anonymous> (catch.e2e-spec.ts:68:42)
 
-  ● CatchPackage (e2e) › Cant read a catch-package that doesnt exist - known to fail
+  ● Catch (e2e) › Cant read a catch that doesnt exist - known to fail
 
     expected 404 "Not Found", got 200 "OK"
 
-      76 |       .get('/api/v1/sawtooth/tp/catch-package/?catchPackageId=404')
+      76 |       .get('/api/v1/sawtooth/tp/catch/?pkCatch=404')
       77 |       .set('Authorization', `Bearer ${jwtToken}`)
     > 78 |       .expect(404)
          |        ^
@@ -1513,7 +1513,7 @@ TEST FAILED: pallet
       80 |     return response
       81 |   });
 
-      at Object.<anonymous> (catch-package.e2e-spec.ts:78:8)
+      at Object.<anonymous> (catch.e2e-spec.ts:78:8)
       ----
       at Test._assertStatus (../../../node_modules/supertest/lib/test.js:252:14)
       at ../../../node_modules/supertest/lib/test.js:308:13
@@ -1521,7 +1521,7 @@ TEST FAILED: pallet
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CatchPackage (e2e) › Cant overwrite a catch-package with authentication - known to fail
+  ● Catch (e2e) › Cant overwrite a catch with authentication - known to fail
 
     expected 400 "Bad Request", got 201 "Created"
 
@@ -1533,7 +1533,7 @@ TEST FAILED: pallet
       121 |   });
       122 |
 
-      at Object.<anonymous> (catch-package.e2e-spec.ts:119:8)
+      at Object.<anonymous> (catch.e2e-spec.ts:119:8)
       ----
       at Test._assertStatus (../../../node_modules/supertest/lib/test.js:252:14)
       at ../../../node_modules/supertest/lib/test.js:308:13
@@ -1541,7 +1541,7 @@ TEST FAILED: pallet
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CatchPackage (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
+  ● Catch (e2e) › Cant create a catch without a related palletNum - fails because of lacking error handling
 
     expected 400 "Bad Request", got 500 "Internal Server Error"
 
@@ -1553,7 +1553,7 @@ TEST FAILED: pallet
       134 |   });
       135 |
 
-      at Object.<anonymous> (catch-package.e2e-spec.ts:132:8)
+      at Object.<anonymous> (catch.e2e-spec.ts:132:8)
       ----
       at Test._assertStatus (../../../node_modules/supertest/lib/test.js:252:14)
       at ../../../node_modules/supertest/lib/test.js:308:13
@@ -1568,15 +1568,15 @@ Time:        7.992 s, estimated 8 s
 Ran all test suites.
 npm ERR! code ELIFECYCLE
 npm ERR! errno 1
-npm ERR! backend@0.0.1 test:e2e:tp:catch-package: `jest --config ./test/jest.tp.catch-package.config.js`
+npm ERR! backend@0.0.1 test:e2e:tp:catch: `jest --config ./test/jest.tp.catch.config.js`
 npm ERR! Exit status 1
 npm ERR! 
-npm ERR! Failed at the backend@0.0.1 test:e2e:tp:catch-package script.
+npm ERR! Failed at the backend@0.0.1 test:e2e:tp:catch script.
 npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 
 npm ERR! A complete log of this run can be found in:
 npm ERR!     /root/.npm/_logs/2022-10-09T12_50_49_807Z-debug.log
-TEST FAILED: catch-package
+TEST FAILED: catch
 
 > backend@0.0.1 test:e2e:tp:company /project/sawtooth-tuna/backend
 > jest --config ./test/jest.tp.company.config.js
@@ -1911,7 +1911,7 @@ TEST FAILED: Company
     ✓ Cant read a pallet-event without authentication (4 ms)
     ✓ Can read all pallet-events with authentication (32 ms)
     ✓ Cant read all pallet-events without authentication (5 ms)
-    ✕ Cant create a catch-package without a related palletNum - fails because of lacking error handling (61 ms)
+    ✕ Cant create a catch without a related palletNum - fails because of lacking error handling (61 ms)
 
   ● PalletEvent (e2e) › Can read a pallet-event with authentication - known to fail
 
@@ -1950,7 +1950,7 @@ TEST FAILED: Company
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● PalletEvent (e2e) › Cant create a catch-package without a related palletNum - fails because of lacking error handling
+  ● PalletEvent (e2e) › Cant create a catch without a related palletNum - fails because of lacking error handling
 
     expected 201 "Created", got 500 "Internal Server Error"
 
@@ -2031,7 +2031,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "Species"("Quantity", "Species", "CatchPackageId", "LaunchDateTime") VALUES ($1, $2, $3, $4) RETURNING "PkSpecies" -- PARAMETERS: [1,1,"1","2022-09-15T14:37:04.837Z"]
+    query: INSERT INTO "Species"("Quantity", "Species", "PkCatch", "LaunchDateTime") VALUES ($1, $2, $3, $4) RETURNING "PkSpecies" -- PARAMETERS: [1,1,"1","2022-09-15T14:37:04.837Z"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2051,7 +2051,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."PkCatch" AS "SpeciesEntity_PkCatch", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2066,7 +2066,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."PkCatch" AS "SpeciesEntity_PkCatch", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2081,7 +2081,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."PkCatch" AS "SpeciesEntity_PkCatch", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2109,7 +2109,7 @@ TEST FAILED: Pallet-event
          |                                     ^
       65 |     expect(response.body.quantity).toEqual<number>(1)
       66 |     expect(response.body.species).toEqual<number>(1)
-      67 |     expect(response.body.catchPackageId).toEqual<string>("1")
+      67 |     expect(response.body.pkCatch).toEqual<string>("1")
 
       at Object.<anonymous> (species.e2e-spec.ts:64:37)
 
@@ -2194,7 +2194,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2204,7 +2204,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "PackingDate" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1"]
+    query: UPDATE "CustomLevelPackage" SET "UpdatedDateTime" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -2225,7 +2225,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2240,7 +2240,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2255,7 +2255,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2270,7 +2270,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2280,7 +2280,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "PackingDate" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2021-01-15T14:37:20.837Z","1"]
+    query: UPDATE "CustomLevelPackage" SET "UpdatedDateTime" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2021-01-15T14:37:20.837Z","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -2301,7 +2301,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2369,7 +2369,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."CatchPackageId" AS "CustomLevelPackageEntity_CatchPackageId", "CustomLevelPackageEntity"."PackingDate" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2379,18 +2379,18 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "CatchPackageId" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
+    query: UPDATE "CustomLevelPackage" SET "PkCatch" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
 
   console.log
-    query failed: UPDATE "CustomLevelPackage" SET "CatchPackageId" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
+    query failed: UPDATE "CustomLevelPackage" SET "PkCatch" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "CustomLevelPackage" violates foreign key constraint "CustomLevelPackage_CatchPackageId_fkey"
+    error: error: insert or update on table "CustomLevelPackage" violates foreign key constraint "CustomLevelPackage_PkCatch_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -2403,7 +2403,7 @@ TEST FAILED: species
       length: 324,
       severity: 'ERROR',
       code: '23503',
-      detail: 'Key (CatchPackageId)=(404) is not present in table "CatchPackage".',
+      detail: 'Key (PkCatch)=(404) is not present in table "Catch".',
       hint: undefined,
       position: undefined,
       internalPosition: undefined,
@@ -2413,7 +2413,7 @@ TEST FAILED: species
       table: 'CustomLevelPackage',
       column: undefined,
       dataType: undefined,
-      constraint: 'CustomLevelPackage_CatchPackageId_fkey',
+      constraint: 'CustomLevelPackage_PkCatch_fkey',
       file: 'ri_triggers.c',
       line: '2528',
       routine: 'ri_ReportViolation'
@@ -2438,7 +2438,7 @@ TEST FAILED: species
     ✓ Cant read all custom-packagees without authentication (3 ms)
     ✕ Cant overwrite a custom-package with authentication - known to fail (46 ms)
     ✕ Cant create a custom-package without a related agent - fails because of lacking error handling (99 ms)
-    ✕ Cant create a custom-package without a related catchPackageId - fails because of lacking error handling (40 ms)
+    ✕ Cant create a custom-package without a related pkCatch - fails because of lacking error handling (40 ms)
 
   ● CustomPackage (e2e) › Can read a custom-package with authentication - known to fail
 
@@ -2451,7 +2451,7 @@ TEST FAILED: species
       64 |       .expect(200)
     > 65 |     expect(response.body.consumerPackageId).toEqual<string>("1")
          |                                             ^
-      66 |     expect(response.body.catchPackageId).toEqual<string>("1")
+      66 |     expect(response.body.pkCatch).toEqual<string>("1")
       67 |     expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
       68 |     expect(response.body.agent).toEqual<number>(1)
 
@@ -2517,7 +2517,7 @@ TEST FAILED: species
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CustomPackage (e2e) › Cant create a custom-package without a related catchPackageId - fails because of lacking error handling
+  ● CustomPackage (e2e) › Cant create a custom-package without a related pkCatch - fails because of lacking error handling
 
     expected 400 "Bad Request", got 500 "Internal Server Error"
 

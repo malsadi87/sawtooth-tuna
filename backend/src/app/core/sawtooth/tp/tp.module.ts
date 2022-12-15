@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { CatchPackageModule } from './catch-package/catch-package.module';
+import { CatchModule } from './catch/catch.module';
 import { CompanyModule } from './company/company.module';
 import { CustomLevelPackageModule } from './custom-level-package/custom-level-package.module';
 import { HaulModule } from './haul/haul.module';
@@ -18,7 +18,7 @@ import { ProductModule } from './product/product.module';
         HaulModule,
         PalletModule,
         PalletEventModule,
-        CatchPackageModule,
+        CatchModule,
         SpeciesModule,
         CompanyModule,
         CustomLevelPackageModule

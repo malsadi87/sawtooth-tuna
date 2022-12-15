@@ -5,7 +5,7 @@ import { CustomLevelPackageController } from './custom-level-package.controller'
 import { CustomLevelPackageRepository } from './custom-level-package.repository';
 import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
 import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.module';
-import { CatchPackageModule } from '../catch-package/catch-package.module';
+import { CatchModule } from '../catch/catch.module';
 import { PalletModule } from '../pallet/pallet.module';
 import { HaulModule } from '../haul/haul.module';
 import { PalletEventModule } from '../pallet-event/pallet-event.module';
@@ -19,7 +19,7 @@ import { CompanyModule } from '../company/company.module';
     TypeOrmModule.forFeature([CustomLevelPackageEntity]),
     SawtoothUtilityModule,
     PalletModule,
-    CatchPackageModule,
+    CatchModule,
     HaulModule,
     PalletEventModule,
     ProductModule,

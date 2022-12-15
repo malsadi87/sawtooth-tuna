@@ -4,8 +4,8 @@ import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPacka
 import { CustomPackageCreationDto } from '../../../../utility/dto/tp/custom-package-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 import { CustomLevelPackageRepository } from './custom-level-package.repository';
-import { CatchPackageService } from '../catch-package/catch-package.service';
-import { CatchPackageEntity } from 'src/entity/catchPackage.entity';
+import { CatchService } from '../catch/catch.service';
+import { CatchEntity } from 'src/entity/catch.entity';
 import { PalletService } from '../pallet/pallet.service';
 import { HaulService } from '../haul/haul.service';
 import { CompanyService } from '../company/company.service';
@@ -28,7 +28,7 @@ export class CustomLevelPackageService {
         private readonly customLevelPackageRepository: CustomLevelPackageRepository,
         private readonly palletService: PalletService,
         private readonly haulService: HaulService,
-        private readonly catchPackageService: CatchPackageService,
+        private readonly catchService: CatchService,
         private readonly companyService: CompanyService,
         private readonly palletEventService: PalletEventService,
         private readonly productService: ProductService,
@@ -64,9 +64,10 @@ export class CustomLevelPackageService {
         return newCustomPackage.consumerPackageId;
     }
 
+    /*
     async getData(consumerPackageId: string): Promise<{
       customLevelPackage: CustomLevelPackageEntity, 
-      catchPackage: CatchPackageEntity,
+      catchObject: CatchEntity,
       pallet: PalletEntity,
       palletEvent: PalletEventEntity[],
       trip: TripEntity,
@@ -77,9 +78,9 @@ export class CustomLevelPackageService {
     }> {
         
         const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
-        const catchPackage = await this.catchPackageService.getById(customLevelPackage.catchPackageId)
-        const pallet = await this.palletService.getByPalletNo(catchPackage.palletNum)
-        const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
+        const catchObject = await this.catchService.getById(customLevelPackage.pkCatch)
+        const pallet = await this.palletService.getByPalletNo(catchObject.palletNum)
+        const palletEvent = await this.palletEventService.getByPalletNumber(catchObject.palletNum)
         const trip = await this.tripService.getByPkTrip(pallet.pkTrip)
         const company = await this.companyService.getById(customLevelPackage.agent)
         const product = await this.productService.getByProductNum(pallet.productNum)
@@ -88,7 +89,7 @@ export class CustomLevelPackageService {
 
         return {
           customLevelPackage: customLevelPackage,
-          catchPackage: catchPackage,
+          catchObject: catchObject,
           pallet: pallet,
           palletEvent: palletEvent,
           trip: trip,
@@ -97,5 +98,5 @@ export class CustomLevelPackageService {
           product: product,
           haul: haul
         }
-    }
+    }*/
 }

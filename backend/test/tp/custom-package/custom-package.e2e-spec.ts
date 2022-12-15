@@ -34,7 +34,7 @@ describe('CustomPackage (e2e)', () => {
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "1",
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "packingDate": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
@@ -48,7 +48,7 @@ describe('CustomPackage (e2e)', () => {
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "2",
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "packingDate": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
@@ -62,7 +62,7 @@ describe('CustomPackage (e2e)', () => {
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "1",
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "packingDate": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
@@ -77,7 +77,7 @@ describe('CustomPackage (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.consumerPackageId).toEqual<string>("1")
-    expect(response.body.catchPackageId).toEqual<string>("1")
+    expect(response.body.pkCatch).toEqual<string>("1")
     expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
     expect(response.body.agent).toEqual<number>(1)
     return response
@@ -105,7 +105,7 @@ describe('CustomPackage (e2e)', () => {
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
       "consumerPackageId": "1",
-      "catchPackageId": "1",
+      "pkCatch": "1",
       "packingDate": "2022-09-15T14:37:04.837Z",
       "agent": 1
     }]))
@@ -120,7 +120,7 @@ describe('CustomPackage (e2e)', () => {
       .expect(200)
     expect(response.body.customLevelPackage).toEqual({
       "consumerPackageId": "1",
-      "catchPackageId": "1",
+      "pkCatch": "1",
       "packingDate": "2022-09-15T14:37:04.837Z",
       "agent": 1
     })
@@ -139,7 +139,7 @@ describe('CustomPackage (e2e)', () => {
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "1",
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "packingDate": "2021-01-15T14:37:20.837Z",
         "agent": 1
       })
@@ -153,7 +153,7 @@ describe('CustomPackage (e2e)', () => {
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "1",
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "packingDate": "2021-01-15T14:37:20.837Z",
         "agent": 404
       })
@@ -162,12 +162,12 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
-  it('Cant create a custom-package without a related catchPackageId - fails because of lacking error handling', async () => {
+  it('Cant create a custom-package without a related pkCatch - fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
         "consumerPackageId": "1",
-        "catchPackageId": "404",
+        "pkCatch": "404",
         "packingDate": "2021-01-15T14:37:20.837Z",
         "agent": 1
       })

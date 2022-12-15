@@ -73,11 +73,11 @@ export const APIBasePath = {
                 getById: '/sawtooth/tp/company/:id',
                 createNew: '/sawtooth/tp/company/addNew'
             },
-            catchPackage: {
-                base: '/sawtooth/tp/catch-package',
-                getAll: '/sawtooth/tp/catch-package/',
-                getById: '/sawtooth/tp/catch-package/:id',
-                createNew: '/sawtooth/tp/catch-package/addNew'
+            catch: {
+                base: '/sawtooth/tp/catch',
+                getAll: '/sawtooth/tp/catch/',
+                getById: '/sawtooth/tp/catch/:id',
+                createNew: '/sawtooth/tp/catch/addNew'
             },
         }
     }

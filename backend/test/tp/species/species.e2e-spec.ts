@@ -34,7 +34,7 @@ describe('Species (e2e)', () => {
       .send({
         "quantity": 1,
         "species": 1,
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "launchDateTime": "2022-09-15T14:37:04.837Z"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -48,7 +48,7 @@ describe('Species (e2e)', () => {
       .send({
         "quantity": 1,
         "species": 1,
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "launchDateTime": "2022-09-15T14:37:04.837Z"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -62,7 +62,7 @@ describe('Species (e2e)', () => {
       .send({
         "quantity": 1,
         "species": 1,
-        "catchPackageId": "1",
+        "pkCatch": "1",
         "launchDateTime": "2022-09-15T14:37:04.837Z"
       })
       .set('Authorization', `Bearer wrong`)
@@ -78,7 +78,7 @@ describe('Species (e2e)', () => {
     expect(response.body.pkSpecies).toEqual<number>(1)
     expect(response.body.quantity).toEqual<number>(1)
     expect(response.body.species).toEqual<number>(1)
-    expect(response.body.catchPackageId).toEqual<string>("1")
+    expect(response.body.pkCatch).toEqual<string>("1")
     expect(response.body.launchDateTime).toEqual<string>("2022-09-15T14:37:04.837Z")
     return response
   });
@@ -107,7 +107,7 @@ describe('Species (e2e)', () => {
       "pkSpecies": 1,
       "quantity": 1,
       "species": 1,
-      "catchPackageId": "1",
+      "pkCatch": "1",
       "launchDateTime": "2022-09-15T14:37:04.837Z"
     }]))
     return response

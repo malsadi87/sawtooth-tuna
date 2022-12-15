@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
-import { CatchPackageEntity } from "./catchPackage.entity";
+import { CatchEntity } from "./catch.entity";
 import { PalletEventEntity } from "./palletEvent.entity";
 import { TripEntity } from "./trip.entity";
 import * as pg from 'pg';
@@ -35,7 +35,8 @@ export class PalletEntity extends BaseEntity {
     @JoinColumn({ referencedColumnName: 'PalletNum' })
     palletEvenets: PalletEventEntity[];
 
-    @OneToMany((entity) => CatchPackageEntity, (x) => x.pallet)
-    @JoinColumn({ referencedColumnName: 'PalletNum' })
-    catchPackages: CatchPackageEntity[];
+    // TODO: Create relation production
+    //@OneToMany((entity) => CatchEntity, (x) => x.pallet)
+    //@JoinColumn({ referencedColumnName: 'PalletNum' })
+    //catchs: CatchEntity[];
 }
