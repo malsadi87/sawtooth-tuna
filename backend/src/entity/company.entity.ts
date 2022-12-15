@@ -5,8 +5,8 @@ import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
 @Entity('Company')
 export class CompanyEntity extends BaseEntity {
     @SawtoothIdentity()
-    @PrimaryColumn({ generated: true, type: 'int', name: 'CompanyId', nullable: false })
-    companyId: number;
+    @PrimaryColumn({ generated: true, type: 'int', name: 'PkCompany', nullable: false })
+    pkCompany: number;
 
     @Column({ type:'varchar', width: 255, name: 'CompanyName', nullable: false })
     companyName: string;
@@ -17,7 +17,8 @@ export class CompanyEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'ContactInfo', nullable: false })
     contactInfo: string;
 
-    @OneToMany((type) => CustomLevelPackageEntity, (x) => x.company)
-    @JoinColumn({ referencedColumnName: 'Agent' })
-    customLevelPackages: CustomLevelPackageEntity[]
+    // TODO: Reference to pallet
+    //@OneToMany((type) => CustomLevelPackageEntity, (x) => x.company)
+    //@JoinColumn({ referencedColumnName: 'Agent' })
+    //customLevelPackages: CustomLevelPackageEntity[]
 }

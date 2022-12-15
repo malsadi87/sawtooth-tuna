@@ -19,14 +19,14 @@ class CompanyPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
 
-        companyId = data.get('companyId')
+        pkCompany = data.get('pkCompany')
         companyName = data.get('companyName')
         companyAddress = data.get('companyAddress')
         contactInfo = data.get('contactInfo')
         
 
-        if not companyId:
-            raise InvalidTransaction('companyId is required')
+        if not pkCompany:
+            raise InvalidTransaction('pkCompany is required')
 
         if not companyName:
             raise InvalidTransaction('companyName is required')
@@ -39,7 +39,7 @@ class CompanyPayload(object):
 
                     
         
-        self._companyId = companyId
+        self._companyId = pkCompany
         self._companyName = companyName
         self._companyAddress = companyAddress
         self._contactInfo = contactInfo
@@ -47,7 +47,7 @@ class CompanyPayload(object):
        
        
     @property
-    def companyId(self):
+    def pkCompany(self):
         return self._companyId
 
     @property

@@ -40,8 +40,8 @@ class Company extends Component {
     this.setState({
       companies: result.map((info) => {
         return (
-          <tr key={info.companyId}>
-            <td>{info.companyId}</td>
+          <tr key={info.pkCompany}>
+            <td>{info.pkCompany}</td>
             <td>{info.companyName}</td>
             <td>{info.companyAddress}</td>
             <td>{info.contactInfo}</td>

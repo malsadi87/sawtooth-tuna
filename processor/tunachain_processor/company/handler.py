@@ -46,16 +46,16 @@ class CompanyTransactionHandler(TransactionHandler):
         LOGGER.info(payload)
 
         
-        _create_company(companyId=payload.companyId,
+        _create_company(pkCompany=payload.pkCompany,
                         companyName=payload.companyName,
                         companyAddress=payload.companyAddress,
                         contactInfo=payload.contactInfo,
                         state=state)
 
 
-def _create_company(companyId, companyName, companyAddress, contactInfo, state):
-    if state.get_company(companyId) is not None:
+def _create_company(pkCompany, companyName, companyAddress, contactInfo, state):
+    if state.get_company(pkCompany) is not None:
         raise InvalidTransaction(
-            'Invalid action: Company already exists: {}'.format(companyId))
+            'Invalid action: Company already exists: {}'.format(pkCompany))
 
-    state.set_company(companyId, companyName, companyAddress, contactInfo)
+    state.set_company(pkCompany, companyName, companyAddress, contactInfo)

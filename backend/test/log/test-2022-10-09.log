@@ -1622,7 +1622,7 @@ TEST FAILED: catch
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "Company"("CompanyName", "CompanyAddress", "ContactInfo") VALUES ($1, $2, $3) RETURNING "CompanyId" -- PARAMETERS: ["Company Name","AddressString","ContactString"]
+    query: INSERT INTO "Company"("CompanyName", "CompanyAddress", "ContactInfo") VALUES ($1, $2, $3) RETURNING "PkCompany" -- PARAMETERS: ["Company Name","AddressString","ContactString"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1642,7 +1642,7 @@ TEST FAILED: catch
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CompanyEntity"."CompanyId" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
+    query: SELECT "CompanyEntity"."PkCompany" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1657,7 +1657,7 @@ TEST FAILED: catch
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CompanyEntity"."CompanyId" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
+    query: SELECT "CompanyEntity"."PkCompany" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1672,7 +1672,7 @@ TEST FAILED: catch
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CompanyEntity"."CompanyId" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
+    query: SELECT "CompanyEntity"."PkCompany" AS "CompanyEntity_CompanyId", "CompanyEntity"."CompanyName" AS "CompanyEntity_CompanyName", "CompanyEntity"."CompanyAddress" AS "CompanyEntity_CompanyAddress", "CompanyEntity"."ContactInfo" AS "CompanyEntity_ContactInfo" FROM "Company" "CompanyEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1696,7 +1696,7 @@ TEST FAILED: catch
 
       60 |       .set('Authorization', `Bearer ${jwtToken}`)
       61 |       .expect(200)
-    > 62 |     expect(response.body.companyId).toEqual<number>(1)
+    > 62 |     expect(response.body.pkCompany).toEqual<number>(1)
          |                                     ^
       63 |     expect(response.body.companyName).toEqual<string>("Company Name")
       64 |     expect(response.body.companyAddress).toEqual<string>("AddressString")
@@ -1708,7 +1708,7 @@ TEST FAILED: catch
 
     expected 404 "Not Found", got 200 "OK"
 
-      71 |       .get('/api/v1/sawtooth/tp/company/?companyId=404')
+      71 |       .get('/api/v1/sawtooth/tp/company/?pkCompany=404')
       72 |       .set('Authorization', `Bearer ${jwtToken}`)
     > 73 |       .expect(404)
          |        ^

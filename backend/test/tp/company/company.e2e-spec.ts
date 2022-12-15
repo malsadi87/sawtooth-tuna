@@ -72,7 +72,7 @@ describe('Company (e2e)', () => {
       .get('/api/v1/sawtooth/tp/company/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.companyId).toEqual<number>(1)
+    expect(response.body.pkCompany).toEqual<number>(1)
     expect(response.body.companyName).toEqual<string>("Company Name")
     expect(response.body.companyAddress).toEqual<string>("AddressString")
     expect(response.body.contactInfo).toEqual<string>("ContactString")
@@ -100,7 +100,7 @@ describe('Company (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "companyId": 1,
+      "pkCompany": 1,
       "companyName": "Company Name",
       "companyAddress": "AddressString",
       "contactInfo": "ContactString"

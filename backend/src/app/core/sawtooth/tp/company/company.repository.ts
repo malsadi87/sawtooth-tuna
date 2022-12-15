@@ -14,7 +14,7 @@ export class CompanyRepository extends Repository<CompanyEntity> {
     }
 
     async getById(id: number): Promise<CompanyEntity> {
-        return await this.findOneBy({ companyId: id});
+        return await this.findOneBy({ pkCompany: id});
     }
 
     async getByName(name: string): Promise<CompanyEntity> {

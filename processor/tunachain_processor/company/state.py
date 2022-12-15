@@ -16,14 +16,14 @@ COMPANY_NAMESPACE = hashlib.sha512(
 LOGGER.info(COMPANY_NAMESPACE)    
 
 
-def _get_address(companyId):
-    adr = hashlib.sha512(str(companyId).encode('utf-8')).hexdigest()[:62]
+def _get_address(pkCompany):
+    adr = hashlib.sha512(str(pkCompany).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_company_address(companyId):
-    add =  COMPANY_NAMESPACE + '00' + _get_address(companyId)
+def _get_company_address(pkCompany):
+    add =  COMPANY_NAMESPACE + '00' + _get_address(pkCompany)
     LOGGER.info(add)
     return add
 
@@ -43,17 +43,17 @@ class CompanyState(object):
     def __init__(self, context):
         self._context = context
 
-    def get_company(self, companyId):
+    def get_company(self, pkCompany):
         LOGGER.info('Get Company method')
-        return self._get_state(_get_company_address(companyId))
+        return self._get_state(_get_company_address(pkCompany))
 
     
-    def set_company(self, companyId, companyName, companyAddress, contactInfo):
-        address = _get_company_address(companyId)
+    def set_company(self, pkCompany, companyName, companyAddress, contactInfo):
+        address = _get_company_address(pkCompany)
         LOGGER.info('set_company method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "companyId": companyId,
+            {   "pkCompany": pkCompany,
                 "companyName": companyName,
                 "companyAddress": companyAddress,
                 "contactInfo": contactInfo

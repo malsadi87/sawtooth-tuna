@@ -20,8 +20,4 @@ export class CustomLevelPackageEntity extends BaseEntity {
     @Column({ type: 'int', name: 'Agent', nullable: false })
     agent: number;
 
-    @ManyToOne((type) => CompanyEntity, x => x.customLevelPackages)
-    @JoinColumn({ name: 'Agent', referencedColumnName: 'companyId' })
-    company: CompanyEntity;    
-    
 }
