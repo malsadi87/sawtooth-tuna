@@ -70,8 +70,7 @@ class ViewCustomPackage extends Component {
     const companyResult = await companyService.getById(customPackageResult.agent)
     console.log("companyResult:", companyResult)
 
-    const speciesResult = await speciesService.getByCatchPackageId(customPackageResult.catchPackageId)
-    console.log("speciesResult:", speciesResult)
+    // TODO: GetSpecies
 
     const productResult = await productService.getByProductNum(palletResult.productNum)
     console.log("productResult:", productResult)

@@ -1,23 +1,17 @@
 import { Transform } from "class-transformer";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
-@Entity('SpeciesAndWeight')
-export class SpeciesAndWeightEntity extends BaseEntity {
+@Entity('Species')
+export class SpeciesEntity extends BaseEntity {
     @SawtoothIdentity()
-    @PrimaryGeneratedColumn('increment', { name: 'SpeciesId' })
-    speciesId: number;
 
-    @Column({ type:'int', name: 'Quantity', nullable: false })
-    quantity: number;
+    @PrimaryColumn({ generated: true, type: 'int', name: 'PkSpecies', nullable: false })
+    pkSpecies: number;
 
-    @Column({ type:'int', name: 'Species', nullable: false })
-    species: number;
+    @Column({ type:'varchar', width: 255, name: 'Name', nullable: false })
+    name: string;
 
-    @Column({ type:'varchar', width: 255, name: 'CatchPackageId', nullable: false })
-    catchPackageId: string;
-
-    @Transform(x => new Date(x.value))
-    @Column({ type:'timestamp', name: 'LaunchDateTime', nullable: true })
-    launchDateTime: Date;
+    @Column({ type:'varchar', width: 255, name: 'Description', nullable: true })
+    description: string;
 }

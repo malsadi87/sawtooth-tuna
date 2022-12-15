@@ -10,7 +10,7 @@ import { PalletModule } from '../pallet/pallet.module';
 import { HaulModule } from '../haul/haul.module';
 import { PalletEventModule } from '../pallet-event/pallet-event.module';
 import { ProductModule } from '../product/product.module';
-import { SpeciesAndWeightModule } from '../species-and-weight/species-and-weight.module';
+import { SpeciesModule } from '../species/species.module';
 import { TripModule } from '../trip/trip.module';
 import { CompanyModule } from '../company/company.module';
 
@@ -23,7 +23,7 @@ import { CompanyModule } from '../company/company.module';
     HaulModule,
     PalletEventModule,
     ProductModule,
-    SpeciesAndWeightModule,
+    SpeciesModule,
     TripModule,
     CompanyModule
   ],

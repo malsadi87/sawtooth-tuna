@@ -1,15 +1,11 @@
 import { IsDateString, IsNumber, Length } from "class-validator";
 
 export class SpeciesCreationDto {
-    @IsNumber()
-    quantity: number;
-
-    @IsNumber()
-    species: number;
 
     @Length(1, 255)
-    catchPackageId: string;
+    name: string;
 
-    @IsDateString()
-    launchDateTime: Date;
+    @Length(1, 255)
+    description: string;
+
 }

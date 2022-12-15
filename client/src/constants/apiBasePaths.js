@@ -58,7 +58,6 @@ export const APIBasePath = {
                 base: '/sawtooth/tp/species',
                 getAll: '/sawtooth/tp/species/',
                 getById: '/sawtooth/tp/species/:id',
-                getByCatchPackageId: '/sawtooth/tp/species/catch-package/:id',
                 createNew: '/sawtooth/tp/species/addNew'
             },
             customPackage: {

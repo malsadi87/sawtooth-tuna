@@ -19,13 +19,13 @@ class SpeciesPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
 
-        speciesId = data.get('speciesId')
+        pkSpecies = data.get('pkSpecies')
         quantity = data.get('quantity')
         species = data.get('species')
         packageNum = data.get('packageNum')
         launchDateTime = data.get('launchDateTime')
 
-        if not speciesId:
+        if not pkSpecies:
             raise InvalidTransaction('Species ID is required')
 
         if not quantity:
@@ -40,7 +40,7 @@ class SpeciesPayload(object):
         if not launchDateTime:
             raise InvalidTransaction('Launch Date is required')                  
         
-        self._speciesId = speciesId
+        self._pkSpecies = pkSpecies
         self._quantity = quantity
         self._species = species
         self._packageNum = packageNum
@@ -48,8 +48,8 @@ class SpeciesPayload(object):
        
        
     @property
-    def speciesId(self):
-        return self._speciesId
+    def pkSpecies(self):
+        return self._pkSpecies
 
     @property
     def quantity(self):

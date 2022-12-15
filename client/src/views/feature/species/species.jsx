@@ -41,12 +41,10 @@ class Species extends Component {
     this.setState({
       species: result.map((info) => {
         return (
-          <tr key={info.speciesId}>
-            <td>{info.speciesId}</td>
-            <td>{info.quantity}</td>
-            <td>{info.species}</td>
-            <td>{info.catchPackageId}</td>
-            <td>{info.launchDateTime}</td>
+          <tr key={info.pkSpecies}>
+            <td>{info.pkSpecies}</td>
+            <td>{info.name}</td>
+            <td>{info.description}</td>
           </tr>
         )
       })
@@ -58,40 +56,10 @@ class Species extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          {/*Quantity*/}
+          {/*Name*/}
           <Form.Item
-            name={'quantity'}
-            label="Quantity"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*Species*/}
-          <Form.Item
-            name={'species'}
-            label="Species"
-            rules={[
-              {
-                required: true,
-                type: 'number',
-                min: 0
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*CatchPackageId*/}
-          <Form.Item
-            name={'catchPackageId'}
-            label="Catch Package ID"
+            name={'name'}
+            label="Name"
             rules={[
               {
                 required: true,
@@ -102,19 +70,18 @@ class Species extends Component {
             <Input />
           </Form.Item>
 
-          {/*LaunchDateTime*/}
+          {/*Description*/}
           <Form.Item
-            name={'launchDateTime'}
-            label="Launch Date Time"
+            name={'description'}
+            label="Description"
             rules={[
               {
-                required: true
+                required: false,
+                type: 'string',
               },
             ]}
           >
-            <DatePicker
-              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
-            />
+            <Input />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
@@ -130,10 +97,8 @@ class Species extends Component {
             <thead>
               <tr>
                 <th>Species ID</th>
-                <th>Quantity</th>
-                <th>Species</th>
-                <th>Catch Package ID</th>
-                <th>Launch Date Time</th>
+                <th>Name</th>
+                <th>Description</th>
               </tr>
             </thead>
             <tbody>

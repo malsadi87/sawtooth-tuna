@@ -75,7 +75,7 @@ describe('Species (e2e)', () => {
       .get('/api/v1/sawtooth/tp/species/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.speciesId).toEqual<number>(1)
+    expect(response.body.pkSpecies).toEqual<number>(1)
     expect(response.body.quantity).toEqual<number>(1)
     expect(response.body.species).toEqual<number>(1)
     expect(response.body.catchPackageId).toEqual<string>("1")
@@ -104,7 +104,7 @@ describe('Species (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "speciesId": 1,
+      "pkSpecies": 1,
       "quantity": 1,
       "species": 1,
       "catchPackageId": "1",

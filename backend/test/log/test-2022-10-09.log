@@ -2031,7 +2031,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "SpeciesAndWeight"("Quantity", "Species", "CatchPackageId", "LaunchDateTime") VALUES ($1, $2, $3, $4) RETURNING "SpeciesId" -- PARAMETERS: [1,1,"1","2022-09-15T14:37:04.837Z"]
+    query: INSERT INTO "Species"("Quantity", "Species", "CatchPackageId", "LaunchDateTime") VALUES ($1, $2, $3, $4) RETURNING "PkSpecies" -- PARAMETERS: [1,1,"1","2022-09-15T14:37:04.837Z"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2051,7 +2051,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesAndWeightEntity"."SpeciesId" AS "SpeciesAndWeightEntity_SpeciesId", "SpeciesAndWeightEntity"."Quantity" AS "SpeciesAndWeightEntity_Quantity", "SpeciesAndWeightEntity"."Species" AS "SpeciesAndWeightEntity_Species", "SpeciesAndWeightEntity"."CatchPackageId" AS "SpeciesAndWeightEntity_CatchPackageId", "SpeciesAndWeightEntity"."LaunchDateTime" AS "SpeciesAndWeightEntity_LaunchDateTime" FROM "SpeciesAndWeight" "SpeciesAndWeightEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2066,7 +2066,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesAndWeightEntity"."SpeciesId" AS "SpeciesAndWeightEntity_SpeciesId", "SpeciesAndWeightEntity"."Quantity" AS "SpeciesAndWeightEntity_Quantity", "SpeciesAndWeightEntity"."Species" AS "SpeciesAndWeightEntity_Species", "SpeciesAndWeightEntity"."CatchPackageId" AS "SpeciesAndWeightEntity_CatchPackageId", "SpeciesAndWeightEntity"."LaunchDateTime" AS "SpeciesAndWeightEntity_LaunchDateTime" FROM "SpeciesAndWeight" "SpeciesAndWeightEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2081,7 +2081,7 @@ TEST FAILED: Pallet-event
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "SpeciesAndWeightEntity"."SpeciesId" AS "SpeciesAndWeightEntity_SpeciesId", "SpeciesAndWeightEntity"."Quantity" AS "SpeciesAndWeightEntity_Quantity", "SpeciesAndWeightEntity"."Species" AS "SpeciesAndWeightEntity_Species", "SpeciesAndWeightEntity"."CatchPackageId" AS "SpeciesAndWeightEntity_CatchPackageId", "SpeciesAndWeightEntity"."LaunchDateTime" AS "SpeciesAndWeightEntity_LaunchDateTime" FROM "SpeciesAndWeight" "SpeciesAndWeightEntity"
+    query: SELECT "SpeciesEntity"."PkSpecies" AS "SpeciesEntity_PkSpecies", "SpeciesEntity"."Quantity" AS "SpeciesEntity_Quantity", "SpeciesEntity"."Species" AS "SpeciesEntity_Species", "SpeciesEntity"."CatchPackageId" AS "SpeciesEntity_CatchPackageId", "SpeciesEntity"."LaunchDateTime" AS "SpeciesEntity_LaunchDateTime" FROM "Species" "SpeciesEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2105,7 +2105,7 @@ TEST FAILED: Pallet-event
 
       62 |       .set('Authorization', `Bearer ${jwtToken}`)
       63 |       .expect(200)
-    > 64 |     expect(response.body.speciesId).toEqual<number>(1)
+    > 64 |     expect(response.body.pkSpecies).toEqual<number>(1)
          |                                     ^
       65 |     expect(response.body.quantity).toEqual<number>(1)
       66 |     expect(response.body.species).toEqual<number>(1)
@@ -2117,7 +2117,7 @@ TEST FAILED: Pallet-event
 
     expected 404 "Not Found", got 200 "OK"
 
-      74 |       .get('/api/v1/sawtooth/tp/species/?speciesId=404')
+      74 |       .get('/api/v1/sawtooth/tp/species/?pkSpecies=404')
       75 |       .set('Authorization', `Bearer ${jwtToken}`)
     > 76 |       .expect(404)
          |        ^

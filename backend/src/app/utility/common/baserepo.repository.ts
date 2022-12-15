@@ -1,5 +1,5 @@
 import { BaseEntity, DataSource, ObjectLiteral, Repository } from "typeorm";
-import { SpeciesAndWeightEntity } from "../../../entity/speciesAndWeight.entity";
+import { SpeciesEntity } from "../../../entity/species.entity";
 
 export class BaseRepository<T extends ObjectLiteral> extends Repository<T> {
     // constructor(private dataSource: DataSource) {

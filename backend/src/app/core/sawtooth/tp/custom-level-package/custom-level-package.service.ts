@@ -11,13 +11,13 @@ import { HaulService } from '../haul/haul.service';
 import { CompanyService } from '../company/company.service';
 import { PalletEventService } from '../pallet-event/pallet-event.service';
 import { ProductService } from '../product/product.service';
-import { SpeciesAndWeightService } from '../species-and-weight/species-and-weight.service';
+import { SpeciesService } from '../species/species.service';
 import { TripService } from '../trip/trip.service';
 import { PalletEntity } from 'src/entity/pallet.entity';
 import { PalletEventEntity } from 'src/entity/palletEvent.entity';
 import { TripEntity } from 'src/entity/trip.entity';
 import { CompanyEntity } from 'src/entity/company.entity';
-import { SpeciesAndWeightEntity } from 'src/entity/speciesAndWeight.entity';
+import { SpeciesEntity } from 'src/entity/species.entity';
 import { ProductEntity } from 'src/entity/product.entity';
 import { HaulEntity } from 'src/entity/haul.entity';
 
@@ -32,7 +32,7 @@ export class CustomLevelPackageService {
         private readonly companyService: CompanyService,
         private readonly palletEventService: PalletEventService,
         private readonly productService: ProductService,
-        private readonly speciesAndWeightService: SpeciesAndWeightService,
+        private readonly speciesService: SpeciesService,
         private readonly tripService: TripService,
         private readonly sawtoothUtilityService: SawtoothUtilityService
     ) {
@@ -71,7 +71,7 @@ export class CustomLevelPackageService {
       palletEvent: PalletEventEntity[],
       trip: TripEntity,
       company: CompanyEntity,
-      species: SpeciesAndWeightEntity[],
+      species: SpeciesEntity,
       product: ProductEntity,
       haul: HaulEntity[]
     }> {
@@ -82,9 +82,9 @@ export class CustomLevelPackageService {
         const palletEvent = await this.palletEventService.getByPalletNumber(catchPackage.palletNum)
         const trip = await this.tripService.getByPkTrip(pallet.pkTrip)
         const company = await this.companyService.getById(customLevelPackage.agent)
-        const species = await this.speciesAndWeightService.getByCatchPackageId(customLevelPackage.catchPackageId)
         const product = await this.productService.getByProductNum(pallet.productNum)
         const haul = await this.haulService.getByPkTrip(pallet.pkTrip)
+        const species = null // TODO: getSpecies
 
         return {
           customLevelPackage: customLevelPackage,

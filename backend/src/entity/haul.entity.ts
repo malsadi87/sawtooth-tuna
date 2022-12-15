@@ -28,6 +28,7 @@ export class HaulEntity extends BaseEntity {
     @Column({ type:'numeric', name: 'LaunchLongitude', nullable: false })
     launchLongitude: number;
 
+    // TODO: Is this x Date value still applicable?
     @Transform(x => new Date(x.value))
     @Column({ type:'timestamp', name: 'HaulDateTime', nullable: false })
     haulDateTime: Date;

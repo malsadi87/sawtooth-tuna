@@ -45,7 +45,7 @@ class SpeciesTransactionHandler(TransactionHandler):
         LOGGER.info('Species handler apply method')
         LOGGER.info(payload)
         
-        _create_species(speciesId=payload.speciesId,
+        _create_species(pkSpecies=payload.pkSpecies,
                         quantity=payload.quantity,
                         species=payload.species,
                         packageNum=payload.packageNum,
@@ -53,9 +53,9 @@ class SpeciesTransactionHandler(TransactionHandler):
                         state=state)
 
 
-def _create_species(speciesId, quantity, species, packageNum, launchDateTime, state):
-    if state.get_species(speciesId) is not None:
+def _create_species(pkSpecies, quantity, species, packageNum, launchDateTime, state):
+    if state.get_species(pkSpecies) is not None:
         raise InvalidTransaction(
-            'Invalid action: Species already exists: {}'.format(speciesId))
+            'Invalid action: Species already exists: {}'.format(pkSpecies))
 
-    state.set_species(speciesId, quantity, species, packageNum, launchDateTime)
+    state.set_species(pkSpecies, quantity, species, packageNum, launchDateTime)

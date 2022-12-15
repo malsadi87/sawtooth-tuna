@@ -15,14 +15,14 @@ SPECIES_NAMESPACE = hashlib.sha512(
     'species'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(speciesId):
-    adr = hashlib.sha512(str(speciesId).encode('utf-8')).hexdigest()[:62]
+def _get_address(pkSpecies):
+    adr = hashlib.sha512(str(pkSpecies).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_species_address(speciesId):
-    add =  SPECIES_NAMESPACE + '00' + _get_address(speciesId)
+def _get_species_address(pkSpecies):
+    add =  SPECIES_NAMESPACE + '00' + _get_address(pkSpecies)
     LOGGER.info(add)
     return add
 
@@ -42,16 +42,16 @@ class SpeciesState(object):
     def __init__(self, context):
         self._context = context
 
-    def get_species(self, speciesId):
-        return self._get_state(_get_species_address(speciesId))
+    def get_species(self, pkSpecies):
+        return self._get_state(_get_species_address(pkSpecies))
 
     
-    def set_species(self, speciesId, quantity, species, packageNum, launchDateTime):
-        address = _get_species_address(speciesId)
+    def set_species(self, pkSpecies, quantity, species, packageNum, launchDateTime):
+        address = _get_species_address(pkSpecies)
         LOGGER.info('set_species method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "speciesId": speciesId,
+            {   "pkSpecies": pkSpecies,
                 "quantity": quantity,
                 "species": species,
                 "packageNum": packageNum,
