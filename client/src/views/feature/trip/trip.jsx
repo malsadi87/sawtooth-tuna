@@ -46,7 +46,7 @@ class Trip extends Component {
             <td>{info.landingDate}</td>
             <td>{info.departurePort}</td>
             <td>{info.landingPort}</td>
-            <td>{info.tripYearNo}</td>
+            <td>{info.tripWithinYearNo}</td>
             <td>{info.vesselName}</td>
           </tr>
         )
@@ -167,6 +167,7 @@ class Trip extends Component {
                 <th>Landing date</th>
                 <th>Departure Port</th>
                 <th>Landing Port</th>
+                <th>Trip Within Year No</th>
                 <th>Vessel Name</th>
               </tr>
             </thead>
