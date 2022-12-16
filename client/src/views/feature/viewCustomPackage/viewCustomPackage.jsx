@@ -58,10 +58,10 @@ class ViewCustomPackage extends Component {
     const catchResult = await catchService.getById(customPackageResult.pkCatch)
     console.log("catchResult:", catchResult)
 
-    const palletResult = await palletService.getById(catchResult.palletNum)
+    const palletResult = await palletService.getById(catchResult.pkPallet)
     console.log("palletResult:", palletResult)
     
-    const palletEventResult = await palletEventService.getById(catchResult.palletNum)
+    const palletEventResult = await palletEventService.getById(catchResult.pkPallet)
     console.log("palletEventResult:", palletEventResult)
 
     const tripResult = await tripService.getById(palletResult.pkTrip)
@@ -72,7 +72,7 @@ class ViewCustomPackage extends Component {
 
     // TODO: GetSpecies
 
-    const productResult = await productService.getByProductId(palletResult.productId)
+    const productResult = await productService.getByPalletId(palletResult.palletId)
     console.log("productResult:", productResult)
 
     const haulResult = await haulService.getByPkTrip(palletResult.pkTrip)

@@ -33,12 +33,7 @@ class PalletEvent extends Component {
   onFinish = async (values) => {
     let palletEvent = {
       'eventTime': values.dateTime,
-      'palletNum': values.palletNum,
-      'temperature': JSON.stringify({ 
-        'isRelative': values.isRelative,
-        'startValue': values.startValue,
-        'value': values.value
-      }),
+      'temperature': values.temperature,
       'location': JSON.stringify({ 
         'latitude': values.latitude, 
         'longitude': values.longitude 
@@ -50,7 +45,8 @@ class PalletEvent extends Component {
       'shock': JSON.stringify({ 
         'acceleration': values.acceleration,
         'duration': values.duration
-      })
+      }),
+      'fkPallet': values.fkPallet,
     }
     const result = await palletEventService.createNew(palletEvent);
   };
@@ -60,14 +56,14 @@ class PalletEvent extends Component {
     this.setState({
       palletEvents: result.map((info) => {
         return (
-          <tr key={info.palletEventId}>
-            <td>{info.palletEventId}</td>
+          <tr key={info.pkPalletEvent}>
+            <td>{info.pkPalletEvent}</td>
             <td>{info.eventTime}</td>
-            <td>{info.palletNum}</td>
             <td>{info.temperature}</td>
             <td>{info.location}</td>
             <td>{info.tilt}</td>
             <td>{info.shock}</td>
+            <td>{info.fkPallet}</td>
           </tr>
         )
       })
@@ -94,18 +90,18 @@ class PalletEvent extends Component {
             />
           </Form.Item>
 
-          {/*Pallet Number*/}
+          {/*Temperature start value*/}
           <Form.Item
-            name={'palletNum'}
-            label="Pallet Number"
+            name={'temperature'}
+            label="Temperature value"
             rules={[
               {
                 required: true,
-                type: 'string',
+                type: 'number'
               },
             ]}
           >
-            <Input />
+            <InputNumber />
           </Form.Item>
 
           {/*Latitude*/}
@@ -126,48 +122,6 @@ class PalletEvent extends Component {
           <Form.Item
             name={'longitude'}
             label="Longitude"
-            rules={[
-              {
-                required: true,
-                type: 'number'
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*Temperature isRelative*/}
-          <Form.Item
-            name={'isRelative'}
-            label="Temperature is relative?"
-            valuePropName="checked"
-            rules={[
-              {
-                type: 'boolean'
-              },
-            ]}
-          >
-            <Checkbox />
-          </Form.Item>
-
-          {/*Temperature start value*/}
-          <Form.Item
-            name={'startValue'}
-            label="Temperature start value"
-            rules={[
-              {
-                required: true,
-                type: 'number'
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-
-          {/*Temperature change value*/}
-          <Form.Item
-            name={'value'}
-            label="Temperature change value"
             rules={[
               {
                 required: true,
@@ -234,6 +188,20 @@ class PalletEvent extends Component {
             <InputNumber />
           </Form.Item>
 
+          {/*Pallet Number*/}
+          <Form.Item
+            name={'fkPallet'}
+            label="Pallet Number"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button type="primary" htmlType="submit" >
               Submit
@@ -247,11 +215,11 @@ class PalletEvent extends Component {
               <tr>
                 <th>ID</th>
                 <th>Event Time</th>
-                <th>Pallet Number</th>
                 <th>Temperature</th>
                 <th>Location</th>
                 <th>Tilt</th>
                 <th>Shock</th>
+                <th>FkPallet</th>
               </tr>
             </thead>
             <tbody>

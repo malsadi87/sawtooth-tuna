@@ -38,7 +38,7 @@ describe('Catch (e2e)', () => {
       .send({
         "pkCatch": "1",
         "updatedDateTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1"
+        "pkPallet": "1"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -51,7 +51,7 @@ describe('Catch (e2e)', () => {
       .send({
         "pkCatch": "2",
         "updatedDateTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1"
+        "pkPallet": "1"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -64,7 +64,7 @@ describe('Catch (e2e)', () => {
       .send({
         "pkCatch": "1",
         "updatedDateTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1"
+        "pkPallet": "1"
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
@@ -78,7 +78,7 @@ describe('Catch (e2e)', () => {
       .expect(200)
     expect(response.body.pkCatch).toEqual<string>("1")
     expect(response.body.updatedDateTime).toEqual<string>("2022-09-15T14:37:04.837Z")
-    expect(response.body.palletNum).toEqual<string>("1")
+    expect(response.body.pkPallet).toEqual<string>("1")
     return response
   });
 
@@ -106,7 +106,7 @@ describe('Catch (e2e)', () => {
     expect(response.body).toEqual(expect.arrayContaining([{
       "pkCatch": "1",
       "updatedDateTime": "2022-09-15T14:37:04.837Z",
-      "palletNum": "1"
+      "pkPallet": "1"
     }]))
     return response
   });
@@ -124,20 +124,20 @@ describe('Catch (e2e)', () => {
       .send({
         "pkCatch": "1",
         "updatedDateTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1"
+        "pkPallet": "1"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)
     return response
   });
 
-  it('Cant create a catch without a related palletNum', async () => {
+  it('Cant create a catch without a related pkPallet', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/catch/addNew')
       .send({
         "pkCatch": "2",
         "updatedDateTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "404"
+        "pkPallet": "404"
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

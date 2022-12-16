@@ -50,14 +50,14 @@ class CatchState(object):
         return self._context
 
     
-    def set_package(self, pkCatch, updatedDateTime, palletNum):
+    def set_package(self, pkCatch, updatedDateTime, pkPallet):
         address = _get_package_address(pkCatch)
         LOGGER.info('set_package_event method')
         LOGGER.info(address)
         state_data = _serialize(
             {   "pkCatch": pkCatch,
                 "updatedDateTime": updatedDateTime,
-                "palletNum": palletNum
+                "pkPallet": pkPallet
             })
         return self._context.set_state(
             {address: state_data}, timeout=self.TIMEOUT)

@@ -1,6 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { HaulEntity } from "./haul.entity";
-import { PalletEntity } from "./pallet.entity";
 import { Transform } from 'class-transformer';
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 
@@ -33,8 +32,4 @@ export class TripEntity extends BaseEntity {
     @OneToMany((type) => HaulEntity, (x) => x.trip)
     @JoinColumn({ referencedColumnName: 'pkTrip' })
     hauls: HaulEntity[];
-
-    @OneToMany((entity) => PalletEntity, (x) => x.trip)
-    @JoinColumn({ referencedColumnName: 'pkTrip' })
-    pallets: PalletEntity[];
 }

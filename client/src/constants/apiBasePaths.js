@@ -27,7 +27,7 @@ export const APIBasePath = {
                 getAll: '/sawtooth/tp/product/',
                 getById: '/sawtooth/tp/product/:id',
                 createNew: '/sawtooth/tp/product/addNew',
-                getByProductId: '/sawtooth/tp/product/productId/:productId'
+                getByPalletId: '/sawtooth/tp/product/palletId/:palletId'
             },
             trip: {
                 base: '/sawtooth/tp/trip',

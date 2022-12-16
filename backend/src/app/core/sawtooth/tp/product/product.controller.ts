@@ -12,9 +12,9 @@ export class ProductController {
         return await this.productService.getByPkProduct(pkProduct);
     }
 
-    @Get('productId/:productId')
-    async getByProductId(@Param('productId') productId: string): Promise<ProductEntity> {
-        return await this.productService.getByProductId(productId);
+    @Get('palletId/:palletId')
+    async getByPalletId(@Param('palletId') palletId: string): Promise<ProductEntity> {
+        return await this.productService.getByPalletId(palletId);
     }
 
     @Post('addNew')

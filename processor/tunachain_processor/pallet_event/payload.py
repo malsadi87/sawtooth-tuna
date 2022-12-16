@@ -20,14 +20,14 @@ class PalletEventPayload(object):
         LOGGER.info(data)
 
 
-        palletNum = data.get('palletNum')
+        pkPallet = data.get('pkPallet')
         eventTime = data.get('eventTime')
         temperature = data.get('temperature')
         location = data.get('location')
         tilt = data.get('tilt')
         shock = data.get('shock')
 
-        if not palletNum:
+        if not pkPallet:
             raise InvalidTransaction('Pallet Number is required')
 
         if not eventTime:
@@ -45,7 +45,7 @@ class PalletEventPayload(object):
         if not shock:
             raise InvalidTransaction('Shock is required')                       
         
-        self._palletNum = palletNum
+        self._pkPallet = pkPallet
         self._eventTime = eventTime
         self._temperature = temperature
         self._location = location
@@ -54,8 +54,8 @@ class PalletEventPayload(object):
        
        
     @property
-    def palletNum(self):
-        return self._palletNum
+    def pkPallet(self):
+        return self._pkPallet
 
     @property
     def eventTime(self):

@@ -11,8 +11,8 @@ export class ProductEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'Title' })
     title: string;
 
-    @Column({ type:'varchar', width: 255, name: 'ProductId' })
-    productId: string;
+    @Column({ type:'varchar', width: 255, name: 'PalletId' })
+    palletId: string;
 
     @Column({ type: 'int', name:'FkSpecies', nullable: false })
     fkSpecies: number;

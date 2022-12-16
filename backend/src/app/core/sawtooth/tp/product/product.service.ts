@@ -26,8 +26,8 @@ export class ProductService {
         return result;
     }
 
-    async getByProductId(productId: string): Promise<ProductEntity> {
-      return await this.productRepository.getByProductId(productId);
+    async getByPalletId(palletId: string): Promise<ProductEntity> {
+      return await this.productRepository.getByPalletId(palletId);
   }
 
     async addNewProduct(productPayload: ProductCreationDto): Promise<number> {

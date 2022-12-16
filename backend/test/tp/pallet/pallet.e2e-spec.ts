@@ -36,10 +36,10 @@ describe('Pallet (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "palletNum": "1",
-        "productId": 1,
-        "supplierId": "Supplier",
-        "palletWeight": 1,
+        "pkPallet": "1",
+        "palletId": 1,
+        "fkCompany": "Supplier",
+        "quantity": 1,
         "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -51,10 +51,10 @@ describe('Pallet (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "palletNum": "2",
-        "productId": 1,
-        "supplierId": "Supplier",
-        "palletWeight": 1,
+        "pkPallet": "2",
+        "palletId": 1,
+        "fkCompany": "Supplier",
+        "quantity": 1,
         "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -66,10 +66,10 @@ describe('Pallet (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "palletNum": "1",
-        "productId": 1,
-        "supplierId": "Supplier",
-        "palletWeight": 1,
+        "pkPallet": "1",
+        "palletId": 1,
+        "fkCompany": "Supplier",
+        "quantity": 1,
         "pkTrip": 123
       })
       .set('Authorization', `Bearer wrong`)
@@ -82,10 +82,10 @@ describe('Pallet (e2e)', () => {
       .get('/api/v1/sawtooth/tp/pallet/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.palletNum).toEqual<string>("1")
-    expect(response.body.productId).toEqual<number>(1)
-    expect(response.body.supplierId).toEqual<string>("Supplier")
-    expect(response.body.palletWeight).toEqual<number>(1.0000)
+    expect(response.body.pkPallet).toEqual<string>("1")
+    expect(response.body.palletId).toEqual<number>(1)
+    expect(response.body.fkCompany).toEqual<string>("Supplier")
+    expect(response.body.quantity).toEqual<number>(1.0000)
     expect(response.body.pkTrip).toEqual<number>(123)
     return response
   });
@@ -112,10 +112,10 @@ describe('Pallet (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "palletNum": "1",
-      "productId": 1,
-      "supplierId": "Supplier",
-      "palletWeight": 1.0000,
+      "pkPallet": "1",
+      "palletId": 1,
+      "fkCompany": "Supplier",
+      "quantity": 1.0000,
       "pkTrip": 123
     }]))
     return response
@@ -132,10 +132,10 @@ describe('Pallet (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "palletNum": "1",
-        "productId": 1,
-        "supplierId": "Supplier",
-        "palletWeight": 5,
+        "pkPallet": "1",
+        "palletId": 1,
+        "fkCompany": "Supplier",
+        "quantity": 5,
         "pkTrip": 123
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -147,10 +147,10 @@ describe('Pallet (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet/addNew')
       .send({
-        "palletNum": "1",
-        "productId": 1,
-        "supplierId": "Supplier",
-        "palletWeight": 1,
+        "pkPallet": "1",
+        "palletId": 1,
+        "fkCompany": "Supplier",
+        "quantity": 1,
         "pkTrip": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)

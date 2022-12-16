@@ -21,31 +21,26 @@ export class PalletEventService {
         return await this.palletEventRepository.getAll();
     }
 
-    async getByPalletNumberAndEventTime(palletNumber: string, eventTime: Date): Promise<PalletEventEntity> {
-        const result = await this.palletEventRepository.getByPalletNumberAndEventTime(palletNumber, eventTime);
+    async getByPkPalletAndEventDateTime(pkPallet: number, eventTime: Date): Promise<PalletEventEntity> {
+        const result = await this.palletEventRepository.getByPkPalletAndEventDateTime(pkPallet, eventTime);
         if (!result)
             throw new NotFoundException('Pallet Event Not Found!');
         return result;
     }
 
-    async getByPalletNumber(palletNumber: string): Promise<PalletEventEntity[]> {
-        return await this.palletEventRepository.getByPalletNumber(palletNumber);
+    async getByPkPallet(pkPallet: number): Promise<PalletEventEntity[]> {
+        return await this.palletEventRepository.getByPkPallet(pkPallet);
     }
 
-    async addNew(newPalletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
+    async addNew(newPalletEventPayload: PalletEventCreationDto): Promise<{ pkPalletEvent: number, eventTime: Date }> {
         try {
             const palletEvent = plainToClass(PalletEventEntity, newPalletEventPayload);
-            const pallet = await this.palletService.getByPalletNo(palletEvent.palletNum);
-    
-            const oldPalletEvent = await this.palletEventRepository.getByPalletNumberAndEventTime(palletEvent.palletNum, palletEvent.eventTime);
-            if (oldPalletEvent) throw new BadRequestException(`Pallet Event with Number - ${palletEvent.palletNum} And Event Time ${palletEvent.eventTime}, Already Exist!`);
-    
             const newPalletEvent = await this.palletEventRepository.addNew(palletEvent);
     
             // Save in Sawtooth
             await this.sawtoothUtilityService.createAsset(newPalletEvent, this.entityName);
     
-            return { palletNum: newPalletEvent.palletNum, eventTime: newPalletEvent.eventTime };
+            return { pkPalletEvent: newPalletEvent.pkPalletEvent, eventTime: newPalletEvent.eventTime };
         } catch(e) {
             if (e instanceof NotFoundException)
                 throw new BadRequestException(`A Pallet has to created first before adding Pallet Event!`);

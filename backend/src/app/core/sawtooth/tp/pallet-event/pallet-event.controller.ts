@@ -7,18 +7,18 @@ import { PalletEventService } from './pallet-event.service';
 export class PalletEventController {
     constructor(private readonly palletEventService: PalletEventService) {}
     
-    @Get(':palletNumber/:eventTime')
-    async getByPalletNumberAndEventTime(@Param('palletNumber') palletNumber: string, @Param('eventTime') eventTime: Date): Promise<PalletEventEntity> {
-        return await this.palletEventService.getByPalletNumberAndEventTime(palletNumber, eventTime);
+    @Get(':pkPallet/:eventTime')
+    async getByPkPalletAndEventDateTime(@Param('pkPallet') pkPallet: number, @Param('eventTime') eventTime: Date): Promise<PalletEventEntity> {
+        return await this.palletEventService.getByPkPalletAndEventDateTime(pkPallet, eventTime);
     }
 
-    @Get(':palletNumber')
-    async getByPalletNumber(@Param('palletNumber') palletNumber: string): Promise<PalletEventEntity[]> {
-        return await this.palletEventService.getByPalletNumber(palletNumber);
+    @Get(':pkPallet')
+    async getByPkPallet(@Param('pkPallet') pkPallet: number): Promise<PalletEventEntity[]> {
+        return await this.palletEventService.getByPkPallet(pkPallet);
     }
 
     @Post('addNew')
-    async create(@Body() palletEventPayload: PalletEventCreationDto): Promise<{ palletNum: string, eventTime: Date }> {
+    async create(@Body() palletEventPayload: PalletEventCreationDto): Promise<{ pkPalletEvent: number, eventTime: Date }> {
         return await this.palletEventService.addNew(palletEventPayload);
     }
     

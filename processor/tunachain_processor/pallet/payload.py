@@ -19,49 +19,49 @@ class PalletPayload(object):
             raise InvalidTransaction("Invalid payload serialization")
         LOGGER.info(data)
 
-        palletNum = data.get('palletNum')
-        productId = data.get('productId')
-        supplierId = data.get('supplierId')
-        palletWeight = data.get('palletWeight')
+        pkPallet = data.get('pkPallet')
+        palletId = data.get('palletId')
+        fkCompany = data.get('fkCompany')
+        quantity = data.get('quantity')
         pkTrip = data.get('pkTrip')
 
-        if not palletNum:
+        if not pkPallet:
             raise InvalidTransaction('Pallet Number is required')
 
-        if not productId:
+        if not palletId:
             raise InvalidTransaction('Product Number is required')
 
-        if not supplierId:
+        if not fkCompany:
             raise InvalidTransaction('Supplier ID is required')
 
-        if not palletWeight:
-            raise InvalidTransaction('Pallet Weight is required')
+        if not quantity:
+            raise InvalidTransaction('Pallet Quantity is required')
 
         if not pkTrip:
             raise InvalidTransaction('Trip No is required')                  
         
-        self._palletNum = palletNum
-        self._productId = productId
-        self._supplierId = supplierId
-        self._palletWeight = palletWeight
+        self._pkPallet = pkPallet
+        self._palletId = palletId
+        self._fkCompany = fkCompany
+        self._quantity = quantity
         self._pkTrip = pkTrip
        
        
     @property
-    def palletNum(self):
-        return self._palletNum
+    def pkPallet(self):
+        return self._pkPallet
 
     @property
-    def productId(self):
-        return self._productId
+    def palletId(self):
+        return self._palletId
 
     @property
-    def supplierId(self):
-        return self._supplierId        
+    def fkCompany(self):
+        return self._fkCompany        
     
     @property
-    def palletWeight(self):
-        return self._palletWeight
+    def quantity(self):
+        return self._quantity
     
     @property
     def pkTrip(self):

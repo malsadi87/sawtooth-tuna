@@ -21,8 +21,8 @@ def _get_address(event):
     return adr
 
 
-def _get_event_address(palletNum, eventTime):
-    identifier = palletNum + eventTime
+def _get_event_address(pkPallet, eventTime):
+    identifier = pkPallet + eventTime
     add =  PALLET_EVENT_NAMESPACE + '00' + _get_address(identifier)
     LOGGER.info(add)
     return add
@@ -43,16 +43,16 @@ class PalletEventState(object):
     def __init__(self, context):
         self._context = context
 
-    def get_pallet_event(self, palletNum, eventTime):
-        return self._get_state(_get_event_address(palletNum, eventTime))
+    def get_pallet_event(self, pkPallet, eventTime):
+        return self._get_state(_get_event_address(pkPallet, eventTime))
 
     
-    def set_pallet_event(self, palletNum, eventTime, temperature, location, tilt, shock):
-        address = _get_event_address(palletNum, eventTime)
+    def set_pallet_event(self, pkPallet, eventTime, temperature, location, tilt, shock):
+        address = _get_event_address(pkPallet, eventTime)
         LOGGER.info('set_pallet_event method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "palletNum": palletNum,
+            {   "pkPallet": pkPallet,
                 "eventTime": eventTime,
                 "temperature": temperature,
                 "location": location,

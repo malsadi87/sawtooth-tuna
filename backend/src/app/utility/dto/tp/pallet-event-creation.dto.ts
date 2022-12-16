@@ -1,14 +1,11 @@
-import { IsDateString, IsJSON, Length } from "class-validator";
+import { IsDateString, IsJSON, IsNumber, Length } from "class-validator";
 
 export class PalletEventCreationDto {
     @IsDateString()
     eventTime: Date;
 
-    @Length(1, 255)
-    palletNum: string;
-
-    @IsJSON()
-    temperature: JSON;
+    @IsNumber()
+    temperature: number;
 
     @IsJSON()
     location: JSON;
@@ -18,4 +15,8 @@ export class PalletEventCreationDto {
 
     @IsJSON()
     shock: JSON;
+
+    @IsNumber()
+    fkPallet: number;
+
 }

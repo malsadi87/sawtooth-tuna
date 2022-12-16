@@ -13,12 +13,12 @@ export class PalletEventRepository extends Repository<PalletEventEntity> {
         return result;
     }
 
-    async getByPalletNumberAndEventTime(palletNumber: string, eventTime: Date): Promise<PalletEventEntity> {
-        return await this.findOneBy({ palletNum: palletNumber, eventTime: eventTime });
+    async getByPkPalletAndEventDateTime(pkPallet: number, eventTime: Date): Promise<PalletEventEntity> {
+        return await this.findOneBy({ fkPallet: pkPallet, eventTime: eventTime });
     }
 
-    async getByPalletNumber(palletNumber: string): Promise<PalletEventEntity[]> {
-        return await this.findBy({ palletNum: palletNumber });
+    async getByPkPallet(pkPallet: number): Promise<PalletEventEntity[]> {
+        return await this.findBy({ fkPallet: pkPallet });
     }
 
     async addNew(newPalletEvent: PalletEventEntity): Promise<PalletEventEntity> {

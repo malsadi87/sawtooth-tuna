@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "Catch" (
 CREATE TABLE IF NOT EXISTS "Product" ( -- This entity is not interesting for the end consumer.
     "PkProduct" SERIAL PRIMARY KEY,
     "Title" VARCHAR(255), -- Example: Cod, headed and gutted.
-    "ProductId" VARCHAR(255) NOT NULL,
+    "PalletId" VARCHAR(255) NOT NULL,
     "FkSpecies" INT NOT NULL,
     FOREIGN KEY ("FkSpecies") REFERENCES "Species"("PkSpecies") ON DELETE NO ACTION
 );
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS "PalletEvent" ( -- This entity is made up
 );
 
 
-CREATE TABLE IF NOT EXISTS "Production" ( -- Also known as "Bag".
+CREATE TABLE IF NOT EXISTS "Production" ( -- Also known as a "Bag" of processed fish with a specific species.
     "PkProduction" SERIAL PRIMARY KEY,
     "ProductionDate" TIMESTAMP NOT NULL,
     "FkPallet" INT NOT NULL,

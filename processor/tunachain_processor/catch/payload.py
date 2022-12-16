@@ -22,10 +22,10 @@ class CatchPayload(object):
 
         pkCatch = data.get('pkCatch')
         updatedDateTime = data.get('updatedDateTime')
-        palletNum = data.get('palletNum')
+        pkPallet = data.get('pkPallet')
        
 
-        if not palletNum:
+        if not pkPallet:
             raise InvalidTransaction('Pallet Number is required')
 
         if not pkCatch:
@@ -37,7 +37,7 @@ class CatchPayload(object):
         
         self._pkCatch = pkCatch
         self._packingDate = updatedDateTime
-        self._palletNum = palletNum
+        self._pkPallet = pkPallet
     
        
     @property
@@ -49,6 +49,6 @@ class CatchPayload(object):
         return self._packingDate
 
     @property
-    def palletNum(self):
-        return self._palletNum        
+    def pkPallet(self):
+        return self._pkPallet        
  

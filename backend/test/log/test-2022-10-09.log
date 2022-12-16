@@ -259,7 +259,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."PalletId" AS "ProductEntity_PalletId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -290,7 +290,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."PalletId" AS "ProductEntity_PalletId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -305,7 +305,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."PalletId" AS "ProductEntity_PalletId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -320,7 +320,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity"
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."PalletId" AS "ProductEntity_PalletId" FROM "Product" "ProductEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -335,7 +335,7 @@ TEST FAILED: authenticate
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."ProductId" AS "ProductEntity_ProductId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
+    query: SELECT "ProductEntity"."PkProduct" AS "ProductEntity_PkProduct", "ProductEntity"."Title" AS "ProductEntity_Title", "ProductEntity"."ProductDescription" AS "ProductEntity_ProductDescription", "ProductEntity"."PalletId" AS "ProductEntity_PalletId" FROM "Product" "ProductEntity" WHERE "ProductEntity"."PkProduct" IN ($1) -- PARAMETERS: [3]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -379,8 +379,8 @@ TEST FAILED: authenticate
     > 64 |     expect(response.body.pkProduct).toEqual<number>(3)
          |                                     ^
       65 |     expect(response.body.title).toEqual<string>("NameString")
-      66 |     expect(response.body.productId).toEqual<string>("DescriptionString")
-      67 |     expect(response.body.productId).toEqual<number>(1)
+      66 |     expect(response.body.palletId).toEqual<string>("DescriptionString")
+      67 |     expect(response.body.palletId).toEqual<number>(1)
 
       at Object.<anonymous> (product.e2e-spec.ts:64:37)
 
@@ -1014,7 +1014,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PkPallet" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1024,7 +1024,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "Pallet" SET "PalletWeight" = $1 WHERE ((("PalletNum" = $2 AND "PkTrip" = $3))) -- PARAMETERS: [1,"1",123]
+    query: UPDATE "Pallet" SET "Quantity" = $1 WHERE ((("PkPallet" = $2 AND "PkTrip" = $3))) -- PARAMETERS: [1,"1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -1045,7 +1045,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1060,7 +1060,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1075,7 +1075,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1090,7 +1090,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PkPallet" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1100,7 +1100,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "Pallet" SET "PalletWeight" = $1 WHERE ((("PalletNum" = $2 AND "PkTrip" = $3))) -- PARAMETERS: [5,"1",123]
+    query: UPDATE "Pallet" SET "Quantity" = $1 WHERE ((("PkPallet" = $2 AND "PkTrip" = $3))) -- PARAMETERS: [5,"1",123]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -1121,7 +1121,7 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEntity"."PalletNum" AS "PalletEntity_PalletNum", "PalletEntity"."ProductId" AS "PalletEntity_ProductId", "PalletEntity"."SupplierId" AS "PalletEntity_SupplierId", "PalletEntity"."PalletWeight" AS "PalletEntity_PalletWeight", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PalletNum" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",404]
+    query: SELECT "PalletEntity"."PkPallet" AS "PalletEntity_PkPallet", "PalletEntity"."PalletId" AS "PalletEntity_PalletId", "PalletEntity"."FkCompany" AS "PalletEntity_FkCompany", "PalletEntity"."Quantity" AS "PalletEntity_Quantity", "PalletEntity"."PkTrip" AS "PalletEntity_PkTrip" FROM "Pallet" "PalletEntity" WHERE ((("PalletEntity"."PkPallet" = $1 AND "PalletEntity"."PkTrip" = $2))) -- PARAMETERS: ["1",404]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1131,12 +1131,12 @@ TEST FAILED: haul
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "Pallet"("PalletNum", "ProductId", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
+    query: INSERT INTO "Pallet"("PkPallet", "PalletId", "FkCompany", "Quantity", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query failed: INSERT INTO "Pallet"("PalletNum", "ProductId", "SupplierId", "PalletWeight", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
+    query failed: INSERT INTO "Pallet"("PkPallet", "PalletId", "FkCompany", "Quantity", "PkTrip") VALUES ($1, $2, $3, $4, $5) -- PARAMETERS: ["1",1,"Supplier",1,404]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
@@ -1154,7 +1154,7 @@ TEST FAILED: haul
       length: 192,
       severity: 'ERROR',
       code: '23505',
-      detail: 'Key ("PalletNum")=(1) already exists.',
+      detail: 'Key ("PkPallet")=(1) already exists.',
       hint: undefined,
       position: undefined,
       internalPosition: undefined,
@@ -1199,11 +1199,11 @@ TEST FAILED: haul
 
       70 |       .set('Authorization', `Bearer ${jwtToken}`)
       71 |       .expect(200)
-    > 72 |     expect(response.body.palletNum).toEqual<string>("1")
+    > 72 |     expect(response.body.pkPallet).toEqual<string>("1")
          |                                     ^
-      73 |     expect(response.body.productId).toEqual<number>(1)
-      74 |     expect(response.body.supplierId).toEqual<string>("supplierId")
-      75 |     expect(response.body.palletWeight).toEqual<number>(1.0000)
+      73 |     expect(response.body.palletId).toEqual<number>(1)
+      74 |     expect(response.body.fkCompany).toEqual<string>("fkCompany")
+      75 |     expect(response.body.quantity).toEqual<number>(1.0000)
 
       at Object.<anonymous> (pallet.e2e-spec.ts:72:37)
 
@@ -1231,16 +1231,16 @@ TEST FAILED: haul
 
     expect(received).toEqual(expected) // deep equality
 
-    Expected: ArrayContaining [{"palletNum": "1", "palletWeight": 1, "productId": 1, "supplierId": "Supplier", "pkTrip": 123}]
-    Received: [{"palletNum": "1", "palletWeight": "1.0000", "productId": 1, "supplierId": "Supplier", "pkTrip": 123}]
+    Expected: ArrayContaining [{"pkPallet": "1", "quantity": 1, "palletId": 1, "fkCompany": "Supplier", "pkTrip": 123}]
+    Received: [{"pkPallet": "1", "quantity": "1.0000", "palletId": 1, "fkCompany": "Supplier", "pkTrip": 123}]
 
        99 |       .set('Authorization', `Bearer ${jwtToken}`)
       100 |       .expect(200)
     > 101 |     expect(response.body).toEqual(expect.arrayContaining([{
           |                           ^
-      102 |       "palletNum": "1",
-      103 |       "productId": 1,
-      104 |       "supplierId": "Supplier",
+      102 |       "pkPallet": "1",
+      103 |       "palletId": 1,
+      104 |       "fkCompany": "Supplier",
 
       at Object.<anonymous> (pallet.e2e-spec.ts:101:27)
 
@@ -1340,7 +1340,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1355,7 +1355,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1370,7 +1370,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1385,7 +1385,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity"
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1400,7 +1400,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1415,7 +1415,7 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PalletNum" AS "CatchEntity_PalletNum" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["2"]
+    query: SELECT "CatchEntity"."PkCatch" AS "CatchEntity_PkCatch", "CatchEntity"."UpdatedDateTime" AS "CatchEntity_PackingDate", "CatchEntity"."PkPallet" AS "CatchEntity_PkPallet" FROM "Catch" "CatchEntity" WHERE "CatchEntity"."PkCatch" IN ($1) -- PARAMETERS: ["2"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1425,17 +1425,17 @@ TEST FAILED: pallet
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
+    query: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PkPallet") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query failed: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PalletNum") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
+    query failed: INSERT INTO "Catch"("PkCatch", "UpdatedDateTime", "PkPallet") VALUES ($1, $2, $3) -- PARAMETERS: ["2","2022-09-15T14:37:04.837Z","404"]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "Catch" violates foreign key constraint "Catch_PalletNum_fkey"
+    error: error: insert or update on table "Catch" violates foreign key constraint "Catch_PkPallet_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -1448,7 +1448,7 @@ TEST FAILED: pallet
       length: 279,
       severity: 'ERROR',
       code: '23503',
-      detail: 'Key (PalletNum)=(404) is not present in table "Pallet".',
+      detail: 'Key (PkPallet)=(404) is not present in table "Pallet".',
       hint: undefined,
       position: undefined,
       internalPosition: undefined,
@@ -1458,7 +1458,7 @@ TEST FAILED: pallet
       table: 'Catch',
       column: undefined,
       dataType: undefined,
-      constraint: 'Catch_PalletNum_fkey',
+      constraint: 'Catch_PkPallet_fkey',
       file: 'ri_triggers.c',
       line: '2528',
       routine: 'ri_ReportViolation'
@@ -1482,7 +1482,7 @@ TEST FAILED: pallet
     ✓ Can read all catchs with authentication (28 ms)
     ✓ Cant read all catchs without authentication (5 ms)
     ✕ Cant overwrite a catch with authentication - known to fail (36 ms)
-    ✕ Cant create a catch without a related palletNum - fails because of lacking error handling (120 ms)
+    ✕ Cant create a catch without a related pkPallet - fails because of lacking error handling (120 ms)
 
   ● Catch (e2e) › Can read a catch with authentication - known to fail
 
@@ -1496,7 +1496,7 @@ TEST FAILED: pallet
     > 68 |     expect(response.body.pkCatch).toEqual<string>("1")
          |                                          ^
       69 |     expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
-      70 |     expect(response.body.palletNum).toEqual<string>("1")
+      70 |     expect(response.body.pkPallet).toEqual<string>("1")
       71 |     return response
 
       at Object.<anonymous> (catch.e2e-spec.ts:68:42)
@@ -1541,7 +1541,7 @@ TEST FAILED: pallet
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● Catch (e2e) › Cant create a catch without a related palletNum - fails because of lacking error handling
+  ● Catch (e2e) › Cant create a catch without a related pkPallet - fails because of lacking error handling
 
     expected 400 "Bad Request", got 500 "Internal Server Error"
 
@@ -1785,7 +1785,7 @@ TEST FAILED: Company
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "PalletEvent"("EventTime", "PalletNum", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PalletEventId" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
+    query: INSERT INTO "PalletEvent"("EventDateTime", "PkPallet", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PkPalletEvent" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1805,7 +1805,7 @@ TEST FAILED: Company
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEventEntity"."PalletEventId" AS "PalletEventEntity_PalletEventId", "PalletEventEntity"."EventTime" AS "PalletEventEntity_EventTime", "PalletEventEntity"."PalletNum" AS "PalletEventEntity_PalletNum", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
+    query: SELECT "PalletEventEntity"."PkPalletEvent" AS "PalletEventEntity_PkPalletEvent", "PalletEventEntity"."EventDateTime" AS "PalletEventEntity_EventDateTime", "PalletEventEntity"."PkPallet" AS "PalletEventEntity_PkPallet", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1820,7 +1820,7 @@ TEST FAILED: Company
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEventEntity"."PalletEventId" AS "PalletEventEntity_PalletEventId", "PalletEventEntity"."EventTime" AS "PalletEventEntity_EventTime", "PalletEventEntity"."PalletNum" AS "PalletEventEntity_PalletNum", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
+    query: SELECT "PalletEventEntity"."PkPalletEvent" AS "PalletEventEntity_PkPalletEvent", "PalletEventEntity"."EventDateTime" AS "PalletEventEntity_EventDateTime", "PalletEventEntity"."PkPallet" AS "PalletEventEntity_PkPallet", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1835,7 +1835,7 @@ TEST FAILED: Company
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "PalletEventEntity"."PalletEventId" AS "PalletEventEntity_PalletEventId", "PalletEventEntity"."EventTime" AS "PalletEventEntity_EventTime", "PalletEventEntity"."PalletNum" AS "PalletEventEntity_PalletNum", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
+    query: SELECT "PalletEventEntity"."PkPalletEvent" AS "PalletEventEntity_PkPalletEvent", "PalletEventEntity"."EventDateTime" AS "PalletEventEntity_EventDateTime", "PalletEventEntity"."PkPallet" AS "PalletEventEntity_PkPallet", "PalletEventEntity"."Temperature" AS "PalletEventEntity_Temperature", "PalletEventEntity"."Location" AS "PalletEventEntity_Location", "PalletEventEntity"."Tilt" AS "PalletEventEntity_Tilt", "PalletEventEntity"."Shock" AS "PalletEventEntity_Shock" FROM "PalletEvent" "PalletEventEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -1855,17 +1855,17 @@ TEST FAILED: Company
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: INSERT INTO "PalletEvent"("EventTime", "PalletNum", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PalletEventId" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","404","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
+    query: INSERT INTO "PalletEvent"("EventDateTime", "PkPallet", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PkPalletEvent" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","404","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query failed: INSERT INTO "PalletEvent"("EventTime", "PalletNum", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PalletEventId" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","404","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
+    query failed: INSERT INTO "PalletEvent"("EventDateTime", "PkPallet", "Temperature", "Location", "Tilt", "Shock") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "PkPalletEvent" -- PARAMETERS: ["2022-09-15T14:37:04.837Z","404","\"{\\\"Celsius\\\":1}\"","\"{\\\"latitude\\\":63.40595699218346,\\\"longitude\\\":10.406196141997356}\"","\"{\\\"tilt\\\":1}\"","\"{\\\"vertical\\\":1,\\\"horisontal\\\":1}\""]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "PalletEvent" violates foreign key constraint "PalletEvent_PalletNum_fkey"
+    error: error: insert or update on table "PalletEvent" violates foreign key constraint "PalletEvent_PkPallet_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -1878,7 +1878,7 @@ TEST FAILED: Company
       length: 275,
       severity: 'ERROR',
       code: '23503',
-      detail: 'Key (PalletNum)=(404) is not present in table "Pallet".',
+      detail: 'Key (PkPallet)=(404) is not present in table "Pallet".',
       hint: undefined,
       position: undefined,
       internalPosition: undefined,
@@ -1888,7 +1888,7 @@ TEST FAILED: Company
       table: 'PalletEvent',
       column: undefined,
       dataType: undefined,
-      constraint: 'PalletEvent_PalletNum_fkey',
+      constraint: 'PalletEvent_PkPallet_fkey',
       file: 'ri_triggers.c',
       line: '2528',
       routine: 'ri_ReportViolation'
@@ -1911,7 +1911,7 @@ TEST FAILED: Company
     ✓ Cant read a pallet-event without authentication (4 ms)
     ✓ Can read all pallet-events with authentication (32 ms)
     ✓ Cant read all pallet-events without authentication (5 ms)
-    ✕ Cant create a catch without a related palletNum - fails because of lacking error handling (61 ms)
+    ✕ Cant create a catch without a related pkPallet - fails because of lacking error handling (61 ms)
 
   ● PalletEvent (e2e) › Can read a pallet-event with authentication - known to fail
 
@@ -1922,7 +1922,7 @@ TEST FAILED: Company
 
       88 |       .set('Authorization', `Bearer ${jwtToken}`)
       89 |       .expect(200)
-    > 90 |     expect(response.body.palletEventId).toEqual<number>(1)
+    > 90 |     expect(response.body.pkPalletEvent).toEqual<number>(1)
          |                                         ^
       91 |     expect(response.body.eventTime).toEqual<string>("2022-09-15T14:37:04.837Z")
       92 |     expect(response.body.temperature).toEqual(JSON.stringify({ "Celsius": 1 }))
@@ -1934,7 +1934,7 @@ TEST FAILED: Company
 
     expected 404 "Not Found", got 200 "OK"
 
-      109 |       .get('/api/v1/sawtooth/tp/pallet-event/?palletEventId=404')
+      109 |       .get('/api/v1/sawtooth/tp/pallet-event/?pkPalletEvent=404')
       110 |       .set('Authorization', `Bearer ${jwtToken}`)
     > 111 |       .expect(404)
           |        ^
@@ -1950,7 +1950,7 @@ TEST FAILED: Company
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● PalletEvent (e2e) › Cant create a catch without a related palletNum - fails because of lacking error handling
+  ● PalletEvent (e2e) › Cant create a catch without a related pkPallet - fails because of lacking error handling
 
     expected 201 "Created", got 500 "Internal Server Error"
 

@@ -46,17 +46,17 @@ class PalletTransactionHandler(TransactionHandler):
         LOGGER.info(payload)
 
         
-        _create_pallet(palletNum=payload.palletNum,
-                        productId=payload.productId,
-                        supplierId=payload.supplierId,
-                        palletWeight=payload.palletWeight,
+        _create_pallet(pkPallet=payload.pkPallet,
+                        palletId=payload.palletId,
+                        fkCompany=payload.fkCompany,
+                        quantity=payload.quantity,
                         pkTrip=payload.pkTrip,
                         state=state)
 
 
-def _create_pallet(palletNum, productId, supplierId, palletWeight, pkTrip, state):
-    if state.get_pallet(palletNum) is not None:
+def _create_pallet(pkPallet, palletId, fkCompany, quantity, pkTrip, state):
+    if state.get_pallet(pkPallet) is not None:
         raise InvalidTransaction(
-            'Invalid action: Pallet already exists: {}'.format(palletNum))
+            'Invalid action: Pallet already exists: {}'.format(pkPallet))
 
-    state.set_pallet(palletNum, productId, supplierId, palletWeight, pkTrip)
+    state.set_pallet(pkPallet, palletId, fkCompany, quantity, pkTrip)

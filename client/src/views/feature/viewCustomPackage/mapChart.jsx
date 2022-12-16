@@ -86,16 +86,16 @@ const MapChart = (props) => {
 
           {props.palletEventResult ?
             props.palletEventResult.map(({
-              palletEventId,
+              pkPalletEvent,
               location
             },
               index
             ) => {
               return (
-                <React.Fragment key={palletEventId}>
+                <React.Fragment key={pkPalletEvent}>
                   {index + 1 < props.palletEventResult.length ?
                     <Line
-                      key={palletEventId}
+                      key={pkPalletEvent}
                       from={[
                         JSON.parse(location).longitude,
                         JSON.parse(location).latitude
@@ -110,7 +110,7 @@ const MapChart = (props) => {
                     />
                     : <></>}
                   <Marker
-                    key={'palletEventId' + palletEventId}
+                    key={'pkPalletEvent' + pkPalletEvent}
                     coordinates={[JSON.parse(location).longitude, JSON.parse(location).latitude]}>
                     <circle
                       className='markerCircle'

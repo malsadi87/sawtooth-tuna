@@ -48,13 +48,13 @@ class CatchTransactionHandler(TransactionHandler):
        
         _create_package(pkCatch=payload.pkCatch,
                         updatedDateTime=payload.updatedDateTime,
-                        palletNum=payload.palletNum,
+                        pkPallet=payload.pkPallet,
                         state=state)
 
 
-def _create_package(pkCatch, updatedDateTime, palletNum , state):
+def _create_package(pkCatch, updatedDateTime, pkPallet , state):
     if state.get_package(pkCatch) is not None:
         raise InvalidTransaction(
             'Invalid action: Package already exists: {}'.format(pkCatch))
 
-    state.set_package(pkCatch, updatedDateTime, palletNum )
+    state.set_package(pkCatch, updatedDateTime, pkPallet )

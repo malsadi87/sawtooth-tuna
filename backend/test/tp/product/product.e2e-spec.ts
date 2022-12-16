@@ -34,8 +34,8 @@ describe('Product (e2e)', () => {
       .send({
         "pkProduct": 3,
         "title": "NameString",
-        "productId": "DescriptionString",
-        "productId": 1
+        "palletId": "DescriptionString",
+        "palletId": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -48,8 +48,8 @@ describe('Product (e2e)', () => {
       .send({
         "pkProduct": 4,
         "title": "NameString",
-        "productId": "DescriptionString",
-        "productId": 2
+        "palletId": "DescriptionString",
+        "palletId": 2
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(201)
@@ -62,8 +62,8 @@ describe('Product (e2e)', () => {
       .send({
         "pkProduct": 4,
         "title": "NameString",
-        "productId": "DescriptionString",
-        "productId": 3
+        "palletId": "DescriptionString",
+        "palletId": 3
       })
       .set('Authorization', `Bearer wrong`)
       .expect(401)
@@ -77,8 +77,8 @@ describe('Product (e2e)', () => {
       .expect(200)
     expect(response.body.pkProduct).toEqual<number>(3)
     expect(response.body.title).toEqual<string>("NameString")
-    expect(response.body.productId).toEqual<string>("DescriptionString")
-    expect(response.body.productId).toEqual<number>(1)
+    expect(response.body.palletId).toEqual<string>("DescriptionString")
+    expect(response.body.palletId).toEqual<number>(1)
     return response
   });
 
@@ -105,8 +105,8 @@ describe('Product (e2e)', () => {
     expect(response.body).toEqual(expect.arrayContaining([{
       "pkProduct": 3,
       "title": "NameString",
-      "productId": "DescriptionString",
-      "productId": 1
+      "palletId": "DescriptionString",
+      "palletId": 1
     }]))
     return response
   });
@@ -124,8 +124,8 @@ describe('Product (e2e)', () => {
       .send({
         "pkProduct": 3,
         "title": "NameStringChanged",
-        "productId": "DescriptionStringChanged",
-        "productId": 1
+        "palletId": "DescriptionStringChanged",
+        "palletId": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(400)

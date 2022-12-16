@@ -22,7 +22,7 @@ export class SpeciesService {
     async getById(id: number): Promise<SpeciesEntity> {
         const result = await this.SpeciesRepository.getById(id);
         if (!result)
-            throw new NotFoundException(`Species And Weight Not Found!`);
+            throw new NotFoundException(`Species And Quantity Not Found!`);
         return result;
     }
 

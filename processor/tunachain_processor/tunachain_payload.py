@@ -34,7 +34,7 @@ class TunachainPayload(object):
         asset = data.get('asset')
         owner = data.get('owner')
         #New fields
-        weight = data.get('weight')
+        quantity = data.get('quantity')
         location = data.get('location')
 
         if not action:
@@ -56,7 +56,7 @@ class TunachainPayload(object):
         self._asset = asset
         self._owner = owner
         #new fields
-        self._weight = weight
+        self._quantity = quantity
         self._location = location
 
     @property
@@ -76,8 +76,8 @@ class TunachainPayload(object):
         return self._owner
 
     @property
-    def weight(self):
-        return self._weight
+    def quantity(self):
+        return self._quantity
 
     @property
     def location(self):

@@ -6,7 +6,7 @@ export class ProductCreationDto {
     title: string;
 
     @Length(1, 255)
-    productId: string;
+    palletId: string;
 
     @IsNumber()
     fkSpecies: number;

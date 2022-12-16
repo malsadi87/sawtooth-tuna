@@ -1,19 +1,14 @@
 import { IsNumber, Length, Max, Min } from "class-validator";
 
 export class PalletCreationDto {
-    @Length(1, 255)
-    palletNum: string;
 
-    @IsNumber()
-    productId: number;
+  @Length(1, 255)
+    palletId: string;
 
-    @Length(1, 255)
-    supplierId: string;
-
-    @IsNumber()
+  @IsNumber()
     @Max(99999.9999)
-    palletWeight: number;
+    quantity: number;
 
-    @IsNumber()
-    pkTrip: number;
+  @IsNumber()
+    fkCompany: number;
 }

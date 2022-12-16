@@ -46,15 +46,15 @@ class ProductState(object):
         return self._get_state(_get_product_address(pkProduct))
 
 
-    def set_product(self, pkProduct, title, productId, productId):
+    def set_product(self, pkProduct, title, palletId, palletId):
         address = _get_product_address(pkProduct)
         LOGGER.info('set_product method')
         LOGGER.info(address)
         state_data = _serialize(
             {   "pkProduct": pkProduct,
                 "title": title,
-                "productId": productId,
-                "productId": productId
+                "palletId": palletId,
+                "palletId": palletId
 
             })
         return self._context.set_state(

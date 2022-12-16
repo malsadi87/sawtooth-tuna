@@ -5,7 +5,7 @@ import { KeyPairDto } from './keyPair.dto';
 export class ProductCreationDto {
     @IsNumber() pkProduct: number;
     @IsString() title: string;
-    @IsString() productId: string;
+    @IsString() palletId: string;
     @IsNumber() fkSpecies: number;
     @IsArray() productAttribute: { name: string, value: string }[]
 }

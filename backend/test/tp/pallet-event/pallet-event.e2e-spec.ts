@@ -37,7 +37,7 @@ describe('PalletEvent (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
         "eventTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1",
+        "pkPallet": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,
@@ -63,7 +63,7 @@ describe('PalletEvent (e2e)', () => {
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
         "eventTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "1",
+        "pkPallet": "1",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,
@@ -87,7 +87,7 @@ describe('PalletEvent (e2e)', () => {
       .get('/api/v1/sawtooth/tp/pallet-event/1/2022-09-15T14:37:04.837Z')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.palletEventId).toEqual<number>(1)
+    expect(response.body.pkPalletEvent).toEqual<number>(1)
     expect(response.body.eventTime).toEqual<string>("2022-09-15T14:37:04.837Z")
     expect(response.body.temperature).toEqual(JSON.stringify({ "Celsius": 1 }))
     expect(response.body.location).toEqual(JSON.stringify({
@@ -126,9 +126,9 @@ describe('PalletEvent (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "palletEventId": 1,
+      "pkPalletEvent": 1,
       "eventTime": "2022-09-15T14:37:04.837Z",
-      "palletNum": "1",
+      "pkPallet": "1",
       "temperature": JSON.stringify({ "Celsius": 1 }),
       "location": JSON.stringify({
         "latitude": 63.40595699218346,
@@ -152,12 +152,12 @@ describe('PalletEvent (e2e)', () => {
     return response
   });
 
-  it('Cant create a pallet-event without a related palletNum.', async () => {
+  it('Cant create a pallet-event without a related pkPallet.', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/pallet-event/addNew')
       .send({
         "eventTime": "2022-09-15T14:37:04.837Z",
-        "palletNum": "404",
+        "pkPallet": "404",
         "temperature": JSON.stringify({ "Celsius": 1 }),
         "location": JSON.stringify({
           "latitude": 63.40595699218346,

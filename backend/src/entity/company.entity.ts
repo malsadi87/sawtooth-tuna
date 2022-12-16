@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
+import { PalletEntity } from "./pallet.entity";
 
 @Entity('Company')
 export class CompanyEntity extends BaseEntity {
@@ -17,8 +18,8 @@ export class CompanyEntity extends BaseEntity {
     @Column({ type:'varchar', width: 255, name: 'ContactInfo', nullable: false })
     contactInfo: string;
 
-    // TODO: Reference to pallet
-    //@OneToMany((type) => CustomLevelPackageEntity, (x) => x.company)
-    //@JoinColumn({ referencedColumnName: 'Agent' })
-    //customLevelPackages: CustomLevelPackageEntity[]
+    // Reference to pallets
+    @OneToMany((type) => PalletEntity, (x) => x.company)
+    @JoinColumn({ referencedColumnName: 'PkCompany' })
+    pallets: PalletEntity[]
 }

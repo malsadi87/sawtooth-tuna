@@ -40,12 +40,11 @@ class Pallet extends Component {
     this.setState({
       pallets: result.map((info) => {
         return (
-          <tr key={info.palletNum}>
-            <td>{info.palletNum}</td>
-            <td>{info.productId}</td>
-            <td>{info.supplierId}</td>
-            <td>{info.palletWeight}</td>
-            <td>{info.pkTrip}</td>
+          <tr key={info.pkPallet}>
+            <td>{info.pkPallet}</td>
+            <td>{info.palletId}</td>
+            <td>{info.quantity}</td>
+            <td>{info.fkCompany}</td>
           </tr>
         )
       })
@@ -57,49 +56,24 @@ class Pallet extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
+
           <Form.Item
-            name={'palletNum'}
-            label="Pallet Number"
+            name={'palletId'}
+            label="Pallet Id"
             rules={[
               {
                 required: true,
                 type: 'string',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name={'productId'}
-            label="Product Number"
-            rules={[
-              {
-                required: true,
-                type: 'number',
                 min: 0
               },
             ]}
           >
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item
-            name={'supplierId'}
-            label="Supplier Id"
-            rules={[
-              {
-                required: true,
-                type: 'string',
-              },
-            ]}
-          >
             <Input />
           </Form.Item>
 
           <Form.Item
-            name={'palletWeight'}
-            label="Weight"
+            name={'quantity'}
+            label="Quantity"
             rules={[
               {
                 required: true,
@@ -113,8 +87,8 @@ class Pallet extends Component {
           </Form.Item>
 
           <Form.Item
-            name={'pkTrip'}
-            label="Trip Id"
+            name={'fkCompany'}
+            label="PkCompany"
             rules={[
               {
                 required: true,
@@ -141,7 +115,7 @@ class Pallet extends Component {
                 <th>Pallet Number</th>
                 <th>Product Number</th>
                 <th>Supplier ID</th>
-                <th>Weight</th>
+                <th>Quantity</th>
                 <th>Trip ID</th>
               </tr>
             </thead>
