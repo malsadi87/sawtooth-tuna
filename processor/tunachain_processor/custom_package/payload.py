@@ -10,7 +10,7 @@ from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
 LOGGER = logging.getLogger(__name__)
 
-class CustomPackagePayload(object):
+class ConsumerPackagePayload(object):
 
     def __init__(self, payload):
         try:
@@ -20,39 +20,39 @@ class CustomPackagePayload(object):
         LOGGER.info(data)
 
 
-        consumerPackageId = data.get('consumerPackageId')
-        pkCatch = data.get('pkCatch')
-        packingDate = data.get('packingDate')
+        pkConsumerPackage = data.get('pkConsumerPackage')
+        fkPallet = data.get('fkPallet')
+        packingDateTime = data.get('packingDateTime')
         agent = data.get('agent')
        
-        LOGGER.info(packingDate)
-        if not consumerPackageId:
+        LOGGER.info(packingDateTime)
+        if not pkConsumerPackage:
             raise InvalidTransaction('Consumer Package Id is required')
 
-        if not pkCatch:
+        if not fkPallet:
             raise InvalidTransaction('Catch ID is required')
 
-        if not packingDate:
+        if not packingDateTime:
             raise InvalidTransaction('Packing Date is required')
 
         if not agent:
             raise InvalidTransaction('agent is required')    
                    
-        self._consumerPackageId = consumerPackageId
-        self._pkCatch = pkCatch
-        self._packingDate = packingDate
+        self._pkConsumerPackage = pkConsumerPackage
+        self._fkPallet = fkPallet
+        self._packingDate = packingDateTime
         self._agent = agent
     
     @property
-    def consumerPackageId(self):
-        return self._consumerPackageId
+    def pkConsumerPackage(self):
+        return self._pkConsumerPackage
 
     @property
-    def pkCatch(self):
-        return self._pkCatch
+    def fkPallet(self):
+        return self._fkPallet
 
     @property
-    def packingDate(self):
+    def packingDateTime(self):
         return self._packingDate
 
     @property

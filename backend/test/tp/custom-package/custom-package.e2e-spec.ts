@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../../src/app/app.module';
 
-describe('CustomPackage (e2e)', () => {
+describe('ConsumerPackage (e2e)', () => {
   let app: INestApplication;
   let jwtToken: string;
 
@@ -33,9 +33,9 @@ describe('CustomPackage (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "1",
-        "pkCatch": "1",
-        "packingDate": "2022-09-15T14:37:04.837Z",
+        "pkConsumerPackage": "1",
+        "fkPallet": "1",
+        "packingDateTime": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -47,9 +47,9 @@ describe('CustomPackage (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "2",
-        "pkCatch": "1",
-        "packingDate": "2022-09-15T14:37:04.837Z",
+        "pkConsumerPackage": "2",
+        "fkPallet": "1",
+        "packingDateTime": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -61,9 +61,9 @@ describe('CustomPackage (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "1",
-        "pkCatch": "1",
-        "packingDate": "2022-09-15T14:37:04.837Z",
+        "pkConsumerPackage": "1",
+        "fkPallet": "1",
+        "packingDateTime": "2022-09-15T14:37:04.837Z",
         "agent": 1
       })
       .set('Authorization', `Bearer wrong`)
@@ -76,9 +76,9 @@ describe('CustomPackage (e2e)', () => {
       .get('/api/v1/sawtooth/tp/custom-package/1')
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
-    expect(response.body.consumerPackageId).toEqual<string>("1")
-    expect(response.body.pkCatch).toEqual<string>("1")
-    expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
+    expect(response.body.pkConsumerPackage).toEqual<string>("1")
+    expect(response.body.fkPallet).toEqual<string>("1")
+    expect(response.body.packingDateTime).toEqual<string>("2022-09-15T14:37:04.837Z")
     expect(response.body.agent).toEqual<number>(1)
     return response
   });
@@ -104,9 +104,9 @@ describe('CustomPackage (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body).toEqual(expect.arrayContaining([{
-      "consumerPackageId": "1",
-      "pkCatch": "1",
-      "packingDate": "2022-09-15T14:37:04.837Z",
+      "pkConsumerPackage": "1",
+      "fkPallet": "1",
+      "packingDateTime": "2022-09-15T14:37:04.837Z",
       "agent": 1
     }]))
     return response
@@ -119,9 +119,9 @@ describe('CustomPackage (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
     expect(response.body.customLevelPackage).toEqual({
-      "consumerPackageId": "1",
-      "pkCatch": "1",
-      "packingDate": "2022-09-15T14:37:04.837Z",
+      "pkConsumerPackage": "1",
+      "fkPallet": "1",
+      "packingDateTime": "2022-09-15T14:37:04.837Z",
       "agent": 1
     })
     return response
@@ -138,9 +138,9 @@ describe('CustomPackage (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "1",
-        "pkCatch": "1",
-        "packingDate": "2021-01-15T14:37:20.837Z",
+        "pkConsumerPackage": "1",
+        "fkPallet": "1",
+        "packingDateTime": "2021-01-15T14:37:20.837Z",
         "agent": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -152,9 +152,9 @@ describe('CustomPackage (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "1",
-        "pkCatch": "1",
-        "packingDate": "2021-01-15T14:37:20.837Z",
+        "pkConsumerPackage": "1",
+        "fkPallet": "1",
+        "packingDateTime": "2021-01-15T14:37:20.837Z",
         "agent": 404
       })
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -162,13 +162,13 @@ describe('CustomPackage (e2e)', () => {
     return response
   });
 
-  it('Cant create a custom-package without a related pkCatch - fails because of lacking error handling', async () => {
+  it('Cant create a custom-package without a related fkPallet - fails because of lacking error handling', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/sawtooth/tp/custom-package/addNew')
       .send({
-        "consumerPackageId": "1",
-        "pkCatch": "404",
-        "packingDate": "2021-01-15T14:37:20.837Z",
+        "pkConsumerPackage": "1",
+        "fkPallet": "404",
+        "packingDateTime": "2021-01-15T14:37:20.837Z",
         "agent": 1
       })
       .set('Authorization', `Bearer ${jwtToken}`)

@@ -17,14 +17,14 @@ CUSTOM_PACKAGE_NAMESPACE = hashlib.sha512(
     'custom-package'.encode('utf-8')).hexdigest()[0:6]
 
 
-def _get_address(consumerPackageId):
-    adr = hashlib.sha512(str(consumerPackageId).encode('utf-8')).hexdigest()[:62]
+def _get_address(pkConsumerPackage):
+    adr = hashlib.sha512(str(pkConsumerPackage).encode('utf-8')).hexdigest()[:62]
     LOGGER.info(adr)
     return adr
 
 
-def _get_custom_package_address(consumerPackageId):
-    add =  CUSTOM_PACKAGE_NAMESPACE + '00' + _get_address(consumerPackageId)
+def _get_custom_package_address(pkConsumerPackage):
+    add =  CUSTOM_PACKAGE_NAMESPACE + '00' + _get_address(pkConsumerPackage)
     LOGGER.info(add)
     return add
 
@@ -37,7 +37,7 @@ def _serialize(data):
     return json.dumps(data, sort_keys=True).encode('utf-8')
 
 
-class CustomPackageState(object):
+class ConsumerPackageState(object):
 
     TIMEOUT = 3
 
@@ -45,20 +45,20 @@ class CustomPackageState(object):
         self._context = context
 
 
-    def get_custom_package(self, consumerPackageId):
-        custom_package = self._get_state(_get_custom_package_address(consumerPackageId))
+    def get_custom_package(self, pkConsumerPackage):
+        custom_package = self._get_state(_get_custom_package_address(pkConsumerPackage))
         return custom_package
 
 
     
-    def set_custom_package(self, consumerPackageId, pkCatch, packingDate, agent):
-        address = _get_custom_package_address(consumerPackageId)
+    def set_custom_package(self, pkConsumerPackage, fkPallet, packingDateTime, agent):
+        address = _get_custom_package_address(pkConsumerPackage)
         LOGGER.info('set_custom_package method')
         LOGGER.info(address)
         state_data = _serialize(
-            {   "consumerPackageId":consumerPackageId,
-                "pkCatch": pkCatch,
-                "packingDate": packingDate,
+            {   "pkConsumerPackage":pkConsumerPackage,
+                "fkPallet": fkPallet,
+                "packingDateTime": packingDateTime,
                 "agent": agent
             })
         return self._context.set_state(

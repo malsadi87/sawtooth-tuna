@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
-import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
+import { ConsumerPackageEntity } from "./consumerPackage.entity";
 import { PalletEntity } from "./pallet.entity";
 
 @Entity('Company')

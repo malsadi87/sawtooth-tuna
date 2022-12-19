@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CustomLevelPackageService } from './custom-level-package.service';
-import { CustomLevelPackageController } from './custom-level-package.controller';
-import { CustomLevelPackageRepository } from './custom-level-package.repository';
-import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
+import { CustomLevelPackageService } from './consumer-package.service';
+import { CustomLevelPackageController } from './consumer-package.controller';
+import { CustomLevelPackageRepository } from './consumer-package.repository';
+import { ConsumerPackageEntity } from '../../../../../entity/consumerPackage.entity';
 import { SawtoothUtilityModule } from '../../sawtooth-utility/sawtooth-utility.module';
 import { CatchModule } from '../catch/catch.module';
 import { PalletModule } from '../pallet/pallet.module';
@@ -16,7 +16,7 @@ import { CompanyModule } from '../company/company.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CustomLevelPackageEntity]),
+    TypeOrmModule.forFeature([ConsumerPackageEntity]),
     SawtoothUtilityModule,
     PalletModule,
     CatchModule,

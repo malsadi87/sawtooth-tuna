@@ -10,6 +10,6 @@ export const RouteUrl = {
     catch: '/catch',
     species: '/species',
     company: '/company',
-    customPackage: '/customPackage',
-    viewCustomPackage: '/viewCustomPackage',
+    consumerPackage: '/consumerPackage',
+    viewConsumerPackage: '/viewConsumerPackage',
 };

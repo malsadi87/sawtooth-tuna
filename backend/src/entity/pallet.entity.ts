@@ -5,6 +5,7 @@ import { PalletEventEntity } from "./palletEvent.entity";
 import { TripEntity } from "./trip.entity";
 import * as pg from 'pg';
 import { CompanyEntity } from "./company.entity";
+import { ConsumerPackageEntity } from "./consumerPackage.entity";
 
 pg.types.setTypeParser(1700, function(val) {
     return parseFloat(val);
@@ -32,6 +33,10 @@ export class PalletEntity extends BaseEntity {
     @OneToMany((entity) => PalletEventEntity, (x) => x.pallet)
     @JoinColumn({ referencedColumnName: 'PkPallet' })
     palletEvents: PalletEventEntity[];
+
+    @OneToMany((entity) => ConsumerPackageEntity, (x) => x.pallet)
+    @JoinColumn({ referencedColumnName: 'PkPallet' })
+    palletConsumerPackages: ConsumerPackageEntity[];
 
     // TODO: Create relation production
     //@OneToMany((entity) => CatchEntity, (x) => x.pallet)

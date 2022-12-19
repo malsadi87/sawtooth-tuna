@@ -2194,7 +2194,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity" WHERE "ConsumerPackageEntity"."PkConsumerPackage" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2204,7 +2204,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "UpdatedDateTime" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1"]
+    query: UPDATE "ConsumerPackage" SET "UpdatedDateTime" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: ["2022-09-15T14:37:04.837Z","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -2225,7 +2225,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2240,7 +2240,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2255,7 +2255,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity"
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity"
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2270,7 +2270,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity" WHERE "ConsumerPackageEntity"."PkConsumerPackage" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2280,7 +2280,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "UpdatedDateTime" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["2021-01-15T14:37:20.837Z","1"]
+    query: UPDATE "ConsumerPackage" SET "UpdatedDateTime" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: ["2021-01-15T14:37:20.837Z","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
@@ -2301,7 +2301,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity" WHERE "ConsumerPackageEntity"."PkConsumerPackage" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2311,18 +2311,18 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "Agent" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: [404,"1"]
+    query: UPDATE "ConsumerPackage" SET "Agent" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: [404,"1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
 
   console.log
-    query failed: UPDATE "CustomLevelPackage" SET "Agent" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: [404,"1"]
+    query failed: UPDATE "ConsumerPackage" SET "Agent" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: [404,"1"]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "CustomLevelPackage" violates foreign key constraint "CustomLevelPackage_Agent_fkey"
+    error: error: insert or update on table "ConsumerPackage" violates foreign key constraint "CustomLevelPackage_Agent_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -2342,7 +2342,7 @@ TEST FAILED: species
       internalQuery: undefined,
       where: undefined,
       schema: 'public',
-      table: 'CustomLevelPackage',
+      table: 'ConsumerPackage',
       column: undefined,
       dataType: undefined,
       constraint: 'CustomLevelPackage_Agent_fkey',
@@ -2369,7 +2369,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: SELECT "CustomLevelPackageEntity"."ConsumerPackageId" AS "CustomLevelPackageEntity_ConsumerPackageId", "CustomLevelPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "CustomLevelPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "CustomLevelPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "CustomLevelPackage" "CustomLevelPackageEntity" WHERE "CustomLevelPackageEntity"."ConsumerPackageId" IN ($1) -- PARAMETERS: ["1"]
+    query: SELECT "ConsumerPackageEntity"."PkConsumerPackage" AS "CustomLevelPackageEntity_PkConsumerPackage", "ConsumerPackageEntity"."PkCatch" AS "CustomLevelPackageEntity_PkCatch", "ConsumerPackageEntity"."UpdatedDateTime" AS "CustomLevelPackageEntity_PackingDate", "ConsumerPackageEntity"."Agent" AS "CustomLevelPackageEntity_Agent" FROM "ConsumerPackage" "ConsumerPackageEntity" WHERE "ConsumerPackageEntity"."PkConsumerPackage" IN ($1) -- PARAMETERS: ["1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
@@ -2379,18 +2379,18 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
   console.log
-    query: UPDATE "CustomLevelPackage" SET "PkCatch" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
+    query: UPDATE "ConsumerPackage" SET "PkCatch" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: ["404","1"]
 
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
           at async Promise.all (index 0)
 
   console.log
-    query failed: UPDATE "CustomLevelPackage" SET "PkCatch" = $1 WHERE "ConsumerPackageId" IN ($2) -- PARAMETERS: ["404","1"]
+    query failed: UPDATE "ConsumerPackage" SET "PkCatch" = $1 WHERE "PkConsumerPackage" IN ($2) -- PARAMETERS: ["404","1"]
 
       at Function.logError (../../../src/platform/PlatformTools.ts:233:17)
 
   console.log
-    error: error: insert or update on table "CustomLevelPackage" violates foreign key constraint "CustomLevelPackage_PkCatch_fkey"
+    error: error: insert or update on table "ConsumerPackage" violates foreign key constraint "CustomLevelPackage_PkCatch_fkey"
         at Parser.parseErrorMessage (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:369:69)
         at Parser.handlePacket (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:188:21)
         at Parser.parse (/project/sawtooth-tuna/backend/node_modules/pg-protocol/src/parser.ts:103:30)
@@ -2410,7 +2410,7 @@ TEST FAILED: species
       internalQuery: undefined,
       where: undefined,
       schema: 'public',
-      table: 'CustomLevelPackage',
+      table: 'ConsumerPackage',
       column: undefined,
       dataType: undefined,
       constraint: 'CustomLevelPackage_PkCatch_fkey',
@@ -2427,7 +2427,7 @@ TEST FAILED: species
       at Function.logInfo (../../../src/platform/PlatformTools.ts:229:17)
 
  FAIL  test/tp/custom-package/custom-package.e2e-spec.ts (7.672 s)
-  CustomPackage (e2e)
+  ConsumerPackage (e2e)
     ✓ Can authenticate (109 ms)
     ✓ Can create a custom-package with authentication (135 ms)
     ✓ Cant create a custom-package without authentication (7 ms)
@@ -2440,7 +2440,7 @@ TEST FAILED: species
     ✕ Cant create a custom-package without a related agent - fails because of lacking error handling (99 ms)
     ✕ Cant create a custom-package without a related pkCatch - fails because of lacking error handling (40 ms)
 
-  ● CustomPackage (e2e) › Can read a custom-package with authentication - known to fail
+  ● ConsumerPackage (e2e) › Can read a custom-package with authentication - known to fail
 
     expect(received).toEqual(expected) // deep equality
 
@@ -2449,7 +2449,7 @@ TEST FAILED: species
 
       63 |       .set('Authorization', `Bearer ${jwtToken}`)
       64 |       .expect(200)
-    > 65 |     expect(response.body.consumerPackageId).toEqual<string>("1")
+    > 65 |     expect(response.body.pkConsumerPackage).toEqual<string>("1")
          |                                             ^
       66 |     expect(response.body.pkCatch).toEqual<string>("1")
       67 |     expect(response.body.packingDate).toEqual<string>("2022-09-15T14:37:04.837Z")
@@ -2457,7 +2457,7 @@ TEST FAILED: species
 
       at Object.<anonymous> (custom-package.e2e-spec.ts:65:45)
 
-  ● CustomPackage (e2e) › Cant read a custom-package that doesnt exist - known to fail
+  ● ConsumerPackage (e2e) › Cant read a custom-package that doesnt exist - known to fail
 
     expected 404 "Not Found", got 200 "OK"
 
@@ -2477,7 +2477,7 @@ TEST FAILED: species
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CustomPackage (e2e) › Cant overwrite a custom-package with authentication - known to fail
+  ● ConsumerPackage (e2e) › Cant overwrite a custom-package with authentication - known to fail
 
     expected 400 "Bad Request", got 201 "Created"
 
@@ -2497,7 +2497,7 @@ TEST FAILED: species
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CustomPackage (e2e) › Cant create a custom-package without a related agent - fails because of lacking error handling
+  ● ConsumerPackage (e2e) › Cant create a custom-package without a related agent - fails because of lacking error handling
 
     expected 400 "Bad Request", got 500 "Internal Server Error"
 
@@ -2517,7 +2517,7 @@ TEST FAILED: species
       at Test.assert (../../../node_modules/supertest/lib/test.js:164:23)
       at Server.localAssert (../../../node_modules/supertest/lib/test.js:120:14)
 
-  ● CustomPackage (e2e) › Cant create a custom-package without a related pkCatch - fails because of lacking error handling
+  ● ConsumerPackage (e2e) › Cant create a custom-package without a related pkCatch - fails because of lacking error handling
 
     expected 400 "Bad Request", got 500 "Internal Server Error"
 

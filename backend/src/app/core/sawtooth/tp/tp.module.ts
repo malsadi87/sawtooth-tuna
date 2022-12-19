@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { CatchModule } from './catch/catch.module';
 import { CompanyModule } from './company/company.module';
-import { CustomLevelPackageModule } from './custom-level-package/custom-level-package.module';
+import { CustomLevelPackageModule } from './consumer-package/consumer-package.module';
 import { HaulModule } from './haul/haul.module';
 import { PalletModule } from './pallet/pallet.module';
 import { PalletEventModule } from './pallet-event/pallet-event.module';

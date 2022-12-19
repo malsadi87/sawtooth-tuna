@@ -28,7 +28,7 @@ from tunachain_processor.haul.handler import HaulTransactionHandler
 from tunachain_processor.pallet_event.handler import PalletEventTransactionHandler
 from tunachain_processor.catch.handler import CatchTransactionHandler
 from tunachain_processor.species.handler import SpeciesTransactionHandler
-from tunachain_processor.custom_package.handler import CustomPackageTransactionHandler
+from tunachain_processor.custom_package.handler import ConsumerPackageTransactionHandler
 from tunachain_processor.company.handler import CompanyTransactionHandler
 from tunachain_processor.generic.handler import GenericEntityTransactionHandler
 
@@ -83,7 +83,7 @@ def main(args=None):
         speciesHandler = SpeciesTransactionHandler()
         LOGGER.info('Species Transaction Handler is initialsed')
         LOGGER.info(speciesHandler)
-        customHandler  = CustomPackageTransactionHandler()
+        customHandler  = ConsumerPackageTransactionHandler()
         companyHandler = CompanyTransactionHandler()
         genericEntityHandler = GenericEntityTransactionHandler()
         LOGGER.info('Generic Entity Transaction Handler is initialized')

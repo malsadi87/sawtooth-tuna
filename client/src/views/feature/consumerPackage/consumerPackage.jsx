@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './customPackage.css';
+import './consumerPackage.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import customPackageService from '../../../services/feature/customPackage/customPackage.service';
+import consumerPackageService from '../../../services/feature/consumerPackage/consumerPackage.service';
 import moment from 'moment';
 
 
@@ -27,25 +27,24 @@ const validateMessages = {
   },
 };
 
-class CustomPackage extends Component {
+class ConsumerPackage extends Component {
   state = {
-    customPackages: null
+    consumerPackages: null
   }
 
   onFinish = async (values) => {
-    const result = await customPackageService.createNew(values);
+    const result = await consumerPackageService.createNew(values);
   };
 
-  getAllCustomPackage = async () => {
-    const result = await customPackageService.getAll();
+  getAllConsumerPackage = async () => {
+    const result = await consumerPackageService.getAll();
     this.setState({
-      customPackages: result.map((info) => {
+      consumerPackages: result.map((info) => {
         return (
-          <tr key={info.consumerPackageId}>
-            <td>{info.consumerPackageId}</td>
-            <td>{info.pkCatch}</td>
-            <td>{info.packingDate}</td>
-            <td>{info.agent}</td>
+          <tr key={info.pkConsumerPackage}>
+            <td>{info.pkConsumerPackage}</td>
+            <td>{info.packingDateTime}</td>
+            <td>{info.fkPallet}</td>
           </tr>
         )
       })
@@ -57,38 +56,10 @@ class CustomPackage extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          {/*ConsumerPackageId*/}
+          {/*PackingDateTime*/}
           <Form.Item
-            name={'consumerPackageId'}
-            label="Consumer Package Id"
-            rules={[
-              {
-                required: true,
-                type: 'string',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          {/*PkCatch*/}
-          <Form.Item
-            name={'pkCatch'}
-            label="Catch Id"
-            rules={[
-              {
-                required: true,
-                type: 'string',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          {/*LaunchDateTime*/}
-          <Form.Item
-            name={'packingDate'}
-            label="Packing Date"
+            name={'packingDateTime'}
+            label="Packing Date Time"
             rules={[
               {
                 required: true
@@ -100,15 +71,14 @@ class CustomPackage extends Component {
             />
           </Form.Item>
 
-          {/*Agent*/}
+          {/*FkPallet*/}
           <Form.Item
-            name={'agent'}
-            label="Agent"
+            name={'fkPallet'}
+            label="Fk Pallet"
             rules={[
               {
                 required: true,
                 type: 'number',
-                min: 0
               },
             ]}
           >
@@ -119,22 +89,21 @@ class CustomPackage extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllCustomPackage}>Get All Packages</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllConsumerPackage}>Get All Packages</Button>
 
           </Form.Item>
         </Form>
-        {this.state.customPackages ?
+        {this.state.consumerPackages ?
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
-                <th>Custom Package ID</th>
-                <th>Catch ID</th>
+                <th>Pk Custom Package</th>
                 <th>Packing Time</th>
-                <th>Agent</th>
+                <th>Fk Pallet</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.customPackages}
+              {this.state.consumerPackages}
             </tbody>
           </table> : ''}
       </div>
@@ -142,6 +111,6 @@ class CustomPackage extends Component {
   };
 }
 
-export default withParamsAndNavigation(CustomPackage);
+export default withParamsAndNavigation(ConsumerPackage);
 
 //export default () => <FormLayoutDemo />;

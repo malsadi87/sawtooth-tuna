@@ -60,7 +60,7 @@ export const APIBasePath = {
                 getById: '/sawtooth/tp/species/:id',
                 createNew: '/sawtooth/tp/species/addNew'
             },
-            customPackage: {
+            consumerPackage: {
                 base: '/sawtooth/tp/custom-package',
                 getAll: '/sawtooth/tp/custom-package/',
                 getById: '/sawtooth/tp/custom-package/:id',

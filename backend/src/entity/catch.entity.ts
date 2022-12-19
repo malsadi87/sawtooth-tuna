@@ -1,7 +1,7 @@
 import { Transform } from "class-transformer";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
-import { CustomLevelPackageEntity } from "./customLevelPackage.entity";
+import { ConsumerPackageEntity } from "./consumerPackage.entity";
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
 import { SpeciesEntity } from "./species.entity";

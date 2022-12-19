@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
-import { CustomLevelPackageEntity } from '../../../../../entity/customLevelPackage.entity';
-import { CustomPackageCreationDto } from '../../../../utility/dto/tp/custom-package-creation.dto';
+import { ConsumerPackageEntity } from '../../../../../entity/consumerPackage.entity';
+import { ConsumerPackageCreationDto } from '../../../../utility/dto/tp/consumer-package-creation.dto';
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
-import { CustomLevelPackageRepository } from './custom-level-package.repository';
+import { CustomLevelPackageRepository } from './consumer-package.repository';
 import { CatchService } from '../catch/catch.service';
 import { CatchEntity } from 'src/entity/catch.entity';
 import { PalletService } from '../pallet/pallet.service';
@@ -39,34 +39,31 @@ export class CustomLevelPackageService {
         this.entityName = 'custom-package';
     }
 
-    async getAll(): Promise<CustomLevelPackageEntity[]> {
+    async getAll(): Promise<ConsumerPackageEntity[]> {
         return await this.customLevelPackageRepository.getAll();
     }
 
-    async getByConsumerPackageId(consumerPackageId: string): Promise<CustomLevelPackageEntity> {
-        const result = await this.customLevelPackageRepository.getByConsumerPackageId(consumerPackageId);
+    async getByPkConsumerPackage(pkConsumerPackage: number): Promise<ConsumerPackageEntity> {
+        const result = await this.customLevelPackageRepository.getByPkConsumerPackage(pkConsumerPackage);
         if (!result)
             throw new NotFoundException('Consumer Package Not Found!');
         return result;
     }
 
-    async addNewPackage(customPackagePayload: CustomPackageCreationDto): Promise<string> {
-        const customPackage = plainToClass(CustomLevelPackageEntity, customPackagePayload);
-        const oldCustomPackage = await this.customLevelPackageRepository.getByConsumerPackageId(customPackage.consumerPackageId);
+    async addNewPackage(consumerPackagePayload: ConsumerPackageCreationDto): Promise<number> {
+        const consumerPackage = plainToClass(ConsumerPackageEntity, consumerPackagePayload);
 
-        if (oldCustomPackage) throw new BadRequestException(`Custom Package with Id - ${customPackage.consumerPackageId}, Already Exist!`);
-
-        const newCustomPackage = await this.customLevelPackageRepository.addNewPackage(customPackage);
+        const newConsumerPackage = await this.customLevelPackageRepository.addNewPackage(consumerPackage);
 
         // Save in Sawtooth
-        await this.sawtoothUtilityService.createAsset(newCustomPackage, this.entityName);
+        await this.sawtoothUtilityService.createAsset(newConsumerPackage, this.entityName);
 
-        return newCustomPackage.consumerPackageId;
+        return newConsumerPackage.pkConsumerPackage;
     }
 
     /*
-    async getData(consumerPackageId: string): Promise<{
-      customLevelPackage: CustomLevelPackageEntity, 
+    async getData(pkConsumerPackage: string): Promise<{
+      customLevelPackage: ConsumerPackageEntity, 
       catchObject: CatchEntity,
       pallet: PalletEntity,
       palletEvent: PalletEventEntity[],
@@ -77,8 +74,8 @@ export class CustomLevelPackageService {
       haul: HaulEntity[]
     }> {
         
-        const customLevelPackage = await this.customLevelPackageRepository. getByConsumerPackageId(consumerPackageId);
-        const catchObject = await this.catchService.getById(customLevelPackage.pkCatch)
+        const customLevelPackage = await this.customLevelPackageRepository. getByPkConsumerPackage(pkConsumerPackage);
+        const catchObject = await this.catchService.getById(customLevelPackage.fkPallet)
         const pallet = await this.palletService.getByPkPallet(catchObject.pkPallet)
         const palletEvent = await this.palletEventService.getByPkPallet(catchObject.pkPallet)
         const trip = await this.tripService.getByPkTrip(pallet.pkTrip)

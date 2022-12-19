@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './viewCustomPackage.css';
+import './viewConsumerPackage.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import customPackageService from '../../../services/feature/customPackage/customPackage.service';
+import consumerPackageService from '../../../services/feature/consumerPackage/consumerPackage.service';
 import moment from 'moment';
 import catchService from '../../../services/feature/catch/catch.service';
 import palletService from '../../../services/feature/pallet/pallet.service';
@@ -37,9 +37,9 @@ const validateMessages = {
   },
 };
 
-class ViewCustomPackage extends Component {
+class ViewConsumerPackage extends Component {
   state = {
-    customPackageResult: null,
+    consumerPackageResult: null,
     catchResult: null,
     palletResult: null,
     palletEventResult: null,
@@ -51,11 +51,11 @@ class ViewCustomPackage extends Component {
   }
 
   onFinish = async (values) => {
-    console.log("Values: ", values.consumerPackageId)
-    const customPackageResult = await customPackageService.getById(values.consumerPackageId);
-    console.log("customPackageResult:", customPackageResult)
+    console.log("Values: ", values.pkConsumerPackage)
+    const consumerPackageResult = await consumerPackageService.getById(values.pkConsumerPackage);
+    console.log("consumerPackageResult:", consumerPackageResult)
 
-    const catchResult = await catchService.getById(customPackageResult.pkCatch)
+    const catchResult = await catchService.getById(consumerPackageResult.fkPallet)
     console.log("catchResult:", catchResult)
 
     const palletResult = await palletService.getById(catchResult.pkPallet)
@@ -67,7 +67,7 @@ class ViewCustomPackage extends Component {
     const tripResult = await tripService.getById(palletResult.pkTrip)
     console.log("tripResult:", tripResult)
 
-    const companyResult = await companyService.getById(customPackageResult.agent)
+    const companyResult = await companyService.getById(consumerPackageResult.agent)
     console.log("companyResult:", companyResult)
 
     // TODO: GetSpecies
@@ -87,12 +87,12 @@ class ViewCustomPackage extends Component {
 
 
     this.setState({
-      customPackages: 
-          <tr key={customPackageResult.consumerPackageId}>
-            <td>{customPackageResult.consumerPackageId}</td>
-            <td>{customPackageResult.pkCatch}</td>
-            <td>{customPackageResult.packingDate}</td>
-            <td>{customPackageResult.agent}</td>
+      consumerPackages: 
+          <tr key={consumerPackageResult.pkConsumerPackage}>
+            <td>{consumerPackageResult.pkConsumerPackage}</td>
+            <td>{consumerPackageResult.fkPallet}</td>
+            <td>{consumerPackageResult.packingDateTime}</td>
+            <td>{consumerPackageResult.agent}</td>
           </tr>
     })
   }
@@ -102,9 +102,9 @@ class ViewCustomPackage extends Component {
       <div style={{margin: 'auto', maxWidth: '1000px'}}>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          {/*ConsumerPackageId*/}
+          {/*PkConsumerPackage*/}
           <Form.Item
-            name={'consumerPackageId'}
+            name={'pkConsumerPackage'}
             label="Consumer Package Id"
             rules={[
               {
@@ -128,7 +128,7 @@ class ViewCustomPackage extends Component {
           haulResult = {this.state.haulResult}
           palletEventResult = {this.state.palletEventResult}
         />
-        {this.state.customPackages ?
+        {this.state.consumerPackages ?
           <table>
             <thead>
               <tr>
@@ -139,7 +139,7 @@ class ViewCustomPackage extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.customPackages}
+              {this.state.consumerPackages}
             </tbody>
           </table> : ''}
       </div>
@@ -147,6 +147,6 @@ class ViewCustomPackage extends Component {
   };
 }
 
-export default withParamsAndNavigation(ViewCustomPackage);
+export default withParamsAndNavigation(ViewConsumerPackage);
 
 //export default () => <FormLayoutDemo />;

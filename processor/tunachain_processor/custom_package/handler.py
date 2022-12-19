@@ -1,4 +1,4 @@
-# CustomPackage Transaction Handler
+# ConsumerPackage Transaction Handler
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------
@@ -9,15 +9,15 @@ import logging
 from sawtooth_sdk.processor.handler import TransactionHandler
 from sawtooth_sdk.processor.exceptions import InvalidTransaction
 
-from tunachain_processor.custom_package.payload import CustomPackagePayload
-from tunachain_processor.custom_package.state import CustomPackageState
+from tunachain_processor.custom_package.payload import ConsumerPackagePayload
+from tunachain_processor.custom_package.state import ConsumerPackageState
 from tunachain_processor.custom_package.state import CUSTOM_PACKAGE_NAMESPACE
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-class CustomPackageTransactionHandler(TransactionHandler):
+class ConsumerPackageTransactionHandler(TransactionHandler):
 
     @property
     def family_name(self):
@@ -39,23 +39,23 @@ class CustomPackageTransactionHandler(TransactionHandler):
         header = transaction.header
         signer = header.signer_public_key
 
-        payload = CustomPackagePayload(transaction.payload)
-        state = CustomPackageState(context)
+        payload = ConsumerPackagePayload(transaction.payload)
+        state = ConsumerPackageState(context)
 
-        LOGGER.info('CustomPackage handler apply method')
+        LOGGER.info('ConsumerPackage handler apply method')
         LOGGER.info(payload)
 
        
-        _create_custom_package(consumerPackageId=payload.consumerPackageId,
-                        pkCatch=payload.pkCatch,
-                        packingDate=payload.packingDate,
+        _create_custom_package(pkConsumerPackage=payload.pkConsumerPackage,
+                        fkPallet=payload.fkPallet,
+                        packingDateTime=payload.packingDateTime,
                         agent=payload.agent,
                         state=state)
 
 
-def _create_custom_package(consumerPackageId, pkCatch, packingDate, agent , state):
-    if state.get_custom_package(consumerPackageId) is not None:
+def _create_custom_package(pkConsumerPackage, fkPallet, packingDateTime, agent , state):
+    if state.get_custom_package(pkConsumerPackage) is not None:
         raise InvalidTransaction(
-            'Invalid action: Consumer Package already exists: {}'.format(consumerPackageId))
+            'Invalid action: Consumer Package already exists: {}'.format(pkConsumerPackage))
 
-    state.set_custom_package(consumerPackageId, pkCatch, packingDate, agent )
+    state.set_custom_package(pkConsumerPackage, fkPallet, packingDateTime, agent )
