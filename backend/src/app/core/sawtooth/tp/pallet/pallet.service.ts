@@ -30,9 +30,9 @@ export class PalletService {
 
     async addNewPallet(palletPayload: PalletCreationDto): Promise<number> {
         const pallet = plainToClass(PalletEntity, palletPayload);
-        Logger.log("******PALLET!")
+
         const newPallet = await this.palletRepository.addNewPallet(pallet);
-        Logger.log(newPallet)
+
         // Save in Sawtooth
         await this.sawtoothUtilityService.createAsset(newPallet, this.entityName);
 

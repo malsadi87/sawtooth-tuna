@@ -12,4 +12,5 @@ export const RouteUrl = {
     company: '/company',
     consumerPackage: '/consumerPackage',
     viewConsumerPackage: '/viewConsumerPackage',
+    production: '/production',
 };

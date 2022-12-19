@@ -132,7 +132,7 @@ class ViewConsumerPackage extends Component {
           <table>
             <thead>
               <tr>
-                <th>Custom Package ID</th>
+                <th>Consumer Package ID</th>
                 <th>Catch ID</th>
                 <th>Packing Time</th>
                 <th>Agent</th>

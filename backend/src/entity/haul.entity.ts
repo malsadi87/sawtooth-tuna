@@ -4,6 +4,7 @@ import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.deco
 import { TripEntity } from "./trip.entity";
 import * as pg from 'pg';
 import { CatchEntity } from "./catch.entity";
+import { ProductionEntity } from "./production.entity";
 
 pg.types.setTypeParser(1700, function(val) {
     return parseFloat(val);
@@ -53,4 +54,8 @@ export class HaulEntity extends BaseEntity {
     @OneToMany((entity) => CatchEntity, (x) => x.haul)
     @JoinColumn({ referencedColumnName: 'pkHaul' })
     catches: CatchEntity[];
+
+    @OneToMany((entity) => ProductionEntity, (x) => x.haul)
+    @JoinColumn({ referencedColumnName: 'pkHaul' })
+    productions: ProductionEntity[];
 }

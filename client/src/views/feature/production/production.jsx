@@ -1,12 +1,10 @@
 import React, { Component, useState } from 'react';
 import { withParamsAndNavigation } from '../../../utility/routerHelper';
 import { RouteUrl } from '../../../constants/routeUrls';
-import './consumerPackage.css';
+import './production.css';
 import { Form, Input, Button, InputNumber, DatePicker } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
-import consumerPackageService from '../../../services/feature/consumerPackage/consumerPackage.service';
 import moment from 'moment';
-
+import productionService from '../../../services/feature/production/production.service';
 
 const layout = {
   labelCol: {
@@ -27,24 +25,26 @@ const validateMessages = {
   },
 };
 
-class ConsumerPackage extends Component {
+class Production extends Component {
   state = {
-    consumerPackages: null
+    productions: null
   }
 
   onFinish = async (values) => {
-    const result = await consumerPackageService.createNew(values);
+    const result = await productionService.createNew(values);
   };
 
-  getAllConsumerPackage = async () => {
-    const result = await consumerPackageService.getAll();
+  getAllProduction = async () => {
+    const result = await productionService.getAll();
     this.setState({
-      consumerPackages: result.map((info) => {
+      productions: result.map((info) => {
         return (
-          <tr key={info.pkConsumerPackage}>
-            <td>{info.pkConsumerPackage}</td>
-            <td>{info.packingDateTime}</td>
+          <tr key={info.pkProduction}>
+            <td>{info.pkProduction}</td>
+            <td>{info.productionDate}</td>
             <td>{info.fkPallet}</td>
+            <td>{info.fkProduct}</td>
+            <td>{info.fkHaul}</td>
           </tr>
         )
       })
@@ -56,10 +56,10 @@ class ConsumerPackage extends Component {
       <div>
         <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
 
-          {/*PackingDateTime*/}
+          {/*Date*/}
           <Form.Item
-            name={'packingDateTime'}
-            label="Packing Date Time"
+            name={'productionDate'}
+            label="Production Date"
             rules={[
               {
                 required: true
@@ -71,14 +71,39 @@ class ConsumerPackage extends Component {
             />
           </Form.Item>
 
-          {/*FkPallet*/}
           <Form.Item
             name={'fkPallet'}
-            label="Fk Pallet"
+            label="FkPallet"
             rules={[
               {
                 required: true,
-                type: 'number',
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item
+            name={'fkProduct'}
+            label="FkProduct"
+            rules={[
+              {
+                required: true,
+                type: 'number'
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item
+            name={'fkHaul'}
+            label="FkHaul"
+            rules={[
+              {
+                required: true,
+                type: 'number'
               },
             ]}
           >
@@ -89,21 +114,23 @@ class ConsumerPackage extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllConsumerPackage}>Get All Packages</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllProduction}>Get All Productions</Button>
 
           </Form.Item>
         </Form>
-        {this.state.consumerPackages ?
+        {this.state.productions ?
           <table style={{ margin: 'auto' }}>
             <thead>
               <tr>
-                <th>Pk Consumer Package</th>
-                <th>Packing Time</th>
-                <th>Fk Pallet</th>
+                <th>Production ID</th>
+                <th>Production Date</th>
+                <th>FkPallet</th>
+                <th>FkProduct</th>
+                <th>FkHaul</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.consumerPackages}
+              {this.state.productions}
             </tbody>
           </table> : ''}
       </div>
@@ -111,6 +138,6 @@ class ConsumerPackage extends Component {
   };
 }
 
-export default withParamsAndNavigation(ConsumerPackage);
+export default withParamsAndNavigation(Production);
 
 //export default () => <FormLayoutDemo />;

@@ -8,6 +8,7 @@ import { HaulEntity } from '../../entity/haul.entity';
 import { ConsumerPackageEntity } from '../../entity/consumerPackage.entity';
 import { CompanyEntity } from '../../entity/company.entity';
 import { CatchEntity } from '../../entity/catch.entity';
+import { ProductionEntity } from 'src/entity/production.entity';
 import { UsersEntity } from '../../entity/users.entity';
 import { RolesEntity } from '../../entity/roles.entity';
 import { DeviceCodesEntity } from '../../entity/deviceCodes.entity';
@@ -40,6 +41,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         HaulEntity,
         PalletEntity,
         PalletEventEntity,
+        ProductionEntity,
         CatchEntity,
         SpeciesEntity,
         CompanyEntity,

@@ -28,13 +28,14 @@ class NavBar extends Component {
         this.getItem('Product', RouteUrl.product, <SettingOutlined />),
         this.getItem('Trip', RouteUrl.trip, <MailOutlined />),
         this.getItem('Haul', RouteUrl.haul, <AppstoreOutlined />),
+        this.getItem('Production', RouteUrl.production, <AppstoreOutlined />),
         this.getItem('Pallet', RouteUrl.pallet, <SettingOutlined />),
         this.getItem('Pallet Event', RouteUrl.palletEvent, <SettingOutlined />),
         this.getItem('Catch', RouteUrl.catch, <SettingOutlined />),
         this.getItem('Species', RouteUrl.species, <SettingOutlined />),
         this.getItem('Company', RouteUrl.company, <SettingOutlined />),
-        this.getItem('Custom Package', RouteUrl.consumerPackage, <SettingOutlined />),
-        this.getItem('View Custom Package', RouteUrl.viewConsumerPackage, <SettingOutlined />),
+        this.getItem('Consumer Package', RouteUrl.consumerPackage, <SettingOutlined />),
+        this.getItem('View Consumer Package', RouteUrl.viewConsumerPackage, <SettingOutlined />),
 
 
     ];

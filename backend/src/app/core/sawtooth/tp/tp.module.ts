@@ -9,6 +9,7 @@ import { PalletEventModule } from './pallet-event/pallet-event.module';
 import { SpeciesModule } from './species/species.module';
 import { TripModule } from './trip/trip.module';
 import { ProductModule } from './product/product.module';
+import { ProductionModule } from './production/production.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { ProductModule } from './product/product.module';
         TripModule,
         ProductModule,
         HaulModule,
+        ProductionModule,
         PalletModule,
         PalletEventModule,
         CatchModule,

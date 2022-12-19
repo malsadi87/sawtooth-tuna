@@ -1,4 +1,4 @@
-# Custom Package state
+# Consumer Package state
 #
 # Written by Mohammed Alsadi
 # -----------------------------------------------------------------------------

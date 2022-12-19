@@ -23,9 +23,11 @@ import Species from "./views/feature/species/species";
 import Company from "./views/feature/company/company";
 import ConsumerPackage from "./views/feature/consumerPackage/consumerPackage";
 import ViewConsumerPackage from "./views/feature/viewConsumerPackage/viewConsumerPackage";
+import production from "./views/feature/production/production";
 
 import authService from "./services/feature/auth/auth.service";
 import {withParamsAndNavigation} from './utility/routerHelper';
+import Production from "./views/feature/production/production";
 
 // Add font-awesome icons to project library
 library.add(fab, faFacebook, faTwitter, faGoogle, faLinkedin, faUser, faEnvelope, faLock, faKey);
@@ -57,6 +59,7 @@ class App extends Component {
                         <Route path={RouteUrl.species} element={<Species />} />
                         <Route path={RouteUrl.company} element={<Company />} />
                         <Route path={RouteUrl.consumerPackage} element={<ConsumerPackage />} />
+                        <Route path={RouteUrl.production} element={<Production />} />
                         <Route path={RouteUrl.viewConsumerPackage} element={<ViewConsumerPackage />} />
                     </Route>
                 </Route>

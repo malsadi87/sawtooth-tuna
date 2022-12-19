@@ -35,7 +35,7 @@ class Catch extends Component {
     const result = await catchService.createNew(values);
   };
 
-  getAllPallet = async () => {
+  getAllCatch = async () => {
     const result = await catchService.getAll();
     this.setState({
       catchs: result.map((info) => {
@@ -115,7 +115,7 @@ class Catch extends Component {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-            <Button className='ms-3' type="primary" onClick={this.getAllPallet}>Get All Packages</Button>
+            <Button className='ms-3' type="primary" onClick={this.getAllCatch}>Get All Packages</Button>
 
           </Form.Item>
         </Form>

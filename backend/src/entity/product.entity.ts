@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
+import { ProductionEntity } from "./production.entity";
 import { SpeciesEntity } from "./species.entity";
 
 @Entity({ name: 'Product' })
@@ -20,4 +21,8 @@ export class ProductEntity extends BaseEntity {
     @ManyToOne((type) => SpeciesEntity, x => x.products)
     @JoinColumn({ name: 'FkSpecies', referencedColumnName: 'pkSpecies' })
     species: SpeciesEntity;
+
+    @OneToMany((entity) => ProductionEntity, (x) => x.product)
+    @JoinColumn({ referencedColumnName: 'PkProduct' })
+    productions: ProductionEntity[];
 }
