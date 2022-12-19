@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { ProductionCreationDto } from "src/app/utility/dto/tp/production-creation.dto";
-import { ProductionEntity } from "src/entity/production.entity";
+import { ProductionCreationDto } from "../../../../utility/dto/tp/production-creation.dto";
+import { ProductionEntity } from "../../../../../entity/production.entity";
 import { ProductionService } from "./production.service";
 
 @Controller('sawtooth/tp/production')

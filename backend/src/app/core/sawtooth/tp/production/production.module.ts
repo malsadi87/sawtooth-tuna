@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ProductionEntity } from "src/entity/production.entity";
+import { ProductionEntity } from "../../../../../entity/production.entity";
 import { SawtoothUtilityModule } from "../../sawtooth-utility/sawtooth-utility.module";
 import { PalletModule } from "../pallet/pallet.module";
 import { ProductionController } from "./production.controller";

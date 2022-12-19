@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { plainToClass } from "class-transformer";
-import { ProductionCreationDto } from "src/app/utility/dto/tp/production-creation.dto";
-import { ProductionEntity } from "src/entity/production.entity";
+import { ProductionCreationDto } from "../../../../utility/dto/tp/production-creation.dto";
+import { ProductionEntity } from "../../../../../entity/production.entity";
 import { ProductionRepository } from "./production.repository";
 import { SawtoothUtilityService } from '../../sawtooth-utility/sawtooth-utility.service';
 
@@ -33,7 +33,7 @@ export class ProductionService {
       const newProduction = await this.productionRepository.addNewProduction(productionObject);
 
       await this.sawtoothUtilityService.createAsset(newProduction, this.familyName);
-      
+
       return newProduction.pkProduction;
     } catch(e) {
       throw e;

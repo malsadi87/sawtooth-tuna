@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { SawtoothIdentity } from "src/app/utility/decorator/sawtoothIdentity.decorator";
+import { SawtoothIdentity } from "../app/utility/decorator/sawtoothIdentity.decorator";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { HaulEntity } from "./haul.entity";
 import { PalletEntity } from "./pallet.entity";
@@ -10,7 +10,6 @@ import { ProductEntity } from "./product.entity";
 @Entity('Production')
 export class ProductionEntity extends BaseEntity {
   @SawtoothIdentity()
-
   @PrimaryColumn({ generated: true, type: 'int', name: 'PkProduction', nullable: false })
   pkProduction: number;
 
