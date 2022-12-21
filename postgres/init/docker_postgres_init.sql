@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "Catch" (
 CREATE TABLE IF NOT EXISTS "Product" ( -- This entity is not interesting for the end consumer.
     "PkProduct" SERIAL PRIMARY KEY,
     "Title" VARCHAR(255), -- Example: Cod, headed and gutted.
-    "PalletId" VARCHAR(255) NOT NULL,
+    "ProductId" VARCHAR(255) NOT NULL,
     "FkSpecies" INT NOT NULL,
     FOREIGN KEY ("FkSpecies") REFERENCES "Species"("PkSpecies") ON DELETE NO ACTION
 );

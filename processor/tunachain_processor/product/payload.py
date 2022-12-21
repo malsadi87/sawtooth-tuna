@@ -20,8 +20,8 @@ class ProductPayload(object):
         LOGGER.info(data)
         pkProduct = data.get('pkProduct')
         title = data.get('title')
-        palletId = data.get('palletId')
-        palletId = data.get('palletId')
+        productId = data.get('productId')
+        productId = data.get('productId')
 
         if not pkProduct:
             raise InvalidTransaction('Product ID is required')
@@ -29,13 +29,13 @@ class ProductPayload(object):
         if not title:
             raise InvalidTransaction('Product Name is required')
 
-        if not palletId:
+        if not productId:
             raise InvalidTransaction('Product Number is required')        
         
         self._pkProduct = pkProduct
         self._title = title
-        self._productDescription = palletId
-        self._palletId = palletId
+        self._productDescription = productId
+        self._productId = productId
        
     @property
     def pkProduct(self):
@@ -46,9 +46,9 @@ class ProductPayload(object):
         return self._title
 
     @property
-    def palletId(self):
+    def productId(self):
         return self._productDescription
 
     @property
-    def palletId(self):
-        return self._palletId  
+    def productId(self):
+        return self._productId  

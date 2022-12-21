@@ -9,8 +9,8 @@ ENV PATH /project/sawtooth-tuna/client/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY client/package*.json ./
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
+RUN npm install
+RUN npm install react-scripts@4.0.3 -g
 
 # add app
 COPY client/ ./

@@ -43,7 +43,7 @@ class Product extends Component {
           <tr key={info.pkProduct}>
             <td>{info.pkProduct}</td>
             <td>{info.title}</td>
-            <td>{info.palletId}</td>
+            <td>{info.productId}</td>
             <td>{info.fkSpecies}</td>
           </tr>
         )
@@ -63,7 +63,7 @@ class Product extends Component {
             <Input />
           </Form.Item>
 
-          <Form.Item name={'palletId'} label="PalletId" rules={[{
+          <Form.Item name={'productId'} label="ProductId" rules={[{
             required: true,
             type: "string"
           }]}>
